@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fig Performance//Grand Opening//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:grand-opening-20261114@figperformance.com
+DTSTAMP:20261024T120000Z
+DTSTART:20261114T180000Z
+DTEND:20261114T210000Z
+SUMMARY:Fig Performance Grand Opening
+LOCATION:Fig Performance\, 1284 E. Yorba Linda Blvd\, Placentia\, CA 92870
+DESCRIPTION:Grand opening of Fig Performance\, a private one-on-one training facility in Placentia built for people over 40. https://figperformance.com/
+URL:https://figperformance.com/#grand-opening
+END:VEVENT
+END:VCALENDAR

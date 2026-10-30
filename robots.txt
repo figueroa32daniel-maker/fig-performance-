@@ -1,0 +1,9 @@
+# Fig Performance: public pages may be crawled, except the client signing pages below.
+# /thanks and /404 stay crawlable so search engines can see their noindex tags.
+User-agent: *
+Allow: /
+# Client signing pages (also noindex): keep out of search results.
+Disallow: /sign
+Disallow: /signed
+
+Sitemap: https://www.figperformance.com/sitemap.xml

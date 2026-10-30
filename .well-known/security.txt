@@ -1,0 +1,4 @@
+Contact: mailto:trainat@figperformance.com
+Expires: 2027-10-23T23:59:59-07:00
+Preferred-Languages: en
+Canonical: https://www.figperformance.com/.well-known/security.txt

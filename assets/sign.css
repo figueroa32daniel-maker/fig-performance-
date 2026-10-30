@@ -1,0 +1,83 @@
+/* ==========================================================
+   Fig Performance: /sign and /signed pages
+   Loaded after styles.css. Reuses brand variables from styles.css.
+   ========================================================== */
+.sign-wrap { max-width: 860px; }
+.sign-form { display: grid; gap: 22px; }
+.sign-intro.legal-body, .sign-card.legal-body { max-width: none; }
+.sign-card { background: var(--white); border: 1px solid #e6ddcc; border-radius: var(--radius); padding: 24px 18px; margin: 0; min-width: 0; }
+@media (min-width: 640px) { .sign-card { padding: 36px 40px; } }
+fieldset.sign-card > legend { float: left; width: 100%; padding: 0; }
+fieldset.sign-card > legend + * { clear: both; }
+.sign-legend { display: flex; align-items: center; gap: 12px; font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--navy); margin: 0 0 18px; line-height: 1.2; }
+.legal-body h2.sign-legend { margin-top: 0; }
+.sign-step { flex: none; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: #fff; font-size: .95rem; }
+.sign-req-note, .help { font-size: .88rem !important; color: var(--muted) !important; margin: 6px 0 12px; }
+.sf .help { margin-bottom: 0; }
+.req { color: #b3261e; font-weight: 700; }
+.sign-noscript { background: #fbf3ea; border: 1px solid #c9a27a; border-radius: var(--radius-sm); padding: 12px 14px; }
+
+/* Document text */
+.doc { border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--cream); padding: 18px 16px; margin-bottom: 22px; }
+@media (min-width: 640px) { .doc { padding: 26px 28px; } }
+.doc-title { font-family: var(--font-head); font-weight: 800; letter-spacing: .14em; text-align: center; color: var(--navy) !important; margin: 0; }
+.doc-sub { text-align: center; font-style: italic; margin: 0 0 1rem; }
+.doc-head { font-family: var(--font-head); font-size: 1rem !important; font-weight: 700; letter-spacing: .04em; color: var(--navy); margin: 1rem 0 .6rem !important; padding: 0; }
+.doc-p { font-size: .98rem !important; }
+.doc-strong { font-weight: 700; color: var(--navy) !important; }
+.check-items { list-style: none; padding: 0 !important; margin: 12px 0 0 !important; display: grid; gap: 14px !important; }
+.check-item { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--navy); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 14px 12px; }
+.check-item .doc-p { margin-bottom: .7rem; }
+.ci-label { color: var(--navy); }
+.initials { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.initials label { font-weight: 600; font-size: .9rem; color: var(--navy); }
+.initials .error { flex-basis: 100%; margin: 0; }
+.sign-form .initials input.init-input { width: 92px; min-height: 46px; text-align: center; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+
+/* Fields */
+.sign-grid { display: grid; gap: 4px 20px; }
+@media (min-width: 640px) { .sign-grid { grid-template-columns: 1fr 1fr; } }
+.sf { margin: 0 0 14px; min-width: 0; }
+.sign-form label, .sign-form .label { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 6px; color: var(--navy); line-height: 1.4; }
+.sign-form input[type=text], .sign-form input[type=tel], .sign-form input[type=email], .sign-form input[type=date] {
+  width: 100%; font: inherit; font-size: 1.05rem; color: var(--text); background: var(--cream); min-height: 52px;
+  border: 1.5px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; transition: border-color .15s ease, box-shadow .15s ease, background-color .15s;
+}
+.sign-form input[type=date] { appearance: none; -webkit-appearance: none; }
+.sign-form input:focus { outline: none; border-color: var(--navy); background: #fff; box-shadow: 0 0 0 4px rgba(15,31,61,.14); }
+.sign-form input[aria-invalid="true"] { border-color: #b3261e; background: #fff8f7; }
+.sign-form input[readonly] { background: #ece7de; color: var(--navy); font-weight: 600; border-style: dashed; cursor: default; }
+.sign-form input[readonly]:focus { box-shadow: none; border-color: var(--navy); }
+.sig-input { font-family: var(--font-head) !important; font-style: italic; font-weight: 600; letter-spacing: .02em; }
+.sign-block { display: grid; gap: 0 20px; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (min-width: 640px) { .sign-block { grid-template-columns: 1fr 220px; } .sign-block > .doc-p, .sign-block > .help { grid-column: 1 / -1; } }
+.sf-check { display: flex; align-items: flex-start; gap: 12px; margin: 6px 0 10px; }
+.sf-check input { flex: none; width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--navy); cursor: pointer; }
+.sf-check label { font-weight: 500; color: var(--text); margin: 0; cursor: pointer; }
+#sec-submit .sf-check label { font-size: .95rem; }
+
+/* Program outline */
+.program { border: 0; padding: 0; margin: 0 0 20px; min-width: 0; }
+.program > legend { padding: 0; }
+.program-note { background: var(--navy); color: var(--on-navy) !important; border-radius: var(--radius-sm); padding: 12px 14px; font-size: .92rem !important; }
+.program-note a { color: #fff !important; }
+.radio-row { display: flex; gap: 10px; }
+.radio { flex: 1; position: relative; }
+.radio input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.radio label { display: flex; align-items: center; justify-content: center; min-height: 52px; margin: 0; border: 1.5px solid var(--line); border-radius: var(--radius-sm); background: var(--cream); font-family: var(--font-head); font-weight: 700; cursor: pointer; }
+.radio input:checked + label { background: var(--navy); border-color: var(--navy); color: #fff; }
+.radio input:focus-visible + label { outline: 3px solid var(--navy); outline-offset: 2px; }
+.radio input:disabled + label { opacity: .45; cursor: not-allowed; }
+.radio input[aria-invalid="true"] + label { border-color: #b3261e; }
+
+/* Stamp + submit */
+.stamp:empty { display: none; }
+.stamp { font-size: .9rem; color: var(--navy); background: var(--cream); border-left: 2px solid var(--gold); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+#sec-submit .btn { margin-top: 14px; min-height: 58px; }
+#sec-submit .btn:disabled { opacity: .7; cursor: progress; transform: none; }
+.sign-foot { text-align: center; font-size: .9rem; }
+.sign-foot a { color: var(--navy); font-weight: 600; }
+
+/* /signed */
+.signed-note { background: var(--white); border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 16px; text-align: left; font-size: 1rem !important; }
+.signed-note a { color: var(--navy); font-weight: 600; }
