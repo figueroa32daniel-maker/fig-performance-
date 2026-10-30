@@ -748,3 +748,9 @@ address { font-style: normal; }
 .faq-group { font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); margin: 18px 0 2px; }
 .faq-group:first-child { margin-top: 0; }
 .faq-item summary { min-height: 44px; }
+
+/* ---------- Service pages (InBody, red light) ---------- */
+.service-page .legal-body picture { display: block; max-width: 360px; margin: 1.4rem 0; }
+.service-page .legal-body picture img { border-radius: var(--radius-sm); }
+.service-page .legal-hero .legal-meta { max-width: 640px; font-size: 1.05rem; }
+.tech-list p a { color: inherit; font-weight: 600; text-underline-offset: 2px; }
