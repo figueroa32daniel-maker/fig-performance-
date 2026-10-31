@@ -768,3 +768,5 @@ address { font-style: normal; }
 .guide-more { margin-top: auto; padding-top: 6px; font-weight: 600; color: var(--navy); }
 .guide-card:hover .guide-more { color: var(--gold-text); }
 .guides-all { margin: 26px 0 0; }
+
+.consult-book { margin: 18px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
