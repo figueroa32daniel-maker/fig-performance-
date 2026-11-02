@@ -33,19 +33,19 @@
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=26">
+<link rel="stylesheet" href="/assets/styles.css?v=34">
 
   </head>
 <body class="pricing-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ============ GRAND OPENING BAR ============ -->
-  <div class="announce">
+  <aside class="announce" aria-label="Grand opening">
     <div class="container announce-inner">
       <p><strong>Grand opening:</strong> Sat, Nov 14 <span class="hide-sm">&middot; 10 AM&ndash;1 PM &middot; 1284 E. Yorba Linda Blvd</span></p>
       <a href="/#grand-opening">Details<span class="sr-only"> about the grand opening</span> &rarr;</a>
     </div>
-  </div>
+  </aside>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
@@ -55,14 +55,12 @@
       </a>
       <nav class="nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/#why">Why private</a></li>
-          <li class="nav-programs"><a href="/#programs">Programs</a></li>
+          <li><a href="/#method">How it works</a></li>
           <li><a href="/pricing" aria-current="page">Pricing</a></li>
-          <li><a href="/#method">Method</a></li>
+          <li><a href="/in-home-personal-training">In-home training</a></li>
           <li><a href="/#coach">Coach</a></li>
-          <li><a href="/#results">Results</a></li>
-          <li><a href="/#faq">FAQ</a></li>
           <li><a href="/#visit">Visit</a></li>
+          <li class="nav-mobile-only"><a href="/#faq">FAQ</a></li>
         </ul>
         <div class="nav-mobile-actions">
           <a class="btn btn-primary btn-block" href="/#consult">Book a free consult</a>
@@ -87,7 +85,7 @@
       <div class="container">
         <p class="kicker">Pricing</p>
         <h1 id="pricing-title">Personal training &amp; membership</h1>
-        <p class="pricing-lede">One-on-one coaching with Dan at <strong>$90 a session</strong>. Pick how many sessions a week, billed weekly or monthly. Every training plan has a <strong>3-month minimum commitment</strong>.</p>
+        <p class="pricing-lede">One-on-one coaching with Dan at <strong>$90 a session</strong>. Pick how many sessions a week, billed weekly or monthly.</p>
       </div>
     </section>
 
@@ -95,16 +93,16 @@
       <div class="container">
         <div class="consult-explainer launch-callout">
           <div>
-            <h2 id="start-title">New here? Start with a free consult.</h2>
-            <p>Your Fig Performance Launch is a free consult: about an hour for an assessment, your goals, and a game plan.</p>
+            <h2 id="start-title">Not sure how often to train? Ask Dan first.</h2>
+            <p>The Performance Launch is free and takes about an hour. You leave knowing how many sessions a week make sense.</p>
           </div>
           <a class="btn btn-primary btn-lg" href="/#consult">Book a free consult</a>
         </div>
 
         <ol class="steps join-steps" aria-label="How to get started">
-          <li class="step"><span class="step-num" aria-hidden="true">1</span><h3>Your Launch</h3><p>Free consult with Dan. You'll leave with a plan and a clear idea of how often to train.</p></li>
+          <li class="step"><span class="step-num" aria-hidden="true">1</span><h3>Your Launch</h3><p>Free consult with Dan: an InBody scan, a few movements and a plan.</p></li>
           <li class="step"><span class="step-num" aria-hidden="true">2</span><h3>Sign two forms</h3><p>Dan sends you a link to sign the waiver and client checklist online before your first session.</p></li>
-          <li class="step"><span class="step-num" aria-hidden="true">3</span><h3>Pick your plan</h3><p>Choose how many sessions a week with Dan. Then we get to work.</p></li>
+          <li class="step"><span class="step-num" aria-hidden="true">3</span><h3>Pick your plan</h3><p>Choose how many sessions a week with Dan. Your first session is a strength assessment.</p></li>
         </ol>
       </div>
     </section>
@@ -149,7 +147,7 @@
               <li>Classes up to 2&ndash;3 times a week</li>
               <li>Red light therapy</li>
               <li>Vibration therapy</li>
-              <li>Complimentary InBody scan</li>
+              <li>Free InBody scan</li>
               <li>One-time trainer consult</li>
             </ul>
             <p class="not-included strong"><span aria-hidden="true">&times;</span> <span><strong>Does not include</strong> weekly one-on-one personal training. Add it separately.</span></p>
@@ -157,15 +155,15 @@
           </article>
         </div>
 
-        <aside class="concierge" aria-labelledby="concierge-title">
-          <p class="concierge-kicker">Prefer we come to you?</p>
-          <h3 id="concierge-title">Concierge personal training</h3>
-          <p>Coach Dan can run sessions at your home, your office or another location you settle on together. Rates vary by location, so there&rsquo;s no set price here. Ask for a quote and we&rsquo;ll work it out with you.</p>
-          <a class="concierge-link" href="/#consult" data-interest="Concierge personal training">Request a quote <span aria-hidden="true">&rarr;</span></a>
+        <aside class="concierge" id="concierge" aria-labelledby="concierge-title">
+          <p class="concierge-kicker">Have a home gym?</p>
+          <h3 id="concierge-title">Train at home with Dan</h3>
+          <p>In-home personal training covers North Orange County and surrounding areas. Dan coaches you one-on-one in your own space and brings gym accessories. It starts with a free phone call, then an assessment at your home.</p>
+          <a class="concierge-link" href="/#consult" data-interest="Concierge personal training">Book a free call <span aria-hidden="true">&rarr;</span></a>
+          <p class="concierge-note">The call is free. <a class="concierge-link" href="/in-home-personal-training">More on in-home personal training</a></p>
         </aside>
 
         <ul class="plan-notes" aria-label="Good to know">
-          <li><strong>3-month minimum commitment</strong> on every training plan.</li>
           <li><strong>Save 20%</strong> when you pay in full for 3 months of coaching. Otherwise, pay weekly or monthly at $90 a session.</li>
           <li>Comparing gyms? Read <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</li>
           <li>Questions? <a href="tel:+17143967178">Call</a> or <a href="sms:+17143967178">text</a> Dan at (714) 396-7178.</li>
@@ -196,10 +194,12 @@
           <li data-contact="phone"><a href="sms:+17143967178">Text (714) 396-7178</a></li>
           <li data-contact="email"><a href="mailto:trainat@figperformance.com">trainat@figperformance.com</a></li>
           <li><a href="/#consult">Book your free consult</a></li>
+          <li><a href="/in-home-personal-training">In-home training</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/inbody-scan-placentia">InBody scan</a></li>
           <li><a href="/red-light-therapy-placentia">Red light therapy</a></li>
           <li><a href="/fitness-after-40">Fitness after 40 guides</a></li>
+          <li><a href="/#faq">FAQ</a></li>
         </ul>
       </div>
     </div>
@@ -214,6 +214,6 @@
     </div>
   </footer>
 
-  <script src="/assets/main.js?v=22" defer></script>
+  <script src="/assets/main.js?v=33" defer></script>
 </body>
 </html>

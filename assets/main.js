@@ -45,7 +45,7 @@ var CONFIG = {
   if (toggle) {
     toggle.addEventListener("click", function () { setNav(!header.classList.contains("nav-open")); });
     doc.querySelectorAll("#site-nav a").forEach(function (a) { a.addEventListener("click", function () { setNav(false); }); });
-    doc.addEventListener("keydown", function (e) { if (e.key === "Escape") setNav(false); });
+    doc.addEventListener("keydown", function (e) { if (e.key === "Escape" && header.classList.contains("nav-open")) { setNav(false); toggle.focus(); } });
   }
 
   /* ---- Mobile sticky CTA (shows after hero, hides at the form) ---- */
@@ -64,16 +64,6 @@ var CONFIG = {
     new IntersectionObserver(function (es) { heroVisible = es[0].isIntersecting; update(); }).observe(hero);
     new IntersectionObserver(function (es) { consultVisible = es[0].isIntersecting; update(); }, { threshold: 0.05 }).observe(consult);
   }
-
-  /* ---- Programs: collapse card details on phones (native <details>, open by default without JS) ---- */
-  (function () {
-    var more = doc.querySelectorAll("details.card-more");
-    if (!more.length || !window.matchMedia) return;
-    var mq = window.matchMedia("(max-width: 767px)");
-    var apply = function () { more.forEach(function (d) { d.open = !mq.matches; }); };
-    apply();
-    if (mq.addEventListener) mq.addEventListener("change", apply); else if (mq.addListener) mq.addListener(apply);
-  })();
 
   /* ---- Back-to-top button: after ~1.5 screens, hidden while the booking quiz is on screen ---- */
   (function () {
@@ -175,11 +165,28 @@ var CONFIG = {
   /* ==========================================================
      Booking quiz: one question per screen, tap-to-advance
      ========================================================== */
+  var STORE = "fig-quiz-v3";
   var quiz = doc.getElementById("quiz");
   var body = doc.getElementById("quiz-body");
+
+  /* Other pages: links to /#consult with data-interest save the choice so the quiz on the
+     home page opens with it preselected (validated there by sanitizeState). */
+  if (!quiz) {
+    doc.querySelectorAll('a[href="/#consult"][data-interest]').forEach(function (link) {
+      link.addEventListener("click", function () {
+        try {
+          var s = JSON.parse(sessionStorage.getItem(STORE) || "null");
+          if (!s || typeof s !== "object" || s.done) s = { step: 0, a: {} };
+          if (!s.a || typeof s.a !== "object") s.a = {};
+          s.a.interest = link.getAttribute("data-interest"); s.preset = true;
+          if (!(s.step > 1)) s.step = s.a.goal ? 2 : 0;
+          sessionStorage.setItem(STORE, JSON.stringify(s));
+        } catch (e) {}
+      });
+    });
+  }
   if (!quiz || !body) return;
 
-  var STORE = "fig-quiz-v3";
   var ICON = {
     strength: '<path d="M6 7v10M18 7v10M3 9v6M21 9v6M6 12h12"/>',
     weight: '<path d="M4 20h16M7 20l2-12h6l2 12"/><circle cx="12" cy="5" r="2"/>',
@@ -206,7 +213,7 @@ var CONFIG = {
     { key: "interest", title: "How would you like to train?", sub: "You can change your mind at the consult.", options: [
       ["1:1 personal training", "one", "$90/session \u00b7 save 20% paying 3 months in full"],
       ["Membership", "key", "Classes up to 2\u20133x a week + access + recovery"],
-      ["Concierge personal training", "home", "Dan comes to you \u00b7 quoted by location"], ["Not sure, help me choose", "unsure"] ] },
+      ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"], ["Not sure, help me choose", "unsure"] ] },
     { key: "time", title: "What fits around your workday?", sub: "Staffed Mon\u2013Sat, 5 AM to 8 PM.", options: [
       ["Before work", "sunrise", "Early morning"], ["Midday", "sun", "Lunch hour"], ["After work", "moon", "Until 8 PM"], ["Saturday", "cal"] ] },
     { key: "pain", multi: true, title: "Anything bothering you?", sub: "Optional. Tap any that apply and Dan will plan around it.", options: [
@@ -433,7 +440,7 @@ var CONFIG = {
     var next = {
       "1:1 personal training": "Dan will reach out to set up your free 1:1 consult this week: about an hour for an assessment, your goals, and a game plan.",
       "Membership": "Dan will reach out to schedule your tour during pre-opening week. Membership doesn't include weekly one-on-one personal training.",
-      "Concierge personal training": "Dan will reach out to ask where you\u2019d like to train and put together a quote for that location.",
+      "Concierge personal training": "Dan will reach out to set up a free phone call, then an assessment at your home.",
       "Not sure, help me choose": "Dan will reach out, talk through your goals, and help you pick the right fit."
     }[interest] || "Dan will reach out to book your free consult.";
     top.hidden = true; bar.hidden = true;
@@ -467,4 +474,65 @@ var CONFIG = {
   render(false);
 
 
+})();
+
+/* ============ v31: hero studio video (poster paints first; video fetched only after load + idle) ============ */
+(function () {
+  var v = document.querySelector(".tour-video");
+  if (!v) return;
+  var frame = v.closest(".tour-frame");
+  var btn = frame && frame.querySelector(".tour-toggle");
+  var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var manual = (mq && mq.matches) || !!(conn && conn.saveData);
+  var sourced = false, ready = false, visible = true, userPaused = false;
+  v.muted = true;
+  function attachSources() {
+    if (sourced) return;
+    var small = Math.min(window.innerWidth, screen.width || 9999) < 700;
+    v.querySelectorAll("source[data-src]").forEach(function (s) { s.src = (small && s.getAttribute("data-src-sm")) || s.getAttribute("data-src"); });
+    v.preload = "auto"; v.load(); sourced = true;
+  }
+  function sync() {
+    if (!btn) return;
+    var playing = !v.paused;
+    btn.classList.toggle("is-playing", playing);
+    btn.setAttribute("aria-label", playing ? "Pause the studio video" : "Play the studio video");
+  }
+  function tryPlay() {
+    attachSources();
+    var p = v.play();
+    if (p && p.catch) p.catch(function () { if (frame) frame.classList.add("is-manual"); sync(); });
+  }
+  v.addEventListener("playing", function () { if (frame) frame.classList.add("is-live"); });
+  v.addEventListener("play", sync); v.addEventListener("pause", sync);
+  if (btn) {
+    btn.hidden = false;
+    btn.addEventListener("click", function () {
+      if (v.paused) { userPaused = false; tryPlay(); } else { userPaused = true; v.pause(); }
+    });
+  }
+  if (manual && frame) frame.classList.add("is-manual");
+  function start() {
+    ready = true;
+    if (manual) return;
+    attachSources();
+    if (visible && !userPaused) tryPlay();
+  }
+  function whenIdle() {
+    if ("requestIdleCallback" in window) window.requestIdleCallback(start, { timeout: 2500 });
+    else setTimeout(start, 1200);
+  }
+  if (document.readyState === "complete") whenIdle();
+  else window.addEventListener("load", whenIdle, { once: true });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        visible = e.isIntersecting;
+        if (visible && ready && !manual && !userPaused) tryPlay();
+        else if (!visible && !v.paused) v.pause();
+      });
+    }, { threshold: 0.35 }).observe(v);
+  }
+  if (mq && mq.addEventListener) mq.addEventListener("change", function (e) { if (e.matches) { manual = true; v.pause(); if (frame) frame.classList.add("is-manual"); } });
 })();
