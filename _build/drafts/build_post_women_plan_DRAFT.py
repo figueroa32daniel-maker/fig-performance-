@@ -39,24 +39,24 @@ DAY1 = table(["Exercise", "Sets &times; reps"], [
     ("Barbell Romanian deadlift (RDL)", "3 &times; 10&ndash;12"),
     ("Dumbbell bench press", "3 &times; 10"),
     ("One-arm dumbbell row", "3 &times; 10 each arm"),
-    ("Bent-over wood chop", "2 &times; 10 each side"),
+    ("Bent-over dumbbell wood chop", "2 &times; 10 each side"),
     ("Cable hip abduction", "3 &times; 20 each leg"),
 ])
 DAY2 = table(["Exercise", "Sets &times; reps"], [
-    ("Sumo squat or box squat", "3 &times; 10"),
+    ("Dumbbell sumo squat or barbell box squat", "3 &times; 10"),
     ("Barbell hip thrust with a 2-second pause", "3 &times; 10"),
-    ("Hyperextension", "3 &times; 12&ndash;15"),
-    ("Lat pulldown", "3 &times; 10&ndash;12"),
+    ("45-degree hyperextension (bodyweight or holding a plate)", "3 &times; 12&ndash;15"),
+    ("Wide-grip cable lat pulldown", "3 &times; 10&ndash;12"),
     ("Seated dumbbell shoulder press", "3 &times; 10"),
-    ("Cable crunch", "2 &times; 12&ndash;15"),
+    ("Kneeling cable crunch", "2 &times; 12&ndash;15"),
     ("Band hip abduction", "3 &times; 20&ndash;25"),
 ])
 DAY3 = table(["Exercise", "Sets &times; reps"], [
-    ("Dumbbell reverse lunge or sumo leg press", "3 &times; 10 each leg / 3 &times; 12"),
+    ("Dumbbell reverse lunge or sumo-stance leg press (machine)", "3 &times; 10 each leg / 3 &times; 12"),
     ("Supported single-leg dumbbell deadlift", "3 &times; 10 each leg"),
     ("Barbell hip thrust pulses", "3 &times; 20&ndash;30"),
     ("Dumbbell curl", "3 &times; 10&ndash;12"),
-    ("Triceps rope pushdown", "3 &times; 12"),
+    ("Cable triceps rope pushdown", "3 &times; 12"),
     ("Bench leg raise", "2 &times; 10&ndash;12"),
     ("Machine hip abduction", "3 &times; 20&ndash;30"),
 ])
@@ -111,7 +111,7 @@ body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full bod
 <p><strong>Works:</strong> Upper back, lats and biceps.</p>
 <p><strong>Why it matters:</strong> Balances out desk posture and rounded shoulders, and helps you stand taller. Defines the back, which also makes the waist look smaller.</p>
 <p><strong>Easier or at-home version:</strong> Chest-supported row, lying face-down on an incline bench. At home: band row anchored to a door.</p>
-<h3>Bent-over wood chop</h3>
+<h3>Bent-over dumbbell wood chop</h3>
 <p><strong>Works:</strong> Obliques and deep core, through rotation.</p>
 <p><strong>Why it matters:</strong> Trains your core to control twisting, the move behind golf swings, reaching into the back seat and turning to look behind you. Helps protect your lower back.</p>
 <p><strong>Easier or at-home version:</strong> Standing band chop, or a lighter weight from a half-kneeling position.</p>
@@ -119,15 +119,15 @@ body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full bod
 <p><strong>Works:</strong> The side glutes (glute medius).</p>
 <p><strong>Why it matters:</strong> Keeps your hips stable and your knees lined up when you walk, climb stairs or stand on one leg, which matters for balance and fall prevention as you age. Shapes the upper and outer glutes.</p>
 <p><strong>Easier or at-home version:</strong> Side-lying leg raise, with or without a band. At home: a mini band around your knees, seated or standing.</p>
-<h3>Sumo squat or box squat</h3>
+<h3>Dumbbell sumo squat or barbell box squat</h3>
 <p><strong>Works:</strong> Quads, glutes and inner thighs.</p>
 <p><strong>Why it matters:</strong> The everyday sit-to-stand: chairs, cars and the toilet, without using your hands. Builds the legs and glutes.</p>
 <p><strong>Easier or at-home version:</strong> Box squat to a higher box or chair, then lower it as you get stronger. At home: goblet squat with one dumbbell.</p>
-<h3>Hyperextension</h3>
+<h3>45-degree hyperextension</h3>
 <p><strong>Works:</strong> Lower back, glutes and hamstrings.</p>
 <p><strong>Why it matters:</strong> Builds endurance in the muscles that hold you upright, for better posture and a lower back that tires less.</p>
 <p><strong>Easier or at-home version:</strong> Bird dog or a floor back extension (lying face-down, lift your chest a few inches). At home: same, or over a stability ball.</p>
-<h3>Lat pulldown</h3>
+<h3>Wide-grip cable lat pulldown</h3>
 <p><strong>Works:</strong> Lats and upper back.</p>
 <p><strong>Why it matters:</strong> Pulling strength and healthy shoulders. Counteracts hours of sitting and looking down at a phone. Builds a defined back.</p>
 <p><strong>Easier or at-home version:</strong> Band pulldown, or a lighter weight with a slower pace. At home: band pulldown anchored to the top of a door.</p>
@@ -135,11 +135,11 @@ body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full bod
 <p><strong>Works:</strong> Shoulders and triceps.</p>
 <p><strong>Why it matters:</strong> Overhead strength for putting a bag in the overhead bin or a box on a high shelf. Rounds out the shoulders.</p>
 <p><strong>Easier or at-home version:</strong> Palms-facing-in grip, which is easier on the shoulders, with lighter dumbbells. If pressing overhead hurts, skip it for now and tell your coach.</p>
-<h3>Cable crunch</h3>
+<h3>Kneeling cable crunch</h3>
 <p><strong>Works:</strong> The front abs.</p>
 <p><strong>Why it matters:</strong> Core strength to control your trunk and protect your back when you lift. Paired with fat loss, a stronger core gives you a firmer-looking midsection.</p>
 <p><strong>Easier or at-home version:</strong> Floor crunch or dead bug. At home: band crunch anchored up high.</p>
-<h3>Dumbbell reverse lunge or sumo leg press</h3>
+<h3>Dumbbell reverse lunge or sumo-stance leg press (machine)</h3>
 <p><strong>Works:</strong> Quads and glutes.</p>
 <p><strong>Why it matters:</strong> Stepping back and catching yourself trains balance and control, and builds the legs.</p>
 <p><strong>Easier or at-home version:</strong> Reverse lunge holding a wall or rack, bodyweight only. At home: bodyweight reverse lunge, then add dumbbells.</p>
@@ -151,7 +151,7 @@ body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full bod
 <p><strong>Works:</strong> Biceps and grip.</p>
 <p><strong>Why it matters:</strong> Carrying groceries, kids and luggage, and grip strength, which researchers link to healthy aging. Tones the front of the arms.</p>
 <p><strong>Easier or at-home version:</strong> Lighter dumbbells or a band curl.</p>
-<h3>Triceps rope pushdown</h3>
+<h3>Cable triceps rope pushdown</h3>
 <p><strong>Works:</strong> Triceps, the back of the arms.</p>
 <p><strong>Why it matters:</strong> Helps you push up out of a chair or off the floor. Firms the back of the arms.</p>
 <p><strong>Easier or at-home version:</strong> Band pushdown anchored to a door, or a one-dumbbell overhead triceps extension.</p>

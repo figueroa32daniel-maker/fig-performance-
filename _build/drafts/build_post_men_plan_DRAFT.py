@@ -26,62 +26,62 @@ WARMUP = table(["Exercise", "Sets &times; reps"], [
     ("Bird dog", f"2 {X} 6 each side"),
     ("Front-to-back leg swing", f"2 {X} 10 each leg"),
     ("Side-to-side leg swing", f"2 {X} 10 each leg"),
-    ("Glute bridge", f"2 {X} 15"),
+    ("Bodyweight glute bridge", f"2 {X} 15"),
     ("Wall slide", f"2 {X} 15"),
     ("Scapular push-up", f"2 {X} 10"),
 ])
 COLS = ["Exercise", "Sets &times; reps"]
 DAY1 = table(COLS, [
-    ("Leg press", f"3 {X} 8&ndash;10"),
-    ("Lying leg curl", f"3 {X} 10&ndash;12"),
-    ("Seated calf raise", f"3 {X} 12&ndash;15"),
+    ("Leg press (machine)", f"3 {X} 8&ndash;10"),
+    ("Lying leg curl (machine)", f"3 {X} 10&ndash;12"),
+    ("Seated calf raise (machine)", f"3 {X} 12&ndash;15"),
     ("Incline dumbbell press", f"3 {X} 8&ndash;10"),
-    ("Underhand lat pulldown", f"3 {X} 8&ndash;10"),
-    ("Cable row", f"3 {X} 10"),
-    ("Lateral raise", f"3 {X} 12&ndash;15"),
+    ("Underhand-grip cable lat pulldown", f"3 {X} 8&ndash;10"),
+    ("Seated cable row", f"3 {X} 10"),
+    ("Dumbbell lateral raise", f"3 {X} 12&ndash;15"),
     ("Cable wood chop", f"2 {X} 10 each side"),
 ])
 DAY2 = table(COLS, [
-    ("Box squat", f"3 {X} 6&ndash;8"),
+    ("Barbell box squat", f"3 {X} 6&ndash;8"),
     ("Barbell Romanian deadlift (RDL)", f"3 {X} 8&ndash;10"),
-    ("Wall tib raise", f"3 {X} 15&ndash;20"),
+    ("Wall tib raise (bodyweight)", f"3 {X} 15&ndash;20"),
     ("Seated dumbbell shoulder press", f"3 {X} 8&ndash;10"),
-    ("Cross-body hammer curl", f"3 {X} 10&ndash;12 each arm"),
-    ("One-arm preacher curl", f"3 {X} 10&ndash;12 each arm"),
-    ("Zottman curl", f"3 {X} 10&ndash;12"),
-    ("Cable overhead triceps extension", f"3 {X} 10&ndash;12"),
-    ("Straight-bar pushdown", f"3 {X} 10&ndash;12"),
+    ("Cross-body dumbbell hammer curl", f"3 {X} 10&ndash;12 each arm"),
+    ("One-arm dumbbell preacher curl", f"3 {X} 10&ndash;12 each arm"),
+    ("Dumbbell Zottman curl", f"3 {X} 10&ndash;12"),
+    ("Cable overhead triceps extension (rope)", f"3 {X} 10&ndash;12"),
+    ("Cable straight-bar pushdown", f"3 {X} 10&ndash;12"),
     ("Single-arm dumbbell skull crusher", f"3 {X} 10&ndash;12 each arm"),
-    ("Weighted sit-up or cable crunch", f"2 {X} 12&ndash;15"),
+    ("Plate-weighted sit-up or kneeling cable crunch", f"2 {X} 12&ndash;15"),
 ])
 DAY3 = table(COLS, [
     ("Dumbbell reverse lunge", f"3 {X} 8&ndash;10 each leg"),
-    ("Glute bridge", f"3 {X} 10&ndash;12"),
-    ("Standing calf raise", f"3 {X} 12&ndash;15"),
+    ("Dumbbell glute bridge", f"3 {X} 10&ndash;12"),
+    ("Standing calf raise (machine, or holding dumbbells on a step)", f"3 {X} 12&ndash;15"),
     ("One-arm incline dumbbell press", f"3 {X} 8&ndash;10 each arm"),
-    ("Flat bench press or flat dumbbell press", f"3 {X} 6&ndash;8"),
+    ("Flat barbell bench press or flat dumbbell press", f"3 {X} 6&ndash;8"),
     ("One-arm dumbbell row", f"3 {X} 10 each arm"),
-    ("Lateral raise", f"3 {X} 12&ndash;15"),
+    ("Dumbbell lateral raise", f"3 {X} 12&ndash;15"),
     ("Hanging knee raise or bench leg raise", f"2 {X} 10&ndash;12"),
 ])
 
 G = [
-    ("Leg press", "Quads and glutes.", "Lets you load your legs heavy with your back supported, a safe way for beginners to build leg strength for stairs, hiking and getting up from the floor. Builds bigger, stronger legs.", "Goblet squat with a dumbbell. At home: goblet squat or bodyweight squat to a chair."),
-    ("Box squat", "Quads, glutes and the muscles that keep your trunk upright.", "Sitting back to a box teaches good squat depth and control, and trains the sit-to-stand you'll use for the rest of your life. A foundation for strong, full legs.", "Sit to a higher box, or hold a dumbbell at your chest (goblet box squat). At home: squat to a chair."),
-    ("Lying leg curl", "Hamstrings.", "Strong hamstrings help protect your knees and balance out the quads. Builds the back of your legs.", "Stability-ball or slider leg curl. At home: slider curls on a hardwood floor, or band leg curls."),
+    ("Leg press (machine)", "Quads and glutes.", "Lets you load your legs heavy with your back supported, a safe way for beginners to build leg strength for stairs, hiking and getting up from the floor. Builds bigger, stronger legs.", "Goblet squat with a dumbbell. At home: goblet squat or bodyweight squat to a chair."),
+    ("Barbell box squat", "Quads, glutes and the muscles that keep your trunk upright.", "Sitting back to a box teaches good squat depth and control, and trains the sit-to-stand you'll use for the rest of your life. A foundation for strong, full legs.", "Sit to a higher box, or hold a dumbbell at your chest (goblet box squat). At home: squat to a chair."),
+    ("Lying leg curl (machine)", "Hamstrings.", "Strong hamstrings help protect your knees and balance out the quads. Builds the back of your legs.", "Stability-ball or slider leg curl. At home: slider curls on a hardwood floor, or band leg curls."),
     ("Barbell Romanian deadlift (RDL)", "Hamstrings, glutes and the muscles along your spine.", "Teaches you to bend at the hips with a flat back, the safest way to lift things off the floor. Builds a strong back side and better posture.", "Dumbbell RDL, and only lower to mid-shin until it feels solid."),
     ("Dumbbell reverse lunge", "Quads and glutes, one leg at a time.", "Builds single-leg strength and balance, and evens out a stronger and weaker side. Stepping back is easier on the knees than walking lunges.", "Bodyweight reverse lunge holding a wall or rack."),
-    ("Glute bridge", "Glutes and hamstrings.", "Strong glutes take stress off your lower back. Builds a stronger, fuller backside.", "Bodyweight bridge on the floor, then add a dumbbell on your hips."),
+    ("Dumbbell glute bridge", "Glutes and hamstrings.", "Strong glutes take stress off your lower back. Builds a stronger, fuller backside.", "Bodyweight bridge on the floor, then add a dumbbell on your hips."),
     ("Seated and standing calf raises", "Calves. Seated works the deeper calf muscle, and standing works the bigger one.", "Strong calves help with ankle stability, balance and walking or running without pain. Fuller lower legs.", "Bodyweight calf raises on a step, holding the wall."),
     ("Incline dumbbell press and one-arm incline press", "Upper chest, front of the shoulders and triceps.", "Pushing strength and upper body bone health. The incline builds the upper chest, which fills out the top of a T-shirt. The one-arm version also makes your core work to keep you steady.", "Incline push-up with your hands on a bench. At home: dumbbells on an adjustable bench, or the floor."),
-    ("Flat bench press or flat dumbbell press", "Chest, shoulders and triceps.", "The classic test of upper body strength, and pushing power for everyday life. Builds a bigger chest.", "Dumbbell floor press, or push-ups."),
-    ("Underhand lat pulldown", "Lats, upper back and biceps.", "Pulling strength and healthy shoulders, and it counteracts hours of sitting hunched at a desk. The wide back that gives you a V-taper.", "Band pulldown anchored to the top of a door."),
-    ("Cable row and one-arm dumbbell row", "Mid and upper back, lats and biceps.", "Better posture and stronger shoulders, and the one-arm version evens out your sides. A thicker, more defined back.", "Chest-supported dumbbell row, or a band row anchored to a door."),
-    ("Lateral raise", "Side shoulders.", "Keeps the shoulders strong and balanced. Wider shoulders make your waist look smaller.", "Lighter dumbbells, one arm at a time while holding something for support, or a band."),
+    ("Flat barbell bench press or flat dumbbell press", "Chest, shoulders and triceps.", "The classic test of upper body strength, and pushing power for everyday life. Builds a bigger chest.", "Dumbbell floor press, or push-ups."),
+    ("Underhand-grip cable lat pulldown", "Lats, upper back and biceps.", "Pulling strength and healthy shoulders, and it counteracts hours of sitting hunched at a desk. The wide back that gives you a V-taper.", "Band pulldown anchored to the top of a door."),
+    ("Seated cable row and one-arm dumbbell row", "Mid and upper back, lats and biceps.", "Better posture and stronger shoulders, and the one-arm version evens out your sides. A thicker, more defined back.", "Chest-supported dumbbell row, or a band row anchored to a door."),
+    ("Dumbbell lateral raise", "Side shoulders.", "Keeps the shoulders strong and balanced. Wider shoulders make your waist look smaller.", "Lighter dumbbells, one arm at a time while holding something for support, or a band."),
     ("Seated dumbbell shoulder press", "Shoulders and triceps.", "Overhead strength for lifting things onto shelves and into the overhead bin. Rounder, fuller shoulders.", "Palms-facing-in grip, which is easier on the shoulders, with lighter dumbbells. If pressing overhead hurts, skip it for now and tell your coach."),
-    ("Cross-body hammer curl, one-arm preacher curl and Zottman curl", "Biceps, forearms and grip. Hammer curls hit the forearm and the outer biceps, preacher curls keep the biceps honest with no swinging, and the Zottman works the biceps on the way up and the forearms on the way down.", "Researchers link grip strength to healthy aging, and strong arms make carrying and lifting easier. Bigger arms.", "Lighter dumbbells or band curls."),
-    ("Cable overhead extension, straight-bar pushdown and single-arm skull crusher", "Triceps, from three angles: stretched overhead, straight down, and lying down.", "The triceps power every push: up off the floor, out of a chair, pressing overhead. They make up most of the size of your upper arm.", "Band pushdown anchored to a door, or a one-dumbbell overhead extension."),
-    ("Core: cable wood chop, weighted sit-up or cable crunch, hanging knee raise or bench leg raise", "The whole core: rotation, crunching and lifting the legs.", "A strong core protects your lower back when you lift, twist and carry. With fat loss, it gives you a firmer midsection.", "Band chop, floor crunch, or bent-knee leg raises lying on the floor."),
+    ("Cross-body dumbbell hammer curl, one-arm dumbbell preacher curl and dumbbell Zottman curl", "Biceps, forearms and grip. Hammer curls hit the forearm and the outer biceps, preacher curls keep the biceps honest with no swinging, and the Zottman works the biceps on the way up and the forearms on the way down.", "Researchers link grip strength to healthy aging, and strong arms make carrying and lifting easier. Bigger arms.", "Lighter dumbbells or band curls."),
+    ("Cable overhead triceps extension, cable straight-bar pushdown and single-arm dumbbell skull crusher", "Triceps, from three angles: stretched overhead, straight down, and lying down.", "The triceps power every push: up off the floor, out of a chair, pressing overhead. They make up most of the size of your upper arm.", "Band pushdown anchored to a door, or a one-dumbbell overhead extension."),
+    ("Core: cable wood chop, plate-weighted sit-up or kneeling cable crunch, hanging knee raise or bench leg raise", "The whole core: rotation, crunching and lifting the legs.", "A strong core protects your lower back when you lift, twist and carry. With fat loss, it gives you a firmer midsection.", "Band chop, floor crunch, or bent-knee leg raises lying on the floor."),
 ]
 GUIDE = "\n".join(f"""<h3>{n}</h3>
 <p><strong>Works:</strong> {w}</p>
@@ -93,7 +93,7 @@ body = f"""<p class="legal-intro">A good beginner workout plan for men is full b
 <h2 id="how">How the plan works</h2>
 <ul>
   <li><strong>Legs first, every day:</strong> 2 leg exercises and 1 calf exercise. No more. That's enough to get stronger without leaving your legs too sore to train again two days later.</li>
-  <li><strong>Days 1 and 3: chest, back and shoulders.</strong> Incline pressing on both days, a flat press once, and lateral raises both days.</li>
+  <li><strong>Days 1 and 3: chest, back and shoulders.</strong> Incline dumbbell pressing on both days, a flat press once, and dumbbell lateral raises both days.</li>
   <li><strong>Day 2: arm day,</strong> with shoulders, biceps and triceps, in between the two chest, back and shoulder days.</li>
   <li><strong>Core: 1 exercise, 2 sets,</strong> hitting a different angle each day.</li>
   <li><strong>Rest 1:15 to 2 minutes</strong> between sets.</li>
@@ -114,7 +114,7 @@ body = f"""<p class="legal-intro">A good beginner workout plan for men is full b
 {DAY3}
 <p><strong>Core swaps:</strong> rotate in a Russian twist, bent-over wood chop, dumbbell side bend or alternating elbow plank.</p>
 
-<h2 id="tib">Why wall tib raises are in the plan</h2>
+<h2 id="tib">Why wall tib raises matter, and how to do them</h2>
 <p>The tibialis anterior is the muscle on the front of your shin. It lifts your toes every time you take a step. Almost nobody trains it, and when it's weak your toes can drag and catch, which is how a lot of trips and falls start as you get older. A strong tib also helps protect your knees and ankles and can ease shin pain. To do one, stand with your back against a wall and your feet about a foot in front of you, then lift your toes as high as you can and lower them slowly.</p>
 
 <h2 id="exercises">What each exercise does, and easier or at-home options</h2>
