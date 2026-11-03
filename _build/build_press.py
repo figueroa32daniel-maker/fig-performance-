@@ -35,6 +35,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="guides">Recent guides by Coach Dan</h2>
 <ul>
+  <li><a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a></li>
   <li><a href="/how-to-avoid-holiday-weight-gain">How to avoid holiday weight gain after 40</a></li>
   <li><a href="/how-to-lose-weight-after-40">How to lose weight after 40</a></li>
   <li><a href="/build-muscle-after-60">Can you build muscle after 60?</a></li>

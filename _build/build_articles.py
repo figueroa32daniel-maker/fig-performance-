@@ -134,6 +134,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a><br>Three full-body days a week, the exact exercises, and how to progress.</li>
   <li><a href="/how-to-avoid-holiday-weight-gain">How to avoid holiday weight gain after 40</a><br>Coach DanHold steady from Thanksgiving to New Year&rsquo;s, plus a 20-minute hotel workout.rsquo;s rules: protein first, room for dessert, drink boundaries, and a hotel workout.</li>
   <li><a href="/how-to-lose-weight-after-40">How to lose weight after 40: a coach&rsquo;s plan</a><br>Steps, protein, lifting heavy enough, training twice a week, and why the scale lies.</li>
   <li><a href="/build-muscle-after-60">Can you build muscle after 60?</a><br>Yes. How Teresa, 60, got her first pull-up and Sam, 70, deadlifts 135 pounds.</li>
