@@ -1,6 +1,6 @@
 """Article: tib raises (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-11-03"
 SLUG = "tib-raises"
@@ -41,6 +41,7 @@ body = f"""<p class="legal-intro">Tib raises strengthen the tibialis anterior, t
   <li><strong>Most sets:</strong> 12 to 20 reps.</li>
   <li><strong>Endurance:</strong> 25 to 30 reps, great with wall tib raises.</li>
 </ul>
+{stats([("5&ndash;10", "reps when it's heavy"), ("12&ndash;20", "reps for most sets"), ("25&ndash;30", "reps for endurance")])}
 <p>Do 2 or 3 sets, 2 or 3 times a week. Start with wall tib raises, then add weight as they get easy. You'll feel the burn fast. That's normal.</p>
 
 <h2 id="plans">Where tib raises fit in your training</h2>

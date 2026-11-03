@@ -12,6 +12,93 @@ header = pricing[body_start: pricing.index("</header>") + len("</header>")]
 header = header.replace(' aria-current="page"', "").replace('          <li><a href="/#results">Results</a></li>\n', "")
 footer = pricing[pricing.index("  <!-- ============ FOOTER ============ -->"):]
 
+TAKEAWAYS = {
+    "how-to-lose-weight-after-40": [
+        "Move more every day: over 5,000 steps, ideally 6,000 or more.",
+        "Eat protein at every meal, and lift heavy enough to get stronger over time.",
+        "Two strength sessions a week is enough for most busy adults over 40. Track body composition, not just the scale."],
+    "build-muscle-after-60": [
+        "Yes, you can build muscle after 60. Teresa did her first pull-up at 60, and Sam deadlifts 135 lb at 70.",
+        "Start light with 8 to 12 reps, fix side-to-side imbalances, then lower the reps and raise the weight.",
+        "It's never too late. Chase progress, not perfection."],
+    "why-am-i-not-losing-weight": [
+        "If you're not losing weight, you're almost always not in a true calorie deficit.",
+        "Healthy food still has calories. Portions, protein and daily steps matter most.",
+        "Measure what you do: what you don't measure, you can't manage."],
+    "strength-training-for-women-over-40": [
+        "Lifting keeps your capabilities: getting up off the floor, climbing stairs, picking yourself up.",
+        "Train full body 2 to 3 times a week, every other day, and walk daily.",
+        "It won't make you bulky. Progress slowly, and eat at least your goal weight in grams of protein."],
+    "how-to-avoid-holiday-weight-gain": [
+        "Eat protein first, fill up on vegetables, and leave room for the dessert you really want.",
+        "Keep training through the holidays, and set boundaries on drinking.",
+        "Keep each holiday to a few days, not two months. Don't wait for January."],
+    "3-day-beginner-workout-plan": [
+        "The best 3-day split for beginners is full body, 3 days a week, on non-consecutive days.",
+        "Pick the women's or men's plan below. Each has exact exercises, sets and reps.",
+        "Rest 1:15 to 2 minutes between sets, and walk on your off days."],
+    "beginner-workout-plan-for-women": [
+        "Full body 3 days a week: 4 leg and glute exercises, 2 upper body and 1 core each day.",
+        "3 sets of 8 to 12 on most lifts, 20 to 30 on abduction and pulses, and 2 sets of core.",
+        "Rest 1:15 to 2 minutes, add weight when you hit the top of the range, and walk on off days."],
+    "beginner-workout-plan-for-men": [
+        "Full body 3 days a week, legs first: 2 leg exercises and 1 calf or tib exercise each day.",
+        "Chest, back and shoulders on Days 1 and 3, with an arm day in the middle.",
+        "Rest 1:15 to 2 minutes, push heavier on box squats and bench, and walk on off days."],
+    "meal-plan-for-weight-loss": [
+        "Every meal and snack has protein, carbs, fats and fiber.",
+        "Build your plate with a palm of protein, a fist of vegetables and high-fiber carbs for the rest.",
+        "Download the free PDF with meal options and a grocery list. No email needed."],
+    "tib-raises": [
+        "Tib raises train the muscle on the front of your shin that lifts your toes and absorbs shock.",
+        "Strong tibs help protect your knees and can help with shin splints.",
+        "Start with wall tib raises, 2 to 3 sets, 2 to 3 times a week, then add weight."],
+    "strength-training-for-women-over-50": [
+        "Your age doesn't decide your program. Your assessment does.",
+        "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
+        "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "glp-1-muscle-loss": [
+        "On GLP-1s, a big share of the weight lost can be muscle.",
+        "Protect it: hit your protein, lift 2 to 3 times a week, eat enough and walk daily.",
+        "The medication is a tool. Your habits keep the results if you ever stop."],
+    "workout-plan-for-men-over-40": [
+        "Train for function, not just looks, and only use ranges of motion you own.",
+        "Start light and fix what hurts: neck, shoulders, lower back, hips and knees.",
+        "Three full-body days a week plus daily walking keeps you capable for life."],
+    "how-to-lose-10-pounds-in-a-month": [
+        "Losing 10 pounds in a month is realistic with about a 1,000-calorie daily deficit.",
+        "Expect about 8 pounds of fat plus water weight.",
+        "Eat high protein and strength train so the weight you lose is fat, not muscle."],
+    "personal-training-cost-placentia": [
+        "Personal training at Fig Performance is $90 a session, or $387 a month for once a week.",
+        "Save 20% when you pay 3 months in full. The first consult and InBody scan are free.",
+        "Compare trainers on price per session, who coaches you, and how they measure progress."],
+}
+
+
+def takeaways_box(slug):
+    items = TAKEAWAYS.get(slug)
+    if not items:
+        return ""
+    lis = "".join(f"<li>{i}</li>" for i in items)
+    return f'<div class="takeaways"><p class="takeaways-title">Key takeaways</p><ul>{lis}</ul></div>\n'
+
+
+def _with_takeaways(slug, body_html):
+    box = takeaways_box(slug)
+    if not box:
+        return body_html
+    if body_html.lstrip().startswith('<p class="legal-intro">'):
+        i = body_html.index("</p>") + 4
+        return body_html[:i] + "\n" + box + body_html[i:]
+    return box + body_html
+
+
+def stats(items):
+    cells = "".join(f'<div class="stat"><span class="stat-num">{n}</span><span class="stat-label">{l}</span></div>' for n, l in items)
+    return f'<div class="stats">{cells}</div>'
+
+
 def callout(label, title, items):
     lis = "".join(f"<li>{i}</li>" for i in items)
     return f'<aside class="callout"><p class="callout-label">{label}</p><p class="callout-title">{title}</p><ul>{lis}</ul></aside>'
@@ -117,7 +204,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=37">
+  <link rel="stylesheet" href="/assets/styles.css?v=38">
 {ld_html}
 </head>
 <body class="{body_class}">
@@ -140,7 +227,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
           <p class="legal-others">Ready to start? <a href="/#consult">Book a free consult</a></p>
         </aside>
         <article class="legal-body">
-{body_html}
+{_with_takeaways(slug, body_html) if kind == "article" else body_html}
         </article>
       </div>
     </section>

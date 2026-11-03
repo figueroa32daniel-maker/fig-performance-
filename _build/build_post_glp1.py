@@ -1,6 +1,6 @@
 """Article: GLP-1s and muscle loss (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-11-03"
 SLUG = "glp-1-muscle-loss"
@@ -15,6 +15,7 @@ body = f"""<p class="legal-intro">GLP-1 medications like semaglutide (Ozempic, W
 
 <h2 id="muscle">Why muscle loss is the real risk</h2>
 <p>To keep muscle, your body needs protein and enough fuel. When your appetite is suppressed, both get hard. In one large semaglutide trial, about 40% of the weight people lost was lean mass, which includes muscle (<a href="{STEP1}" target="_blank" rel="noopener noreferrer">STEP 1 body-composition substudy</a>). Some studies also suggest rapid weight loss can affect bone density.</p>
+{stats([("~40%", "of weight lost was lean mass in a large semaglutide trial"), ("~2/3", "of lost weight regained within a year of stopping"), ("2&ndash;3x", "strength sessions a week to protect muscle")])}
 <p>Lose too much muscle and you lose strength, you burn fewer calories at rest, and everyday things get harder. For some people, that trade isn't worth it.</p>
 <p>My honest take: if your doctor says you're at high risk of heart disease or another serious condition, these medications can make a lot of sense. For most people, go in with a plan to protect your muscle.</p>
 

@@ -1,6 +1,6 @@
 """'Why am I not losing weight?' rewritten from Coach Dan's voice memo (Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA, callout, pullquote
+from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 SLUG = "why-am-i-not-losing-weight"
 DATE = "2026-10-30"
@@ -29,6 +29,7 @@ body = f"""<p class="legal-intro">If you're not losing weight, you're almost alw
 <h2 id="movement">5. You sit more than you think</h2>
 <p>This is the bottleneck for most of the CEOs, CFOs, business owners, managers and work-from-home clients I coach. Most people didn't gain the weight because they started eating more. They gained it because their life became sedentary.</p>
 <p>And it's usually not your metabolism. A large 2021 study of more than 6,000 people found that metabolism stays fairly steady from about age 20 to 60 (<a href="{PONTZER}" target="_blank" rel="noopener noreferrer">NBC News</a>). What changes is how much we move.</p>
+{stats([("5,000+", "steps a day, ideally 6,000 or more"), ("0.7&ndash;1 g", "of protein per pound a day"), ("20 to 60", "the ages metabolism stays fairly steady")])}
 <p>When your body doesn't move, you get stiff. When you get stiff, you get pain. When you're in pain, you work out less, you lose abilities you used to have, and you become even more sedentary.</p>
 <p><strong>What to do:</strong> walk more. My target for clients is more than 5,000 steps a day, and ideally 6,000 or more. Walk after meals, take calls on your feet, and get up from your desk every hour.</p>
 

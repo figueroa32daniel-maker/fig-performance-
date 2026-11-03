@@ -1,5 +1,5 @@
 """Article: Can you build muscle after 60? (from Coach Dan's interview answers, Oct 30 2026)."""
-from build_pages import page, SITE, CTA, callout, pullquote
+from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-10-30"
 SLUG = "build-muscle-after-60"
@@ -20,6 +20,8 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
 </ul>
 <p>Every step was based on what I saw from her in person: what looked safe, and what she was ready for.</p>
 {callout("Client result", "Teresa, 60: from zero bodyweight exercises to pull-ups", ["Started with a shoulder injury", "First pull-up in about 3 months", "Bench press about 85 pounds for reps", "Curls with 30-pound dumbbells"])}
+
+{stats([("60", "Teresa's age at her first pull-up"), ("~3 months", "from no bodyweight exercises to a pull-up"), ("135 lb", "Sam's deadlift at 70")])}
 
 <h2 id="sam">Sam, 70: deadlifting 135 pounds for reps</h2>
 <p>Sam is 70, and he's a badass. Right now he's doing:</p>

@@ -1,6 +1,6 @@
 """Article: can you lose 10 pounds in a month (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA, callout, pullquote
+from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-11-03"
 SLUG = "how-to-lose-10-pounds-in-a-month"
@@ -17,6 +17,7 @@ body = f"""<p class="legal-intro">Yes, you can lose 10 pounds in a month. It's r
   <li><strong>About 500 calories from food:</strong> eat 500 fewer calories a day than you burn.</li>
   <li><strong>About 500 calories from movement:</strong> more daily steps and some cardio.</li>
 </ul>
+{stats([("~1,000", "calorie daily deficit"), ("~2 lb", "of fat a week"), ("~8 lb", "of fat in a month, plus water")])}
 <p>Two pounds a week works out to about 8 pounds of fat in a month. The rest of the 10 usually comes from water. When you cut calories, and especially carbs and salt, your body lets go of stored water in the first week or two. That's why the first few pounds come off fast.</p>
 
 <h2 id="how">How to lose 10 pounds in a month</h2>

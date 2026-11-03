@@ -40,7 +40,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 
 <h2 id="compare">Online coaching vs. in-person training</h2>
 <div class="price-table-wrap"><table class="price-table compare-table">
-  <thead><tr><th></th><th>Online coaching</th><th>In-person, once a week</th></tr></thead>
+  <thead><tr><th><span class="sr-only">Feature</span></th><th>Online coaching</th><th>In-person, once a week</th></tr></thead>
   <tbody>
     <tr><td>Price</td><td>$249/month</td><td>$387/month</td></tr>
     <tr><td>Time with Dan</td><td>Weekly video call, about 30 min</td><td>Weekly 50-minute session in the gym</td></tr>

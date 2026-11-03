@@ -10,7 +10,7 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 
 ## Publishing a new article
 
-1. Copy `build_post_muscle60.py` to `build_post_<slug>.py`. Write the article from Dan's own answers. Use `kind="article"` and `published="YYYY-MM-DD"`.
+1. Copy `build_post_muscle60.py` to `build_post_<slug>.py`. Add 3 key takeaways for the slug to `TAKEAWAYS` in `build_pages.py`, and use `callout()`, `pullquote()` and `stats()` where they fit (see `design-system/fig-performance/pages/articles.md`). Write the article from Dan's own answers. Use `kind="article"` and `published="YYYY-MM-DD"`.
 2. Run it. Add the article to:
    - the hub at `fitness-after-40` (in `build_articles.py`)
    - the homepage guides strip (`#guides` in `index.html`), if it's a top article
