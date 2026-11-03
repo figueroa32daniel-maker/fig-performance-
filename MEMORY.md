@@ -52,3 +52,4 @@ Read this at the start of every session, together with `_build/README.md` (how t
   - sentence-case article headlines
   - trimmed menu (8 items plus button)
 - 2026-11-03: Decided not to install claude-mem. It needs an account, stores memories on their cloud by default, and wouldn't persist in cloud sessions. This file replaces it.
+- 2026-11-03: Design system chosen by Dan: Premium + Editorial. Saved at `design-system/fig-performance/MASTER.md` (navy/gold/cream, Montserrat/Inter, spacious Swiss minimal) and `pages/articles.md` (editorial: sentence-case H1, human dates, featured image, client callouts, pull quotes). Generated with ui-ux-pro-max, then adjusted to the existing brand.

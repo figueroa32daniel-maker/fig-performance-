@@ -5,6 +5,7 @@ Static site deployed to Vercel from `main`. Read `MEMORY.md` first (project memo
 ## Design
 
 - Use the `ui-ux-pro-max` skill in `.claude/skills/ui-ux-pro-max/` for all UI design work: new pages, layout changes, components, and design reviews.
-- Before changing any page's look, read `design-system/fig-performance/MASTER.md` (once it exists). If `design-system/fig-performance/pages/<page>.md` exists, its rules override the master file.
+- Before changing any page's look, read `design-system/fig-performance/MASTER.md`. If `design-system/fig-performance/pages/<page>.md` exists, its rules override the master file.
 - Keep the Fig Performance brand: navy, gold and cream, the logo, and Montserrat headings with Inter body text, unless Dan approves a change.
+- To use the skill's search tool, run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain>` from the repo root (the SKILL.md path uses ${CLAUDE_PLUGIN_ROOT}, which is the repo root here). Treat results as suggestions; the brand rules in MASTER.md win.
 - Run the skill's pre-delivery checklist (`references/quick-reference.md` and the checklist in its output) before publishing any design change. Check every change on a phone-sized screen too.
