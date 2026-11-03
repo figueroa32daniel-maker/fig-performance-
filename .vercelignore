@@ -5,3 +5,6 @@ SECURITY.md
 .htaccess
 docs
 _build
+.claude
+CLAUDE.md
+design-system
