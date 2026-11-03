@@ -164,17 +164,6 @@ hub_faqs = [
 ]
 
 pages = {
-    "strength-training-for-women-over-40.html": page(
-        "strength-training-for-women-over-40",
-        "Strength Training for Women Over 40 | Fig Performance",
-        "How women over 40 can start strength training to lose fat, tone up and feel strong: how often to lift, what to do, how heavy, and a sample week.",
-        "Strength Training for Women Over 40: Where to Start",
-        "Fitness after 40", "Strength Training for Women Over 40: Where to Start",
-        "Why it matters, how often to lift, the movements to focus on, and a sample week.",
-        [("why", "Why it matters"), ("bulky", "Will it make me bulky?"), ("how-often", "How often"),
-         ("exercises", "The movements"), ("heavy", "How heavy"), ("aches", "Training around aches"),
-         ("nutrition", "Protein and recovery"), ("sample", "Sample week"), ("coach", "When a coach helps")],
-        wst_body, wst_faqs, "Strength Training for Women Over 40", kind="article", published=DATE),
     "fitness-after-40.html": page(
         "fitness-after-40",
         "Fitness After 40 Guides | Fig Performance",
