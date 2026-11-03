@@ -1,7 +1,5 @@
-"""DRAFT until Dan approves: 'Why am I not losing weight?' rewritten from Coach Dan's voice memo (Nov 3 2026).
-On approval: remove the why-am-i-not-losing-weight entry from build_articles.py and promote this file to _build/."""
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+"""'Why am I not losing weight?' rewritten from Coach Dan's voice memo (Nov 3 2026)."""
+import sys
 from build_pages import page, SITE, CTA
 
 SLUG = "why-am-i-not-losing-weight"

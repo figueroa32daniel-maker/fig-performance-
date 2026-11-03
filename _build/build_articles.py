@@ -140,7 +140,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
   <li><a href="/how-to-avoid-holiday-weight-gain">How to avoid holiday weight gain after 40</a><br>Coach DanHold steady from Thanksgiving to New Year&rsquo;s, plus a 20-minute hotel workout.rsquo;s rules: protein first, room for dessert, drink boundaries, and a hotel workout.</li>
   <li><a href="/how-to-lose-weight-after-40">How to lose weight after 40: a coach&rsquo;s plan</a><br>Steps, protein, lifting heavy enough, training twice a week, and why the scale lies.</li>
   <li><a href="/build-muscle-after-60">Can you build muscle after 60?</a><br>Yes. How Teresa, 60, got her first pull-up and Sam, 70, deadlifts 135 pounds.</li>
-  <li><a href="/why-am-i-not-losing-weight">Why am I not losing weight? (When you already eat well and exercise)</a><br>Eight common reasons the scale won't move after 40, and what to do about each one.</li>
+  <li><a href="/why-am-i-not-losing-weight">Why am I not losing weight? (When you already eat well and exercise)</a><br>Nine common reasons the scale won't move after 40, and what to do about each one.</li>
   <li><a href="/strength-training-for-women-over-40">Strength training for women over 40: where to start</a><br>Why it matters, how often to lift, the movements to focus on, and a sample week.</li>
 </ul>
 
@@ -164,17 +164,6 @@ hub_faqs = [
 ]
 
 pages = {
-    "why-am-i-not-losing-weight.html": page(
-        "why-am-i-not-losing-weight",
-        "Why Am I Not Losing Weight After 40? | Fig Performance",
-        "Eating well and exercising but not losing weight? Eight common reasons the scale won't move after 40, and what to do about each one.",
-        "Why Am I Not Losing Weight? (When You Already Eat Well and Exercise)",
-        "Fitness after 40", "Why Am I Not Losing Weight? (When You Already Eat Well and Exercise)",
-        "Eight common reasons the scale won't move after 40, and what to do about each one.",
-        [("scale", "The scale can't see it"), ("healthy", "Healthy isn't the right amount"), ("protein", "Not enough protein"),
-         ("training", "Workouts that don't progress"), ("sleep", "Sleep and stress"), ("movement", "Sitting too much"),
-         ("measure", "Not measuring"), ("medical", "Medical factors"), ("plan", "What works after 40")],
-        nlw_body, nlw_faqs, "Why Am I Not Losing Weight?", kind="article", published=DATE),
     "strength-training-for-women-over-40.html": page(
         "strength-training-for-women-over-40",
         "Strength Training for Women Over 40 | Fig Performance",
