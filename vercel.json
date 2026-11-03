@@ -105,6 +105,11 @@
   ],
   "redirects": [
     {
+      "source": "/shop",
+      "destination": "https://zyqn8q-ma.myshopify.com",
+      "permanent": false
+    },
+    {
       "source": "/privacy-policy",
       "destination": "/privacy",
       "permanent": true

@@ -859,6 +859,7 @@ address { font-style: normal; }
 .brand img { max-width: none; }
 /* v33: five header links fit from 960px */
 @media (min-width: 960px) and (max-width: 1099px) { .nav ul { gap: 10px; } .nav ul a { font-size: .78rem; letter-spacing: .05em; } }
+@media (min-width: 960px) and (max-width: 1039px) { .nav ul { gap: 4px; } .nav ul a { letter-spacing: .03em; } }
 .btn-gold { background: var(--gold-light); color: var(--navy); border-color: var(--gold-light); }
 .btn-gold:hover { background: #dcb46e; }
 .price-table.compare-table td, .price-table.compare-table th { white-space: normal; vertical-align: top; }
