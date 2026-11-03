@@ -1,7 +1,7 @@
 """Article: 3-day beginner workout plan (women's plan from Coach Dan, Nov 3 2026; men's plan to follow).
-DRAFT until Dan approves. Exercise choices, order and rest are Dan's. Rep ranges and warm-up style follow
+Exercise choices, order and rest are Dan's. Rep ranges and warm-up style follow
 common glute-focused programming (reviewed against Bret Contreras's published plans, nothing copied)."""
-import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys
 from build_pages import page, SITE, CTA
 
 DATE = "2026-11-03"

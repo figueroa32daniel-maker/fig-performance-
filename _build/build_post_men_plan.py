@@ -1,7 +1,6 @@
-"""DRAFT until Dan approves: beginner workout plan for men (3-day full body). Exercise picks, day structure,
+"""beginner workout plan for men (3-day full body). Exercise picks, day structure,
 2 leg exercises + 1 calf per day, 2 core sets, arm day in the middle and rest times are Dan's (Nov 3 2026)."""
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import sys
 from build_pages import page, SITE, CTA
 
 DATE = "2026-11-03"
