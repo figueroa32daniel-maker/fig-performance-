@@ -134,6 +134,12 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/meal-plan-for-weight-loss">Simple meal plan for weight loss (free PDF)</a><br>Protein, carbs, fats and fiber at every meal, a sample day and a grocery list.</li>
+  <li><a href="/how-to-lose-10-pounds-in-a-month">How to lose 10 pounds in a month</a><br>The 1,000-calorie deficit, what to expect, and a client who did it.</li>
+  <li><a href="/glp-1-muscle-loss">GLP-1s and muscle loss</a><br>How to keep your muscle on Ozempic, Wegovy, Mounjaro or Zepbound.</li>
+  <li><a href="/strength-training-for-women-over-50">Strength training for women over 50</a><br>Why age doesn't decide your program, the assessment, and menopause.</li>
+  <li><a href="/workout-plan-for-men-over-40">Workout plan for men over 40</a><br>Train for function, fix what hurts, and Jonathan's story.</li>
+  <li><a href="/tib-raises">Tib raises</a><br>Why your shins need strength, and how to train them.</li>
   <li><a href="/beginner-workout-plan-for-women">Beginner workout plan for women</a><br>Full body 3 days a week: 4 leg and glute exercises, 2 upper body and 1 core each day.</li>
   <li><a href="/beginner-workout-plan-for-men">Beginner workout plan for men</a><br>A 3-day full-body split: legs first, an arm day in the middle, and wall tib raises.</li>
   <li><a href="/3-day-beginner-workout-plan">3-day workout split for beginners</a><br>Why full body 3 days a week works, and which plan to pick.</li>
