@@ -4,13 +4,13 @@ from build_pages import page, SITE, CTA
 SLUG = "online-personal-trainer"
 BOOK = '<p><a class="btn btn-gold" href="/#consult" data-interest="Online coaching">Book a free video call</a></p>'
 
-body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one-on-one coaching you can do from anywhere: a weekly video call with Dan, a custom training program in the app, a custom nutrition plan built from foods you already enjoy, and real accountability. It's $249 a month as a 3-month program. It's built for adults over 40 who want a coach's guidance but can't make it to sessions in person.</p>
+body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one-on-one coaching you can do from anywhere: a weekly video call with Dan, a custom training program in the R.H.O.D.E.S. app, a custom nutrition plan built from foods you already enjoy, and real accountability. It's $249 a month as a 3-month program. It's built for adults over 40 who want a coach's guidance but can't make it to sessions in person.</p>
 {BOOK}
 
 <h2 id="included">What you get</h2>
 <ul>
   <li><strong>A weekly one-on-one accountability call.</strong> Up to about 30 minutes with Dan over Zoom, Google Meet or FaceTime.</li>
-  <li><strong>A custom training program in the app.</strong> Built around your goals, your limitations and any past injuries. Every workout has a warm-up, the workout and a cool-down stretch, to keep you flexible and help prevent pain and injury.</li>
+  <li><strong>A custom training program in the R.H.O.D.E.S. app.</strong> R.H.O.D.E.S. is the Fig Performance training app. Built around your goals, your limitations and any past injuries. Every workout has a warm-up, the workout and a cool-down stretch, to keep you flexible and help prevent pain and injury.</li>
   <li><strong>A custom nutrition plan.</strong> Built from the foods you already enjoy, using Dan's 80/20 approach.</li>
   <li><strong>Supplement guidance</strong> in your nutrition tab, aimed at health, energy, strength, endurance, bone health, immune support and longevity. Check with your doctor before starting any supplement, especially if you take medication.</li>
   <li><strong>Travel workouts</strong> for when you're on the road or away from your usual gym.</li>
@@ -44,7 +44,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
   <tbody>
     <tr><td>Price</td><td>$249/month</td><td>$387/month</td></tr>
     <tr><td>Time with Dan</td><td>Weekly video call, about 30 min</td><td>Weekly 50-minute session in the gym</td></tr>
-    <tr><td>Custom training program</td><td>Yes, in the app</td><td>Yes</td></tr>
+    <tr><td>Custom training program</td><td>Yes, in the R.H.O.D.E.S. app</td><td>Yes</td></tr>
     <tr><td>Custom nutrition plan</td><td>Yes</td><td>Yes</td></tr>
     <tr><td>Form coaching</td><td>On your weekly calls</td><td>Every rep, in person</td></tr>
     <tr><td>InBody scans</td><td>No, weekly weigh-ins instead</td><td>Yes</td></tr>
@@ -60,7 +60,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 <ol>
   <li>Book a free video call. Tell Dan your goals, your schedule and any injuries.</li>
   <li>Dan builds your training program and nutrition plan.</li>
-  <li>You get set up in the app and start training.</li>
+  <li>You get set up in the R.H.O.D.E.S. app and start training.</li>
 </ol>
 {BOOK}
 {CTA}"""
@@ -69,7 +69,7 @@ faqs = [
     ("How much does an online personal trainer cost?",
      "Online coaching with Coach Dan at Fig Performance is $249 a month as a 3-month program ($747), or $697 if you pay in full. It includes a weekly one-on-one video call, a custom training program in the app, a custom nutrition plan and supplement guidance."),
     ("What's included in online coaching?",
-     "A weekly accountability call over Zoom, Google Meet or FaceTime; a custom training program in the app with warm-ups and cool-down stretches; a custom 80/20 nutrition plan built from foods you enjoy; supplement guidance; travel workouts; and messaging support between calls."),
+     "A weekly accountability call over Zoom, Google Meet or FaceTime; a custom training program in the R.H.O.D.E.S. app with warm-ups and cool-down stretches; a custom 80/20 nutrition plan built from foods you enjoy; supplement guidance; travel workouts; and messaging support between calls."),
     ("Is online personal training as good as in-person?",
      "It depends on you. If you can train on your own and want a plan, nutrition and accountability, online coaching works well and costs less. If you're new to lifting or have injuries that need hands-on attention, in-person training is the better start."),
     ("Can I pay month to month?",

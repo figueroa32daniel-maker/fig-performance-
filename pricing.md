@@ -31,7 +31,7 @@ Last updated: November 3, 2026. Source of truth: https://www.figperformance.com/
 - Price: $249 a month for 3 months ($747), or $697 paid in full
 - Sold as a 3-month program only (no month-to-month)
 - Weekly one-on-one accountability video call with Coach Dan (Zoom, Google Meet or FaceTime, up to about 30 minutes)
-- Custom training program in the coaching app, built around your goals, limitations and past injuries, with a warm-up, workout and cool-down stretch
+- Custom training program in the R.H.O.D.E.S. app, built around your goals, limitations and past injuries, with a warm-up, workout and cool-down stretch
 - Custom nutrition plan built from foods you already enjoy, using Dan's 80/20 approach (Precision Nutrition Level 1 certified)
 - Supplement guidance, and workouts for when you travel
 - Details: https://www.figperformance.com/online-personal-trainer
