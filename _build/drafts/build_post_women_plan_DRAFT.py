@@ -5,7 +5,7 @@ import sys, os; sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspa
 from build_pages import page, SITE, CTA
 
 DATE = "2026-11-03"
-SLUG = "3-day-beginner-workout-plan"
+SLUG = "beginner-workout-plan-for-women"
 REST = "1:15&ndash;2 min"
 
 
@@ -39,7 +39,7 @@ DAY1 = table(["Exercise", "Sets &times; reps"], [
     ("Barbell Romanian deadlift (RDL)", "3 &times; 10&ndash;12"),
     ("Dumbbell bench press", "3 &times; 10"),
     ("One-arm dumbbell row", "3 &times; 10 each arm"),
-    ("Bent-over wood chop", "3 &times; 10 each side"),
+    ("Bent-over wood chop", "2 &times; 10 each side"),
     ("Cable hip abduction", "3 &times; 20 each leg"),
 ])
 DAY2 = table(["Exercise", "Sets &times; reps"], [
@@ -48,7 +48,7 @@ DAY2 = table(["Exercise", "Sets &times; reps"], [
     ("Hyperextension", "3 &times; 12&ndash;15"),
     ("Lat pulldown", "3 &times; 10&ndash;12"),
     ("Seated dumbbell shoulder press", "3 &times; 10"),
-    ("Cable crunch", "3 &times; 12&ndash;15"),
+    ("Cable crunch", "2 &times; 12&ndash;15"),
     ("Band hip abduction", "3 &times; 20&ndash;25"),
 ])
 DAY3 = table(["Exercise", "Sets &times; reps"], [
@@ -57,18 +57,18 @@ DAY3 = table(["Exercise", "Sets &times; reps"], [
     ("Barbell hip thrust pulses", "3 &times; 20&ndash;30"),
     ("Dumbbell curl", "3 &times; 10&ndash;12"),
     ("Triceps rope pushdown", "3 &times; 12"),
-    ("Bench leg raise", "3 &times; 10&ndash;12"),
+    ("Bench leg raise", "2 &times; 10&ndash;12"),
     ("Machine hip abduction", "3 &times; 20&ndash;30"),
 ])
 
-body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full body, three times a week, on non-consecutive days like Monday, Wednesday and Friday. Every session trains your legs and glutes, your upper body and your core. Below is the exact plan Coach Dan Figueroa uses for women at Fig Performance in Placentia: 4 leg exercises, 2 upper body and 1 core each day, with a warm-up and cool-down. A separate plan for men is coming.</p>
+body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full body, three times a week, on non-consecutive days like Monday, Wednesday and Friday. Every session trains your legs and glutes, your upper body and your core. Below is the exact plan Coach Dan Figueroa uses for women at Fig Performance in Placentia: 4 leg exercises, 2 upper body and 1 core each day, with a warm-up and cool-down. Looking for the men&rsquo;s version? See the <a href="/beginner-workout-plan-for-men">beginner workout plan for men</a>.</p>
 
 <h2 id="how">How the plan works</h2>
 <ul>
   <li><strong>Full body, three days a week.</strong> Chest, back, shoulders and legs all get trained, with a rest day between sessions to recover.</li>
   <li><strong>4 leg exercises every day:</strong> a squat or lunge, a hinge (RDL, hyperextension or single-leg deadlift), a hip thrust, and hip abduction. Hip thrusts are the theme all three days: regular, paused, then pulses.</li>
   <li><strong>2 upper body exercises:</strong> chest and back on Day 1, back and shoulders on Day 2, arms on Day 3.</li>
-  <li><strong>1 core exercise,</strong> hitting a different angle each day: rotation, flexion and a leg raise.</li>
+  <li><strong>1 core exercise, 2 sets,</strong> hitting a different angle each day: rotation, flexion and a leg raise.</li>
   <li><strong>Abduction always goes last,</strong> with a different tool each day: cable, band, then machine.</li>
   <li><strong>Rest 1:15 to 2 minutes</strong> between sets.</li>
 </ul>
@@ -196,7 +196,7 @@ faqs = [
     ("What should a 3-day workout plan for women include?",
      "At Fig Performance, each day has 4 leg and glute exercises (a squat or lunge, a hinge, a hip thrust and hip abduction), 2 upper body exercises and 1 core exercise, plus a warm-up and cool-down stretch."),
     ("How many sets and reps should a beginner do?",
-     "3 sets per exercise: 8 to 12 reps on squats, hip thrusts, RDLs and upper body, 12 to 15 on hyperextensions and core, and 20 to 30 on hip abduction and hip thrust pulses."),
+     "3 sets per exercise and 2 sets for core: 8 to 12 reps on squats, hip thrusts, RDLs and upper body, 12 to 15 on hyperextensions and core, and 20 to 30 on hip abduction and hip thrust pulses."),
     ("Can I do this workout plan at home?",
      "Yes. With adjustable dumbbells, a bench or couch, a long resistance band and a mini band, every exercise has an at-home version: glute bridges and couch hip thrusts, dumbbell RDLs, floor presses, band rows and pulldowns, and band abduction."),
     ("How long should I rest between sets?",
@@ -207,14 +207,14 @@ faqs = [
 
 html = page(
     SLUG,
-    "3-Day Beginner Workout Plan for Women (Full Body) | Fig Performance",
-    "A 3-day beginner workout plan for women: full body 3x a week with 4 leg, 2 upper body and 1 core exercise per day, warm-up, sets, reps and rest.",
-    "3-Day Beginner Workout Plan for Women (Full Body)",
-    "Fitness after 40", "3-Day Beginner Workout Plan for Women",
+    "Beginner Workout Plan for Women: 3-Day Full Body | Fig Performance",
+    "A beginner workout plan for women: full body 3 days a week, 4 leg, 2 upper body and 1 core exercise per day, with warm-up, sets, reps and home options.",
+    "Beginner Workout Plan for Women (3-Day Full Body Plan)",
+    "Fitness after 40", "Beginner Workout Plan for Women",
     "Full body, three days a week: the exact exercises, sets, reps and warm-up Coach Dan uses.",
     [("how", "How it works"), ("warmup", "Warm-up"), ("plan", "The plan"), ("exercises", "What each exercise does"), ("home", "Training at home"), ("cooldown", "Cool-down"),
      ("effort", "How hard to push"), ("progress", "How to progress"), ("off-days", "Off days"), ("safety", "Before you start")],
-    body, faqs, "3-Day Beginner Workout Plan", kind="article", published=DATE)
+    body, faqs, "Beginner Workout Plan for Women", kind="article", published=DATE)
 
 if __name__ == "__main__":
     import sys
