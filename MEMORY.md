@@ -44,7 +44,7 @@ Read this at the start of every session, together with `_build/README.md` (how t
 - 2026-11-03: In progress, not published:
   - Belly fat after menopause: content gathered, needs a draft and Dan's review.
   - Strength training with knee pain: needs a client story.
-- 2026-11-03: Planned design polish, waiting on Dan's photos:
+- 2026-11-03 (superseded below): Planned design polish, waiting on Dan's photos:
   - people-first homepage hero
   - photos in articles
   - client callout boxes
@@ -53,3 +53,4 @@ Read this at the start of every session, together with `_build/README.md` (how t
   - trimmed menu (8 items plus button)
 - 2026-11-03: Decided not to install claude-mem. It needs an account, stores memories on their cloud by default, and wouldn't persist in cloud sessions. This file replaces it.
 - 2026-11-03: Design system chosen by Dan: Premium + Editorial. Saved at `design-system/fig-performance/MASTER.md` (navy/gold/cream, Montserrat/Inter, spacious Swiss minimal) and `pages/articles.md` (editorial: sentence-case H1, human dates, featured image, client callouts, pull quotes). Generated with ui-ux-pro-max, then adjusted to the existing brand.
+- 2026-11-03: Shipped design polish (Dan-approved): human dates ("Nov 3, 2026"), title-case article H1s with balanced wrapping, client callout boxes (`callout()` in build_pages.py), pull quotes (`pullquote()`), and a 5-item menu (How it works, Pricing, Guides, Coach, Shop). Dan said to skip photos for now.
