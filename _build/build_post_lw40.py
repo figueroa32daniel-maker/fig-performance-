@@ -94,7 +94,7 @@ faqs = [
     ("Why am I the same weight even though I'm working out?",
      "You may be recomposing: losing fat and gaining muscle at the same time. Your weight can stay flat while body fat drops and muscle rises. An InBody scan shows the change the scale misses."),
     ("Can you build strength at 60?",
-     "Yes. Teresa, a Fig Performance client, started at 60 unable to do bodyweight exercises. About three months of progressive strength training later, she did her first pull-up and was benching about 75 pounds for reps."),
+     "Yes. Teresa, a Fig Performance client, started at 60 unable to do bodyweight exercises. About three months of progressive strength training later, she did her first pull-up, and today she benches about 85 pounds for reps."),
     ("How many steps a day should I walk to lose weight?",
      "Many desk workers get 2,000 to 5,000 steps a day. Coach Dan aims clients for over 5,000, and ideally more than 6,000, as a realistic daily target."),
 ]
