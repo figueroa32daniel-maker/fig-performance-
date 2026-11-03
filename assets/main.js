@@ -201,6 +201,7 @@ var CONFIG = {
     cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     check: '<path d="M5 12l5 5 9-10"/>',
     note: '<path d="M4 4h16v12H8l-4 4V4z"/><path d="M8 9h8M8 12h5"/>',
+    video: '<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/>',
     home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/>',
     conf: '<path d="M12 2l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.2 1.3-6.6L2.5 9l6.6-.8L12 2z"/>'
   };
@@ -213,8 +214,9 @@ var CONFIG = {
     { key: "interest", title: "How would you like to train?", sub: "You can change your mind at the consult.", options: [
       ["1:1 personal training", "one", "$90/session \u00b7 save 20% paying 3 months in full"],
       ["Membership", "key", "Classes up to 2\u20133x a week + access + recovery"],
-      ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"], ["Not sure, help me choose", "unsure"] ] },
-    { key: "time", title: "What fits around your workday?", sub: "Staffed Mon\u2013Sat, 5 AM to 8 PM.", options: [
+      ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"],
+      ["Online coaching", "video", "$249/mo, 3-month program \u00b7 weekly video call + app + nutrition"], ["Not sure, help me choose", "unsure"] ] },
+    { key: "time", title: "What fits around your workday?", sub: "Staffed Mon\u2013Fri, 5 AM to 8 PM, and Sat, 5 AM to noon.", options: [
       ["Before work", "sunrise", "Early morning"], ["Midday", "sun", "Lunch hour"], ["After work", "moon", "Until 8 PM"], ["Saturday", "cal"] ] },
     { key: "pain", multi: true, title: "Anything bothering you?", sub: "Optional. Tap any that apply and Dan will plan around it.", options: [
       "Lower back", "Knee", "Hip", "Shoulder", "Neck", "None" ] },
@@ -441,6 +443,7 @@ var CONFIG = {
       "1:1 personal training": "Dan will reach out to set up your free 1:1 consult this week: about an hour for an assessment, your goals, and a game plan.",
       "Membership": "Dan will reach out to schedule your tour during pre-opening week. Membership doesn't include weekly one-on-one personal training.",
       "Concierge personal training": "Dan will reach out to set up a free phone call, then an assessment at your home.",
+      "Online coaching": "Dan will reach out to set up a free video call to talk through your goals and how online coaching works.",
       "Not sure, help me choose": "Dan will reach out, talk through your goals, and help you pick the right fit."
     }[interest] || "Dan will reach out to book your free consult.";
     top.hidden = true; bar.hidden = true;

@@ -1,6 +1,6 @@
 # Pricing — Fig Performance (Placentia, CA)
 
-Last updated: October 31, 2026. Source of truth: https://www.figperformance.com/pricing
+Last updated: November 3, 2026. Source of truth: https://www.figperformance.com/pricing
 
 ## Free consult with InBody scan
 - Price: $0
@@ -21,9 +21,20 @@ Last updated: October 31, 2026. Source of truth: https://www.figperformance.com/
 - Includes: facility access during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM), classes up to 2–3 times a week, red light therapy, vibration therapy, a complimentary InBody scan, a one-time trainer consult
 - Does not include weekly one-on-one personal training
 
-## Concierge personal training
-- Coach Dan trains you at your home or office in Placentia, Yorba Linda, Brea, Fullerton or Anaheim Hills
+## In-home personal training
+- Coach Dan trains you one-on-one in your own home gym across North Orange County and nearby cities
+- Starts with a free phone call, then an assessment at your home
 - Price: quoted by location
+- Details: https://www.figperformance.com/in-home-personal-training
+
+## Online coaching (3-month program)
+- Price: $249 a month for 3 months ($747), or $697 paid in full
+- Sold as a 3-month program only (no month-to-month)
+- Weekly one-on-one accountability video call with Coach Dan (Zoom, Google Meet or FaceTime, up to about 30 minutes)
+- Custom training program in the coaching app, built around your goals, limitations and past injuries, with a warm-up, workout and cool-down stretch
+- Custom nutrition plan built from foods you already enjoy, using Dan's 80/20 approach (Precision Nutrition Level 1 certified)
+- Supplement guidance, and workouts for when you travel
+- Details: https://www.figperformance.com/online-personal-trainer
 
 ## Contact
 - Phone/text: (714) 396-7178
