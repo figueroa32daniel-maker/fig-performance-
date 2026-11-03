@@ -1,6 +1,6 @@
 """'Strength training for women over 40' rewritten from Coach Dan's voice memo (Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 SLUG = "strength-training-for-women-over-40"
 DATE = "2026-10-30"
@@ -17,7 +17,8 @@ body = f"""<p class="legal-intro">Strength training after 40 isn't just about lo
 <h2 id="how-often">How often should you lift?</h2>
 <p>Two to three full-body sessions a week, every other day: Monday, Wednesday and Friday, or Tuesday, Thursday and Saturday. That leaves you at least four days of rest a week, which is plenty.</p>
 <p>Walk every day, at least 30 minutes, and work your way up to about 90 minutes a day.</p>
-<p>You only need about 3 days of training. If you want to do 4, that's fine. But the best program isn't the hardest one. It's the one you can keep doing for years. Can you see yourself training 4 or 5 days a week for the next 10 years? If the answer is no, train 3. Do what you can actually do, and get really consistent at it. Consistency is the biggest driver of results. <strong>Chase progress, not perfection.</strong></p>
+<p>You only need about 3 days of training. If you want to do 4, that's fine. But the best program isn't the hardest one. It's the one you can keep doing for years. Can you see yourself training 4 or 5 days a week for the next 10 years? If the answer is no, train 3. Do what you can actually do, and get really consistent at it. Consistency is the biggest driver of results.</p>
+{pullquote("Chase progress, not perfection.")}
 
 <h2 id="exercises">The movements to focus on</h2>
 <p>You don't need fancy exercises. A good program covers five basic movements:</p>

@@ -33,7 +33,7 @@ Rules: one accent (gold), used sparingly. No new colors without Dan's approval. 
 - **Headings:** Montserrat (`--font-head`), self-hosted variable font. Bold weights.
 - **Body:** Inter (`--font-body`), self-hosted. Base 16px or larger, line-height 1.5 to 1.65.
 - **Kickers / labels:** Montserrat, small, uppercase, wide letter-spacing, gold, with the short gold rule before them. This is a signature brand element; keep it.
-- **Headline case:** ALL CAPS only for short headlines (about 6 words or fewer, like the homepage hero). Longer headlines, including every article H1, use sentence case.
+- **Headline case:** ALL CAPS only for short headlines (about 6 words or fewer, like the homepage hero). Longer headlines, including every article H1, use title case or sentence case, never all caps, with balanced line breaks.
 - No third typeface. Don't load Google Fonts; the fonts are self-hosted.
 
 ## Spacing (spacious, density 3/10)

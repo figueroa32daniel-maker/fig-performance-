@@ -1,5 +1,5 @@
 """Article: Can you build muscle after 60? (from Coach Dan's interview answers, Oct 30 2026)."""
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 DATE = "2026-10-30"
 SLUG = "build-muscle-after-60"
@@ -19,6 +19,7 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
   <li>Bench press around 85 pounds for reps</li>
 </ul>
 <p>Every step was based on what I saw from her in person: what looked safe, and what she was ready for.</p>
+{callout("Client result", "Teresa, 60: from zero bodyweight exercises to pull-ups", ["Started with a shoulder injury", "First pull-up in about 3 months", "Bench press about 85 pounds for reps", "Curls with 30-pound dumbbells"])}
 
 <h2 id="sam">Sam, 70: deadlifting 135 pounds for reps</h2>
 <p>Sam is 70, and he's a badass. Right now he's doing:</p>
@@ -61,7 +62,8 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
 <h2 id="late">Is it too late to start at 60 or 70?</h2>
 <p>It's never too late. You'll never know how good you can get unless you try, and you have to give yourself some grace.</p>
 <p>Plenty of people hit their stride late. Samuel L. Jackson became a household name in his mid-40s. Colonel Sanders started franchising Kentucky Fried Chicken in his 60s. They didn't wait for the perfect time. They just started.</p>
-<p>You don't need to be in great shape to begin. You don't need perfect mobility, stability or strength. Take imperfect action. <strong>Chase progress, not perfection.</strong></p>
+<p>You don't need to be in great shape to begin. You don't need perfect mobility, stability or strength. Take imperfect action.</p>
+{pullquote("Chase progress, not perfection.")}
 
 <h2 id="start">How to start</h2>
 <p>At Fig Performance in Placentia, every new client starts with a free consult: an <a href="/inbody-scan-placentia">InBody scan</a> to see your muscle and body fat, a strength assessment, and a plan built around your body, including any old injuries. Sessions are one-on-one with me, so every set is watched and adjusted.</p>

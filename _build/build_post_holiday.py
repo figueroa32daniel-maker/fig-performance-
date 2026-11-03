@@ -1,5 +1,5 @@
 """Article: How to avoid holiday weight gain after 40 (from Coach Dan's answers, Nov 3 2026)."""
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 DATE = "2026-11-03"
 SLUG = "how-to-avoid-holiday-weight-gain"
@@ -20,7 +20,8 @@ body = f"""<p class="legal-intro">To avoid holiday weight gain: eat protein firs
 <p>That's how I eat too. At family dinner I stack up on protein and vegetables, add a little bit of carbs, and leave room for dessert. I don't skip dessert. I like dessert.</p>
 
 <h2 id="eighty-twenty">Why I eat 80/20, even in December</h2>
-<p>My diet is 80/20: about 80% clean, nutrient-dense food, and 20% food I just enjoy. For your nutrition to be sustainable, it has to be flexible, and it has to be enjoyable. If your plan doesn't have room for your mom's pie, you won't stick to it. Build the pie in.</p>
+{pullquote("For your nutrition to be sustainable, it has to be flexible, and it has to be enjoyable.")}
+<p>My diet is 80/20: about 80% clean, nutrient-dense food, and 20% food I just enjoy. If your plan doesn't have room for your mom's pie, you won't stick to it. Build the pie in.</p>
 
 <h2 id="training">I still train on Thanksgiving</h2>
 <p>I train on Thanksgiving Day. You have to have balance: if you're going to eat that much food, balance it out with some exercise. On Christmas morning, I'll train if I have time. But spending time with family comes first.</p>

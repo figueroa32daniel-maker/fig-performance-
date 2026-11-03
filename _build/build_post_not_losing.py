@@ -1,6 +1,6 @@
 """'Why am I not losing weight?' rewritten from Coach Dan's voice memo (Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 SLUG = "why-am-i-not-losing-weight"
 DATE = "2026-10-30"
@@ -41,7 +41,8 @@ body = f"""<p class="legal-intro">If you're not losing weight, you're almost alw
 <p><strong>What to do:</strong> have a go-to way to bring your stress down. Go on a walk, journal, watch your favorite show, get a massage, have the occasional glass of wine, or spend less time on your phone.</p>
 
 <h2 id="measure">8. You're not measuring anything</h2>
-<p>What you don't measure, you can't manage. If you don't know your starting point, you can't tell what's working. The scale alone also misses a lot: if you're building muscle while losing fat, your weight can stay the same while your body improves.</p>
+{pullquote("What you don't measure, you can't manage.")}
+<p>If you don't know your starting point, you can't tell what's working. The scale alone also misses a lot: if you're building muscle while losing fat, your weight can stay the same while your body improves.</p>
 <p><strong>What to do:</strong> get a baseline. Get an <a href="/inbody-scan-placentia">InBody scan</a> or DEXA scan, track your weight, and find out how many calories you're eating now and how many you need. Then follow one plan, re-measure and adjust.</p>
 
 <h2 id="medical">9. Something medical is in the mix</h2>

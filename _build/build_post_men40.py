@@ -1,6 +1,6 @@
 """Article: workout plan for men over 40 (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 DATE = "2026-11-03"
 SLUG = "workout-plan-for-men-over-40"
@@ -24,13 +24,11 @@ body = f"""<p class="legal-intro">The best workout plan for men over 40 trains f
 <h2 id="jonathan">Jonathan, 43: from back pain to a 185-pound bench</h2>
 <p>Jonathan is 43, ex-Army and 6'4", and he has a brand new son he wanted to be strong for. When he came to me, he was in bad shape: low energy, poor endurance, inflamed, and dealing with lower back pain that kept coming back even after physical therapy cleared him. He also had shoulder pain that had kept him from bench pressing for 10 years. In the Army he could do a ton of pull-ups. Now he could barely do one.</p>
 <p>We started with rehab-style work I knew wouldn't cause back or hip pain. As his capacity grew, we progressed: hyperextensions and Jefferson curls for spinal extension and flexion, and bent-over wood chops for rotation, which also helped his golf swing.</p>
-<p>In the first three months, his inflammation came down, his belly flattened, his chest and arms got more defined, and he went from one pull-up to five in a row. Over time he kept building:</p>
-<ul>
-  <li>Chin-ups with 35 pounds added</li>
-  <li>Jefferson curls with 135 pounds</li>
-  <li>Bench press with 185 pounds, after 10 years of not being able to bench at all</li>
-</ul>
+<p>In the first three months, his inflammation came down, his belly flattened, his chest and arms got more defined, and he went from one pull-up to five in a row. Over time he kept building.</p>
+{callout("Client result", "Jonathan, 43, ex-Army", ["Pull-ups: from 1 to 5 in a row", "Chin-ups with 35 pounds added", "Jefferson curls with 135 pounds", "Bench press 185 pounds, after 10 years of not benching"])}
 <p>His glutes grew a lot too, thanks to all the posterior chain work. Most of all, he improved his capacity as a father and a husband.</p>
+
+{pullquote("Motion is lotion. As you get older, your body gets stiffer. Keep it moving.")}
 
 <h2 id="plan">What a workout plan for men over 40 looks like</h2>
 <ul>

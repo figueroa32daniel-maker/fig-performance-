@@ -12,6 +12,15 @@ header = pricing[body_start: pricing.index("</header>") + len("</header>")]
 header = header.replace(' aria-current="page"', "").replace('          <li><a href="/#results">Results</a></li>\n', "")
 footer = pricing[pricing.index("  <!-- ============ FOOTER ============ -->"):]
 
+def callout(label, title, items):
+    lis = "".join(f"<li>{i}</li>" for i in items)
+    return f'<aside class="callout"><p class="callout-label">{label}</p><p class="callout-title">{title}</p><ul>{lis}</ul></aside>'
+
+
+def pullquote(text, who="Coach Dan Figueroa"):
+    return f'<blockquote class="pullquote"><p>{text}</p><cite>{who}</cite></blockquote>'
+
+
 CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
 
 
@@ -64,7 +73,14 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
     ld_html = "\n".join(
         f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld
     )
-    byline = (f'\n        <p class="legal-meta article-byline">By Coach Dan Figueroa, ACSM certified personal trainer &middot; Updated {published}</p>' if kind == "article" else "")
+    if kind == "article" and published:
+        import datetime as _dt
+        _d = _dt.date.fromisoformat(published)
+        _human = f"{_d:%b} {_d.day}, {_d.year}"
+        byline = f'\n        <p class="legal-meta article-byline">By Coach Dan Figueroa, ACSM certified personal trainer &middot; Precision Nutrition Level 1 coach &middot; Updated <time datetime="{published}">{_human}</time></p>'
+    else:
+        byline = ""
+    body_class = "legal-page service-page article-page" if kind == "article" else "legal-page service-page"
     toc_html = "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in toc)
     e = html.escape
     return f"""<!doctype html>
@@ -101,10 +117,10 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=36">
+  <link rel="stylesheet" href="/assets/styles.css?v=37">
 {ld_html}
 </head>
-<body class="legal-page service-page">
+<body class="{body_class}">
   {header}
 
   <main id="main">
