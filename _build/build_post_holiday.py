@@ -1,47 +1,42 @@
-"""Article: How to avoid holiday weight gain after 40 (Nov 2026, seasonal)."""
+"""Article: How to avoid holiday weight gain after 40 (from Coach Dan's answers, Nov 3 2026)."""
 from build_pages import page, SITE, CTA
 
 DATE = "2026-11-03"
 SLUG = "how-to-avoid-holiday-weight-gain"
 STUDY = "https://pubmed.ncbi.nlm.nih.gov/10727591/"
 
-body = f"""<p class="legal-intro">To avoid holiday weight gain, don't try to lose weight between Thanksgiving and New Year's. Aim to hold steady: keep your daily steps up, keep two strength sessions a week, eat protein first, go easy on the drinks, and get back to normal at your very next meal. The holidays are a handful of days, not six weeks.</p>
+body = f"""<p class="legal-intro">To avoid holiday weight gain: eat protein first, fill up on vegetables, leave room for the dessert you actually want, keep training, and go easy on the drinks. Most of all, keep the holidays to the holidays. Thanksgiving is a couple of days, not all of November. Here's exactly what I tell my clients over 40, and what I do myself.</p>
 
 <h2 id="why">Why the holidays matter more than one pound</h2>
-<p>In a well-known study in the <em>New England Journal of Medicine</em>, adults gained on average a little under a pound over the holiday season, and most of them hadn't lost it by the next fall (<a href="{STUDY}" target="_blank" rel="noopener noreferrer">Yanovski et al., 2000</a>). One pound sounds like nothing. But after 40, when muscle is easier to lose and a desk job keeps you sitting, a pound a year adds up to 10 pounds a decade. The people in that study who reported being more active gained less.</p>
-<p>So the goal for the next six weeks is simple: <strong>maintain</strong>. If you come out of New Year's at the same weight, with the same strength, you're ahead of most people.</p>
+<p>In a well-known study in the <em>New England Journal of Medicine</em>, adults gained a little under a pound on average over the holiday season, and most of them still hadn't lost it by the next fall (<a href="{STUDY}" target="_blank" rel="noopener noreferrer">Yanovski et al., 2000</a>). One pound sounds like nothing. But after 40, when muscle is easier to lose and a desk job keeps you sitting, a pound a year turns into 10 pounds a decade. The people in that study who were more active gained less.</p>
 
-<h2 id="plan">9 ways to avoid holiday weight gain</h2>
+<h2 id="mindset">Live a little, but act like you have goals</h2>
+<p>The holidays are for family. We use food to bond with the people we love, and there's nothing wrong with that. Live a little.</p>
+<p>But if you have goals, you have to act in accordance with those goals. That doesn't mean skipping the meal or saying no to dessert. It means you decide what matters to you before you sit down, instead of letting the table decide for you.</p>
 
-<h3>1. Aim to maintain, not lose</h3>
-<p>Trying to diet through December usually backfires. You feel deprived at every party, then overdo it. Eat at maintenance on normal days and enjoy the actual holiday meals without guilt.</p>
+<h2 id="plate">How to build your holiday plate</h2>
+<p>This is what I tell every client before Thanksgiving: <strong>protein first, as much as you can.</strong> Then your vegetables and fiber. Protein and fiber fill you up fast, so you naturally have less room for the stuff that doesn't support your goals.</p>
+<p>The clients who get through the holidays well do exactly that. Most of their plate is protein, and the rest is vegetables. They skip the rolls and the stuffing on purpose, to save room for a piece of pie.</p>
+<p>That's how I eat too. At family dinner I stack up on protein and vegetables, add a little bit of carbs, and leave room for dessert. I don't skip dessert. I like dessert.</p>
 
-<h3>2. Keep your daily steps up</h3>
-<p>Coach Dan's target for clients over 40 is more than 5,000 steps a day, and ideally 6,000 or more. Everyday movement burns more calories than most people realize, and it's the first thing to disappear when it's cold, dark and busy. Walk after the big meal. Park farther away. Take calls on your feet.</p>
+<h2 id="eighty-twenty">Why I eat 80/20, even in December</h2>
+<p>My diet is 80/20: about 80% clean, nutrient-dense food, and 20% food I just enjoy. For your nutrition to be sustainable, it has to be flexible, and it has to be enjoyable. If your plan doesn't have room for your mom's pie, you won't stick to it. Build the pie in.</p>
 
-<h3>3. Don't drop your strength training</h3>
-<p>Two sessions a week is enough to keep your muscle and your progress through the holidays. Muscle keeps your metabolism up, so this is the habit to protect. If your week gets packed, shorten the sessions instead of skipping them.</p>
+<h2 id="training">I still train on Thanksgiving</h2>
+<p>I train on Thanksgiving Day. You have to have balance: if you're going to eat that much food, balance it out with some exercise. On Christmas morning, I'll train if I have time. But spending time with family comes first.</p>
+<p>The rest of the season, keep your normal training and your daily walking. For my clients over 40 that's usually two strength sessions a week and more than 5,000 steps a day, ideally 6,000 or more. If your week gets packed, shorten the sessions instead of skipping them.</p>
 
-<h3>4. Eat protein first</h3>
-<p>Start every plate with protein: turkey, ham, roast, shrimp, eggs. Protein fills you up and helps you keep muscle. You'll naturally eat less of the stuff that's easy to overdo.</p>
+<h2 id="mistakes">The biggest holiday mistakes I see after 40</h2>
+<h3>1. Drinking way too much</h3>
+<p>This is the big one. Drinking every weekend leading up to Thanksgiving, and every weekend after, all the way through New Year's. Alcohol adds a lot of calories, wrecks your sleep, and makes late-night snacking more likely. Set hard boundaries before the season starts: which nights you'll drink, and how much.</p>
+<h3>2. Dragging the holidays out for weeks</h3>
+<p>Thanksgiving is a couple of days. Christmas is a couple of days. Give each one a week at most, then move on. It's not supposed to be two months of holiday food, drinking and poor habits. Everybody's doing great in October, then they have no boundaries for eight weeks, and they're upset about their holiday weight in January.</p>
+<h3>3. Giving in to peer pressure</h3>
+<p>Somebody will say, "Come on, live a little, it's the holidays." You're allowed to say no. If you have goals, you need personal boundaries, and you need the self-control to stick to them. Have discipline. Be firm.</p>
 
-<h3>5. Treat the holiday as a day, not a season</h3>
-<p>Thanksgiving is one day. Christmas Eve and Christmas are two. The office party is one evening. Enjoy those, then go back to your normal meals in between. Having a few go-to options for regular days, like breakfast A or B and lunch A or B, makes that easy because you don't have to think about it.</p>
-
-<h3>6. Go easy on the drinks</h3>
-<p>Alcohol is where a lot of holiday calories hide, and it makes late-night snacking more likely. Decide how many drinks you'll have before you get there, and have a glass of water between each one.</p>
-
-<h3>7. Don't skip meals to "save up"</h3>
-<p>Showing up to a party starving is how one plate turns into three. Eat a normal, protein-heavy meal earlier in the day.</p>
-
-<h3>8. Protect your sleep</h3>
-<p>Late nights make you hungrier and less likely to train the next day. Keep your wake-up time steady, even when bedtime moves.</p>
-
-<h3>9. Get back on plan at the next meal</h3>
-<p>One big meal doesn't undo your progress, and the scale jump the next morning is mostly water and salt. Don't wait for Monday or January. Your next meal is the fresh start.</p>
-
-<h2 id="travel">Traveling? A 20-minute hotel workout</h2>
-<p>No gym needed. Do 3 rounds, resting about a minute between rounds:</p>
+<h2 id="travel">Traveling for the holidays</h2>
+<p>When my clients travel, I give them a program they can do in a hotel room. I tell them to get as much movement as they can, keep prioritizing protein and fiber, and bring their supplements so they're still getting their micronutrients. If they need support, they message me.</p>
+<p>Here's a simple 20-minute version you can do anywhere. Do 3 rounds, resting about a minute between rounds:</p>
 <ul>
   <li>Bodyweight squats or split squats: 10 to 15 reps (each leg for split squats)</li>
   <li>Push-ups, on the floor or with hands on the bed or a desk: 8 to 15 reps</li>
@@ -49,33 +44,39 @@ body = f"""<p class="legal-intro">To avoid holiday weight gain, don't try to los
   <li>Plank: 20 to 40 seconds</li>
   <li>Reverse lunges: 8 to 10 reps each leg</li>
 </ul>
-<p>Then go for a walk. Stop anything that causes pain, and check with your doctor first if you have a medical condition or recent injury.</p>
+<p>Then go for a walk. Stop anything that causes pain, and check with your doctor first if you have a medical condition or a recent injury.</p>
 
-<h2 id="january">Start before January</h2>
-<p>Most people wait for January 1st, start too hard, and quit by February. If you start now, you walk into the new year already in a routine. At Fig Performance in Placentia, every client starts with a free consult and an <a href="/inbody-scan-placentia">InBody scan</a>, so you know your real body fat and muscle before the holidays and can see what changed after. Read more in <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a> and <a href="/nutrition-coaching-placentia">how nutrition coaching works</a>.</p>
+<h2 id="january">Why you shouldn't wait for January</h2>
+<p>Habits take time to build. If you wait for January 1st, you're starting from zero.</p>
+<p>November and December are the hardest months of the year. It's cold, it's raining, everyone's busy and stressed, you're shopping and traveling. If you learn to stay on track now, when it's hard, it gets easy when things calm down. You learn discipline, self-control and how to set boundaries, and by the time January, February and March come around, you're already in a routine that carries you all the way to summer.</p>
+<p>At Fig Performance in Placentia, every client starts with a free consult and an <a href="/inbody-scan-placentia">InBody scan</a>, so you know your real body fat and muscle going into the holidays and can see what changed after. Read more in <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a> and <a href="/nutrition-coaching-placentia">how nutrition coaching works</a>.</p>
 {CTA}"""
 
 faqs = [
+    ("How do I avoid gaining weight over the holidays?",
+     "Eat protein first and fill up on vegetables, leave room for the one dessert you really want, keep training and walking, limit drinks, and keep each holiday to a few days instead of letting it stretch through November and December."),
+    ("What should I eat first at Thanksgiving dinner?",
+     "Protein, as much as you can, then vegetables and fiber. They fill you up fast, so you have less room for the foods that don't support your goals. Skipping the rolls and stuffing is an easy way to save room for pie."),
+    ("Should I skip dessert over the holidays?",
+     "No. Coach Dan eats 80/20: about 80% nutrient-dense food and 20% food he enjoys. Nutrition only works long term if it's flexible and enjoyable, so plan your dessert in."),
     ("How much weight do people gain over the holidays?",
      "Less than most people think. A study in the New England Journal of Medicine found adults gained a little under a pound on average over the holiday season. The problem is most didn't lose it afterward, so it adds up year after year."),
-    ("How do I avoid gaining weight over the holidays?",
-     "Aim to maintain rather than lose. Keep your daily steps above 5,000 (ideally 6,000 or more), keep two strength sessions a week, eat protein first, limit drinks, and go back to your normal meals right after each holiday meal."),
-    ("Is it better to start a diet now or wait until January?",
-     "Start building habits now. Aim to hold your weight through the holidays while you keep training, so you start January already in a routine instead of starting from scratch."),
-    ("Will one big holiday meal make me gain weight?",
-     "Not much fat. The scale jump the next morning is mostly water and salt. Go back to your normal eating at your next meal and it usually comes back down within a few days."),
+    ("Is it better to start now or wait until January?",
+     "Start now. November and December are the hardest months, so if you build the habits now, January and the rest of the year get much easier."),
     ("How can I work out while traveling for the holidays?",
-     "Do a 20-minute bodyweight circuit in your room: squats or split squats, push-ups, glute bridges, a plank and reverse lunges, 3 rounds. Then go for a walk."),
+     "Do a 20-minute bodyweight circuit in your room: squats or split squats, push-ups, glute bridges, a plank and reverse lunges, 3 rounds. Then walk as much as you can, and keep prioritizing protein and fiber."),
 ]
 
 html = page(
     SLUG,
     "How to Avoid Holiday Weight Gain After 40 | Fig Performance",
-    "How to avoid holiday weight gain after 40: aim to maintain, keep your steps and strength training, eat protein first, and a 20-minute hotel workout.",
-    "How to Avoid Holiday Weight Gain (After 40)",
+    "How to avoid holiday weight gain after 40, from Coach Dan: protein first, room for dessert, train on Thanksgiving, set drink boundaries, and a hotel workout.",
+    "How to Avoid Holiday Weight Gain After 40 (A Coach's Rules)",
     "Fitness after 40", "How to Avoid Holiday Weight Gain After 40",
-    "Hold steady from Thanksgiving to New Year's, without skipping the good parts.",
-    [("why", "Why it matters"), ("plan", "9 ways to avoid it"), ("travel", "20-minute hotel workout"), ("january", "Start before January")],
+    "Live a little, keep your goals. What Coach Dan tells clients, and what he does himself.",
+    [("why", "Why it matters"), ("mindset", "Live a little, keep your goals"), ("plate", "Your holiday plate"),
+     ("eighty-twenty", "Eating 80/20"), ("training", "Training on Thanksgiving"), ("mistakes", "Biggest mistakes"),
+     ("travel", "Traveling"), ("january", "Don't wait for January")],
     body, faqs, "Holiday Weight Gain", kind="article", published=DATE)
 
 if __name__ == "__main__":
