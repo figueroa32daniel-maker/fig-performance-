@@ -1,6 +1,6 @@
 # Fig Performance website
 
-Static site deployed to Vercel from `main`. Read `_build/README.md` first for how pages are built and published, and for Dan's rules. The most important rule: never publish an article until Dan has approved it.
+Static site deployed to Vercel from `main`. Read `MEMORY.md` first (project memory: business facts, approved client names, decisions and a log; add to its log when something important is decided or shipped). Then read `_build/README.md` for how pages are built and published, and for Dan's rules. The most important rule: never publish an article until Dan has approved it.
 
 ## Design
 
