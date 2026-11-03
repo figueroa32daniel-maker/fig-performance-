@@ -861,3 +861,5 @@ address { font-style: normal; }
 @media (min-width: 960px) and (max-width: 1099px) { .nav ul { gap: 10px; } .nav ul a { font-size: .78rem; letter-spacing: .05em; } }
 .btn-gold { background: var(--gold-light); color: var(--navy); border-color: var(--gold-light); }
 .btn-gold:hover { background: #dcb46e; }
+.price-table.compare-table td, .price-table.compare-table th { white-space: normal; vertical-align: top; }
+@media (max-width: 479px) { .price-table.compare-table thead th { letter-spacing: .04em; } .price-table.compare-table td:first-child { font-weight: 600; color: var(--navy); } }

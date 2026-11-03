@@ -39,7 +39,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 </ul>
 
 <h2 id="compare">Online coaching vs. in-person training</h2>
-<div class="price-table-wrap"><table class="price-table">
+<div class="price-table-wrap"><table class="price-table compare-table">
   <thead><tr><th></th><th>Online coaching</th><th>In-person, once a week</th></tr></thead>
   <tbody>
     <tr><td>Price</td><td>$249/month</td><td>$387/month</td></tr>
