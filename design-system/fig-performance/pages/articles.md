@@ -6,7 +6,7 @@ Applies to every guide built with `page(..., kind="article")`, like the fitness-
 
 ## Layout
 
-- Article header: kicker, then the H1 in **sentence case** (never ALL CAPS), a one-line dek, then the byline ("By Coach Dan Figueroa, ACSM CPT · Precision Nutrition Level 1") and a human date ("Updated Nov 3, 2026").
+- Article header: kicker, then the H1 in **title case or sentence case** (never ALL CAPS), a one-line dek, then the byline ("By Coach Dan Figueroa, ACSM CPT · Precision Nutrition Level 1") and a human date ("Updated Nov 3, 2026").
 - Featured image right under the header (Dan coaching, the gym, or the exercise in the article). Full width of the text column, 3:2 or 16:9.
 - Reading column about 680–720px wide, body text 17–18px with line-height 1.65.
 - Keep the "On this page" contents box, but make it lighter: no heavy card, just a hairline and the gold rule.
