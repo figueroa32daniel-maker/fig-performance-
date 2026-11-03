@@ -1,6 +1,6 @@
 """Article: can you lose 10 pounds in a month (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 DATE = "2026-11-03"
 SLUG = "how-to-lose-10-pounds-in-a-month"
@@ -9,7 +9,7 @@ body = f"""<p class="legal-intro">Yes, you can lose 10 pounds in a month. It's r
 
 <h2 id="realistic">Is losing 10 pounds in a month realistic?</h2>
 <p>100% realistic. Some trainers will tell you it's irresponsible to lose that much that fast. But if what you care about right now is seeing the scale go down, we can make that happen, as long as you know what you're signing up for.</p>
-<p>Adriana, 48, came to me wanting to lose about 30 pounds. I told her we could aim for about 2 pounds a week. She lost 10 pounds in her first month.</p>
+{callout("Client result", "Adriana, 48: 10 pounds in her first month", ["Goal: lose about 30 pounds", "Plan: about 2 pounds a week", "Result: 10 pounds down in month one"])}
 
 <h2 id="math">The math: a 1,000-calorie daily deficit</h2>
 <p>A pound of fat stores roughly 3,500 calories. So a 500-calorie daily deficit loses about a pound a week, and a 1,000-calorie daily deficit loses about 2 pounds a week. Here's how I split it:</p>

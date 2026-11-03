@@ -1,6 +1,6 @@
 """Article: strength training for women over 50 (from Coach Dan's voice answers, Nov 3 2026)."""
 import sys
-from build_pages import page, SITE, CTA
+from build_pages import page, SITE, CTA, callout, pullquote
 
 DATE = "2026-11-03"
 SLUG = "strength-training-for-women-over-50"
@@ -11,6 +11,7 @@ body = f"""<p class="legal-intro">Strength training for women over 50 isn't a ge
 <h2 id="age">Your age doesn't decide your program</h2>
 <p>I don't treat a 60-year-old like she's 90, or a 40-year-old like she's 60. Every client gets the same effective coaching, because I want all my clients to feel strong, confident, capable and powerful.</p>
 <p>Teresa started with me at 60 with a shoulder injury, unable to do a single bodyweight exercise. About three months later she did her first pull-up, and today she bench presses about 85 pounds for reps. <a href="/build-muscle-after-60">Read how she progressed, month by month</a>. Sam is 70: he curls 30-pound dumbbells, presses the 45s on the dumbbell bench, and deadlifts 135 pounds.</p>
+{callout("Client results", "Age didn't decide their program", ["Teresa, 60: first pull-up in about 3 months, now benches about 85 pounds for reps", "Sam, 70: deadlifts 135 pounds, dumbbell benches the 45s, curls 30-pound dumbbells"])}
 <p>Everybody gets strong. Everybody keeps the ability to jump, run, pick things up, set them down and lift them overhead.</p>
 
 <h2 id="assessment">It starts with an assessment</h2>
