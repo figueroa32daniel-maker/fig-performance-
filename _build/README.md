@@ -23,6 +23,8 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 
 ## Rules from Dan (never break these)
 
+- Never publish an article until Dan has reviewed it and approved it. He adds his own suggestions to every article first. Drafts go in the article plan doc (Claude Docs project 1a4c49c4-7f9b-466c-bf63-1d21fa93dc1e) for his review.
+
 - Prices: use only what the website already shows. That's $90 a session; the 1–4 sessions-a-week table ($387, $774, $1,161, $1,548 a month); 20% off when paid 3 months in full; a 3-month minimum; and a free consult. The membership price is quoted at the consult.
 - Never mention Crunch on Dan's own marketing, except the sourced price comparison on the cost guide.
 - No "$150 value" claims.
