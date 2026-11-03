@@ -66,7 +66,7 @@ body = f"""<p class="legal-intro">If you're over 40, you work a desk job, and yo
 <ul>
   <li>Weighted planks with about 75 pounds on her back</li>
   <li>Curls with 30-pound dumbbells</li>
-  <li>Bench press around 75 pounds for reps</li>
+  <li>Bench press around 85 pounds for reps</li>
 </ul>
 <p>That's what three months can do when you progressively overload, track your strength, are smart about intensity and recovery, eat enough protein and get good sleep. Age didn't stop her. (Read <a href="/build-muscle-after-60">exactly how Teresa progressed</a>.) The basics, done consistently, did the work.</p>
 <p>Another client wrote in her review that she lost 10 pounds in her first four weeks: "He has helped me understand my workouts, pushed me when I needed to be pushed, and helped me stay accountable."</p>

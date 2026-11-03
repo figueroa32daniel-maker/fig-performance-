@@ -16,7 +16,7 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
   <li>Her first pull-up, and now multiple reps with the lightest assistance band</li>
   <li>Weighted planks with about 75 pounds on her back</li>
   <li>Curls with 30-pound dumbbells</li>
-  <li>Bench press around 75 pounds for reps</li>
+  <li>Bench press around 85 pounds for reps</li>
 </ul>
 <p>Every step was based on what I saw from her in person: what looked safe, and what she was ready for.</p>
 
