@@ -42,7 +42,7 @@ Read this at the start of every session, together with `_build/README.md` (how t
   - lose 10 lb in a month
 - 2026-11-03: Installed the UI/UX Pro Max design skill. Dan chose "keep brand, add polish."
 - 2026-11-03: In progress, not published:
-  - Belly fat after menopause: content gathered, needs a draft and Dan's review.
+  - Belly fat after menopause: LIVE Nov 7 (/how-to-lose-belly-fat-after-menopause). Researched draft + Dan's additions (progressive overload, weighted abs, creatine 5 g, magnesium/theanine/ashwagandha with doctor caveat). No client story by Dan's choice.
   - Strength training with knee pain: needs a client story.
 - 2026-11-03 (superseded below): Planned design polish, waiting on Dan's photos:
   - people-first homepage hero
