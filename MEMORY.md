@@ -18,6 +18,7 @@ Read this at the start of every session, together with `_build/README.md` (how t
 - Sam, 70: deadlifts 135 lb, dumbbell benches the 45s, curls 30 lb dumbbells.
 - Adriana, 48: lost 10 lb in her first month.
 - Jonathan, 43: ex-Army, new son, back pain and shoulder pain. Pull-ups went from 1 to 5. Chin-ups with +35 lb, Jefferson curl 135 lb, bench 185 lb. Don't mention where he lives. Back story approved Nov 7: was stiff/achy, pain bending over, had quit golf; now golfs again.
+- Danielle: trained a few months ago after a car accident left her tripping and falling; Dan used isometrics, eccentrics and unilateral leg work to rebuild the brain-to-muscle signal (outcome not stated).
 - Priscilla, over 42: stomach was inflamed from drinking and junk food; stopped, dieted, cardio, trained 3x/week with Dan; lost 20 lb and her stomach was very flat in about 2-3 months.
 - Thinzar (spelling confirmed by Dan Nov 7): hip thrust from 55 lb (bar + 5 each side) to 135 lb in about six weeks.
 

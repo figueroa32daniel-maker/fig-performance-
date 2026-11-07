@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "strength-training-for-women-over-60": [
+        "The formula doesn't change at 60. The starting point does. Progressive lifting, six movements, protein, sleep.",
+        "Heavy lifting builds bone: women 65+ with low bone mass gained 2.9% spine density in 8 months (LIFTMOR).",
+        "Balance is strength: isometrics, slow eccentrics and single-leg work. Protein at goal weight in grams; fiber 22 g+."],
     "is-belly-fat-the-last-to-go": [
         "Yes, the lower belly is last: those fat cells resist releasing fat. The deep visceral fat leaves first.",
         "Aim for a visceral fat level under 6 on the InBody. That's the number that matters for your health.",
