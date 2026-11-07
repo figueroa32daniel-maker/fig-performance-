@@ -35,6 +35,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="guides">Recent guides by Coach Dan</h2>
 <ul>
+  <li><a href="/strength-training-for-seniors">Strength training for seniors</a></li>
   <li><a href="/how-to-lose-belly-fat-after-menopause">How to lose belly fat after menopause</a></li>
   <li><a href="/meal-plan-for-weight-loss">Simple meal plan for weight loss</a></li>
   <li><a href="/glp-1-muscle-loss">GLP-1s and muscle loss</a></li>

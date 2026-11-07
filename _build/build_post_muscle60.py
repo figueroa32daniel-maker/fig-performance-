@@ -24,11 +24,11 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
 {stats([("60", "Teresa's age at her first pull-up"), ("~3 months", "from no bodyweight exercises to a pull-up"), ("135 lb", "Sam's deadlift at 70")])}
 
 <h2 id="sam">Sam, 70: deadlifting 135 pounds for reps</h2>
-<p>Sam is 70, and he's a badass. Right now he's doing:</p>
+<p>Sam is 70, a former restaurant owner who ran his own business for decades, and he's a badass. Right now he's doing:</p>
 <ul>
   <li>Deadlifts with about 135 pounds for reps</li>
-  <li>Dumbbell bench press with the 45s for reps</li>
-  <li>Seated dumbbell shoulder press with 45-pound dumbbells</li>
+  <li>Dumbbell bench press with the 50s for reps</li>
+  <li>Seated dumbbell shoulder press with 40-pound dumbbells</li>
   <li>One-arm lat pulldown with 90-plus pounds</li>
   <li>Decline sit-ups and decline leg raises</li>
 </ul>
@@ -64,7 +64,7 @@ body = f"""<p class="legal-intro">Yes, you can build muscle after 60. I see it e
 <h2 id="late">Is it too late to start at 60 or 70?</h2>
 <p>It's never too late. You'll never know how good you can get unless you try, and you have to give yourself some grace.</p>
 <p>Plenty of people hit their stride late. Samuel L. Jackson became a household name in his mid-40s. Colonel Sanders started franchising Kentucky Fried Chicken in his 60s. They didn't wait for the perfect time. They just started.</p>
-<p>You don't need to be in great shape to begin. You don't need perfect mobility, stability or strength. Take imperfect action.</p>
+<p>You don't need to be in great shape to begin. You don't need perfect mobility, stability or strength. Take imperfect action. For the exact movements, sets and reps, read <a href="/strength-training-for-seniors">strength training for seniors</a>.</p>
 {pullquote("Chase progress, not perfection.")}
 
 <h2 id="start">How to start</h2>
