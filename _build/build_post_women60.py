@@ -85,7 +85,7 @@ faqs = [
 html = page(
     SLUG,
     "Strength Training for Women Over 60: How to Start | Fig",
-    "Strength training for women over 60 from Coach Dan: why the formula doesn't change, lifting heavy for bone, how to train balance, protein and fiber, and Teresa's first pull-up at 60.",
+    "Strength training for women over 60: why the formula doesn't change, lifting heavy for bone, training balance, protein and fiber, and Teresa's first pull-up at 60.",
     "Strength Training for Women Over 60: How to Start and How Far You Can Go",
     "Fitness after 40", "Strength Training for Women Over 60",
     "The formula doesn't change at 60. Your starting point does. Bone, balance, protein, and Teresa's first pull-up.",
