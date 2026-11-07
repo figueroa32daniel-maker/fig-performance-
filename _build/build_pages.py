@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "is-belly-fat-the-last-to-go": [
+        "Yes, the lower belly is last: those fat cells resist releasing fat. The deep visceral fat leaves first.",
+        "Aim for a visceral fat level under 6 on the InBody. That's the number that matters for your health.",
+        "Walk 30 minutes daily, lift at least twice a week, eat your goal weight in grams of protein."],
     "hip-thrust": [
         "Shoulder blades on the bench edge, bar at the hip crease with a thick pad, knees at 90 degrees at the top.",
         "Reach full hip extension every rep. Drive up with power; the way down can be quick.",

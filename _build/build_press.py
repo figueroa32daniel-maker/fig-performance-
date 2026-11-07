@@ -35,6 +35,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="guides">Recent guides by Coach Dan</h2>
 <ul>
+  <li><a href="/is-belly-fat-the-last-to-go">Is belly fat the last to go?</a></li>
   <li><a href="/hip-thrust">Hip thrust form for women over 40</a></li>
   <li><a href="/jefferson-curls">Are Jefferson curls safe?</a></li>
   <li><a href="/strength-training-for-seniors">Strength training for seniors</a></li>

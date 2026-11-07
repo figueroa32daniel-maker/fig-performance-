@@ -134,6 +134,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/is-belly-fat-the-last-to-go">Is belly fat the last to go?</a><br>Why the body keeps it, which belly fat leaves first, and what actually moves it.</li>
   <li><a href="/hip-thrust">Hip thrust form and why women over 40 need it</a><br>Setup, the mistakes I fix, and the 3-day glute program I learned from Bret Contreras.</li>
   <li><a href="/jefferson-curls">Are Jefferson curls safe? My unpopular opinion</a><br>Why I load a rounded spine, how to start at body weight, and who should wait.</li>
   <li><a href="/strength-training-for-seniors">Strength training for seniors</a><br>The 6 movements to train, how to start, and why you're not too old to lift heavy.</li>
