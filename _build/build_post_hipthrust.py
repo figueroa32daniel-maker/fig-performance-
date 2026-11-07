@@ -89,7 +89,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Hip Thrust Form and Why Women Over 40 Need It | Fig Performance",
+    "Hip Thrust Form for Women Over 40 | Fig Performance",
     "Hip thrust form from a coach who trained with Bret Contreras: bench height, bar placement, the mistakes to fix, and a 3-day glute program for women over 40.",
     "Hip Thrust Form: How to Do It and Why Women Over 40 Need It",
     "Fitness after 40", "Hip Thrust Form: How to Do It and Why Women Over 40 Need It",
