@@ -1,4 +1,4 @@
-"""Article: Are Jefferson curls safe? (from Coach Dan's voice memo, Nov 7 2026). Publish only after Dan approves."""
+"""Article: Are Jefferson curls safe? (from Coach Dan's voice memo; approved by Dan Nov 7 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
@@ -58,8 +58,8 @@ body = f"""<p class="legal-intro">If you've been told to never round your back w
 
 <h2 id="jonathan">What it did for Jonathan</h2>
 <p>Jonathan came to me at 43 with a back in bad shape. Stiff, achy, cranky. Bending over hurt. Touching his toes hurt. He'd stopped golfing entirely because his back wouldn't let him. He also had shoulder pain, a new son at home, and an Army background, so he was no stranger to hard training. His back just hadn't been trained in the range that was failing him.</p>
-<p>We started the Jefferson curl the way I start everyone: body weight, short range, then more range, then load. Today Jonathan Jefferson curls 135 pounds. That's 135 pounds through the exact motion that used to hurt him empty-handed.</p>
-{callout("Client result", "Jonathan, 43", ["Came in stiff and in pain bending over; had quit golf because of his back", "Started at body weight, short range", "Now Jefferson curls 135 pounds"])}
+<p>We started the Jefferson curl the way I start everyone: body weight, short range, then more range, then load. Today Jonathan Jefferson curls 135 pounds. That's 135 pounds through the exact motion that used to hurt him empty-handed. And he's back on the golf course.</p>
+{callout("Client result", "Jonathan, 43", ["Came in stiff and in pain bending over; had quit golf because of his back", "Started at body weight, short range", "Now Jefferson curls 135 pounds, and golfs again"])}
 <p>Another client in his 40s went from 10 pounds to 45 pounds on the Jefferson curl in two months, following the same progression. Nothing fancy. Range first, then small jumps in weight, and the back adapts.</p>
 
 <h2 id="chiro">What I'd say to a chiropractor who disagrees</h2>
