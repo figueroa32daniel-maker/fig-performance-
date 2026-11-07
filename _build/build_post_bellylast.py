@@ -82,8 +82,8 @@ faqs = [
 
 html = page(
     SLUG,
-    "Is Belly Fat the Last to Go? Why, and What Works | Fig Performance",
-    "Is belly fat the last to go? Yes, and here's the science: why the body stores fat there, why the lower belly is stubborn, and what moved one client's stomach in 3 months.",
+    "Is Belly Fat the Last to Go? Why, and What Works | Fig",
+    "Is belly fat the last to go? Yes. The science of why the body keeps it, why the lower belly is stubborn, and what flattened one client's stomach in 3 months.",
     "Is Belly Fat the Last to Go? Why Your Body Keeps It, and What Moves It",
     "Fitness after 40", "Is Belly Fat the Last to Go? Why Your Body Keeps It, and What Moves It",
     "Yes. Here's why, which belly fat leaves first, and how Priscilla got a flat stomach after 42.",
