@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "how-to-lose-belly-fat-after-menopause": [
+        "Lower estrogen moves fat to your belly, and you lose 3% to 8% of muscle per decade after 30.",
+        "Lift 2 to 3 times a week and get stronger every week. Muscle is a byproduct of strength.",
+        "Eat in a small deficit built on whole, fiber-rich foods, with at least 1.2 g of protein per kg a day."],
     "glp-1-muscle-loss": [
         "On GLP-1s, a big share of the weight lost can be muscle.",
         "Protect it: hit your protein, lift 2 to 3 times a week, eat enough and walk daily.",
