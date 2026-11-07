@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "hip-thrust": [
+        "Shoulder blades on the bench edge, bar at the hip crease with a thick pad, knees at 90 degrees at the top.",
+        "Reach full hip extension every rep. Drive up with power; the way down can be quick.",
+        "Three leg days a week: hip thrust, a squat, a hinge, then abduction. About 32 leg sets a week."],
     "jefferson-curls": [
         "Your spine bends every day. Training that range with light load makes it stronger, not more fragile.",
         "Start with body weight and a short range to a bench. Add range first, then 2.5 lb at a time. 1 to 8 slow reps.",
