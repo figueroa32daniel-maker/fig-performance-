@@ -1,4 +1,4 @@
-"""Article: hip thrust form and programming for women over 40 (from Coach Dan's voice memo, Nov 7 2026). Publish only after Dan approves."""
+"""Article: hip thrust form and programming for women over 40 (from Coach Dan's voice memos; approved by Dan Nov 7 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
@@ -34,7 +34,15 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 
 <h2 id="power">Power up, don't crawl down</h2>
 <p>One thing I changed after the seminar. At the bottom of a hip thrust the glutes lose most of their tension, so there's no reason to lower the bar in slow motion. Bret's cue is to focus on exploding upward with force and not worry about a slow negative. He coaches the deadlift the same way. The power on the way up is what matters.</p>
-<p>That's also why some women do better with a shorter version: pulsing in the top half of the rep instead of coming all the way down, so the glutes stay under tension the entire set. If full-range reps aren't giving you the burn where you want it, try it.</p>
+<p>That's also why there's more than one way to do the rep, and I think all of them are fantastic:</p>
+<ul>
+  <li><strong>Traditional hip thrust.</strong> The weight touches down, then you drive it back up. Full range.</li>
+  <li><strong>Half-rep hip thrust.</strong> You lower about halfway, low enough that the glutes are still working but without touching the floor, then thrust back up. Tension never leaves the glutes.</li>
+  <li><strong>Pulses.</strong> Quarter reps at the top, up and down. Brutal on the glutes.</li>
+  <li><strong>One-and-a-quarter reps.</strong> A full hip thrust, then a quarter rep, and that counts as one.</li>
+  <li><strong>Paused hip thrust.</strong> Hold the top for a count before lowering.</li>
+</ul>
+<p>If full-range reps aren't giving you the burn where you want it, try the half-rep or the pulses.</p>
 {pullquote("Lower the weight, find what full hip extension actually looks like, and work your hip mobility. More range means more glute, and faster results.", "Coach Dan Figueroa")}
 
 <h2 id="mistakes">The mistakes I fix most</h2>
@@ -46,8 +54,8 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 </ul>
 
 <h2 id="beginner">How I start a beginner</h2>
-<p>With the barbell. Not a dumbbell, not a bodyweight bridge for weeks. I had a client start with the empty bar and a 5-pound plate on each side, 55 pounds total. About a month and a half later she was hip thrusting 135 pounds.</p>
-{stats([("55 lb", "where she started"), ("135 lb", "six weeks later"), ("3&times;", "a week, on leg days")])}
+<p>With the barbell. Not a dumbbell, not a bodyweight bridge for weeks. Stinzar started with the empty bar and a 5-pound plate on each side, 55 pounds total. About a month and a half later she was hip thrusting 135 pounds.</p>
+{stats([("55 lb", "where Stinzar started"), ("135 lb", "six weeks later"), ("3&times;", "a week, on leg days")])}
 <p>That's not unusual. You can't load a dumbbell glute bridge or a single-leg hip thrust anywhere near what you can load a barbell, and the barbell is the most accessible option because not everyone has a hip thrust machine. Yes, it's more setup than most exercises. That's one of the things a coach is for.</p>
 
 <h2 id="program">How I program the glutes now</h2>
@@ -61,7 +69,7 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 </ol>
 <p><strong>Two upper body days:</strong> one for chest, back and shoulders; one for back and arms.</p>
 {callout("The weekly template", "Glutes, three days a week", ["Mon / Wed / Fri: hip thrust, a squat pattern, a hinge, then abduction", "Two upper body days: chest, back and shoulders; back and arms", "About 32 working sets a week for the legs"])}
-<p><strong>Reps:</strong> for a new client I run the hip thrust the way I run most lifts: 8 to 10 reps per set the first month, then 5 to 6 with more weight, then heavier still. The rest of the leg day lives in the 8 to 12 range. Add weight whenever the form holds.</p>
+<p><strong>Reps:</strong> honestly, anywhere from 1 to 30. There are strength reps (1 to 6), muscle-building reps (8 to 15) and muscular endurance reps (20 to 30), and the hip thrust works in all three. I rotate through them. A new client usually starts in the 8 to 12 range to learn the movement, then we go heavier for strength and higher for endurance as the weeks go on. Add weight whenever the form holds.</p>
 
 <h2 id="vs">Hip thrust vs. squat</h2>
 <p>People ask which is better for the glutes. Both work. A 2015 EMG study found the barbell hip thrust activated the glutes much more than a back squat at the same relative load (<a href="{EMG}" target="_blank" rel="noopener noreferrer">Contreras et al., 2015</a>). A 2023 training study that followed people for nine weeks found squats and hip thrusts built similar glute size, with squats adding more quad and inner-thigh size (<a href="{PLOTKIN}" target="_blank" rel="noopener noreferrer">Plotkin et al., 2023</a>). That's why the template above has both: a squat pattern and a hip thrust on every leg day. The hip thrust lets you load the glutes hard without your spine or knees being the limit, which is exactly what a 50-year-old with a cranky back needs.</p>
