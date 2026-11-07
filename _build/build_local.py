@@ -4,7 +4,7 @@ from build_pages import page, SITE, CTA
 CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
 BOOK = f'<p><a class="btn btn-gold" href="{CAL}" target="_blank" rel="noopener">Book your free consult online</a></p>'
 
-pt_body = f"""<p class="legal-intro">Fig Performance is a private, one-on-one personal training gym in Placentia, CA, built for adults over 40. Every session is with Coach Dan Figueroa, an ACSM certified personal trainer, at 1284 E. Yorba Linda Blvd. No crowds, no waiting for equipment, and progress you can measure with an InBody scan.</p>
+pt_body = f"""<p class="legal-intro">Here's exactly what happens when you train one-on-one at <a href="/">Fig Performance, a private personal training gym in Placentia</a>: a free consult with an InBody scan, a plan built around your body, 50-minute sessions with Coach Dan Figueroa (ACSM certified), recovery, and a re-scan to prove it worked. No crowds, no waiting for equipment, no guessing.</p>
 
 <h2 id="who">Who we train</h2>
 <p>Most clients are 40 to 70, work demanding jobs, and already "eat pretty healthy." They want to lose fat, build muscle and feel strong again, and they're tired of guessing. Many have hurt a back, knee or shoulder before, so every plan starts around what your body can do today.</p>
@@ -30,7 +30,7 @@ pt_body = f"""<p class="legal-intro">Fig Performance is a private, one-on-one pe
 <p>Personal training is $90 a session with Coach Dan, billed weekly or monthly, with a 3-month minimum. Save 20% when you pay 3 months in full. Your first consult and InBody scan are free. See <a href="/pricing">all plans and pricing</a>, or read <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
 
 <h2 id="hours">Hours and location</h2>
-<p>1284 E. Yorba Linda Blvd, Placentia, CA 92870. Staffed Monday to Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM. Easy to reach from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, Fullerton, Anaheim Hills and Villa Park.</p>
+<p>1284 E. Yorba Linda Blvd, Placentia, CA 92870. Staffed Monday to Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM. Easy to reach from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a>, <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a> and Villa Park.</p>
 
 <h2 id="start">Start with a free consult</h2>
 <p>Your consult and InBody scan are free, with no commitment. <a href="/free-consult-placentia">See what's included</a>.</p>
@@ -40,8 +40,8 @@ pt_body = f"""<p class="legal-intro">Fig Performance is a private, one-on-one pe
 pt_faqs = [
     ("How much does a personal trainer cost in Placentia?",
      "At Fig Performance, personal training is $90 a session with Coach Dan, billed weekly or monthly, with a 3-month minimum. You save 20% when you pay 3 months in full. The first consult and InBody scan are free."),
-    ("Is there a personal trainer in Placentia for people over 40?",
-     "Yes. Fig Performance in Placentia specializes in one-on-one strength training for adults over 40, with InBody scans to track fat and muscle and plans built around old injuries."),
+    ("What happens in the first session?",
+     "The first visit is the free consult: an InBody scan, a movement and strength assessment and a conversation about your goals. Your first training session starts from what that showed, usually with the basic strength patterns at a weight you can control."),
     ("How often should I train with a personal trainer?",
      "Many Fig Performance clients over 40 train twice a week in 50-minute sessions and add daily walking. Some train three or four times a week."),
     ("What areas do you serve?",
@@ -93,13 +93,13 @@ fc_faqs = [
 pages = {
     "personal-training-placentia": page(
         "personal-training-placentia",
-        "Personal Training in Placentia, CA for Adults 40+ | Fig Performance",
-        "Private one-on-one personal training in Placentia, CA for adults over 40. $90 a session, InBody scans, real client results. Free consult with InBody scan.",
-        "Personal Training in Placentia, CA | Fig Performance",
-        "Placentia, CA", "Personal Training in Placentia, CA",
-        "One-on-one strength coaching for adults over 40, measured with InBody scans.",
+        "How One-on-One Personal Training Works | Fig Performance",
+        "How one-on-one personal training works at Fig Performance: the free consult, your plan, 50-minute private sessions, recovery and InBody re-scans. $90 a session.",
+        "How One-on-One Personal Training Works | Fig Performance",
+        "How it works", "How One-on-One Personal Training Works",
+        "The consult, the plan, the sessions and the re-scan, step by step. For adults over 40.",
         [("who", "Who we train"), ("how", "How it works"), ("results", "Client results"), ("pricing", "Pricing"), ("hours", "Hours and location"), ("start", "Free consult")],
-        pt_body, pt_faqs, "Personal Training in Placentia"),
+        pt_body, pt_faqs, "How Personal Training Works"),
     "free-consult-placentia": page(
         "free-consult-placentia",
         "Free Consult + InBody Scan in Placentia | Fig Performance",
