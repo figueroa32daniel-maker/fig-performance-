@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "jefferson-curls": [
+        "Your spine bends every day. Training that range with light load makes it stronger, not more fragile.",
+        "Start with body weight and a short range to a bench. Add range first, then 2.5 lb at a time. 1 to 8 slow reps.",
+        "Skip it or get cleared first if you have osteoporosis, a recent disc injury or nerve pain down a leg."],
     "strength-training-for-seniors": [
         "Don't train like you're fragile. Find your starting point with an assessment, then progress.",
         "Train 6 movements: push, pull, squat, hinge, carry and overhead, plus core.",

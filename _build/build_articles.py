@@ -134,6 +134,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/jefferson-curls">Are Jefferson curls safe? My unpopular opinion</a><br>Why I load a rounded spine, how to start at body weight, and who should wait.</li>
   <li><a href="/strength-training-for-seniors">Strength training for seniors</a><br>The 6 movements to train, how to start, and why you're not too old to lift heavy.</li>
   <li><a href="/how-to-lose-belly-fat-after-menopause">How to lose belly fat after menopause</a><br>What the research says about strength training, protein, creatine, diet and sleep.</li>
   <li><a href="/meal-plan-for-weight-loss">Simple meal plan for weight loss (free PDF)</a><br>Protein, carbs, fats and fiber at every meal, a sample day and a grocery list.</li>
