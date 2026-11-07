@@ -1,4 +1,4 @@
-"""Article: Is belly fat the last to go? (from Coach Dan's voice memo, Nov 7 2026). Publish only after Dan approves."""
+"""Article: Is belly fat the last to go? (from Coach Dan's voice memo; approved by Dan Nov 7 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
