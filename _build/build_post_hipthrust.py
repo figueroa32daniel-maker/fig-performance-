@@ -54,8 +54,8 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 </ul>
 
 <h2 id="beginner">How I start a beginner</h2>
-<p>With the barbell. Not a dumbbell, not a bodyweight bridge for weeks. Stinzar started with the empty bar and a 5-pound plate on each side, 55 pounds total. About a month and a half later she was hip thrusting 135 pounds.</p>
-{stats([("55 lb", "where Stinzar started"), ("135 lb", "six weeks later"), ("3&times;", "a week, on leg days")])}
+<p>With the barbell. Not a dumbbell, not a bodyweight bridge for weeks. Thinzar started with the empty bar and a 5-pound plate on each side, 55 pounds total. About a month and a half later she was hip thrusting 135 pounds.</p>
+{stats([("55 lb", "where Thinzar started"), ("135 lb", "six weeks later"), ("3&times;", "a week, on leg days")])}
 <p>That's not unusual. You can't load a dumbbell glute bridge or a single-leg hip thrust anywhere near what you can load a barbell, and the barbell is the most accessible option because not everyone has a hip thrust machine. Yes, it's more setup than most exercises. That's one of the things a coach is for.</p>
 
 <h2 id="program">How I program the glutes now</h2>

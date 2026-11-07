@@ -18,7 +18,7 @@ Read this at the start of every session, together with `_build/README.md` (how t
 - Sam, 70: deadlifts 135 lb, dumbbell benches the 45s, curls 30 lb dumbbells.
 - Adriana, 48: lost 10 lb in her first month.
 - Jonathan, 43: ex-Army, new son, back pain and shoulder pain. Pull-ups went from 1 to 5. Chin-ups with +35 lb, Jefferson curl 135 lb, bench 185 lb. Don't mention where he lives. Back story approved Nov 7: was stiff/achy, pain bending over, had quit golf; now golfs again.
-- Stinzar (spelling from Dan's voice memo, confirm): hip thrust from 55 lb (bar + 5 each side) to 135 lb in about six weeks.
+- Thinzar (spelling confirmed by Dan Nov 7): hip thrust from 55 lb (bar + 5 each side) to 135 lb in about six weeks.
 
 ## How we work
 - Dan reviews and approves every article before it goes live. He sends answers by voice memo. Write in his voice, using only facts he gave. Verify science claims and soften overstatements. Show him what changed.
