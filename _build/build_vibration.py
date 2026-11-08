@@ -35,7 +35,7 @@ body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration the
 </ul>
 
 <h2 id="access">Vibration therapy in Placentia</h2>
-<p>Vibration therapy is included with a Fig Performance membership, along with red light therapy, classes, a complimentary InBody scan and a one-time trainer consult. Membership is quoted at your free consult. See <a href="/pricing">plans and pricing</a>.</p>
+<p>Vibration therapy is included with a Fig Performance membership, along with red light therapy, classes, a complimentary InBody scan and a one-time trainer consult. Semi-private membership is $199 to $345 a month. See <a href="/pricing">plans and pricing</a>.</p>
 <p>We're at 1284 E. Yorba Linda Blvd, Placentia, a short drive from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park.</p>
 {CTA}"""
 

@@ -16,7 +16,7 @@ SHARED_TRAIN = """<h2 id="training">What training looks like</h2>
 <p>Coach Dan Figueroa is an ACSM certified personal trainer and a Precision Nutrition Level 1 certified nutrition coach. Every session is with him. No hand-offs to a junior trainer.</p>"""
 
 SHARED_PRICE = """<h2 id="pricing">Pricing</h2>
-<p>Personal training is $90 a session, billed weekly or monthly, with a 3-month minimum. Save 20% when you pay in full for 3 months. Membership with classes and recovery tools is quoted at the consult. See <a href="/pricing">plans and pricing</a> or the <a href="/personal-training-cost-placentia">personal training cost guide</a>.</p>"""
+<p>Personal training is $90 a session, billed weekly or monthly, with a 3-month minimum. It's $72 a session when you pay for 3 months upfront. Semi-private membership, with small-group training, open gym and recovery tools, is $199 to $345 a month. See <a href="/pricing">plans and pricing</a> or the <a href="/personal-training-cost-placentia">personal training cost guide</a>.</p>"""
 
 
 def start_block(city):

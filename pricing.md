@@ -1,6 +1,6 @@
 # Pricing — Fig Performance (Placentia, CA)
 
-Last updated: November 3, 2026. Source of truth: https://www.figperformance.com/pricing
+Last updated: November 7, 2026. Source of truth: https://www.figperformance.com/pricing
 
 ## Free consult with InBody scan
 - Price: $0
@@ -13,12 +13,16 @@ Last updated: November 3, 2026. Source of truth: https://www.figperformance.com/
 - 2 sessions a week: $180/week or $774/month
 - 3 sessions a week: $270/week or $1,161/month
 - 4 sessions a week: $360/week or $1,548/month
-- 3-month minimum commitment on every training plan
-- Save 20% when you pay in full for 3 months
+- 3-month minimum commitment on every plan; no drop-ins or one-off sessions
+- $72 per session when you pay for 3 months upfront (20% off)
 
-## Membership
-- Price: ask at your free consult
-- Includes: facility access during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM), classes up to 2–3 times a week, red light therapy, vibration therapy, a complimentary InBody scan, a one-time trainer consult
+## Semi-private membership (small-group training)
+- 1 group session a week: $199/month
+- 2 group sessions a week: $225/month
+- 3 group sessions a week: $279/month
+- 4 group sessions a week: $345/month
+- No initiation fee. 3-month minimum, then month to month until you pause or cancel. Pause anytime (travel, a break). Missed sessions don't carry over.
+- Includes: small-group training, open gym during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM), red light therapy, vibration therapy, a complimentary InBody scan, a one-time trainer consult
 - Does not include weekly one-on-one personal training
 
 ## In-home personal training

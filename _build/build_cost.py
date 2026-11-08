@@ -22,7 +22,7 @@ body = f"""<p class="legal-intro">Personal training at Fig Performance in Placen
   <li><strong>Save 20%</strong> when you pay 3 months in full.</li>
   <li>The first consult and InBody body-composition scan are free.</li>
 </ul>
-<p>Membership, with classes, red light and vibration therapy, is quoted at your consult. Concierge training at your home or office is quoted by location. Full details are on the <a href="/pricing">pricing page</a>.</p>
+<p>Semi-private membership, with small-group training, open gym, red light and vibration therapy, is $199 to $345 a month depending on how many group sessions a week you choose, with no initiation fee. Concierge training at your home or office is quoted by location. Full details are on the <a href="/pricing">pricing page</a>.</p>
 
 <h2 id="types">The main types of training in Placentia</h2>
 <ul>
@@ -62,7 +62,7 @@ faqs = [
     ("How much does personal training cost in Placentia?",
      "At Fig Performance, one-on-one personal training is $90 a session: $387 a month for once a week or $774 a month for twice a week. Save 20% by paying 3 months in full. The first consult and InBody scan are free."),
     ("How much is a gym membership in Placentia?",
-     "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. Fig Performance's membership, with classes and recovery tools, is quoted at the free consult."),
+     "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. Fig Performance's semi-private membership, with small-group training, open gym and recovery tools, is $199 to $345 a month."),
     ("Why is one-on-one training more expensive than a gym membership?",
      "A membership pays for equipment. One-on-one training pays for a coach's full attention: a plan built for you, form correction on every set, and progress tracking."),
     ("How many personal training sessions a week do I need?",

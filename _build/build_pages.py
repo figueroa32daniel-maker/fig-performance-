@@ -374,7 +374,7 @@ red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is p
 <p>Red light therapy is included with a Fig Performance membership, along with <a href="/vibration-therapy-placentia">vibration therapy</a>, classes, a complimentary InBody scan and a one-time trainer consult. See <a href="/pricing">plans and pricing</a>, or ask about it at your free consult.</p>
 
 <h2 id="cost">How much does red light therapy cost?</h2>
-<p>Standalone red light sessions at wellness studios are usually sold per visit or as a monthly package. At Fig Performance, red light therapy comes with membership instead, so you get recovery, training space and coaching in one place. Membership is quoted at your <a href="/free-consult-placentia">free consult</a>.</p>
+<p>Standalone red light sessions at wellness studios are usually sold per visit or as a monthly package. At Fig Performance, red light therapy comes with membership instead, so you get recovery, training space and coaching in one place. Semi-private membership is $199 to $345 a month. Ask about it at your <a href="/free-consult-placentia">free consult</a>.</p>
 
 <h2 id="visit">Red light therapy in Placentia</h2>
 <p>We're a private, coach-led strength gym on E. Yorba Linda Blvd in Placentia, a short drive from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park. Coming from Fullerton, we're a few minutes up Placentia Ave or the 57.</p>
@@ -382,7 +382,7 @@ red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is p
 
 red_faqs = [
     ("Is red light therapy included with membership?",
-     "Yes. A Fig Performance membership includes red light therapy, vibration therapy, classes up to 2 to 3 times a week, a complimentary InBody scan and a one-time trainer consult."),
+     "Yes. A Fig Performance membership includes red light therapy, vibration therapy, 1 to 4 small-group sessions a week, open gym, a complimentary InBody scan and a one-time trainer consult."),
     ("Does red light therapy help with fat loss?",
      "Don't count on it. The research on red light therapy for fat loss isn't strong. Fat loss after 40 comes from strength training, nutrition and consistency. We use red light as part of recovery."),
     ("Does red light therapy help muscle recovery?",
@@ -390,7 +390,7 @@ red_faqs = [
     ("Is red light therapy safe?",
      "Red light therapy doesn't use UV light and is generally considered low risk. Don't stare into the panel, and check with your physician first if you're pregnant, sensitive to light, take light-sensitizing medication, or have an implanted medical device."),
     ("How much does red light therapy cost in Placentia?",
-     "At Fig Performance, red light therapy is included with membership, along with vibration therapy, classes, a complimentary InBody scan and a one-time trainer consult. Membership is quoted at your free consult."),
+     "At Fig Performance, red light therapy is included with membership, along with vibration therapy, classes, a complimentary InBody scan and a one-time trainer consult. Semi-private membership is $199 to $345 a month."),
     ("Where can I find red light therapy near Fullerton, Yorba Linda or Brea?",
      "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM."),
 ]

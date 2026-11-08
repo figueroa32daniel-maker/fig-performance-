@@ -213,7 +213,7 @@ var CONFIG = {
       ["Feel healthier and more confident", "conf"], ["Not sure yet", "unsure"] ] },
     { key: "interest", title: "How would you like to train?", sub: "You can change your mind at the consult.", options: [
       ["1:1 personal training", "one", "$90/session \u00b7 save 20% paying 3 months in full"],
-      ["Membership", "key", "Classes up to 2\u20133x a week + access + recovery"],
+      ["Membership", "key", "Small group 1\u20134x a week + open gym, from $199/mo"],
       ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"],
       ["Online coaching", "video", "$249/mo, 3-month program \u00b7 weekly video call + app + nutrition"], ["Not sure, help me choose", "unsure"] ] },
     { key: "time", title: "What fits around your workday?", sub: "Staffed Mon\u2013Fri, 5 AM to 8 PM, and Sat, 5 AM to noon.", options: [
