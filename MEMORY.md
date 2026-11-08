@@ -18,7 +18,7 @@ Read this at the start of every session, together with `_build/README.md` (how t
 - Sam, 70: deadlifts 135 lb, dumbbell benches the 45s, curls 30 lb dumbbells.
 - Adriana, 48: lost 10 lb in her first month.
 - Jonathan, 43: ex-Army, new son, back pain and shoulder pain. Pull-ups went from 1 to 5. Chin-ups with +35 lb, Jefferson curl 135 lb, bench 185 lb. Don't mention where he lives. Back story approved Nov 7: was stiff/achy, pain bending over, had quit golf; now golfs again.
-- Danielle: trained a few months ago after a car accident left her tripping and falling; Dan used isometrics, eccentrics and unilateral leg work to rebuild the brain-to-muscle signal (outcome not stated).
+- Danielle: trained a few months ago after a car accident left her tripping and falling; Dan used isometrics, eccentrics and unilateral leg work to rebuild the brain-to-muscle signal It was a single consultation, not ongoing training; she said it was the first practical advice she'd gotten after three doctors.
 - Priscilla, over 42: stomach was inflamed from drinking and junk food; stopped, dieted, cardio, trained 3x/week with Dan; lost 20 lb and her stomach was very flat in about 2-3 months.
 - Thinzar (spelling confirmed by Dan Nov 7): hip thrust from 55 lb (bar + 5 each side) to 135 lb in about six weeks.
 
@@ -69,3 +69,4 @@ Read this at the start of every session, together with `_build/README.md` (how t
 - 2026-11-07: Hip thrust article APPROVED by Dan and published (/hip-thrust). Dan attended Bret Contreras's 3-day seminar in Fort Lauderdale, Aug 2026; his glute template for women: 3 leg days (hip thrust + squat pattern + hinge + abduction), ~32 leg sets/week, 2 upper days. Rep range 1-30 by goal. Variations: traditional, half-rep, pulses, 1 1/4 reps, paused. Dan said: start publishing as memos come in.
 - 2026-11-07: Belly fat article APPROVED by Dan and published (/is-belly-fat-the-last-to-go). Priscilla approved by name. Dan's InBody visceral fat target: under 6.
 - 2026-11-07: First rank-tracker check (run 5e9aacc8, mobile, Placentia, top 40): personal trainer placentia 23 (home page), inbody scan near me 4, red light therapy placentia 12; the other 10 keywords (incl. near me, yorba linda, brea, fullerton ca, anaheim hills) not in top 40. Baseline row added to the Rankings table in the backlog tab of the plan doc.
+- 2026-11-07: Women over 60 article APPROVED by Dan and published (/strength-training-for-women-over-60). Danielle approved by name (consultation only).
