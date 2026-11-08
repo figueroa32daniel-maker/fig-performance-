@@ -91,9 +91,9 @@
   var rc = money(q.get("recurring"));
   if (rc !== null) { $("f-recurring").value = rc; lock($("f-recurring")); prefilled.push("recurring"); }
   /* Standard plans: fill the amounts from sessions + billing when the link doesn't set them.
-     Monthly = $387 per weekly session ($90 x 4.3 weeks); weekly = $90 per session. First payment = one period. */
+     Monthly = $360 per weekly session ($90 x 4 sessions); weekly = $90 per session. First payment = one period. */
   if (td === null && rc === null && /^[1-3]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
-    var plan = (bill === "weekly" ? 90 : 387) * Number(sess);
+    var plan = (bill === "weekly" ? 90 : 360) * Number(sess);
     var planTxt = plan.toFixed(2);
     $("f-today").value = planTxt; lock($("f-today")); prefilled.push("today");
     $("f-recurring").value = planTxt; lock($("f-recurring")); prefilled.push("recurring");
