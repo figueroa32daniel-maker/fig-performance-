@@ -441,8 +441,8 @@ var CONFIG = {
   function showThanks(first, interest) {
     var next = {
       "1:1 personal training": "Dan will reach out to set up your free 1:1 consult this week: about an hour for an assessment, your goals, and a game plan.",
-      "Semi-private": "Dan will reach out to book your free Performance Launch and find the right group times for you.",
-      "Membership": "Dan will reach out to book your free Performance Launch and a tour. Membership is open gym; coached sessions are separate.",
+      "Semi-private": "Dan will reach out to book your free consultation and find group times that work for you.",
+      "Membership": "Dan will reach out to book your free consultation and a tour. Membership is open gym, and coached sessions are separate.",
       "Concierge personal training": "Dan will reach out to set up a free phone call, then an assessment at your home.",
       "Not sure, help me choose": "Dan will reach out, talk through your goals, and help you pick the right fit."
     }[interest] || "Dan will reach out to book your free consult.";
