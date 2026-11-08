@@ -22,7 +22,8 @@ Last updated: November 7, 2026. Source of truth: https://www.figperformance.com/
 ## Membership (open gym)
 - Price: $79.99/month plus a $50 yearly maintenance fee, charged when you join
 - Month to month, cancel anytime. No initiation fee.
-- Includes: open gym during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM) and a free consultation to start (talk with a trainer, InBody scan, workout assessment, game plan)
+- Includes: open gym during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM) and a free consultation with Dan (InBody scan, workout assessment, recommended program for your goals)
+- Members can try one semi-private session; add-ons (red light, vibration, weekly InBody scans) available on request
 - Does not include coached sessions
 
 ## Semi-private (coached training in groups of 3 people max)
