@@ -58,9 +58,9 @@ Generous white space is part of the premium feel. When in doubt, add space and r
 
 ## Components
 
-- **Primary button:** navy fill, white text (`.btn .btn-primary`). One per section.
+- **Primary button:** gold fill (`--gold-light`), navy text, darker gold border (`.btn .btn-primary`). One per section. Gold is reserved for the main action and the featured offer (Dan, Nov 7 2026: make the site pop with one accent).
 - **Secondary button:** outline (`.btn .btn-secondary`).
-- **Gold button:** on navy backgrounds only (`.btn .btn-gold`).
+- **Gold button:** `.btn-gold` is the same look, kept for older markup.
 - **Cards:** white, 1px line border or soft shadow, 24px padding. Hover may lift 2px; no scale transforms.
 - **Tables:** `.price-table` (with `.compare-table` when text needs to wrap on phones).
 - **Icons:** inline SVG, single consistent line style. Never emoji.
