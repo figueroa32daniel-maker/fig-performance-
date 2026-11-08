@@ -25,7 +25,7 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 
 - Never publish an article until Dan has reviewed it and approved it. He adds his own suggestions to every article first. Drafts go in the article plan doc (Claude Docs project 1a4c49c4-7f9b-466c-bf63-1d21fa93dc1e) for his review.
 
-- Prices: use only what the website already shows. That's $90 a session; the 1–4 sessions-a-week table ($387, $774, $1,161, $1,548 a month); 20% off when paid 3 months in full; a 3-month minimum; and a free consult. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full. The membership price is quoted at the consult.
+- Prices: use only what the website already shows. That's $90 a session; the 1–4 sessions-a-week table ($360, $720, $1,080, $1,440 a month, billed monthly); 20% off when paid 3 months in full; a 3-month minimum; and a free consult. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full. The membership price is quoted at the consult.
 - Never mention Crunch on Dan's own marketing, except the sourced price comparison on the cost guide.
 - No "$150 value" claims.
 - The 12 extra reviews are "client reviews" from people Dan coached before Fig Performance. Never call them text-message reviews.

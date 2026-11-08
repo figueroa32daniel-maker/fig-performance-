@@ -9,10 +9,10 @@ Last updated: November 7, 2026. Source of truth: https://www.figperformance.com/
 
 ## Personal training (one-on-one with Coach Dan Figueroa, ACSM certified)
 - Price: $90 per session
-- 1 session a week: $90/week or $387/month
-- 2 sessions a week: $180/week or $774/month
-- 3 sessions a week: $270/week or $1,161/month
-- 4 sessions a week: $360/week or $1,548/month
+- 1 session a week: $360/month ($864 for 3 months paid upfront)
+- 2 sessions a week: $720/month ($1,728 for 3 months paid upfront)
+- 3 sessions a week: $1,080/month ($2,592 for 3 months paid upfront)
+- 4 sessions a week: $1,440/month ($3,456 for 3 months paid upfront)
 - 3-month minimum commitment on every plan; no drop-ins or one-off sessions
 - $72 per session when you pay for 3 months upfront (20% off)
 - Includes: 50-minute one-on-one sessions (warm-up, workout, cool-down), a nutrition program, a training program in the Fig app, a weekly InBody scan

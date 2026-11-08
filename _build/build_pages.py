@@ -94,7 +94,7 @@ TAKEAWAYS = {
         "Expect about 8 pounds of fat plus water weight.",
         "Eat high protein and strength train so the weight you lose is fat, not muscle."],
     "personal-training-cost-placentia": [
-        "Personal training at Fig Performance is $90 a session, or $387 a month for once a week.",
+        "Personal training at Fig Performance is $90 a session, or $360 a month for once a week.",
         "Save 20% when you pay 3 months in full. The first consult and InBody scan are free.",
         "Compare trainers on price per session, who coaches you, and how they measure progress."],
 }

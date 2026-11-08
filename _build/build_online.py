@@ -42,7 +42,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 <div class="price-table-wrap"><table class="price-table compare-table">
   <thead><tr><th><span class="sr-only">Feature</span></th><th>Online coaching</th><th>In-person, once a week</th></tr></thead>
   <tbody>
-    <tr><td>Price</td><td>$249/month</td><td>$387/month</td></tr>
+    <tr><td>Price</td><td>$249/month</td><td>$360/month</td></tr>
     <tr><td>Time with Dan</td><td>Weekly video call, about 30 min</td><td>Weekly 50-minute session in the gym</td></tr>
     <tr><td>Custom training program</td><td>Yes, in the R.H.O.D.E.S. app</td><td>Yes</td></tr>
     <tr><td>Custom nutrition plan</td><td>Yes</td><td>Yes</td></tr>

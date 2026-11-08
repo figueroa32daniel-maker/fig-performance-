@@ -4,16 +4,16 @@ from build_pages import page, SITE, CTA
 SLUG = "personal-training-cost-placentia"
 CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
 
-body = f"""<p class="legal-intro">Personal training at Fig Performance in Placentia costs $90 a session, or $387 a month for one session a week, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
+body = f"""<p class="legal-intro">Personal training at Fig Performance in Placentia costs $90 a session, or $360 a month for one session a week, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
 
 <h2 id="fig">Fig Performance prices (2026)</h2>
 <div class="price-table-wrap"><table class="price-table">
-  <thead><tr><th>Sessions a week</th><th>Weekly</th><th>Monthly</th></tr></thead>
+  <thead><tr><th>Sessions a week</th><th>Monthly</th><th>3 months paid upfront</th></tr></thead>
   <tbody>
-    <tr><td>1</td><td>$90</td><td>$387</td></tr>
-    <tr><td>2</td><td>$180</td><td>$774</td></tr>
-    <tr><td>3</td><td>$270</td><td>$1,161</td></tr>
-    <tr><td>4</td><td>$360</td><td>$1,548</td></tr>
+    <tr><td>1</td><td>$360</td><td>$864</td></tr>
+    <tr><td>2</td><td>$720</td><td>$1,728</td></tr>
+    <tr><td>3</td><td>$1,080</td><td>$2,592</td></tr>
+    <tr><td>4</td><td>$1,440</td><td>$3,456</td></tr>
   </tbody>
 </table></div>
 <ul>
@@ -60,7 +60,7 @@ body = f"""<p class="legal-intro">Personal training at Fig Performance in Placen
 
 faqs = [
     ("How much does personal training cost in Placentia?",
-     "At Fig Performance, one-on-one personal training is $90 a session: $387 a month for once a week or $774 a month for twice a week. Save 20% by paying 3 months in full. The first consult and InBody scan are free."),
+     "At Fig Performance, one-on-one personal training is $90 a session: $360 a month for once a week or $720 a month for twice a week. Save 20% by paying 3 months in full. The first consult and InBody scan are free."),
     ("How much is a gym membership in Placentia?",
      "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. At Fig Performance, an open-gym membership is $79.99 a month, and semi-private small-group training with recovery tools is $199 to $345 a month."),
     ("Why is one-on-one training more expensive than a gym membership?",
@@ -73,7 +73,7 @@ faqs = [
 
 html = page(SLUG,
     "Personal Training Cost in Placentia, CA (2026 Prices) | Fig Performance",
-    "How much personal training costs in Placentia, CA: real 2026 prices ($90 a session, $387/month), what changes the price, and how to compare trainers.",
+    "How much personal training costs in Placentia, CA: real 2026 prices ($90 a session, $360/month), what changes the price, and how to compare trainers.",
     "How Much Does Personal Training Cost in Placentia? (2026)",
     "Prices", "How Much Does Personal Training Cost in Placentia?",
     "Real 2026 prices, what changes them, and how to compare your options.",

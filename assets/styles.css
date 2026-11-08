@@ -915,3 +915,4 @@ address { font-style: normal; }
 .price-terms { font-size: .86rem; color: var(--muted); margin: 0 0 1rem; }
 .best-for { font-size: .92rem; color: var(--text); background: var(--cream); border-left: 3px solid var(--gold); padding: 8px 12px; margin: .4rem 0 .6rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .how-cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
+.tier-note { font-size: .84rem; color: var(--muted); margin: 0 0 .8rem; }
