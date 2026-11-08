@@ -349,7 +349,7 @@ red_img = """<p><picture>
   <img src="/assets/gym/red-light-480.jpg" srcset="/assets/gym/red-light-480.jpg 480w, /assets/gym/red-light.jpg 900w" sizes="(min-width: 960px) 720px, 92vw" width="480" height="720" loading="lazy" decoding="async" alt="Red light therapy panel at Fig Performance in Placentia, lit up with rows of red LEDs">
 </picture></p>"""
 
-red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is part of how you recover between training sessions. It's included with membership, built into the routine alongside vibration therapy, and set up so you can use it without a crowd or a wait.</p>
+red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is part of how you recover between training sessions. It's included with semi-private training, built into the routine alongside vibration therapy, and set up so you can use it without a crowd or a wait.</p>
 
 <h2 id="what">What red light therapy is</h2>
 <p>Red light therapy uses a panel of LEDs that give off red and near-infrared light. You stand or sit in front of the panel for a short session. It doesn't use UV light, it isn't a tanning bed, and it doesn't feel like much beyond gentle warmth.</p>
@@ -371,18 +371,18 @@ red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is p
 <p>Talk to your physician before using red light therapy if you're pregnant, have a light-sensitive condition, take medication that makes you sensitive to light, or have an implanted medical device. Red light therapy is offered for general wellness. It doesn't diagnose, treat, cure or prevent any disease. See our <a href="/disclaimer#recovery-tech">health disclaimer</a> for more.</p>
 
 <h2 id="access">How to use it at Fig Performance</h2>
-<p>Red light therapy is included with a Fig Performance membership, along with <a href="/vibration-therapy-placentia">vibration therapy</a>, classes, a complimentary InBody scan and a one-time trainer consult. See <a href="/pricing">plans and pricing</a>, or ask about it at your free consult.</p>
+<p>Red light therapy is included with Fig Performance's semi-private training, along with <a href="/vibration-therapy-placentia">vibration therapy</a>, coached small-group sessions and open gym. See <a href="/pricing">plans and pricing</a>, or ask about it at your free consult.</p>
 
 <h2 id="cost">How much does red light therapy cost?</h2>
-<p>Standalone red light sessions at wellness studios are usually sold per visit or as a monthly package. At Fig Performance, red light therapy comes with membership instead, so you get recovery, training space and coaching in one place. Semi-private membership is $199 to $345 a month. Ask about it at your <a href="/free-consult-placentia">free consult</a>.</p>
+<p>Standalone red light sessions at wellness studios are usually sold per visit or as a monthly package. At Fig Performance, red light therapy comes with semi-private training instead, so you get recovery, training space and coaching in one place. Semi-private is $199 to $345 a month. Ask about it at your <a href="/free-consult-placentia">free consult</a>.</p>
 
 <h2 id="visit">Red light therapy in Placentia</h2>
 <p>We're a private, coach-led strength gym on E. Yorba Linda Blvd in Placentia, a short drive from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park. Coming from Fullerton, we're a few minutes up Placentia Ave or the 57.</p>
 {CTA}"""
 
 red_faqs = [
-    ("Is red light therapy included with membership?",
-     "Yes. A Fig Performance membership includes red light therapy, vibration therapy, 1 to 4 small-group sessions a week, open gym, a complimentary InBody scan and a one-time trainer consult."),
+    ("Is red light therapy included with semi-private training?",
+     "Yes. Fig Performance's semi-private training includes red light therapy, vibration therapy, 1 to 4 coached small-group sessions a week and open gym, from $199 a month."),
     ("Does red light therapy help with fat loss?",
      "Don't count on it. The research on red light therapy for fat loss isn't strong. Fat loss after 40 comes from strength training, nutrition and consistency. We use red light as part of recovery."),
     ("Does red light therapy help muscle recovery?",
@@ -390,7 +390,7 @@ red_faqs = [
     ("Is red light therapy safe?",
      "Red light therapy doesn't use UV light and is generally considered low risk. Don't stare into the panel, and check with your physician first if you're pregnant, sensitive to light, take light-sensitizing medication, or have an implanted medical device."),
     ("How much does red light therapy cost in Placentia?",
-     "At Fig Performance, red light therapy is included with membership, along with vibration therapy, classes, a complimentary InBody scan and a one-time trainer consult. Semi-private membership is $199 to $345 a month."),
+     "At Fig Performance, red light therapy is included with semi-private training, along with vibration therapy, coached small-group sessions and open gym. Semi-private is $199 to $345 a month."),
     ("Where can I find red light therapy near Fullerton, Yorba Linda or Brea?",
      "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM."),
 ]
@@ -410,10 +410,10 @@ pages = {
     "red-light-therapy-placentia.html": page(
         "red-light-therapy-placentia",
         "Red Light Therapy in Placentia, CA | Fig Performance",
-        "Red light therapy in Placentia, near Fullerton and Yorba Linda. Included with Fig Performance membership, with vibration therapy. Cost, safety and what to expect.",
+        "Red light therapy in Placentia, near Fullerton and Yorba Linda. Included with Fig Performance semi-private training, with vibration therapy. Cost, safety and what to expect.",
         "Red Light Therapy in Placentia | Fig Performance",
         "Recovery", "Red Light Therapy in Placentia, CA",
-        "Part of the recovery routine at Fig Performance. Included with membership.",
+        "Part of the recovery routine at Fig Performance. Included with semi-private training.",
         [("what", "What it is"), ("research", "What the research says"), ("session", "What a session is like"),
          ("safety", "Check with a doctor"), ("access", "How to use it"), ("cost", "Cost"), ("visit", "Visit us")],
         red_body, red_faqs, "Red Light Therapy"),

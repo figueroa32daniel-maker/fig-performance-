@@ -212,10 +212,10 @@ var CONFIG = {
       ["Get stronger", "strength"], ["Lose weight", "weight"], ["Move without pain", "pain"],
       ["Feel healthier and more confident", "conf"], ["Not sure yet", "unsure"] ] },
     { key: "interest", title: "How would you like to train?", sub: "You can change your mind at the consult.", options: [
-      ["1:1 personal training", "one", "$90/session \u00b7 save 20% paying 3 months in full"],
-      ["Membership", "key", "Small group 1\u20134x a week + open gym, from $199/mo"],
-      ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"],
-      ["Online coaching", "video", "$249/mo, 3-month program \u00b7 weekly video call + app + nutrition"], ["Not sure, help me choose", "unsure"] ] },
+      ["1:1 personal training", "one", "$90/session \u00b7 $72 paying 3 months upfront"],
+      ["Semi-private", "key", "Coached small group 1\u20134x a week + recovery \u00b7 $199\u2013$345/mo"],
+      ["Membership", "key", "Open gym \u00b7 $79.99/mo"],
+      ["Concierge personal training", "home", "Dan comes to your home gym \u00b7 North Orange County and surrounding areas"], ["Not sure, help me choose", "unsure"] ] },
     { key: "time", title: "What fits around your workday?", sub: "Staffed Mon\u2013Fri, 5 AM to 8 PM, and Sat, 5 AM to noon.", options: [
       ["Before work", "sunrise", "Early morning"], ["Midday", "sun", "Lunch hour"], ["After work", "moon", "Until 8 PM"], ["Saturday", "cal"] ] },
     { key: "pain", multi: true, title: "Anything bothering you?", sub: "Optional. Tap any that apply and Dan will plan around it.", options: [
@@ -441,9 +441,9 @@ var CONFIG = {
   function showThanks(first, interest) {
     var next = {
       "1:1 personal training": "Dan will reach out to set up your free 1:1 consult this week: about an hour for an assessment, your goals, and a game plan.",
-      "Membership": "Dan will reach out to schedule your tour during pre-opening week. Membership doesn't include weekly one-on-one personal training.",
+      "Semi-private": "Dan will reach out to book your free Performance Launch and find the right group times for you.",
+      "Membership": "Dan will reach out to book your free Performance Launch and a tour. Membership is open gym; coached sessions are separate.",
       "Concierge personal training": "Dan will reach out to set up a free phone call, then an assessment at your home.",
-      "Online coaching": "Dan will reach out to set up a free video call to talk through your goals and how online coaching works.",
       "Not sure, help me choose": "Dan will reach out, talk through your goals, and help you pick the right fit."
     }[interest] || "Dan will reach out to book your free consult.";
     top.hidden = true; bar.hidden = true;

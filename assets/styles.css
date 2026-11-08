@@ -903,3 +903,13 @@ address { font-style: normal; }
 .stat-num { display: block; font-family: var(--font-head); font-weight: 800; font-size: clamp(1.7rem, 4.5vw, 2.3rem); line-height: 1.05; color: var(--navy); letter-spacing: -.02em; }
 .stat-label { display: block; font-size: .92rem; line-height: 1.4; color: var(--muted); margin-top: 6px; }
 .article-page .legal-body .takeaways .takeaways-title { color: var(--gold-light); font-size: .74rem; line-height: 1.4; }
+
+/* Pricing trio: Membership | 1:1 PT (featured) | Semi-private */
+.pricing-trio { max-width: 1120px; margin-left: auto; margin-right: auto; }
+@media (min-width: 1000px) { .pricing-grid.pricing-trio { grid-template-columns: 1fr 1.1fr 1fr; align-items: stretch; } }
+@media (max-width: 999px) { .pricing-trio .price-card.featured { order: -1; } }
+.tiers { list-style: none; padding: 0; margin: .9rem 0 .6rem; border-top: 1px solid var(--line); }
+.tiers li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: .95rem; }
+.tiers strong { color: var(--navy); font-size: 1.05rem; white-space: nowrap; }
+.tiers small { font-size: .78rem; font-weight: 600; color: var(--muted); margin-left: 1px; }
+.price-terms { font-size: .86rem; color: var(--muted); margin: 0 0 1rem; }

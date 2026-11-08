@@ -4,7 +4,7 @@ from build_pages import page, SITE, CTA
 SLUG = "vibration-therapy-placentia"
 MAYO = "https://www.mayoclinic.org/healthy-lifestyle/fitness/expert-answers/whole-body-vibration/faq-20057958"
 
-body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration therapy is part of the recovery routine, included with membership alongside red light therapy. Here's what it is, what the research actually says, who should skip it, and how we use it with adults over 40.</p>
+body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration therapy is part of the recovery routine, included with semi-private training alongside red light therapy. Here's what it is, what the research actually says, who should skip it, and how we use it with adults over 40.</p>
 
 <h2 id="what">What vibration therapy is</h2>
 <p>Whole-body vibration therapy means standing, sitting or holding a position on a platform that vibrates quickly. The vibration makes your muscles contract and relax many times a second. You can stand still on it, or do simple moves like a squat or a calf raise while it runs.</p>
@@ -35,7 +35,7 @@ body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration the
 </ul>
 
 <h2 id="access">Vibration therapy in Placentia</h2>
-<p>Vibration therapy is included with a Fig Performance membership, along with red light therapy, classes, a complimentary InBody scan and a one-time trainer consult. Semi-private membership is $199 to $345 a month. See <a href="/pricing">plans and pricing</a>.</p>
+<p>Vibration therapy is included with Fig Performance's semi-private training, along with red light therapy, coached small-group sessions and open gym. Semi-private is $199 to $345 a month. See <a href="/pricing">plans and pricing</a>.</p>
 <p>We're at 1284 E. Yorba Linda Blvd, Placentia, a short drive from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park.</p>
 {CTA}"""
 
@@ -49,15 +49,15 @@ faqs = [
     ("Can vibration therapy help you lose weight?",
      "Not on its own. Some studies show it may support weight loss when combined with eating fewer calories, but fat loss after 40 comes from strength training, nutrition and daily activity."),
     ("Where can I find vibration therapy near Placentia?",
-     "Fig Performance at 1284 E. Yorba Linda Blvd in Placentia includes vibration therapy and red light therapy with membership. It's close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park."),
+     "Fig Performance at 1284 E. Yorba Linda Blvd in Placentia includes vibration therapy and red light therapy with semi-private training. It's close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park."),
 ]
 
 html = page(SLUG,
     "Vibration Therapy in Placentia, CA: Does It Work? | Fig Performance",
-    "Vibration therapy in Placentia, included with Fig Performance membership. Does it actually work, who should skip it, and how we use it for recovery after 40.",
+    "Vibration therapy in Placentia, included with Fig Performance semi-private training. Does it actually work, who should skip it, and how we use it for recovery after 40.",
     "Vibration Therapy in Placentia: Does It Actually Work?",
     "Recovery", "Vibration Therapy in Placentia, CA",
-    "What it is, what the research says, and who should skip it. Included with membership.",
+    "What it is, what the research says, and who should skip it. Included with semi-private training.",
     [("what", "What it is"), ("work", "Does it work?"), ("ten-minutes", "Is 10 minutes a workout?"),
      ("who-not", "Who should skip it"), ("session", "How we use it"), ("access", "Vibration therapy in Placentia")],
     body, faqs, "Vibration Therapy")
