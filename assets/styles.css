@@ -916,3 +916,19 @@ address { font-style: normal; }
 .best-for { font-size: .92rem; color: var(--text); background: var(--cream); border-left: 3px solid var(--gold); padding: 8px 12px; margin: .4rem 0 .6rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .how-cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; }
 .tier-note { font-size: .84rem; color: var(--muted); margin: 0 0 .8rem; }
+.price-card .outcome { font-size: 1rem; font-weight: 600; color: var(--navy); margin: -.2rem 0 .6rem; line-height: 1.45; }
+.addon-note { font-size: .86rem; color: var(--muted); margin: 0 0 1rem; }
+.offer-proof { max-width: 1120px; margin: 32px auto 0; text-align: center; }
+.offer-proof-rating { color: #fff; font-size: 1rem; margin: 0 0 18px; }
+.offer-proof-rating .review-stars { color: var(--gold); letter-spacing: 2px; margin-right: 4px; }
+.offer-proof-rating a { color: var(--gold); }
+.offer-proof-quotes { display: grid; gap: 16px; text-align: left; }
+@media (min-width: 760px) { .offer-proof-quotes { grid-template-columns: 1fr 1fr; } }
+.offer-proof-quotes figure { margin: 0; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); padding: 18px 20px; }
+.offer-proof-quotes blockquote { margin: 0; }
+.offer-proof-quotes blockquote p { color: #fff; margin: 0 0 8px; font-size: .98rem; }
+.offer-proof-quotes figcaption { color: rgba(255,255,255,.7); font-size: .86rem; }
+.first-month { max-width: 880px; margin: 40px auto 0; background: var(--white); color: var(--text); border-radius: var(--radius); border-top: 3px solid var(--gold); padding: 26px 26px 10px; }
+.first-month h3 { font-size: 1.15rem; margin: 0 0 12px; }
+.first-month ol { margin: 0; padding-left: 1.2rem; }
+.first-month li { margin-bottom: 10px; }

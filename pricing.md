@@ -18,17 +18,17 @@ Last updated: November 7, 2026. Source of truth: https://www.figperformance.com/
 - Includes: 50-minute one-on-one sessions (warm-up, workout, cool-down), a nutrition program, a training program in the Fig app, a weekly InBody scan
 
 ## Membership (open gym)
-- Price: $79.99/month plus a $50 yearly maintenance fee
+- Price: $79.99/month plus a $50 yearly maintenance fee, charged when you join
 - Month to month, cancel anytime. No initiation fee.
 - Includes: open gym during staffed hours (Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM) and a free consultation to start (talk with a trainer, InBody scan, workout assessment, game plan)
 - Does not include coached sessions
 
-## Semi-private (coached small-group training)
+## Semi-private (coached training in groups of 3 people max)
 - 1 group session a week: $199/month
 - 2 group sessions a week: $225/month
 - 3 group sessions a week: $279/month
 - 4 group sessions a week: $345/month
-- No initiation fee. 3-month minimum, then month to month until you pause or cancel. Pause anytime (travel, a break). Missed sessions don't carry over.
+- No initiation fee. 3-month minimum, then month to month until you pause or cancel. Pause with notice (travel, a break). Otherwise missed sessions are still billed and don't carry over.
 - Includes: 50-minute coached small-group sessions (warm-up, workout, cool-down), a nutrition program, a training program in the Fig app, a weekly InBody scan, open gym during staffed hours, red light therapy, vibration therapy
 - Does not include weekly one-on-one personal training
 

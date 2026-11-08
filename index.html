@@ -32,7 +32,7 @@
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=41">
+  <link rel="stylesheet" href="/assets/styles.css?v=42">
 
   <!-- Structured data: only confirmed facts. -->
   <script type="application/ld+json">
@@ -238,7 +238,7 @@
     {
       "@type": "Offer",
       "name": "Semi-private training",
-      "description": "Coached small-group sessions, open gym, red light therapy and vibration therapy. $199 a month for 1 session a week, $225 for 2, $279 for 3, $345 for 4. 3-month minimum, no initiation fee, pause anytime.",
+      "description": "Coached small-group sessions, open gym, red light therapy and vibration therapy. $199 a month for 1 session a week, $225 for 2, $279 for 3, $345 for 4. Groups of 3 people max. 3-month minimum, no initiation fee, pause with notice.",
       "price": "199.00",
       "priceCurrency": "USD"
     },
@@ -365,7 +365,7 @@
       "name": "How does Fig Performance work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It starts with a free consultation: about an hour with Dan for a talk about your goals, an InBody scan, a workout assessment and a game plan. Then you pick how you want to train: one-on-one personal training, semi-private small-group training or an open-gym membership. One-on-one and semi-private sessions are 50 minutes (warm-up, workout, cool-down) and come with a nutrition program, a training program in our app and a weekly InBody scan. They start with a 3-month commitment, because steady work is what gets results, and you can pause anytime. Membership is month to month."
+        "text": "It starts with a free consultation: about an hour with Dan for a talk about your goals, an InBody scan, a workout assessment and a game plan. Then you pick how you want to train: one-on-one personal training, semi-private small-group training or an open-gym membership. One-on-one and semi-private sessions are 50 minutes (warm-up, workout, cool-down) and come with a nutrition program, a training program in our app and a weekly InBody scan. They start with a 3-month commitment, because steady work is what gets results, and you can pause with notice. Membership is month to month."
       }
     },
     {
@@ -445,7 +445,7 @@
       "name": "What’s included with each option?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Personal training ($90 a session, billed monthly with a 3-month minimum; $72 a session when you pay for 3 months upfront): 50-minute one-on-one sessions with Dan, a nutrition program, a training program in our app and a weekly InBody scan. Semi-private ($199 a month for 1 coached group session a week, $225 for 2, $279 for 3, $345 for 4): 50-minute small-group sessions, a nutrition program, a training program in our app, a weekly InBody scan, open gym, and red light and vibration therapy. Membership ($79.99 a month plus a $50 yearly maintenance fee, month to month, cancel anytime): open gym during staffed hours and a free consultation to start. Personal training and semi-private have a 3-month minimum and you can pause anytime. No initiation fee on any plan."
+        "text": "Personal training ($90 a session, billed monthly with a 3-month minimum; $72 a session when you pay for 3 months upfront): 50-minute one-on-one sessions with Dan, a nutrition program, a training program in our app and a weekly InBody scan. Semi-private ($199 a month for 1 coached group session a week, $225 for 2, $279 for 3, $345 for 4): 50-minute small-group sessions, a nutrition program, a training program in our app, a weekly InBody scan, open gym, and red light and vibration therapy. Membership ($79.99 a month plus a $50 yearly maintenance fee, month to month, cancel anytime): open gym during staffed hours and a free consultation to start. Personal training and semi-private have a 3-month minimum and you can pause with notice. No initiation fee on any plan."
       }
     },
     {
@@ -699,13 +699,16 @@
           <article class="price-card" aria-labelledby="mem-title">
             <p class="card-tag">Open gym</p>
             <h3 id="mem-title">Membership</h3>
+            <p class="outcome">Train on your own in a quiet gym that never gets crowded.</p>
             <p class="price"><span class="amount">$79.99</span><span class="per">/ month</span></p>
-            <p class="price-note">Plus a <strong>$50 yearly maintenance fee</strong>.</p>
+            <p class="price-note">Plus a <strong>$50 yearly maintenance fee</strong>, charged when you join.</p>
             <p class="best-for"><strong>Best for:</strong> people who already know how to train and want a quiet gym.</p>
             <div class="card-more-body"><ul class="checks">
               <li>Open gym during staffed hours, Mon&ndash;Fri 5 AM&ndash;8 PM, Sat 5 AM&ndash;12 PM</li>
               <li>A free consultation to start: a talk with a trainer, an InBody scan, a workout assessment and a game plan</li>
+              <li>Try one semi-private session to see if it fits you</li>
             </ul>
+            <p class="addon-note">Want red light, vibration therapy or weekly InBody scans? Ask about add-ons.</p>
             <p class="price-terms">Month to month &middot; Cancel anytime &middot; No initiation fee</p>
             <p class="not-included strong"><span aria-hidden="true">&times;</span> <span><strong>Does not include</strong> coached sessions. Add semi-private or 1:1 training anytime.</span></p></div>
             <a class="btn btn-secondary btn-block" href="#consult" data-interest="Membership">Book a free consult</a>
@@ -714,6 +717,7 @@
           <article class="price-card featured" aria-labelledby="pt-title">
             <p class="card-tag">Best results &middot; 1:1 with Dan</p>
             <h3 id="pt-title">Personal Training</h3>
+            <p class="outcome">Lose fat, get stronger and tone up, with Dan coaching every rep.</p>
             <p class="price"><span class="amount">$90</span><span class="per">/ session</span></p>
             <p class="price-note"><strong>$72 a session</strong> when you pay for 3 months upfront.</p>
             <p class="best-for"><strong>Best for:</strong> the fastest results, with the most flexibility, guidance and support.</p>
@@ -732,13 +736,14 @@
               <li>Support from Dan, Monday through Saturday</li>
               <li>A weekly InBody scan to keep you accountable</li>
             </ul>
-            <p class="price-terms">3-month minimum &middot; No initiation fee &middot; Pause anytime. Billed monthly. Your time slots are held just for you, so the bill stays the same whether or not you make every session.</p></div>
+            <p class="price-terms">3-month minimum &middot; No initiation fee &middot; Billed monthly, and your time slots are held just for you. Traveling or need a break? Pause your plan with notice. Otherwise, missed sessions are still billed.</p></div>
             <a class="btn btn-primary btn-block btn-lg" href="#consult" data-interest="1:1 personal training">Book a free consult</a>
           </article>
 
           <article class="price-card" aria-labelledby="semi-title">
             <p class="card-tag">Small group &middot; recovery</p>
             <h3 id="semi-title">Semi-Private</h3>
+            <p class="outcome">Get coached and stay accountable for less than one-on-one.</p>
             <p class="price"><span class="amount">$199</span><span class="per">/ month</span></p>
             <p class="price-note">Pick how many coached group sessions a week.</p>
             <p class="best-for"><strong>Best for:</strong> coaching and accountability at a lower price, with a small group.</p>
@@ -749,15 +754,22 @@
               <li><span>4 sessions a week</span><strong>$345<small>/mo</small></strong></li>
             </ul>
             <ul class="checks">
-              <li>50-minute coached small-group sessions: warm-up, workout and cool-down</li>
+              <li>50-minute coached sessions in a group of 3 people max: warm-up, workout and cool-down</li>
               <li>A nutrition program and a training program in our app</li>
               <li>A weekly InBody scan to keep you accountable</li>
               <li>Open gym during staffed hours</li>
               <li>Red light and vibration therapy</li>
             </ul>
-            <p class="price-terms">3-month minimum &middot; No initiation fee &middot; Pause anytime. Missed sessions don&rsquo;t carry over.</p></div>
+            <p class="price-terms">3-month minimum &middot; No initiation fee &middot; Billed monthly. Traveling or need a break? Pause your plan with notice. Otherwise, missed sessions are still billed and don&rsquo;t carry over.</p></div>
             <a class="btn btn-secondary btn-block" href="#consult" data-interest="Semi-private">Book a free consult</a>
           </article>
+        </div>
+        <div class="offer-proof" aria-label="What clients say">
+          <p class="offer-proof-rating"><span class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <strong>5.0</strong> from 75 reviews of Coach Dan on Google, Yelp and from past clients. <a href="/#reviews">Read the reviews</a></p>
+          <div class="offer-proof-quotes">
+            <figure><blockquote><p>&ldquo;Dan is an excellent coach. He works with all ages and fitness levels. Patient, detail oriented and dedicated to his clients.&rdquo;</p></blockquote><figcaption>Ian Deak, Google review</figcaption></figure>
+            <figure><blockquote><p>&ldquo;The trainer here is incredibly knowledgeable and provides fantastic guidance.&rdquo;</p></blockquote><figcaption>Syl, Google review</figcaption></figure>
+          </div>
         </div>
         <div class="concierge concierge-full" id="concierge" aria-labelledby="concierge-title">
           <div class="concierge-main">
@@ -1396,7 +1408,7 @@
           </details>
           <details class="faq-item">
             <summary><span>How does Fig Performance work?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="faq-a"><p>It starts with a free consultation: about an hour with Dan for a talk about your goals, an InBody scan, a workout assessment and a game plan. Then you pick how you want to train: one-on-one personal training, semi-private small-group training or an open-gym membership. One-on-one and semi-private sessions are 50 minutes (warm-up, workout, cool-down) and come with a nutrition program, a training program in our app and a weekly InBody scan. They start with a 3-month commitment, because steady work is what gets results, and you can pause anytime. Membership is month to month.</p></div>
+            <div class="faq-a"><p>It starts with a free consultation: about an hour with Dan for a talk about your goals, an InBody scan, a workout assessment and a game plan. Then you pick how you want to train: one-on-one personal training, semi-private small-group training or an open-gym membership. One-on-one and semi-private sessions are 50 minutes (warm-up, workout, cool-down) and come with a nutrition program, a training program in our app and a weekly InBody scan. They start with a 3-month commitment, because steady work is what gets results, and you can pause with notice. Membership is month to month.</p></div>
           </details>
           <details class="faq-item">
             <summary><span>Do you offer private personal training?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
@@ -1437,7 +1449,7 @@
           </details>
           <details class="faq-item">
             <summary><span>What’s included with each option?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <div class="faq-a"><p>Personal training ($90 a session, billed monthly with a 3-month minimum; $72 a session when you pay for 3 months upfront): 50-minute one-on-one sessions with Dan, a nutrition program, a training program in our app and a weekly InBody scan.</p><p>Semi-private ($199 a month for 1 coached group session a week, $225 for 2, $279 for 3, $345 for 4): 50-minute small-group sessions, a nutrition program, a training program in our app, a weekly InBody scan, open gym, and red light and vibration therapy. Membership ($79.99 a month plus a $50 yearly maintenance fee, month to month, cancel anytime): open gym during staffed hours and a free consultation to start. Personal training and semi-private have a 3-month minimum and you can pause anytime. No initiation fee on any plan.</p></div>
+            <div class="faq-a"><p>Personal training ($90 a session, billed monthly with a 3-month minimum; $72 a session when you pay for 3 months upfront): 50-minute one-on-one sessions with Dan, a nutrition program, a training program in our app and a weekly InBody scan.</p><p>Semi-private ($199 a month for 1 coached group session a week, $225 for 2, $279 for 3, $345 for 4): 50-minute small-group sessions, a nutrition program, a training program in our app, a weekly InBody scan, open gym, and red light and vibration therapy. Membership ($79.99 a month plus a $50 yearly maintenance fee, month to month, cancel anytime): open gym during staffed hours and a free consultation to start. Personal training and semi-private have a 3-month minimum and you can pause with notice. No initiation fee on any plan.</p></div>
           </details>
           <details class="faq-item">
             <summary><span>Do you offer concierge personal training?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
