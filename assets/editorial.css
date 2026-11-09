@@ -1,0 +1,74 @@
+/* ==========================================================
+   Fig Performance: editorial look (aesthetic layer only)
+   Loaded after styles.css on pages with <body class="ed">.
+   Changes type, color, borders, spacing and motion. Never
+   wording or layout order.
+   Skills used: ui-ux-pro-max ("Classic Elegant": Playfair
+   Display + Inter for luxury), impeccable craft floor (themed
+   browser surfaces, one authored motion moment, no soft-shadow
+   cards, no colored side bars), Emil Kowalski (exact transition
+   properties, strong ease-out, buttons press on :active,
+   nothing animates from nothing, reduced motion respected),
+   taste-skill (hover micro-interactions on photos and links).
+   ========================================================== */
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/playfair-display-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 400; font-display: swap; src: url("/assets/fonts/playfair-display-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weight: 500; font-display: swap; src: url("/assets/fonts/playfair-display-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 500; font-display: swap; src: url("/assets/fonts/playfair-display-latin-500-italic.woff2") format("woff2"); }
+
+.ed {
+  --ed-ink: #0f1f3d;
+  --ed-ground: #f5f0e8;
+  --ed-line: #d9cfbf;
+  --ed-soft: #3e4452;
+  --ed-gold: #d1a65a;
+  --ed-gold-ink: #7a5a1e;
+  --ed-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --ed-out: cubic-bezier(.23, 1, .32, 1);
+  caret-color: var(--ed-gold-ink);
+  scrollbar-color: #b9ad98 var(--ed-ground);
+}
+.ed ::selection { background: var(--ed-ink); color: var(--ed-ground); }
+.ed :focus-visible { outline: 2px solid var(--ed-gold-ink); outline-offset: 3px; }
+.ed .hero :focus-visible, .ed .section-navy :focus-visible, .ed .site-footer :focus-visible { outline-color: var(--ed-gold); }
+.ed a { text-underline-offset: .22em; text-decoration-thickness: 1px; }
+
+/* ---------- Type ---------- */
+.ed h1, .ed h2, .ed h3 { font-family: var(--ed-serif); }
+.ed h1 { text-transform: none; font-weight: 400; letter-spacing: -.02em; line-height: 1.04; }
+.ed .hero h1 .hl { font-style: italic; color: var(--ed-gold); }
+.ed h2 { font-weight: 400; letter-spacing: -.015em; line-height: 1.1; text-transform: none; text-wrap: balance; }
+.ed h3 { font-weight: 500; letter-spacing: -.005em; text-transform: none; }
+.ed .faq-item summary { font-family: var(--ed-serif); font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+/* ---------- Buttons: square, letterspaced, they press ---------- */
+.ed .btn { border-radius: 0; letter-spacing: .12em; transition: background-color .2s var(--ed-out), color .2s var(--ed-out), border-color .2s var(--ed-out), transform .16s var(--ed-out); }
+@media (hover: hover) { .ed .btn:hover { transform: translateY(-1px); } }
+.ed .btn:active { transform: scale(.97); }
+.ed .btn-primary { box-shadow: none; }
+.ed .mcta-call { padding: 0; }
+
+/* ---------- Hero ---------- */
+.ed .tour-frame { border-radius: 0; box-shadow: 0 40px 80px -48px rgba(0,0,0,.65); }
+
+/* The one authored moment: the headline settles in once */
+@media (prefers-reduced-motion: no-preference) {
+  .ed .hero h1 { animation: ed-settle .9s var(--ed-out) both; }
+}
+@keyframes ed-settle { from { opacity: .001; transform: translateY(14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* ---------- Surfaces: square corners, hairlines, no soft shadows ---------- */
+.ed .feature, .ed .step, .ed .visit-card, .ed .faq-item, .ed .guide-card, .ed .review, .ed .quiz, .ed .price-card, .ed .first-month, .ed .stat-row, .ed .creds li, .ed .tier, .ed .gym-link, .ed .result-link, .ed .quiz input, .ed .quiz button, .ed .quiz .opt { border-radius: 0; }
+.ed .feature, .ed .step, .ed .visit-card, .ed .guide-card, .ed .review { box-shadow: none; }
+.ed .section-cream .feature, .ed .section-cream .step, .ed .section-cream .visit-card, .ed .section-cream .guide-card, .ed .section-cream .review { border-color: var(--ed-line); }
+.ed .tech-list li { border-radius: 0; border-left: 0; border-top: 1px solid var(--ed-ink); box-shadow: none; }
+.ed .price-card { box-shadow: none; }
+.ed .price-card h3 { font-weight: 400; }
+.ed .step-num, .ed .stat-row strong, .ed .price .amount { font-family: var(--ed-serif); font-weight: 400; }
+.ed .guide-card h3 { transition: color .2s var(--ed-out); }
+@media (hover: hover) { .ed .guide-card:hover h3 { color: var(--ed-gold-ink); } }
+
+/* Photographs: a slow zoom inside the frame on hover */
+.ed .gym-link, .ed .result-link { overflow: hidden; }
+.ed .gym-link img, .ed .result-link img { transition: transform .7s var(--ed-out); }
+@media (hover: hover) { .ed .gym-link:hover img, .ed .result-link:hover img { transform: scale(1.03); } }
