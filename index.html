@@ -33,6 +33,7 @@
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="/assets/styles.css?v=46">
+  <link rel="stylesheet" href="/assets/editorial.css?v=1">
 
   <!-- Structured data: only confirmed facts. -->
   <script type="application/ld+json">
@@ -524,7 +525,7 @@
 }
 </script>
 </head>
-<body>
+<body class="ed">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ============ GRAND OPENING BAR ============ -->
@@ -572,37 +573,27 @@
 
   <main id="main">
     <!-- ============ HERO ============ -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="rule-label"><span>Grand opening &middot; Sat, Nov 14</span></p>
-          <h1 id="hero-title">Private Personal Training in <span class="nowrap hl">Placentia, CA</span></h1>
-          <p class="lead hero-lede">A private, coach-led strength gym for adults over 40. Train one-on-one with Dan, in a small coached group, or on your own. It starts with a free consultation.</p>
-          <div class="hero-ctas">
-            <a class="btn btn-primary btn-lg" href="#consult" data-interest="1:1 personal training">Book a free consult</a>
-            <a class="btn btn-secondary btn-lg" href="tel:+17143967178" data-contact="phone">Call or text (714) 396-7178</a>
+    <section class="hero ed-hero" aria-labelledby="hero-title">
+      <div class="container ed-hero-inner">
+        <div class="ed-hero-copy">
+          <h1 id="hero-title" class="ed-h1"><span class="ed-h1-main">Get strong <em>again</em> after forty.</span> <span class="ed-h1-sub">Private personal training in Placentia, CA</span></h1>
+          <p class="ed-lede">One-on-one coaching with Dan, small groups of three, or open gym on your own. A quiet, private gym where a coach is always on the floor.</p>
+          <div class="ed-ctas">
+            <a class="btn btn-primary btn-lg" href="#consult" data-interest="1:1 personal training">Book a free consultation</a>
+            <a class="ed-link" href="#programs">See pricing</a>
           </div>
-          <p class="hero-more"><a href="#how">See how it works &darr;</a></p>
-          <p class="hero-address">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <span>Grand opening Saturday, Nov 14, 10 AM&ndash;1 PM &middot; <a href="https://www.google.com/maps/search/?api=1&amp;query=Fig%20Performance%2C%201284%20E.%20Yorba%20Linda%20Blvd%2C%20Placentia%2C%20CA%2092870" target="_blank" rel="noopener noreferrer">1284 E. Yorba Linda Blvd, Placentia</a></span>
-          </p>
+          <ul class="ed-meta" aria-label="At a glance">
+            <li><span class="ed-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <strong>5.0</strong> from 75 reviews</li>
+            <li>ACSM certified coach</li>
+            <li>Grand opening Sat, Nov 14, 10 AM&ndash;1 PM</li>
+            <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Fig%20Performance%2C%201284%20E.%20Yorba%20Linda%20Blvd%2C%20Placentia%2C%20CA%2092870" target="_blank" rel="noopener noreferrer">1284 E. Yorba Linda Blvd</a></li>
+          </ul>
         </div>
-        <div class="hero-visual">
-          <figure class="tour-media hero-video">
-            <div class="tour-frame">
-              <img class="tour-poster" src="/assets/studio-tour-poster.webp?v=33" srcset="/assets/studio-tour-poster-640.webp?v=33 640w, /assets/studio-tour-poster.webp?v=33 1280w" sizes="(min-width: 960px) 46vw, 100vw" width="1280" height="720" decoding="async" fetchpriority="high" alt="The Fig Performance training floor in Placentia">
-              <video class="tour-video" muted loop playsinline preload="none" width="1280" height="720" aria-label="Silent 9-second video tour of the Fig Performance studio in Placentia, filmed empty, showing dumbbell racks, cable stations, a Hammer Strength leg press and a body-composition scanner">
-                <source data-src="/assets/studio-tour.webm?v=33" data-src-sm="/assets/studio-tour-640.webm?v=33" type="video/webm">
-                <source data-src="/assets/studio-tour.mp4?v=33" data-src-sm="/assets/studio-tour-640.mp4?v=33" type="video/mp4">
-                <p>Your browser can't play this video. <a href="/assets/studio-tour.mp4?v=33">Download the studio video (MP4, 2 MB)</a>.</p>
-              </video>
-              <button class="tour-toggle" type="button" aria-label="Play the studio video" hidden>
-                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
-              </button>
-            </div>
-          </figure>
+        <div class="ed-hero-photo">
+          <picture>
+            <source type="image/webp" srcset="/assets/dan-480.webp 480w, /assets/dan.webp 800w" sizes="(min-width: 960px) 34vw, 92vw">
+            <img src="/assets/dan.jpg" srcset="/assets/dan-480.jpg 480w, /assets/dan.jpg 800w" sizes="(min-width: 960px) 34vw, 92vw" width="800" height="1000" decoding="async" fetchpriority="high" alt="Coach Dan Figueroa, owner of Fig Performance">
+          </picture>
         </div>
       </div>
     </section>
@@ -611,7 +602,6 @@
     <section class="section section-navy consult" id="consult" aria-labelledby="consult-title">
       <div class="container consult-inner">
         <div class="consult-head">
-          <p class="kicker">Take the first step</p>
           <h2 id="consult-title">Book your free consultation</h2>
           <p>Answer 5 quick questions and leave your number. Dan will text or call to set it up.</p>
           <p class="consult-book"><span>Free, no commitment. <a href="/free-consult-placentia">See what&rsquo;s included</a>. Rather pick a time yourself?</span> <a class="btn btn-gold" href="https://calendly.com/trainwithcoachdan/free-consult-inbody-scan" target="_blank" rel="noopener">Book online now</a></p>
@@ -656,6 +646,27 @@
       </div>
     </section>
 
+    <!-- ============ STUDIO BAND (video) ============ -->
+    <section class="ed-band" aria-labelledby="band-title">
+      <figure class="tour-media ed-band-media">
+        <div class="tour-frame">
+          <img class="tour-poster" src="/assets/studio-tour-poster.webp?v=33" srcset="/assets/studio-tour-poster-640.webp?v=33 640w, /assets/studio-tour-poster.webp?v=33 1280w" sizes="(min-width: 960px) 46vw, 100vw" width="1280" height="720" decoding="async" fetchpriority="high" alt="The Fig Performance training floor in Placentia">
+          <video class="tour-video" muted loop playsinline preload="none" width="1280" height="720" aria-label="Silent 9-second video tour of the Fig Performance studio in Placentia, filmed empty, showing dumbbell racks, cable stations, a Hammer Strength leg press and a body-composition scanner">
+            <source data-src="/assets/studio-tour.webm?v=33" data-src-sm="/assets/studio-tour-640.webm?v=33" type="video/webm">
+            <source data-src="/assets/studio-tour.mp4?v=33" data-src-sm="/assets/studio-tour-640.mp4?v=33" type="video/mp4">
+            <p>Your browser can't play this video. <a href="/assets/studio-tour.mp4?v=33">Download the studio video (MP4, 2 MB)</a>.</p>
+          </video>
+          <button class="tour-toggle" type="button" aria-label="Play the studio video" hidden>
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+          </button>
+        </div>
+      </figure>
+      <div class="container ed-band-copy">
+        <h2 id="band-title" class="ed-band-line">1,500 square feet. A coach on the floor. <em>Never a crowd.</em></h2>
+      </div>
+    </section>
+
     <!-- ============ REVIEWS STRIP ============ -->
     <section class="proof-strip section-cream" aria-label="Reviews">
       <div class="container proof-strip-inner">
@@ -668,7 +679,6 @@
     <section class="section section-cream" id="who" aria-labelledby="who-title">
       <div class="container who-inner">
         <div class="section-head">
-          <p class="kicker">Built for adults 40 to 70</p>
           <h2 id="who-title">&ldquo;I feel like my health is slipping away, and I don't know how to stop it.&rdquo;</h2>
           <p class="section-sub">Lawyers, CEOs, business owners, managers and supervisors: people who've put their careers first and are ready to put their strength back on the calendar.</p>
         </div>
@@ -697,7 +707,6 @@
     <section class="section section-beige" id="why" aria-labelledby="why-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">The Fig difference</p>
           <h2 id="why-title">No crowds and no waiting on equipment</h2>
           <p class="section-sub">Fig Performance is a small private gym, and personal training sessions are just you and Dan.</p>
         </div>
@@ -728,8 +737,7 @@
     <section class="section section-beige recovery" id="facility" aria-labelledby="facility-title">
       <div class="container recovery-inner recovery-single">
         <div class="recovery-copy">
-          <p class="kicker">The facility</p>
-          <h2 id="facility-title">1,500 square feet, no crowd.</h2>
+          <h2 id="facility-title">What&rsquo;s inside</h2>
           <ul class="tech-list">
             <li>
               <h3>Strength &amp; cardio equipment</h3>
@@ -854,7 +862,6 @@
     <section class="section section-white" id="how" aria-labelledby="how-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">How it works</p>
           <h2 id="how-title">Three steps to get started</h2>
           <p class="section-sub">Fig Performance is a private strength gym in Placentia for adults over 40, with a coach on the floor whenever we&rsquo;re open. Here&rsquo;s how you start.</p>
         </div>
@@ -889,7 +896,6 @@
           <span class="gd-time">10 AM &ndash; 1 PM</span>
         </div>
         <div class="grand-copy">
-          <p class="kicker">Grand opening</p>
           <h2 id="go-title">You're invited: Saturday, November 14, 2026.</h2>
           <p class="section-sub">10 AM to 1 PM at the gym in Placentia. Tour the space, meet Dan, and see the InBody scanner, red light and vibration therapy in person.</p>
           <div class="grand-ctas">
@@ -905,7 +911,6 @@
     <section class="section section-cream" id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">Services</p>
           <h2 id="services-title">What we offer</h2>
           <p class="section-sub">Coached training, open gym and the tools to track and recover, all at one gym in Placentia.</p>
         </div>
@@ -951,10 +956,9 @@
     </section>
 
     <!-- ============ PROGRAMS & PRICING ============ -->
-    <section class="section section-navy" id="programs" aria-labelledby="programs-title">
+    <section class="section section-cream ed-programs" id="programs" aria-labelledby="programs-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">Programs &amp; pricing</p>
           <h2 id="programs-title">Three ways to train, and what each one costs</h2>
           <p class="section-sub">Membership for open gym, semi-private for coached small-group training, or one-on-one personal training with Dan.</p>
         </div>
@@ -1054,13 +1058,13 @@
               <li>Assessment at your home</li>
               <li>Your plan starts</li>
             </ol>
-            <a class="btn btn-inverse btn-block" href="#consult" data-interest="Concierge personal training">Book a free call</a>
+            <a class="btn btn-secondary btn-block" href="#consult" data-interest="Concierge personal training">Book a free call</a>
             <p class="concierge-note">The call is free.</p>
             <a class="concierge-more" href="/in-home-personal-training">More on in-home personal training <span aria-hidden="true">&rarr;</span></a>
           </div>
         </div>
         <p class="pricing-foot">Not sure which fits? Ask Dan at your free consult.</p>
-        <p class="programs-cta"><a class="btn btn-inverse btn-lg" href="/pricing">See plans &amp; pricing</a></p>
+        <p class="programs-cta"><a class="btn btn-secondary btn-lg" href="/pricing">See plans &amp; pricing</a></p>
       </div>
     </section>
 
@@ -1074,7 +1078,6 @@
           </picture>
         </figure>
         <div class="coach-copy">
-          <p class="kicker">Meet your coach</p>
           <h2 id="coach-title">Daniel &ldquo;Dan&rdquo; Figueroa</h2>
           <p class="role">Owner &amp; Head Coach, Fig Performance</p>
           <ul class="creds" aria-label="Credentials">
@@ -1383,7 +1386,6 @@
     <section class="section section-white" id="guides" aria-labelledby="guides-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">Blog</p>
           <h2 id="guides-title">Straight answers for adults over 40.</h2>
           <p class="section-sub">Written by Coach Dan from what actually works with his clients.</p>
         </div>
@@ -1514,7 +1516,6 @@
     <section class="section section-beige" id="contact" aria-labelledby="visit-title">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">Contact &amp; areas served</p>
           <h2 id="visit-title">Personal training in Placentia, CA.</h2>
           <p class="section-sub">On E. Yorba Linda Blvd in Placentia, serving North Orange County and surrounding areas. In-home personal training reaches these cities:</p>
           <ul class="area-chips" aria-label="Areas served">
@@ -1560,7 +1561,6 @@
     <!-- ============ FINAL CTA ============ -->
     <section class="section section-navy final-cta" aria-labelledby="final-title">
       <div class="container final-cta-inner">
-        <p class="kicker">Take the first step</p>
         <h2 id="final-title">Book your free consultation</h2>
         <p class="section-sub">About an hour with Dan: an InBody scan, a workout assessment and a recommended program for your goals. It&rsquo;s free, and you don&rsquo;t have to sign up for anything.</p>
         <div class="final-cta-btns">
