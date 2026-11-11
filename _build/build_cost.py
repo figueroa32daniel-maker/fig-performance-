@@ -4,7 +4,7 @@ from build_pages import page, SITE, CTA
 SLUG = "personal-training-cost-placentia"
 CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
 
-body = f"""<p class="legal-intro">Personal training at Fig Performance in Placentia costs $90 a session, or $360 a month for one session a week, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
+body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performance in Placentia</a> costs $90 a session, or $360 a month for one session a week, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
 
 <h2 id="fig">Fig Performance prices (2026)</h2>
 <div class="price-table-wrap"><table class="price-table">
