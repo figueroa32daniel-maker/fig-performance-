@@ -1,4 +1,4 @@
-"""Article: building muscle after 50 (from Coach Dan's voice memo, Nov 11 2026). Publish only after Dan approves."""
+"""Article: building muscle after 50 (from Coach Dan's voice memo; approved by Dan Nov 11 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
