@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "building-muscle-after-50": [
+        "You can build muscle after 50. If you've never trained hard, about a pound a month early on is realistic.",
+        "Recover better, not train less: 2 to 3 lifting days, never back to back, 7+ hours of sleep, protein at goal weight in grams.",
+        "Creatine monohydrate, 5 to 10 g a day, is safe for healthy adults and helps muscle, strength and possibly memory."],
     "strength-training-for-women-over-60": [
         "The formula doesn't change at 60. The starting point does. Progressive lifting, six movements, protein, sleep.",
         "Heavy lifting builds bone: women 65+ with low bone mass gained 2.9% spine density in 8 months (LIFTMOR).",
@@ -228,7 +232,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=38">
+  <link rel="stylesheet" href="/assets/styles.css?v=46">
   <link rel="stylesheet" href="/assets/editorial.css?v=3">
 {ld_html}
 </head>

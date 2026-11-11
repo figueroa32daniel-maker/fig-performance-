@@ -134,6 +134,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/building-muscle-after-50">Building muscle after 50</a><br>Honest numbers on how much you can gain, why recovery and protein matter more, and the research on creatine.</li>
   <li><a href="/strength-training-for-women-over-60">Strength training for women over 60</a><br>Why the formula doesn't change, lifting heavy for bone, training balance, and Teresa's first pull-up.</li>
   <li><a href="/is-belly-fat-the-last-to-go">Is belly fat the last to go?</a><br>Why the body keeps it, which belly fat leaves first, and what actually moves it.</li>
   <li><a href="/hip-thrust">Hip thrust form and why women over 40 need it</a><br>Setup, the mistakes I fix, and the 3-day glute program I learned from Bret Contreras.</li>
@@ -189,5 +190,7 @@ pages = {
 
 if __name__ == "__main__":
     for name, content in pages.items():
+        if name == "fitness-after-40.html":
+            content = content.replace('<li><a href="/fitness-after-40">Blog</a></li>', '<li><a href="/fitness-after-40" aria-current="page">Blog</a></li>', 1)
         (SITE / name).write_text(content)
         print("wrote", name, len(content))

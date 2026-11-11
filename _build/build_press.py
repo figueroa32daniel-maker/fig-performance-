@@ -35,6 +35,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="guides">Recent guides by Coach Dan</h2>
 <ul>
+  <li><a href="/building-muscle-after-50">Building muscle after 50</a></li>
   <li><a href="/strength-training-for-women-over-60">Strength training for women over 60</a></li>
   <li><a href="/is-belly-fat-the-last-to-go">Is belly fat the last to go?</a></li>
   <li><a href="/hip-thrust">Hip thrust form for women over 40</a></li>
