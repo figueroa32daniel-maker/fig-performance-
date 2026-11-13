@@ -27,7 +27,7 @@ pt_body = f"""<p class="legal-intro">Here's exactly what happens when you train 
 <p>Fig Performance is rated 5.0 on Google, and Coach Dan's coaching business is rated 5.0 across 38 Yelp reviews.</p>
 
 <h2 id="pricing">Pricing</h2>
-<p>Personal training is $90 a session with Coach Dan, billed monthly, with a 3-month minimum. Save 20% when you pay 3 months in full. Your first consult and InBody scan are free. See <a href="/pricing">all plans and pricing</a>, or read <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
+<p>Personal training is $90 a session with Coach Dan, billed weekly or monthly, with a 3-month minimum. Save 20% when you pay 3 months in full. Your first consult and InBody scan are free. See <a href="/pricing">all plans and pricing</a>, or read <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
 
 <h2 id="hours">Hours and location</h2>
 <p>1284 E. Yorba Linda Blvd, Placentia, CA 92870. Staffed Monday to Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM. Easy to reach from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a>, <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a> and Villa Park.</p>
@@ -39,7 +39,7 @@ pt_body = f"""<p class="legal-intro">Here's exactly what happens when you train 
 
 pt_faqs = [
     ("How much does a personal trainer cost in Placentia?",
-     "At Fig Performance, personal training is $90 a session with Coach Dan, billed monthly, with a 3-month minimum. You save 20% when you pay 3 months in full. The first consult and InBody scan are free."),
+     "At Fig Performance, personal training is $90 a session with Coach Dan, billed weekly or monthly, with a 3-month minimum. You save 20% when you pay 3 months in full. The first consult and InBody scan are free."),
     ("What happens in the first session?",
      "The first visit is the free consult: an InBody scan, a movement and strength assessment and a conversation about your goals. Your first training session starts from what that showed, usually with the basic strength patterns at a weight you can control."),
     ("How often should I train with a personal trainer?",
