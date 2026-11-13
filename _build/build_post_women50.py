@@ -61,7 +61,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Strength Training for Women Over 50 (and Menopause) | Fig Performance",
+    "Strength Training for Women Over 50 & Menopause | Fig Performance",
     "Strength training for women over 50, from Coach Dan: why age doesn't decide your program, the assessment, menopause, bone density and how often to lift.",
     "Strength Training for Women Over 50: Age Doesn't Decide Your Program",
     "Fitness after 40", "Strength Training for Women Over 50",

@@ -64,7 +64,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Workout Plan for Men Over 40 (Train for Function) | Fig Performance",
+    "Workout Plan for Men Over 40: Function First | Fig Performance",
     "A workout plan for men over 40 from Coach Dan: train for function, start light, fix shoulders, hips, back and knees, and a client's 3-month story.",
     "Workout Plan for Men Over 40: Train for Function, Not Just Looks",
     "Fitness after 40", "Workout Plan for Men Over 40",

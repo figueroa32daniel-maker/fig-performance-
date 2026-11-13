@@ -59,7 +59,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "How to Lose 10 Pounds in a Month (Realistic Plan) | Fig Performance",
+    "How to Lose 10 Pounds in a Month (Real Plan) | Fig Performance",
     "Can you lose 10 pounds in a month? Yes. Coach Dan on the 1,000-calorie deficit, protein, strength training, what to expect and who shouldn't try it.",
     "Can You Lose 10 Pounds in a Month? Yes. Here's How.",
     "Fitness after 40", "How to Lose 10 Pounds in a Month",

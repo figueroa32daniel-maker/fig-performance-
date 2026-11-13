@@ -87,7 +87,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Build Muscle After 60: Her First Pull-Up in 3 Months | Fig Performance",
+    "Build Muscle After 60: Her First Pull-Up | Fig Performance",
     "Yes, you can build muscle after 60. How a 60-year-old got her first pull-up in 3 months and a 70-year-old deadlifts 135 lb, from Coach Dan.",
     "How a 60-Year-Old Did Her First Pull-Up in 3 Months (Placentia, CA)",
     "Fitness after 40", "Can You Build Muscle After 60?",
