@@ -72,7 +72,7 @@ faqs = [
 ]
 
 html = page(SLUG,
-    "Personal Training Cost in Placentia, CA (2026 Prices) | Fig Performance",
+    "Personal Training Cost in Placentia, CA (2026) | Fig Performance",
     "How much personal training costs in Placentia, CA: real 2026 prices ($90 a session, $360/month), what changes the price, and how to compare trainers.",
     "How Much Does Personal Training Cost in Placentia? (2026)",
     "Prices", "How Much Does Personal Training Cost in Placentia?",

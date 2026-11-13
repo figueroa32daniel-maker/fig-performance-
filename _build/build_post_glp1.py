@@ -59,7 +59,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "GLP-1 Muscle Loss: How to Keep Muscle on Ozempic | Fig Performance",
+    "GLP-1 Muscle Loss: Keep Muscle on Ozempic | Fig Performance",
     "GLP-1s like Ozempic and Zepbound can cost you muscle. Coach Dan on protein, strength training, eating enough and keeping your results after you stop.",
     "GLP-1s and Muscle Loss: How to Keep Your Muscle on Ozempic or Zepbound",
     "Fitness after 40", "GLP-1s and Muscle Loss: How to Keep Your Muscle",

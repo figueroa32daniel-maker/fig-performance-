@@ -415,7 +415,7 @@ pages = {
     "red-light-therapy-placentia.html": page(
         "red-light-therapy-placentia",
         "Red Light Therapy in Placentia, CA | Fig Performance",
-        "Red light therapy in Placentia, near Fullerton and Yorba Linda. Included with Fig Performance semi-private training, with vibration therapy. Cost, safety and what to expect.",
+        "Red light therapy in Placentia, near Fullerton and Yorba Linda. Included with Fig Performance semi-private training. Cost, safety and what to expect.",
         "Red Light Therapy in Placentia | Fig Performance",
         "Recovery", "Red Light Therapy in Placentia, CA",
         "Part of the recovery routine at Fig Performance. Included with semi-private training.",

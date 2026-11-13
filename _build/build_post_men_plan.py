@@ -146,7 +146,7 @@ body = f"""<p class="legal-intro">A good beginner workout plan for men is full b
 <p>If you have a medical condition, a recent injury, or you haven't exercised in a long time, check with your doctor first. Stop any exercise that causes sharp pain, and swap it for the easier version.</p>
 
 <h2 id="coach">Want someone to set it up for you?</h2>
-<p>At Fig Performance in Placentia, every plan starts with a free consult and an <a href="/inbody-scan-placentia">InBody scan</a>, and Dan builds the program around your body, including old injuries. Can't make it in person? <a href="/online-personal-trainer">Online coaching</a> puts your plan in the R.H.O.D.E.S. app, with a weekly call with Dan. Looking for the women's version? See the <a href="/beginner-workout-plan-for-women">beginner workout plan for women</a>.</p>
+<p>At Fig Performance in Placentia, every plan starts with a free consult and an <a href="/inbody-scan-placentia">InBody scan</a>, and Dan builds the program around your body, including old injuries. Can't make it in person? <a href="/online-personal-trainer">Online coaching</a> puts your plan in the R.H.O.D.E.S. app, with a weekly call with Dan. Looking for the women's version? See the <a href="/beginner-workout-plan-for-women">beginner workout plan for women</a>, or the general <a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a>.</p>
 {CTA}"""
 
 faqs = [

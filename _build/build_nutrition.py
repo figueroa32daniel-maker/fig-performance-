@@ -48,7 +48,7 @@ faqs = [
 ]
 
 html = page(SLUG,
-    "Nutrition Coaching in Placentia, CA for Adults 40+ | Fig Performance",
+    "Nutrition Coaching in Placentia for Adults 40+ | Fig Performance",
     "Nutrition coaching in Placentia with Coach Dan, PN1 certified: more protein, a simple plan from foods you like, no obsessive tracking. Included with training.",
     "Nutrition Coaching in Placentia, CA | Fig Performance",
     "Nutrition", "Nutrition Coaching in Placentia, CA",

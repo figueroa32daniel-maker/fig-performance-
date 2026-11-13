@@ -53,8 +53,8 @@ faqs = [
 ]
 
 html = page(SLUG,
-    "Vibration Therapy in Placentia, CA: Does It Work? | Fig Performance",
-    "Vibration therapy in Placentia, included with Fig Performance semi-private training. Does it actually work, who should skip it, and how we use it for recovery after 40.",
+    "Vibration Therapy in Placentia: Does It Work? | Fig Performance",
+    "Vibration therapy in Placentia, included with Fig Performance semi-private training. Does it work, who should skip it, and how we use it for recovery after 40.",
     "Vibration Therapy in Placentia: Does It Actually Work?",
     "Recovery", "Vibration Therapy in Placentia, CA",
     "What it is, what the research says, and who should skip it. Included with semi-private training.",
