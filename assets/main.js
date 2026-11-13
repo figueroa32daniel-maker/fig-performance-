@@ -454,7 +454,6 @@ var CONFIG = {
         '<h3 class="q-title" tabindex="-1">You\'re in, ' + esc(first) + ".</h3>" +
         "<p>" + esc(next) + "</p>" +
         '<ul class="done-steps"><li>Keep your phone handy; Dan will reach out by text or call.</li><li>Your consult is free.</li></ul>' +
-        '<p class="done-event"><strong>Grand opening:</strong> Saturday, November 14, 10 AM&ndash;1 PM at 1284 E. Yorba Linda Blvd, Placentia. <a href="/grand-opening.ics" download>Add to calendar</a></p>' +
         '<a class="btn btn-secondary" href="https://www.instagram.com/figperformance/" target="_blank" rel="noopener noreferrer">See us on Instagram</a>' +
       "</div>";
     body.querySelector(".q-title").focus();
