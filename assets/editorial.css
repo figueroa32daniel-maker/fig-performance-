@@ -72,3 +72,40 @@
 .ed .gym-link, .ed .result-link { overflow: hidden; }
 .ed .gym-link img, .ed .result-link img { transition: transform .7s var(--ed-out); }
 @media (hover: hover) { .ed .gym-link:hover img, .ed .result-link:hover img { transform: scale(1.03); } }
+
+/* ==========================================================
+   Nov 13 polish: finish the editorial look consistently
+   ========================================================== */
+/* 1. Small labels are labels, not serif headings */
+.ed .faq-group, .ed .visit-card h3, .ed .site-footer h2 { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; }
+
+/* 2. FAQ questions: larger and easier to read */
+.ed .faq-item summary { font-size: 1.14rem; line-height: 1.35; padding-top: 20px; padding-bottom: 20px; }
+@media (max-width: 640px) { .ed .faq-item summary { font-size: 1.06rem; } }
+
+/* 3. One card style: fine gold line on top, hairline sides */
+.ed { --ed-rule: #b88939; --radius: 0px; --radius-sm: 0px; }
+.ed .review, .ed .guide-card, .ed .step, .ed .visit-card, .ed .first-month, .ed .price-table-wrap { border-top: 1px solid var(--ed-rule); }
+.ed .steps-strip .step { border-top: 0; }
+.ed .tech-list li { border-top-color: var(--ed-rule); }
+.ed .guide-card:hover { transform: none; box-shadow: none; }
+
+/* 4. Square the rounded leftovers; hairlines instead of side bars */
+.ed .coach-photo { box-shadow: none; border-color: var(--ed-line); padding: 10px; }
+.ed .coach-photo picture, .ed .coach-photo img { border-radius: 0; }
+.ed .creds li { border-left: 1px solid var(--line); }
+.ed .area-chips li, .ed .chip, .ed .opt, .ed .opt-ic, .ed .quiz, .ed .header-phone, .ed .nav-toggle, .ed .best-for, .ed .not-included, .ed .card-tag, .ed .feature-icon, .ed .skip-link { border-radius: 0; }
+.ed .next-list li { border-left: 1px solid var(--line-navy); border-top: 1px solid var(--ed-gold); }
+.ed .best-for { border-left: 0; border-top: 1px solid var(--ed-rule); }
+.ed .opt:hover { box-shadow: none; }
+
+/* 5. Hero video: larger on desktop */
+@media (min-width: 960px) { .ed .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 40px; } }
+.ed .hero .tour-frame { border-width: 1px; }
+
+/* 6. "Placentia, CA": gold italic carries it, no bar */
+.ed .hero h1 .hl { box-shadow: none; }
+
+/* 7. Section labels the same size everywhere */
+.ed .kicker { font-size: .8125rem; letter-spacing: .22em; }
+.ed .rule-label { font-size: .8125rem; }

@@ -233,7 +233,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="/assets/styles.css?v=46">
-  <link rel="stylesheet" href="/assets/editorial.css?v=3">
+  <link rel="stylesheet" href="/assets/editorial.css?v=5">
 {ld_html}
 </head>
 <body class="{body_class} ed">
