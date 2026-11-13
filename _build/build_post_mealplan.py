@@ -78,7 +78,7 @@ body = f"""<p class="legal-intro">A simple meal plan for weight loss doesn't nee
 <p>That goes for drinking too. Ask yourself honestly: do drinks during the week, plus weekend brunch, girls' night, guys' night, watching the game, the Super Bowl or family events, fit your goals? Is there room to cut back? A glass of wine can be a treat if it fits your plan, but it isn't a health food. The U.S. Surgeon General has warned that alcohol raises cancer risk, even at moderate amounts (<a href="{SG}" target="_blank" rel="noopener noreferrer">HHS</a>).</p>
 
 <h2 id="eighty-twenty">Keep it 80/20</h2>
-<p>About 80% of your food should come from whole, nutrient-dense foods, and about 20% can be food you simply enjoy. Nutrition only works long term if it's flexible and enjoyable. Read more in <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a> and <a href="/why-am-i-not-losing-weight">why am I not losing weight</a>.</p>
+<p>About 80% of your food should come from whole, nutrient-dense foods, and about 20% can be food you simply enjoy. Nutrition only works long term if it's flexible and enjoyable. Read more in <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a>, <a href="/why-am-i-not-losing-weight">why am I not losing weight</a> and <a href="/how-to-lose-10-pounds-in-a-month">how to lose 10 pounds in a month</a>.</p>
 
 <h2 id="download">Get the free PDF</h2>
 <p>Everything on this page, on one printable plan you can stick on the fridge. No email or sign-up needed.</p>
@@ -106,7 +106,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Meal Plan for Weight Loss + Grocery List (Free PDF) | Fig Performance",
+    "Meal Plan for Weight Loss + Grocery List (PDF) | Fig Performance",
     "A simple meal plan for weight loss from Coach Dan: protein, carbs, fats and fiber at every meal, breakfast to snacks, a grocery list and a free PDF.",
     "Simple Meal Plan for Weight Loss + Grocery List (Free PDF)",
     "Nutrition", "Simple Meal Plan for Weight Loss (Free PDF)",

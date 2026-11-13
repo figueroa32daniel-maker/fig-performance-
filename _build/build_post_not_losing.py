@@ -58,7 +58,7 @@ body = f"""<p class="legal-intro">If you're not losing weight, you're almost alw
   <li><strong>Recover</strong> with sleep, stress management, red light and vibration therapy.</li>
   <li><strong>Re-scan</strong> to see what changed, then adjust.</li>
 </ul>
-<p>For the step-by-step version, read <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a>, or see how <a href="/nutrition-coaching-placentia">nutrition coaching</a> works. If you've been doing "everything right" and still feel stuck, your free consult will show you why, with real numbers.</p>
+<p>For the step-by-step version, read <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a> or <a href="/how-to-lose-10-pounds-in-a-month">how to lose 10 pounds in a month</a>, or see how <a href="/nutrition-coaching-placentia">nutrition coaching</a> works. If you've been doing "everything right" and still feel stuck, your free consult will show you why, with real numbers.</p>
 {CTA}"""
 
 faqs = [

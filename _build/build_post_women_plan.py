@@ -61,7 +61,7 @@ DAY3 = table(["Exercise", "Sets &times; reps"], [
     ("Machine hip abduction", "3 &times; 20&ndash;30"),
 ])
 
-body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full body, three times a week, on non-consecutive days like Monday, Wednesday and Friday. Every session trains your legs and glutes, your upper body and your core. Below is the exact plan Coach Dan Figueroa uses for women at Fig Performance in Placentia: 4 leg exercises, 2 upper body and 1 core each day, with a warm-up and cool-down. Looking for the men&rsquo;s version? See the <a href="/beginner-workout-plan-for-men">beginner workout plan for men</a>.</p>
+body = f"""<p class="legal-intro">A good 3-day beginner workout plan is full body, three times a week, on non-consecutive days like Monday, Wednesday and Friday. Every session trains your legs and glutes, your upper body and your core. Below is the exact plan Coach Dan Figueroa uses for women at Fig Performance in Placentia: 4 leg exercises, 2 upper body and 1 core each day, with a warm-up and cool-down. Looking for the men&rsquo;s version? See the <a href="/beginner-workout-plan-for-men">beginner workout plan for men</a>, or the general <a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a>.</p>
 
 <h2 id="how">How the plan works</h2>
 <ul>
@@ -207,7 +207,7 @@ faqs = [
 
 html = page(
     SLUG,
-    "Beginner Workout Plan for Women: 3-Day Full Body | Fig Performance",
+    "Beginner Workout Plan for Women (3 Days) | Fig Performance",
     "A beginner workout plan for women: full body 3 days a week, 4 leg, 2 upper body and 1 core exercise per day, with warm-up, sets, reps and home options.",
     "Beginner Workout Plan for Women (3-Day Full Body Plan)",
     "Fitness after 40", "Beginner Workout Plan for Women",
