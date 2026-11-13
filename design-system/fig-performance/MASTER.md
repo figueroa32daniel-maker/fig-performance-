@@ -31,6 +31,7 @@ Rules: one accent (gold), used sparingly. No new colors without Dan's approval. 
 ## Typography
 
 - **Headings (h1-h3):** Playfair Display, self-hosted (assets/fonts), regular/medium weights, sentence case, gold italic for the highlighted words. Set in assets/editorial.css (Dan-approved Nov 9, 2026). Montserrat stays for kickers, nav and buttons.
+- **Cards:** one style everywhere: 1px gold top line (#b88939), hairline sides, square corners, no shadow. Small labels (FAQ groups, contact card titles, footer titles) stay Montserrat caps, never serif.
 - **Finish:** square corners on buttons and cards, hairline rules instead of soft shadows, no colored side bars, buttons press on tap (scale .97), one headline settle animation, reduced motion respected.
 - **Body:** Inter (`--font-body`), self-hosted. Base 16px or larger, line-height 1.5 to 1.65.
 - **Kickers / labels:** Montserrat, small, uppercase, wide letter-spacing, gold, with the short gold rule before them. This is a signature brand element; keep it.
