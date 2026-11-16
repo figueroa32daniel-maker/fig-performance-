@@ -1,4 +1,4 @@
-"""Article: calorie deficit after 40 (from Coach Dan's voice memo, Nov 16 2026). Publish only after Dan approves."""
+"""Article: calorie deficit after 40 (from Coach Dan's voice memos; approved by Dan Nov 16 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
