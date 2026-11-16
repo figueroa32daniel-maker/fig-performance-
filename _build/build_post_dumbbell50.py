@@ -1,4 +1,4 @@
-"""Article: dumbbell workout for beginners over 50 (from Coach Dan's voice memo, Nov 16 2026). Publish only after Dan approves."""
+"""Article: dumbbell workout for beginners over 50 (from Coach Dan's voice memos, Nov 16 2026). Publish only after Dan approves."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
@@ -6,7 +6,22 @@ DATE = "2026-11-16"
 SLUG = "dumbbell-workout-for-beginners-over-50"
 
 STARTING_WEIGHTS = """<h2 id="weights">How heavy should you start?</h2>
-<p>[DAN: starting weights pending]</p>"""
+<p>Here's where most beginners over 50 land on their first day with me. Pounds per dumbbell; the goblet squat uses one.</p>
+<div class="price-table-wrap"><table class="price-table compare-table">
+  <thead><tr><th scope="col">Exercise</th><th scope="col">Men</th><th scope="col">Women</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Goblet squat (one dumbbell)</th><td>25+</td><td>20&ndash;25</td></tr>
+    <tr><th scope="row">Dumbbell RDL</th><td>20&ndash;25</td><td>20&ndash;25</td></tr>
+    <tr><th scope="row">Flat or incline press</th><td>20&ndash;25</td><td>15&ndash;20</td></tr>
+    <tr><th scope="row">One-arm row</th><td>20&ndash;30</td><td>15&ndash;20</td></tr>
+    <tr><th scope="row">Seated shoulder press</th><td>20&ndash;25</td><td>10&ndash;15</td></tr>
+    <tr><th scope="row">Lateral raise</th><td>10&ndash;15</td><td>5&ndash;10</td></tr>
+    <tr><th scope="row">Hammer curl</th><td>15&ndash;20</td><td>5&ndash;10</td></tr>
+    <tr><th scope="row">Farmer's carry (each hand)</th><td>45&ndash;50</td><td>20&ndash;25</td></tr>
+  </tbody>
+</table></div>
+<p>Those are starting points, not rules. When in doubt, start lighter and go up. Your first set is the hardest to judge, because you're fresh and everything feels easy. By the second set you're a much better judge of what's actually challenging.</p>
+<p>And <strong>write it down.</strong> Every exercise, every weight, every rep. Next week you walk in and start at the exact weight that was challenging last time, instead of guessing all over again. That notebook is how two reps a week turns into real strength.</p>"""
 
 body = f"""<p class="legal-intro">If you're over 50 and starting to lift, or starting again after years away, you don't need a gym full of machines. You need a set of dumbbells and an adjustable bench. That's it. With those two things you can train every muscle in your body, two or three days a week, around a full life.</p>
 <p>Here's the plan I'd give you: how many days, what to do on them, how hard to push, how to know when to go up in weight, and what to swap in if your shoulder, knee or back has opinions.</p>
@@ -92,7 +107,7 @@ body = f"""<p class="legal-intro">If you're over 50 and starting to lift, or sta
 <p>Pain is case by case: where it hurts, how long you've had it, and how bad it is. If it's sharp, getting worse, or there's a history of surgery, see your doctor or a physical therapist first. For the usual aches I see, here's what I swap in.</p>
 <p><strong>Bad shoulder.</strong> Neutral-grip work is almost always safe on the shoulders: neutral-grip press, single-arm neutral-grip press, neutral-grip row. Add two-arm dumbbell pullovers on the bench, lateral raises and face pulls, which are usually fine, and prone shoulder extensions. I'll also add trap and neck work, because a lot of shoulder pain gets better when the muscles around it get stronger.</p>
 <p><strong>Bad knee.</strong> Step-ups are very safe on the knees, probably a better choice than any squat. Box squats are super safe too, and reverse lunges are gentler than forward lunges. At that point I put more focus on the hamstrings and glutes: single-leg RDL, dumbbell RDL, bench-supported RDL, glute bridge, hip thrust. Then exercises that help knee mobility and stability: terminal knee extensions with a band, lateral band walks, standing hip abduction. If you have access to machines, leg extensions, leg curls, abduction and adduction are all knee-friendly.</p>
-<p><strong>Bad back.</strong> Depends where. For <strong>upper-back pain</strong>, strengthen your posture. I used to get upper-back pain myself; what fixed it was dumbbell pullovers, scapular elevation and depression (shrugging up and pulling your shoulders down), thoracic spine rotations, and cat-cows. For <strong>lower-back pain</strong>, [DAN: confirm the lower-back rule] until it settles, then build it back gradually.</p>
+<p><strong>Bad back.</strong> Depends where. For <strong>upper-back pain</strong>, strengthen your posture. I used to get upper-back pain myself; what fixed it was dumbbell pullovers, scapular elevation and depression (shrugging up and pulling your shoulders down), thoracic spine rotations, and cat-cows. For <strong>lower-back pain</strong>, stay away from anything that puts your spine into extension, meaning arching it backward, which compresses the joints at the back of the spine. Rounding usually isn't the problem; arching is. Keep your ribs down on overhead presses, and don't lean back to finish an RDL or a back extension. Once it settles, build it back gradually.</p>
 
 <h2 id="month">What the first months look like</h2>
 <ul>
@@ -119,6 +134,8 @@ faqs = [
      "Coach Dan's clients add two reps or five pounds to every exercise each week, when their technique and confidence are ready."),
     ("What dumbbell exercises are safe for bad shoulders?",
      "Neutral-grip presses and rows, lateral raises, dumbbell pullovers and face pulls are usually shoulder-friendly. Pain is case by case; see a doctor or physical therapist if it's sharp or worsening."),
+    ("How heavy should dumbbells be for a beginner over 50?",
+     "Typical starting weights: goblet squat 25+ lb for men, 20 to 25 for women; dumbbell press 20 to 25 for men, 15 to 20 for women; lateral raise 10 to 15 for men, 5 to 10 for women. Start lighter, judge on the second set, and write it down."),
     ("What exercises are safe for bad knees?",
      "Step-ups, box squats, reverse lunges, RDLs, glute bridges and hip thrusts, plus terminal knee extensions and lateral band walks for stability."),
 ]
