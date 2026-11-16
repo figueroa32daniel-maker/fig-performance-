@@ -12,6 +12,7 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 
 <h2 id="why">Why the glutes, and why now</h2>
 <p>The glutes are the muscle group you most want strong and well developed after 40, and I mean that for two reasons that matter equally. Posterior chain strength is longevity: it's how you get up from a chair at 75, climb stairs without a rail, and protect your knees and lower back in everything else you do. And it's aesthetics. Nobody's embarrassed about that, and they shouldn't be. Rebuilding the glutes is the fastest visible change most women get from lifting.</p>
+<p>It isn't only for women in their 40s. The same posterior chain work matters even more at 60 and 70, when getting out of a chair and catching yourself on a stair start to depend on it. If that's you, read <a href="/strength-training-for-women-over-60">strength training for women over 60</a> and <a href="/strength-training-for-seniors">strength training for seniors</a> too.</p>
 <p>The hip thrust does both faster than anything else because, as Bret has shown and I've watched in my gym, it's very easy to scale. You can add weight almost every session for months. That builds confidence as fast as it builds muscle.</p>
 
 <h2 id="setup">The setup: get these four things right</h2>
@@ -72,7 +73,7 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 <p><strong>Reps:</strong> honestly, anywhere from 1 to 30. There are strength reps (1 to 6), muscle-building reps (8 to 15) and muscular endurance reps (20 to 30), and the hip thrust works in all three. I rotate through them. A new client usually starts in the 8 to 12 range to learn the movement, then we go heavier for strength and higher for endurance as the weeks go on. Add weight whenever the form holds.</p>
 
 <h2 id="vs">Hip thrust vs. squat</h2>
-<p>People ask which is better for the glutes. Both work. A 2015 EMG study found the barbell hip thrust activated the glutes much more than a back squat at the same relative load (<a href="{EMG}" target="_blank" rel="noopener noreferrer">Contreras et al., 2015</a>). A 2023 training study that followed people for nine weeks found squats and hip thrusts built similar glute size, with squats adding more quad and inner-thigh size (<a href="{PLOTKIN}" target="_blank" rel="noopener noreferrer">Plotkin et al., 2023</a>). That's why the template above has both: a squat pattern and a hip thrust on every leg day. The hip thrust lets you load the glutes hard without your spine or knees being the limit, which is exactly what a 50-year-old with a cranky back needs.</p>
+<p>People ask which is better for the glutes. Both work. A 2015 EMG study found the barbell hip thrust activated the glutes much more than a back squat at the same relative load (<a href="{EMG}" target="_blank" rel="noopener noreferrer">Contreras et al., 2015</a>). A 2023 training study that followed people for nine weeks found squats and hip thrusts built similar glute size, with squats adding more quad and inner-thigh size (<a href="{PLOTKIN}" target="_blank" rel="noopener noreferrer">Plotkin et al., 2023</a>). That's why the template above has both: a squat pattern and a hip thrust on every leg day. The hip thrust lets you load the glutes hard without your spine or knees being the limit, which is exactly what a 50-year-old with a cranky back needs. More on that age group in <a href="/building-muscle-after-50">building muscle after 50</a>.</p>
 
 <h2 id="coach">Start here</h2>
 <p>If you've never hip thrusted, set up a bench and the empty bar, find full hip extension with no weight first, then add 5 pounds a side. If you want someone to set up the bar and watch your form, that's what the free consult is for.</p>
@@ -91,14 +92,18 @@ faqs = [
      "12 to 24 inches. A 12-inch plyo box or an adjustable bench works. Shoulder blades on the edge, not your whole back."),
     ("Should I lower slowly on hip thrusts?",
      "No. There's little glute tension at the bottom, so focus on driving up with power. Coach Dan still cues a glute squeeze through the whole rep for mind-to-muscle connection."),
+    ("Are hip thrusts good for women?",
+     "Yes. They build the glutes directly, they're easier on the knees and lower back than a squat, and they scale fast: Coach Dan's client Thinzar went from 55 to 135 pounds in about six weeks."),
+    ("Are hip thrusts safe for older adults?",
+     "For most people, yes. The hip thrust loads the glutes without the spine or knees being the limit, and glute strength is what gets you out of a chair and up the stairs at 75. Start with the empty bar, and check with your doctor first if you have a hip or back injury or a recent surgery."),
     ("How often should I do hip thrusts?",
      "Three times a week on leg days, alongside a squat pattern, a hinge and an abduction exercise, following Bret Contreras's programming for women building the glutes."),
 ]
 
 html = page(
     SLUG,
-    "Hip Thrust Form for Women Over 40 | Fig Performance",
-    "Hip thrust form from a coach who trained with Bret Contreras: bench height, bar placement, the mistakes to fix, and a 3-day glute program for women over 40.",
+    "Hip Thrusts for Women Over 40: Form and Program | Fig Performance",
+    "Hip thrusts for women over 40 from a coach who trained with Bret Contreras: setup, bar placement, how heavy to start, the mistakes to fix, and a 3-day plan.",
     "Hip Thrust Form: How to Do It and Why Women Over 40 Need It",
     "Fitness after 40", "Hip Thrust Form: How to Do It and Why Women Over 40 Need It",
     "What I learned from the coach who invented the hip thrust, and how I program it for women over 40.",
