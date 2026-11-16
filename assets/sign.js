@@ -1,5 +1,6 @@
 /* ==========================================================
    Fig Performance: /sign page (waiver + PT client checklist)
+   - /sign?type=waiver: waiver only (gym members), checklist hidden.
    - Prefills program details from the link Dan sends:
        /sign?name=&sessions=&billing=&today=&recurring=&start=
      Valid params are shown read-only; missing ones stay editable.
@@ -68,6 +69,38 @@
 
   /* ---------- prefill from the link ---------- */
   var q = new URLSearchParams(window.location.search);
+
+  /* ---------- waiver-only mode (gym / open-gym members) ----------
+     /sign?type=waiver shows only the Liability Waiver. The Personal Training
+     Client Checklist is hidden and its fields are disabled, so they are not
+     validated or submitted. */
+  var WAIVER_ONLY = /^(waiver|gym)$/i.test(clean(q.get("type"), 10));
+  if (WAIVER_ONLY) {
+    DOC_VERSION = "waiver-v1 2026-10-24";
+    var chk = $("sec-checklist");
+    chk.hidden = true;
+    chk.querySelectorAll("input").forEach(function (i) { i.disabled = true; i.required = false; });
+    var h1 = doc.querySelector(".legal-hero h1");
+    if (h1) h1.textContent = "Sign your liability waiver";
+    doc.title = "Sign your liability waiver | Fig Performance";
+    var meta = doc.querySelector(".legal-hero .legal-meta");
+    if (meta) meta.textContent = "Liability Waiver (waiver-v1) \u00b7 Version date: October 24, 2026";
+    var intro = doc.querySelector(".sign-intro .legal-intro");
+    if (intro && intro.firstChild && intro.firstChild.nodeType === 3)
+      intro.firstChild.nodeValue = "Please read the waiver below, fill in your details, and type your full legal name to sign. It takes about 2 minutes. When you submit, a signed record is emailed to Fig Performance (Train With Dan Inc.). Questions first? Call or text ";
+    var gLeg = doc.querySelector("#sec-guardian .sign-step");
+    if (gLeg) gLeg.textContent = "3";
+    var gHelp = doc.querySelector("#sec-guardian .help");
+    if (gHelp) gHelp.textContent = "Required because the client is under 18. A parent or legal guardian must read the waiver above and sign here.";
+    var gDoc = doc.querySelector("#sec-guardian .doc-p");
+    if (gDoc) gDoc.textContent = "If the member is under 18, parent or guardian signature: by typing my name above, I confirm I am the client's parent or legal guardian and I sign the Liability Waiver on the client's behalf.";
+    var cl = doc.querySelector('label[for="f-consent"]');
+    if (cl) cl.childNodes.forEach(function (n) {
+      if (n.nodeType === 3) n.nodeValue = n.nodeValue.replace("the Liability Waiver and the Personal Training Client Checklist above", "the Liability Waiver above");
+    });
+    var sub = doc.querySelector("#sec-submit .consent");
+    if (sub && sub.firstChild && sub.firstChild.nodeType === 3) sub.firstChild.nodeValue = sub.firstChild.nodeValue.replace("your signed documents", "your signed waiver");
+  }
   var prefilled = [];
   function lock(input) { input.readOnly = true; input.setAttribute("aria-readonly", "true"); input.classList.add("is-locked"); }
 
@@ -123,7 +156,7 @@
     var minor = $("f-minor").checked;
     gSec.hidden = !minor;
     gFields.forEach(function (id) { var i = $(id); i.disabled = !minor; if (id !== "f-g-date") i.required = minor; });
-    $("submit-step").textContent = minor ? "5" : "4";
+    $("submit-step").textContent = WAIVER_ONLY ? (minor ? "4" : "3") : (minor ? "5" : "4");
     if (!minor) ["f-g-sig", "f-g-rel", "f-g-phone"].forEach(function (id) { setErr(id, false); });
   }
   $("f-minor").addEventListener("change", syncMinor);
@@ -159,6 +192,7 @@
       sigWords.indexOf(" " + nf.split(" ")[0] + " ") > -1 && sig.indexOf(nl) > -1);
     check("f-date-waiver", !!clean($("f-date-waiver").value, 40));
 
+    if (!WAIVER_ONLY) {
     for (var n = 1; n <= 6; n++) check("f-init-" + n, /^\p{L}{2,4}$/u.test($("f-init-" + n).value.trim()));
 
     check("f-sessions", /^[1-7]$/.test($("f-sessions").value.trim()));
@@ -170,6 +204,7 @@
     var sig2 = norm($("f-sig-checklist").value);
     check("f-sig-checklist", !!sig2 && sig2 === sig && bad.indexOf("f-sig-waiver") === -1);
     check("f-date-checklist", !!clean($("f-date-checklist").value, 40));
+    }
 
     if ($("f-minor").checked) {
       var g = norm($("f-g-sig").value);
@@ -205,6 +240,7 @@
     if (minor) w.push("If the member is under 18, parent or guardian signature: /s/ " + clean($("f-g-sig").value, 120) + " (" + clean($("f-g-rel").value, 40) + ")   Date: " + $("f-g-date").value);
     else w.push("Member confirmed they are 18 or older (under-18 box not checked).");
 
+    if (!WAIVER_ONLY) {
     c.push("FIG PERFORMANCE - Personal Training Client Checklist (" + DOC_VERSION.split("; ")[1] + ")");
     c.push("Client Name: " + full + "      Date: " + $("f-date-checklist").value);
     $("checklist-doc").querySelectorAll(".check-item").forEach(function (li) {
@@ -221,17 +257,19 @@
     if (minor) c.push("Parent or guardian signature: /s/ " + clean($("f-g-sig").value, 120) + " (" + clean($("f-g-rel").value, 40) + ")      Date: " + $("f-g-date").value);
     c.push("Trainer Signature: (to be countersigned by Fig Performance)");
     c.push("Fig Performance (Train With Dan Inc.) · Placentia, CA · (714) 396-7178 · trainat@figperformance.com");
+    }
 
-    $("f-subject").value = "SIGNED: Fig Performance waiver and checklist - " + full;
+    $("f-subject").value = (WAIVER_ONLY ? "SIGNED: Fig Performance waiver (gym membership) - " : "SIGNED: Fig Performance waiver and checklist - ") + full;
     addHidden("_replyto", clean($("f-email").value, 254));
     addHidden("Signed at (Pacific)", stamp);
     addHidden("Signed at (ISO 8601, UTC)", iso);
     addHidden("Signer device time zone", (Intl.DateTimeFormat().resolvedOptions().timeZone || "unknown"));
     addHidden("Document versions", DOC_VERSION);
-    addHidden("Program details prefilled by link", prefilled.length ? "Yes (" + prefilled.join(", ") + ")" : "No (entered on the page)");
+    addHidden("Paperwork type", WAIVER_ONLY ? "Waiver only (gym membership, no personal training checklist)" : "Waiver and Personal Training Client Checklist");
+    if (!WAIVER_ONLY) addHidden("Program details prefilled by link", prefilled.length ? "Yes (" + prefilled.join(", ") + ")" : "No (entered on the page)");
     addHidden("Signed from", window.location.origin + window.location.pathname);
     addHidden("Waiver full text as signed", w.join("\n\n"));
-    addHidden("Checklist full text as signed", c.join("\n\n"));
+    if (!WAIVER_ONLY) addHidden("Checklist full text as signed", c.join("\n\n"));
     $("sign-stamp").textContent = "Signed electronically by " + full + " on " + stamp + ".";
   }
 
@@ -254,7 +292,7 @@
     if (Date.now() - loadedAt < MIN_FILL_MS) {
       e.preventDefault();
       status.className = "form-status err";
-      status.textContent = "Please take a moment to review both documents, then tap Sign and submit again.";
+      status.textContent = "Please take a moment to review " + (WAIVER_ONLY ? "the waiver" : "both documents") + ", then tap Sign and submit again.";
       loadedAt = Date.now() - MIN_FILL_MS;
       status.focus(); return;
     }
