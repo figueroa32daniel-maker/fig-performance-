@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "dumbbell-workout-for-beginners-over-50": [
+        "All you need is dumbbells and an adjustable bench, two or three days a week.",
+        "Push each work set to 7 to 9 on the 1 to 10 scale: two or three reps left in the tank.",
+        "Add two reps or five pounds a week when you're ready. Neutral grips, step-ups and RDLs for cranky joints."],
     "calorie-deficit": [
         "Weight loss is thermodynamics: eat less than you burn. What you eat decides how livable it is, not whether it works.",
         "Set it from an InBody BMR plus your real activity: 300 to 500 calories a day below. Test for one to two weeks.",

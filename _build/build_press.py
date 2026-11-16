@@ -35,6 +35,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="guides">Recent guides by Coach Dan</h2>
 <ul>
+  <li><a href="/dumbbell-workout-for-beginners-over-50">Dumbbell workout for beginners over 50</a></li>
   <li><a href="/calorie-deficit">Calorie deficit after 40</a></li>
   <li><a href="/hotel-workout">The hotel workout</a></li>
   <li><a href="/building-muscle-after-50">Building muscle after 50</a></li>
