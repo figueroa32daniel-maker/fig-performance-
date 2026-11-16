@@ -1,4 +1,4 @@
-"""Article: dumbbell workout for beginners over 50 (from Coach Dan's voice memos, Nov 16 2026). Publish only after Dan approves."""
+"""Article: dumbbell workout for beginners over 50 (from Coach Dan's voice memos; approved by Dan Nov 16 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
