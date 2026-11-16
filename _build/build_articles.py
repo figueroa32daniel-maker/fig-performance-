@@ -134,6 +134,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 
 <h2 id="guides">Guides</h2>
 <ul>
+  <li><a href="/calorie-deficit">Calorie deficit after 40: how I set one that works</a><br>InBody math, foods you already enjoy, the 80/20 rule, and three rules for the new year.</li>
   <li><a href="/hotel-workout">The hotel workout, from someone who travels a lot</a><br>Find the gym, buy the day pass, the dumbbell-and-cable session, and the protein rule for the road.</li>
   <li><a href="/building-muscle-after-50">Building muscle after 50</a><br>Honest numbers on how much you can gain, why recovery and protein matter more, and the research on creatine.</li>
   <li><a href="/strength-training-for-women-over-60">Strength training for women over 60</a><br>Why the formula doesn't change, lifting heavy for bone, training balance, and Teresa's first pull-up.</li>

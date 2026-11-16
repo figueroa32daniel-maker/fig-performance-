@@ -57,6 +57,10 @@ TAKEAWAYS = {
         "Your age doesn't decide your program. Your assessment does.",
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
+    "calorie-deficit": [
+        "Weight loss is thermodynamics: eat less than you burn. What you eat decides how livable it is, not whether it works.",
+        "Set it from an InBody BMR plus your real activity: 300 to 500 calories a day below. Test for one to two weeks.",
+        "Build it from foods you already enjoy, more protein and fiber, 80/20. Get a coach, get a plan, do it."],
     "hotel-workout": [
         "Hotel gym if it has dumbbells, a gym nearby if not, bands if neither, a room circuit last. Twenty minutes beats nothing.",
         "One or two sessions a week maintains muscle and conditioning. Push, squat, pull, core, carry; adjust reps to the weights available.",
