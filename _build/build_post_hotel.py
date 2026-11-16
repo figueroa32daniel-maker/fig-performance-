@@ -10,7 +10,8 @@ body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Po
 
 <h2 id="why">Why I don't skip workouts on the road</h2>
 <p>We're creatures of habit. The reason I train on vacation isn't that one missed week ruins anything. It doesn't. It's that routine is what keeps you from falling off. The more consistent you are with something, the better it sticks and the better the results. Break the routine for a two-week trip and the first week back is twice as hard. Keep it, even at half the dose, and you walk back in like you never left.</p>
-<p>And the dose is small. You only need <strong>one or two workouts a week to maintain muscle and keep your conditioning.</strong> Muscle atrophies faster than people think when you stop using it, but it takes very little to tell it to stay. One session is good enough. Two is better. Three is fantastic. On a vacation trip I'll get at least one or two. On a work trip of two weeks or more, I buy a week pass and train like I'm home.</p>
+<p>The clients of mine who succeed the most on the road are not the ones with the best hotel gym. They're the ones who just keep the routine. That's really it. So before any trip, I give clients three things: one or two workouts a week, lots of steps (a given when you're traveling), and protein at every single meal.</p>
+<p>And the workout dose is small. You only need <strong>one or two workouts a week to maintain muscle and keep your conditioning.</strong> Muscle atrophies faster than people think when you stop using it, but it takes very little to tell it to stay. One session is good enough. Two is better. Three is fantastic. On a vacation trip I'll get at least one or two. On a work trip of two weeks or more, I buy a week pass and train like I'm home.</p>
 {pullquote("Twenty minutes of something is better than nothing. Messy action beats no action, every time.", "Coach Dan Figueroa")}
 
 <h2 id="gym">Step one: use the hotel gym, if there is one</h2>
@@ -62,7 +63,14 @@ body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Po
 
 <h2 id="protein">The habit that matters more than the workout: protein</h2>
 <p>Here's the trick I figured out from traveling a lot. The workouts keep you in the routine, but <strong>protein is what protects your muscle and keeps your appetite from running the trip.</strong> Prioritize protein at every chance you get. The moment you land, before you do anything else, go to a grocery store and stock up: protein shakes, protein bars, protein snacks. Keep them in the room and in your bag.</p>
-<p>Then at every meal, protein first. Vacation food is bread, pasta, dessert and drinks with a little protein on the side. Flip it. Eat the fish, the steak, the eggs first. You'll enjoy the rest more and eat less of it without trying. The rule I give clients: your goal weight in grams of protein a day, even on vacation. The shakes and bars make it possible on a travel day when meals are unpredictable.</p>
+<p>Here's the simple travel version I give clients:</p>
+<ul>
+  <li><strong>Two protein shakes a day.</strong></li>
+  <li><strong>One protein bar, or a couple of cups of Greek yogurt.</strong></li>
+  <li><strong>A dinner with protein and fiber.</strong> Fish, steak, chicken, eggs, plus vegetables.</li>
+</ul>
+<p>That gets you to the floor I want on travel days: <strong>at least 100 grams of protein a day for men and at least 80 for women.</strong> Those are minimums, not targets. If you carry more muscle or you're heavier, your number is higher, and if you're used to eating more, stay there. Plenty of my female clients eat 100 or more. At home the rule is your goal weight in grams; on the road, hold the floor and you'll come back without having lost anything.</p>
+<p>And at every meal, protein first. Vacation food is bread, pasta, dessert and drinks with a little protein on the side. Flip it. Eat the fish, the steak, the eggs first. You'll enjoy the rest more and eat less of it without trying.</p>
 
 <h2 id="holidays">Holiday travel specifically</h2>
 <p>Everything above applies, plus three things, because the holidays stack food, alcohol and no movement for two or three weeks straight:</p>
@@ -89,8 +97,8 @@ faqs = [
      "No. Strength and muscle hold for weeks. The risk isn't the missed week; it's breaking the routine so the first week back is twice as hard."),
     ("What should I pack to work out while traveling?",
      "Gym clothes, and optionally a set of bands, which weigh nothing and cover pull-aparts, squats, Romanian deadlifts and glute work when there's no gym. Coach Dan trains in the same walking shoes he explores in."),
-    ("How do I eat healthy while traveling?",
-     "Protein first at every meal, and stock up on protein shakes, bars and snacks at a grocery store as soon as you arrive. Aim for your goal weight in grams of protein a day, even on vacation."),
+    ("How much protein should I eat while traveling?",
+     "At least 100 grams a day for men and 80 for women, more if you carry more muscle. Coach Dan's travel version: two protein shakes, a protein bar or a couple of Greek yogurts, and a dinner with protein and fiber. Stock up at a grocery store the day you land."),
 ]
 
 html = page(

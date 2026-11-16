@@ -60,7 +60,7 @@ TAKEAWAYS = {
     "hotel-workout": [
         "Hotel gym if it has dumbbells, a gym nearby if not, bands if neither, a room circuit last. Twenty minutes beats nothing.",
         "One or two sessions a week maintains muscle and conditioning. Push, squat, pull, core, carry; adjust reps to the weights available.",
-        "Pack gym clothes and stock up on protein shakes, bars and snacks the day you land."],
+        "Protein floor on the road: 100 g a day for men, 80 for women. Two shakes, a bar or Greek yogurt, a dinner with protein and fiber."],
     "building-muscle-after-50": [
         "You can build muscle after 50. If you've never trained hard, about a pound a month early on is realistic.",
         "Recover better, not train less: 2 to 3 lifting days, never back to back, 7+ hours of sleep, protein at goal weight in grams.",
