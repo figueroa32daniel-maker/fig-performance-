@@ -5,56 +5,46 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-15"
 SLUG = "hotel-workout"
 
-body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Poland, Norway, Costa Rica and Brazil, and all over the US: Florida, Texas, North Carolina, Las Vegas, Oregon. Here's the thing nobody tells you about the "hotel workout": the best one is usually not in your hotel. It's at the gym down the street, and there is always a gym down the street.</p>
-<p>This is how I keep training when I travel, what I look for in a gym, the workout I do when the equipment is limited, a room-only fallback for when there's truly nothing nearby, and the one habit that matters more than any of it over the holidays.</p>
+body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Poland, Norway, Portugal, Costa Rica and Brazil, and all over the US: Florida, Texas, North Carolina, Las Vegas, Oregon. Here's what I've learned about the "hotel workout": the gym is wherever you can find one, the workout doesn't have to be long, and the only mistake is doing nothing because the setup isn't perfect.</p>
+<p>This is how I keep training when I travel, in this order: the hotel gym if there is one, a gym nearby if there isn't, bands if there's neither, and a room-only circuit as the last resort. Plus the one habit that matters more than any of it over the holidays.</p>
 
 <h2 id="why">Why I don't skip workouts on the road</h2>
-<p>We're creatures of habit. The reason I train on vacation isn't that one missed week ruins anything. It doesn't. It's that routine is what keeps you from falling off. The more consistent you are with something, the better it sticks and the better the results. Break the routine for a two-week trip and the first week back is twice as hard. Keep it, even at half the dose, and you walk back into the gym like you never left.</p>
-<p>So the target is low and non-negotiable: <strong>one or two workouts a week while traveling.</strong> One is good enough. Two is better. Three is fantastic. On a vacation trip I'll get at least one or two. On a longer work trip, two weeks or more, I buy a week pass and train like I'm home.</p>
-{pullquote("Even in Brazil, the nearest gym was twenty minutes away. I took an Uber. Routine is worth a twenty-minute ride.", "Coach Dan Figueroa")}
+<p>We're creatures of habit. The reason I train on vacation isn't that one missed week ruins anything. It doesn't. It's that routine is what keeps you from falling off. The more consistent you are with something, the better it sticks and the better the results. Break the routine for a two-week trip and the first week back is twice as hard. Keep it, even at half the dose, and you walk back in like you never left.</p>
+<p>And the dose is small. You only need <strong>one or two workouts a week to maintain muscle and keep your conditioning.</strong> Muscle atrophies faster than people think when you stop using it, but it takes very little to tell it to stay. One session is good enough. Two is better. Three is fantastic. On a vacation trip I'll get at least one or two. On a work trip of two weeks or more, I buy a week pass and train like I'm home.</p>
+{pullquote("Twenty minutes of something is better than nothing. Messy action beats no action, every time.", "Coach Dan Figueroa")}
 
-<h2 id="gym">Step one: find a gym and buy the day pass</h2>
-<p>Before you work out in a hotel room with a towel and a chair, search for a gym within a short ride of where you're staying. There's almost always one. Buy the day pass, or the week pass if you're there a while. It's the best money you'll spend on the trip.</p>
-<p>You don't need a fancy gym. Here's my whole checklist:</p>
+<h2 id="gym">Step one: use the hotel gym, if there is one</h2>
+<p>If the hotel has a weight room, I use it. I don't always book the hotel with the gym, though. When I'm traveling for fun I'd rather be in the right part of town than near a treadmill, and the hotels with real gyms aren't always where I want to stay. So I don't count on it. If it's there, fantastic.</p>
+<p>What makes a hotel gym usable? <strong>Dumbbells.</strong> That's the minimum. No bench, fine. A row of dumbbells that goes up to at least 25 pounds and I can get a real workout. The best case, in a hotel or anywhere, is three things:</p>
 <ul>
   <li><strong>Dumbbells</strong></li>
   <li><strong>A bench</strong></li>
   <li><strong>A cable machine</strong></li>
-  <li><strong>A pull-up bar</strong> is a bonus, not a requirement</li>
 </ul>
-<p>That's it. With dumbbells, a bench and cables you can train every muscle in the body, and the cable machine alone covers a dozen exercises. If a gym has those three things, you're set.</p>
+<p>With those three you can train every muscle in the body. A pull-up bar is a bonus. Nothing builds the upper back faster.</p>
 
-<h2 id="workout">The travel gym workout</h2>
-<p>One full-body session, built from what every small gym has. Pick six to eight of these, one or two per movement, and go:</p>
-<p><strong>Push</strong></p>
-<ul>
-  <li>Dumbbell bench press</li>
-  <li>Dumbbell lateral raises</li>
-  <li>Cable triceps pressdown</li>
-</ul>
-<p><strong>Pull</strong></p>
-<ul>
-  <li>Chest-supported dumbbell row</li>
-  <li>Cable reverse fly</li>
-  <li>Cable curl</li>
-  <li>Pull-ups, if there's a bar and you've got the strength. Nothing builds the upper back faster.</li>
-</ul>
-<p><strong>Legs</strong></p>
-<ul>
-  <li>Dumbbell goblet squat</li>
-  <li>Reverse lunges</li>
-  <li>Single-leg glute bridge</li>
-</ul>
-<p><strong>Core</strong></p>
-<ul>
-  <li>Cable crunches</li>
-  <li>Bench leg raises</li>
-</ul>
-<p><strong>How heavy, how many reps:</strong> it depends on what the gym has. If the dumbbells only go up to 25 pounds, go higher rep, 12 to 25 per set, and make the last few hard. If they go up to 50 or more, train the way you would at home, 6 to 12 reps. Either way, you're keeping the habit and giving the muscle a reason to stay.</p>
-{callout("The travel gym checklist", "All you need", ["Dumbbells, a bench, a cable machine", "A pull-up bar if you're lucky", "A day pass or a week pass", "One or two sessions a week, full body"])}
+<h2 id="nearby">Step two: find a gym nearby and buy the day pass</h2>
+<p>No hotel gym, or just a treadmill in a closet? Search for a gym within a short ride and buy the day pass, or the week pass if you're there a while. It's the best money you'll spend on the trip. Even in Brazil, the nearest gym was twenty minutes away. I took an Uber.</p>
+<p>One honest note: fitness isn't as big everywhere as it is in the US. In Lisbon there was one really good big gym near me and five or ten small boot-camp-style studios that didn't do walk-in memberships. So it depends on the city. Look before you go, and if the only option is a small studio with a day rate, take it.</p>
 
-<h2 id="room">If there's truly no gym: the room-only fallback</h2>
-<p>Rare, but it happens. Twenty minutes, no equipment, three rounds:</p>
+<h2 id="workout">The travel workout</h2>
+<p>One full-body session, built from whatever the gym has. Pick one exercise from each line and go. Twenty minutes is plenty. An hour is not required.</p>
+<ol>
+  <li><strong>Push:</strong> dumbbell bench press or dumbbell overhead press</li>
+  <li><strong>Squat:</strong> goblet squat or reverse lunges</li>
+  <li><strong>Pull:</strong> lat pulldown, one-arm dumbbell row, or pull-ups if there's a bar</li>
+  <li><strong>Core:</strong> dumbbell side bend, bent-over wood chopper, weighted sit-up, or bench leg raises</li>
+  <li><strong>Carry or arms:</strong> hold the heaviest dumbbells you can find for 30 seconds to a minute (grip strength counts), or swap in arms: dumbbell curls, lateral raises, skull crushers. With cables: cable curls, rope or straight-bar pressdowns, cable overhead rows.</li>
+</ol>
+<p><strong>How heavy, how many reps:</strong> it depends on what's there. If the dumbbells top out at 25 pounds, go higher rep, 12 to 25 per set, and make the last few hard. If they go to 50 or more, train the way you would at home, 6 to 12 reps. Either way, you're keeping the habit and giving the muscle a reason to stay.</p>
+{callout("The travel workout", "Five lines, twenty minutes", ["Push, squat, pull, core, carry or arms", "One exercise per line, 2 to 3 sets", "12 to 25 reps with light dumbbells, 6 to 12 with heavy"])}
+
+<h2 id="bands">Step three: bands, when there's no gym at all</h2>
+<p>If you want one piece of gear in your bag, make it a set of bands. They weigh nothing and they go anywhere, and even three exercises with a band keeps the routine alive. Band pull-aparts and shoulder dislocations for the upper back and shoulders. Banded push-ups and banded squats. Banded Romanian deadlifts. A booty band for glute bridges, single-leg glute bridges, kickbacks and fire hydrants.</p>
+<p>It's not the same as a bar on your back. It's not supposed to be. It's three or four exercises, done, routine intact.</p>
+
+<h2 id="room">Last resort: the room-only circuit</h2>
+<p>No gym, no bands, twenty minutes, three rounds:</p>
 <ol>
   <li><strong>Squat</strong> to the edge of the bed or a chair, 15 reps</li>
   <li><strong>Reverse lunges</strong>, 10 per side</li>
@@ -63,15 +53,16 @@ body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Po
   <li><strong>Suitcase carry</strong>: pick up your actual suitcase, walk the hall and back, switch hands</li>
   <li><strong>Plank</strong>, 30 to 45 seconds</li>
 </ol>
-<p>It's not a replacement for lifting. It's a placeholder that keeps the routine alive until you're back under a bar.</p>
+
+<h2 id="perfect">Stop chasing the perfect scenario</h2>
+<p>Some people think that if they can't get a full hour in, it isn't worth doing. It's the opposite. A 20-minute circuit is better than nothing, and nothing is what you get when you wait for ideal. Life gets crazy. Stuff happens. You roll with it and do what you can. If I land somewhere with no gym nearby and a hotel with no weight room, I settle for band work, and I don't feel bad about it, because the point was never to be perfect. The point was to keep doing it.</p>
 
 <h2 id="pack">What I pack</h2>
-<p>Gym clothes. That's it. Nothing crazy, no bands, no gadgets. I train in the same walking shoes I wear to explore the city. If you pack workout clothes, you'll work out. If you don't, you've already decided not to.</p>
+<p>Gym clothes. That's it. I train in the same walking shoes I wear to explore the city. If you pack workout clothes, you'll work out. If you don't, you've already decided not to. Bands are optional and worth it.</p>
 
 <h2 id="protein">The habit that matters more than the workout: protein</h2>
 <p>Here's the trick I figured out from traveling a lot. The workouts keep you in the routine, but <strong>protein is what protects your muscle and keeps your appetite from running the trip.</strong> Prioritize protein at every chance you get. The moment you land, before you do anything else, go to a grocery store and stock up: protein shakes, protein bars, protein snacks. Keep them in the room and in your bag.</p>
-<p>Then at every meal, protein first. Vacation food is bread, pasta, dessert and drinks with a little protein on the side. Flip it. Eat the fish, the steak, the eggs first. You'll enjoy the rest more and eat less of it without trying.</p>
-<p>The rule I give clients: your goal weight in grams of protein a day, even on vacation. Want to weigh 170? Aim for about 170 grams. The shakes and bars make it possible on a travel day when meals are unpredictable.</p>
+<p>Then at every meal, protein first. Vacation food is bread, pasta, dessert and drinks with a little protein on the side. Flip it. Eat the fish, the steak, the eggs first. You'll enjoy the rest more and eat less of it without trying. The rule I give clients: your goal weight in grams of protein a day, even on vacation. The shakes and bars make it possible on a travel day when meals are unpredictable.</p>
 
 <h2 id="holidays">Holiday travel specifically</h2>
 <p>Everything above applies, plus three things, because the holidays stack food, alcohol and no movement for two or three weeks straight:</p>
@@ -89,15 +80,15 @@ body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Po
 
 faqs = [
     ("What's the best hotel workout?",
-     "The gym near your hotel. Coach Dan searches for a gym within a short ride, buys a day or week pass, and trains with dumbbells, a bench and a cable machine. A room-only bodyweight circuit is the fallback when there's truly no gym nearby."),
+     "Use the hotel gym if it has dumbbells. If not, find a gym nearby and buy a day pass. If there's neither, bands. Last resort, a 20-minute room circuit. A full-body session of push, squat, pull, core and a carry covers everything."),
     ("How many workouts should I do while traveling?",
-     "One or two a week keeps the routine alive. One is good enough, two is better, three is fantastic. On long work trips, buy a week pass and train like you're home."),
+     "One or two a week is enough to maintain muscle and conditioning. Twenty minutes counts. On long work trips, buy a week pass and train like you're home."),
     ("What equipment does a travel gym need?",
      "Dumbbells, a bench and a cable machine cover every muscle. A pull-up bar is a bonus. Adjust reps to the weights available: 12 to 25 reps with light dumbbells, 6 to 12 with heavier ones."),
     ("Will I lose muscle if I skip the gym for a week?",
      "No. Strength and muscle hold for weeks. The risk isn't the missed week; it's breaking the routine so the first week back is twice as hard."),
     ("What should I pack to work out while traveling?",
-     "Gym clothes. Coach Dan trains in the same walking shoes he explores in. No bands or gadgets required."),
+     "Gym clothes, and optionally a set of bands, which weigh nothing and cover pull-aparts, squats, Romanian deadlifts and glute work when there's no gym. Coach Dan trains in the same walking shoes he explores in."),
     ("How do I eat healthy while traveling?",
      "Protein first at every meal, and stock up on protein shakes, bars and snacks at a grocery store as soon as you arrive. Aim for your goal weight in grams of protein a day, even on vacation."),
 ]
@@ -105,12 +96,12 @@ faqs = [
 html = page(
     SLUG,
     "Hotel Workout: How I Train in Any Country | Fig Performance",
-    "The best hotel workout is the gym down the street. How Coach Dan trains on the road, the dumbbell-and-cable session, a room-only fallback, and the protein rule.",
+    "Hotel gym, a gym nearby, bands, or a 20-minute room circuit: how Coach Dan trains on the road in any country, the travel workout, and the protein rule.",
     "Hotel Workout: How I Train in Any Country (Gym or No Gym)",
     "Fitness after 40", "The Hotel Workout, From Someone Who Travels a Lot",
-    "Find the gym, buy the day pass, pack gym clothes, stock up on protein. One or two sessions a week keeps the routine alive.",
-    [("why", "Why I don't skip"), ("gym", "Find a gym"), ("workout", "The travel workout"), ("room", "Room-only fallback"),
-     ("pack", "What I pack"), ("protein", "Protein on the road"), ("holidays", "Holiday travel"), ("coach", "When you get home")],
+    "Hotel gym, gym nearby, bands, or a room circuit. Twenty minutes beats nothing, and one or two sessions a week keeps the routine alive.",
+    [("why", "Why I don't skip"), ("gym", "The hotel gym"), ("nearby", "A gym nearby"), ("workout", "The travel workout"), ("bands", "Bands"),
+     ("room", "Room-only circuit"), ("perfect", "Stop chasing perfect"), ("pack", "What I pack"), ("protein", "Protein on the road"), ("holidays", "Holiday travel"), ("coach", "When you get home")],
     body, faqs, "Hotel Workout", kind="article", published=DATE)
 
 if __name__ == "__main__":
