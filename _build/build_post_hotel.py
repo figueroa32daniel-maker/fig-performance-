@@ -1,4 +1,4 @@
-"""Article: hotel / travel workout (from Coach Dan's voice memo, Nov 15 2026). Publish only after Dan approves."""
+"""Article: hotel / travel workout (from Coach Dan's voice memos Nov 15-16; approved by Dan Nov 16 2026)."""
 import sys
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
