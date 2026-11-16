@@ -106,7 +106,7 @@ html = page(
     SLUG,
     "Hotel Workout: How I Train in Any Country | Fig Performance",
     "The best hotel workout is the gym down the street. How Coach Dan trains on the road, the dumbbell-and-cable session, a room-only fallback, and the protein rule.",
-    "Hotel Workout: How I Train in Any Country (and Why It's Usually Not in the Hotel)",
+    "Hotel Workout: How I Train in Any Country (Gym or No Gym)",
     "Fitness after 40", "The Hotel Workout, From Someone Who Travels a Lot",
     "Find the gym, buy the day pass, pack gym clothes, stock up on protein. One or two sessions a week keeps the routine alive.",
     [("why", "Why I don't skip"), ("gym", "Find a gym"), ("workout", "The travel workout"), ("room", "Room-only fallback"),

@@ -58,8 +58,8 @@ TAKEAWAYS = {
         "Strength training helps slow the bone and muscle loss that speeds up after menopause.",
         "Train 3 times a week, build up to heavy gradually, and eat at least your goal weight in grams of protein."],
     "hotel-workout": [
-        "The best hotel workout is the gym down the street. Buy the day pass; dumbbells, a bench and cables are all you need.",
-        "One or two sessions a week keeps the routine alive. Adjust reps to the weights available.",
+        "Hotel gym if it has dumbbells, a gym nearby if not, bands if neither, a room circuit last. Twenty minutes beats nothing.",
+        "One or two sessions a week maintains muscle and conditioning. Push, squat, pull, core, carry; adjust reps to the weights available.",
         "Pack gym clothes and stock up on protein shakes, bars and snacks the day you land."],
     "building-muscle-after-50": [
         "You can build muscle after 50. If you've never trained hard, about a pound a month early on is realistic.",
