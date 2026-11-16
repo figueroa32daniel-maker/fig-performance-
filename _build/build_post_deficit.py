@@ -26,8 +26,16 @@ body = f"""<p class="legal-intro">Every January the same thing happens. People s
 </ol>
 {callout("The setup", "Scan, then math", ["InBody for your BMR", "Add your activity and job", "Subtract 300 to 500 calories", "Test for one to two weeks, scan weekly, adjust"])}
 
-<h2 id="low">How low can you go?</h2>
-<p>I've had clients as low as 1,000 calories a day, for a short stretch, with a reason, and with protein and lifting kept high so the weight that comes off is fat. <a href="/how-to-lose-10-pounds-in-a-month">Adriana lost 10 pounds in her first month</a> that way. But that's a sprint, not a lifestyle, and it's not where most people should start. For most clients over 40, 300 to 500 calories a day is the number: about half a pound to a pound a week, slow enough to keep your muscle, your energy and your sanity.</p>
+<h2 id="low">How aggressive should a deficit be?</h2>
+<p>A 1,000-calorie deficit can be done. I've done it with clients. <a href="/how-to-lose-10-pounds-in-a-month">Adriana lost 10 pounds in her first month</a> on roughly a 1,000-calorie daily deficit, about 500 from eating less and 500 from moving more. But I would not start someone there, especially someone who's very heavy. An aggressive deficit has to be calculated: you need a history of what you've been eating, how you felt at those calories, and an honest look at the trade-off. Cut harder and you get more headaches and your training suffers. Is it worth it for a few weeks? Sometimes. As a lifestyle? No.</p>
+<p>For most clients over 40, 300 to 500 calories a day below what you burn is the number: about half a pound to a pound a week, slow enough to keep your muscle, your energy and your sanity. Be strategic, logical and reasonable, and think about whether you can still be doing it in six months.</p>
+
+<h2 id="skinnyfat">Why "intermittent fasting worked" and you still look soft</h2>
+<p>Here's a story I hear constantly. Someone starts intermittent fasting. They don't eat until 4 or 5 p.m., then they eat one meal, maybe 800 calories, they're full, they go to sleep, and they do it again the next day. They lose weight and they credit the fasting.</p>
+<p>It's not the fasting. It's that they're eating 800 calories a day. That's 5,600 calories a week. Of course they lost weight.</p>
+<p>Then a couple of months in, they come to me and say, "I lost the weight, but I'm not toned. I don't look defined. I look skinny fat." That's because they lost weight for the sake of losing weight, with almost no protein and no lifting, so a big share of what came off was muscle. The goal isn't a smaller number on the scale. It's better body composition: less fat, same or more muscle. That takes enough protein, strength training, and carbohydrates placed strategically around your training for recovery and performance.</p>
+{pullquote("You didn't lose weight because of intermittent fasting. You lost weight because you were eating 800 calories a day.", "Coach Dan Figueroa")}
+
 <p>One more reason not to go too low: as you lose weight, you burn less, so the same deficit shrinks over time. The NIH built a calculator around the real math, the <a href="{BWP}" target="_blank" rel="noopener noreferrer">Body Weight Planner</a>, and it shows weight loss slowing even when you do everything right. That slowdown isn't failure. It's why we re-scan and adjust.</p>
 
 <h2 id="food">Build the diet from food you already eat</h2>
@@ -40,7 +48,7 @@ body = f"""<p class="legal-intro">Every January the same thing happens. People s
 <p>A diet has to be two things to last: <strong>enjoyable and flexible.</strong> If I give someone food they don't like, they won't stick to it. So I use an 80/20 approach: about 80% of your food is the structured, protein-first plan built from things you enjoy, and 20% is whatever you want. Food is emotional and psychological. Going cold turkey on everything you like is how people end up bingeing in week three. Keeping a connection to the food you love is what makes it work for a year, not a month.</p>
 
 <h2 id="wrong">What goes wrong every January</h2>
-<p>People try the same thing they tried last year and expect a different result. The same crash diet, the same 6 a.m. cardio, the same "this time I'll just have more willpower." If you want a different result, you have to do something different.</p>
+<p>There's an old saying, usually credited to Einstein, though nobody's sure who said it first: insanity is doing the same thing over and over and expecting different results. That's January. People try the same crash diet, the same 6 a.m. cardio, the same "this time I'll just have more willpower," and expect it to work this time. If you want a different result, you have to do something completely different.</p>
 <p>And you have to be logical about it, not emotional. The scale goes up a pound after a salty dinner and people throw the whole plan out. A logical person looks at the weekly average and the InBody and asks whether the trend is moving. Usually it is.</p>
 
 <h2 id="rules">My three rules for the new year</h2>
@@ -68,11 +76,11 @@ faqs = [
     ("Does it matter what you eat in a calorie deficit?",
      "For weight loss, the amount matters most. A Kansas State nutrition professor lost 27 pounds in 10 weeks eating mostly snack cakes at 1,800 calories a day. For muscle, energy and sticking with it, food quality matters: protein, fiber, and food you enjoy."),
     ("Is a 1,000-calorie deficit safe?",
-     "Some clients go that low for a short stretch, with high protein and lifting. It's a sprint, not a lifestyle, and not where most people should start. Talk to your doctor if you have a medical condition."),
+     "It can be done for a short stretch, with high protein and lifting, but it's not where to start, especially if you're very heavy. Expect more headaches and lower performance. Most adults over 40 do better at 300 to 500 calories a day. Talk to your doctor if you have a medical condition."),
     ("Why am I in a calorie deficit but not losing weight?",
      "Water can hold the scale still while fat comes off, then drop all at once. Give a new deficit one to two weeks, track your weekly average, and use a body-composition scan to see what changed."),
     ("Does intermittent fasting work better than a calorie deficit?",
-     "No. Intermittent fasting works because it's a structured way to eat fewer calories. If you eat the same total, the timing doesn't change fat loss."),
+     "No. Intermittent fasting works because it's a structured way to eat fewer calories. One 800-calorie meal a day is a big deficit, and without enough protein and lifting it often leaves people skinny fat."),
     ("What is the 80/20 rule for dieting?",
      "About 80% of your food follows the plan, built from foods you already enjoy with more protein and fiber, and 20% is whatever you want. It keeps the diet enjoyable and flexible, which is what makes it last."),
 ]
@@ -84,7 +92,7 @@ html = page(
     "Calorie Deficit After 40: How I Set One That Actually Works",
     "Fitness after 40", "Calorie Deficit After 40: How I Set One That Works",
     "Burn more than you eat. The trick is a deficit you can live with: InBody math, food you enjoy, and three rules for the new year.",
-    [("simple", "It's thermodynamics"), ("set", "How I set it"), ("low", "How low can you go?"), ("food", "Food you already eat"),
+    [("simple", "It's thermodynamics"), ("set", "How I set it"), ("low", "How aggressive?"), ("skinnyfat", "Why you look soft"), ("food", "Food you already eat"),
      ("wrong", "What goes wrong in January"), ("rules", "Three rules for the new year"), ("track", "Is it working?"), ("coach", "Start with a number")],
     body, faqs, "Calorie Deficit After 40", kind="article", published=DATE)
 
