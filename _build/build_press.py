@@ -5,8 +5,17 @@ SLUG = "press"
 
 body = """<p class="legal-intro">For interview requests, expert quotes or photos, email <a href="mailto:trainat@figperformance.com">trainat@figperformance.com</a> or text <a href="sms:+17143967178">(714) 396-7178</a>. Coach Dan replies within 24 hours.</p>
 
+<h2 id="news">In the news</h2>
+<figure class="press-feature press-feature-lg">
+  <p class="press-feature-label">VoyageLA Magazine &middot; November 16, 2026</p>
+  <p class="press-feature-title"><a href="https://voyagela.com/interview/exploring-life-business-with-daniel-figueroa-of-fig-performance/" target="_blank" rel="noopener">Exploring Life &amp; Business with Daniel Figueroa of FIG Performance</a></p>
+  <p>In this Local Stories interview, Dan talks about starting as a personal trainer in 2020, coaching clients out of his garage during COVID, and being turned down by four landlords before he found the Placentia space. He also explains how Fig Performance coaches adults over 40: 80/20 nutrition built around food you enjoy, and training you can keep doing for years.</p>
+  <blockquote><p>&ldquo;Consistency over time is the key to long-term health and fitness.&rdquo;</p></blockquote>
+  <figcaption><a href="https://voyagela.com/interview/exploring-life-business-with-daniel-figueroa-of-fig-performance/" target="_blank" rel="noopener">Read the full interview on VoyageLA &rarr;</a></figcaption>
+</figure>
+
 <h2 id="about">About Fig Performance</h2>
-<p>Fig Performance is a private, one-on-one strength gym in Placentia, California, built for adults over 40 who want to lose fat, build muscle and get stronger. Every client starts with an InBody body-composition scan, so progress is measured, not guessed. Recovery is built in with red light and vibration therapy. The gym opens officially on Saturday, November 14, 2026, at 1284 E. Yorba Linda Blvd, Placentia, CA 92870.</p>
+<p>Fig Performance is a private, one-on-one strength gym in Placentia, California, built for adults over 40 who want to lose fat, build muscle and get stronger. Every client starts with an InBody body-composition scan, so progress is measured, not guessed. Recovery is built in with red light and vibration therapy. The gym opened on Saturday, November 14, 2026, at 1284 E. Yorba Linda Blvd, Placentia, CA 92870.</p>
 
 <h2 id="dan">About Coach Dan Figueroa</h2>
 <p>Daniel Figueroa is the owner and head coach of Fig Performance. He is an ACSM certified personal trainer, a Precision Nutrition Level 1 certified nutrition coach, certified in CPR, AED and first aid, and a former lifeguard. He has trained since age 15&frac12; and placed first and second in bodybuilding competitions. Before opening Fig Performance, he coached clients through Train With Dan, his coaching business, which holds a 5.0 rating across 38 Yelp reviews.</p>
@@ -72,7 +81,7 @@ html = page(SLUG, "Press & Media | Fig Performance, Placentia",
             "Press kit for Fig Performance: about the gym, Coach Dan Figueroa's bio, headshot and logo, topics he speaks on, and how to request an interview.",
             "Press & Media: Fig Performance and Coach Dan Figueroa", "Press", "Press &amp; Media",
             "Expert quotes on fitness after 40 from Coach Dan Figueroa, ACSM certified personal trainer.",
-            [("about", "About Fig Performance"), ("dan", "About Coach Dan"), ("topics", "Topics"), ("facts", "Fast facts"), ("contact", "Press contact")],
+            [("news", "In the news"), ("about", "About Fig Performance"), ("dan", "About Coach Dan"), ("topics", "Topics"), ("facts", "Fast facts"), ("contact", "Press contact")],
             body, faqs, "Press", kind="article", published="2026-10-31")
 
 if __name__ == "__main__":
