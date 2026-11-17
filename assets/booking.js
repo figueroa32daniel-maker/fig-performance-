@@ -13,7 +13,7 @@
   var TZ = "America/Los_Angeles";
   var DAYS = 14;
   var PHONE = (window.CONFIG && CONFIG.PHONE) || "(714) 396-7178";
-  var LEAD_ENDPOINT = (window.CONFIG && CONFIG.FORM_ENDPOINT) || "https://formsubmit.co/ajax/figueroa32daniel@gmail.com";
+  var LEAD_ENDPOINT = (window.CONFIG && CONFIG.FORM_ENDPOINT) || "https://formsubmit.co/ajax/trainat@figperformance.com";
   var POLICY = (window.CONFIG && CONFIG.POLICY_VERSION) || "";
   var loadedAt = Date.now();
 

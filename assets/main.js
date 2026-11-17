@@ -7,7 +7,7 @@
 var CONFIG = {
   PHONE: "(714) 396-7178",            // display format; links use +1 digits
   EMAIL: "trainat@figperformance.com",
-  FORM_ENDPOINT: "https://formsubmit.co/ajax/figueroa32daniel@gmail.com",
+  FORM_ENDPOINT: "https://formsubmit.co/ajax/trainat@figperformance.com",
   POLICY_VERSION: "2026-10-24.2"         // bump when privacy/terms/consent text changes
 };
 
