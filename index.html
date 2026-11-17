@@ -32,7 +32,7 @@
   <link rel="preload" href="/assets/fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/assets/styles.css?v=47">
+  <link rel="stylesheet" href="/assets/styles.css?v=48">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
 
   <!-- Structured data: only confirmed facts. -->
@@ -230,7 +230,7 @@
       "description": "About an hour: an InBody body-composition scan, a movement and strength assessment, a goals conversation and a game plan. No commitment.",
       "price": "0",
       "priceCurrency": "USD",
-      "url": "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
+      "url": "https://www.figperformance.com/#consult"
     },
     {
       "@type": "Offer",
@@ -318,7 +318,7 @@
     "name": "Book a free consult",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan",
+      "urlTemplate": "https://www.figperformance.com/#consult",
       "actionPlatform": [
         "https://schema.org/DesktopWebPlatform",
         "https://schema.org/MobileWebPlatform"
@@ -577,37 +577,24 @@
         <div class="consult-head">
           <p class="kicker">Take the first step</p>
           <h2 id="consult-title">Book your free consultation</h2>
-          <p>Answer 5 quick questions and leave your number. We&rsquo;ll text or call to set it up.</p>
-          <p class="consult-book"><span>Free, no commitment. <a href="/free-consult-placentia">See what&rsquo;s included</a>. Rather pick a time yourself?</span> <a class="btn btn-gold" href="https://calendly.com/trainwithcoachdan/free-consult-inbody-scan" target="_blank" rel="noopener">Book online now</a></p>
+          <p>Pick a day and a time, leave your mobile number, and you&rsquo;re booked. We&rsquo;ll text you a confirmation right away.</p>
+          <p class="consult-book"><span>Free, no commitment. <a href="/free-consult-placentia">See what&rsquo;s included</a>.</span></p>
         </div>
 
-        <div class="quiz" id="quiz" data-state="intro">
-          <!-- Progress + back (shown by JS) -->
-          <div class="quiz-top" hidden>
-            <button type="button" class="quiz-back" aria-label="Go back to the previous question">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Back
-            </button>
-            <p class="quiz-count" aria-live="polite" aria-atomic="true"></p>
-          </div>
-          <div class="quiz-bar" hidden><span></span></div>
-
-          <!-- JS renders the one-question-per-screen quiz in here -->
-          <div class="quiz-body" id="quiz-body"></div>
-
-          <!-- No-JavaScript fallback: plain form that still emails Dan -->
+        <div class="quiz booking" id="booking" data-state="loading">
+          <!-- assets/booking.js renders the day and time picker here -->
           <noscript>
             <form class="lead-form-basic" action="https://formsubmit.co/figueroa32daniel@gmail.com" method="POST">
               <input type="hidden" name="_subject" value="New Fig Performance consult request">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_next" value="https://www.figperformance.com/thanks">
               <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-              <label for="ns-name">First name</label><input id="ns-name" name="First name" autocomplete="given-name" required>
+              <label for="ns-name">Full name</label><input id="ns-name" name="Name" autocomplete="name" required>
               <label for="ns-phone">Mobile number</label><input id="ns-phone" name="Mobile" type="tel" inputmode="tel" autocomplete="tel" required>
-              <label for="ns-email">Email (optional)</label><input id="ns-email" name="Email" type="email" autocomplete="email">
-              <label for="ns-int">Interested in</label>
-              <select id="ns-int" name="Interested in"><option>1:1 personal training</option><option>Semi-private</option><option>Membership</option><option>Concierge personal training</option><option>Not sure, help me choose</option></select>
+              <label for="ns-email">Email</label><input id="ns-email" name="Email" type="email" autocomplete="email" required>
+              <label for="ns-when">Best day and time for you</label><input id="ns-when" name="Best time" required>
               <p class="consent">By submitting, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>, and that Fig Performance may call or text this number about your consultation and services. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.</p>
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Book my free consult</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Request my free consult</button>
             </form>
           </noscript>
         </div>
@@ -1579,7 +1566,7 @@
         <p class="section-sub">About an hour with Dan: an InBody scan, a workout assessment and a recommended program for your goals. It&rsquo;s free, and you don&rsquo;t have to sign up for anything.</p>
         <div class="final-cta-btns">
           <a class="btn btn-primary btn-lg" href="#consult">Answer 5 quick questions</a>
-          <a class="btn btn-inverse btn-lg" href="https://calendly.com/trainwithcoachdan/free-consult-inbody-scan" target="_blank" rel="noopener">Pick a time online</a>
+          <a class="btn btn-inverse btn-lg" href="#consult">Pick a time online</a>
         </div>
         <p class="final-cta-call">Or call or text <a href="tel:+17143967178" data-contact-text="phone">(714) 396-7178</a></p>
       </div>
@@ -1644,6 +1631,7 @@
     <a class="btn btn-secondary mcta-call" href="tel:+17143967178" tabindex="-1" aria-label="Call or text (714) 396-7178" data-contact="phone"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg></a>
   </div>
 
-  <script src="/assets/main.js?v=36" defer></script>
+  <script src="/assets/main.js?v=37" defer></script>
+  <script src="/assets/booking.js?v=1" defer></script>
 </body>
 </html>
