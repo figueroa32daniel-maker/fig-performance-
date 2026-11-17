@@ -3,11 +3,13 @@
  * The website's own day/time picker talks to this; this talks to Calendly.
  *
  *   GET  /api/booking?from=YYYY-MM-DD   -> open consult times for 7 days from that date
- *   POST /api/booking                    -> books a time (name, mobile, email required)
+ *   POST /api/booking                    -> books a time (name + mobile required, email optional)
  *
  * Settings (Vercel > Project > Settings > Environment Variables):
  *   CALENDLY_TOKEN       required. Calendly personal access token. Never put it in the site files.
  *   CALENDLY_EVENT_SLUG  optional. The end of the consult booking link. Default: free-consult-inbody-scan
+ *   BOOKING_INBOX        optional. Calendly needs an email on every booking; when a visitor skips email,
+ *                        the booking uses this address instead. Default: trainat@figperformance.com
  */
 "use strict";
 
@@ -99,16 +101,25 @@ async function book(req, res) {
   const start = clean(b.start, 40);
   if (name.length < 2) return send(res, 400, { error: "name" });
   if (!phone) return send(res, 400, { error: "phone" });
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return send(res, 400, { error: "email" });
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return send(res, 400, { error: "email" });
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(start) || Date.parse(start) < Date.now()) return send(res, 400, { error: "start" });
 
   const et = await eventType();
-  const invitee = { name, email, timezone: TZ, text_reminder_number: phone };
+  // Like Train With Dave: only name + mobile are required. Calendly still needs an email, so a
+  // booking without one uses the gym's inbox (Dan then also gets Calendly's emails for it).
+  const inbox = (process.env.BOOKING_INBOX || "trainat@figperformance.com").trim();
+  const invitee = { name, email: email || inbox, timezone: TZ, text_reminder_number: phone };
   const payload = {
     event_type: et.uri,
     start_time: start,
     invitee,
-    tracking: { utm_source: "figperformance.com", utm_medium: "website", utm_campaign: "native-booking" }
+    tracking: {
+      utm_source: clean(b.utm_source, 100) || "figperformance.com",
+      utm_medium: clean(b.utm_medium, 100) || "website",
+      utm_campaign: clean(b.utm_campaign, 100) || "native-booking",
+      utm_content: clean(b.utm_content, 100) || undefined,
+      utm_term: clean(b.utm_term, 100) || undefined
+    }
   };
   let r = await calendly("/invitees", { method: "POST", body: JSON.stringify(payload) });
   // If text reminders aren't switched on for this event yet, Calendly can reject the number: book without it.

@@ -19,6 +19,28 @@
 
   var st = { mode: "loading", slots: {}, day: null, time: null, page: 0, loaded: {} };
 
+  /* Returning visitors: their details are filled in for them (this browser only). */
+  var SAVED = "fig-booker";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(SAVED) || "{}") || {}; } catch (e) { saved = {}; }
+  function remember(d) { try { localStorage.setItem(SAVED, JSON.stringify(d)); } catch (e) {} }
+
+  /* Where the visitor came from (ad, Google, Instagram), kept for this visit. */
+  var UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  var utm = {};
+  try {
+    var q = new URLSearchParams(location.search);
+    UTM_KEYS.forEach(function (k) { if (q.get(k)) utm[k] = q.get(k).slice(0, 100); });
+    if (q.get("gclid")) utm.utm_source = utm.utm_source || "google-ads";
+    if (q.get("fbclid")) utm.utm_source = utm.utm_source || "facebook";
+    if (Object.keys(utm).length) sessionStorage.setItem("fig-utm", JSON.stringify(utm));
+    else utm = JSON.parse(sessionStorage.getItem("fig-utm") || "{}") || {};
+  } catch (e) {}
+  if (!utm.utm_source && document.referrer && document.referrer.indexOf(location.host) < 0) {
+    try { utm.utm_source = new URL(document.referrer).hostname.replace(/^www\./, ""); utm.utm_medium = "referral"; } catch (e) {}
+  }
+  function source() { return UTM_KEYS.filter(function (k) { return utm[k]; }).map(function (k) { return k.replace("utm_", "") + ": " + utm[k]; }).join(", ") || "direct / unknown"; }
+
   var fmtDay = new Intl.DateTimeFormat("en-US", { timeZone: TZ, weekday: "short" });
   var fmtNum = new Intl.DateTimeFormat("en-US", { timeZone: TZ, day: "numeric" });
   var fmtMon = new Intl.DateTimeFormat("en-US", { timeZone: TZ, month: "short" });
@@ -107,18 +129,24 @@
     if (!request) html += '<p class="bk-label"><span>3</span> Your details</p><p class="bk-summary">' + (st.time ? esc(fmtLong.format(new Date(st.time))) + " at " + esc(fmtTime.format(new Date(st.time))) + " (Pacific) &middot; Fig Performance, Placentia" : "") + "</p>";
     html +=
       '<div class="bk-fields">' +
-        '<label class="bk-field"><span>Full name</span><input name="name" autocomplete="name" maxlength="80" required></label>' +
-        '<label class="bk-field"><span>Mobile phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(714) 555-0123" required></label>' +
-        '<label class="bk-field bk-wide"><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="254" required></label>' +
+        '<label class="bk-field"><span>Name</span><input name="name" autocomplete="name" maxlength="80" placeholder="First and last" value="' + esc(saved.name || "") + '" required></label>' +
+        '<label class="bk-field"><span>Mobile phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(714) 555-0123" value="' + esc(saved.phone || "") + '" required>' +
+          '<small class="bk-note">We\'ll text your confirmation and a reminder. Reply STOP anytime.</small></label>' +
         (request ? '<label class="bk-field bk-wide"><span>Best day and time for you</span><input name="when" maxlength="120" placeholder="e.g. Tuesday after 5 PM" required></label>' : "") +
-        '<label class="bk-field bk-wide"><span>Your goal <i>(optional)</i></span><textarea name="goal" rows="2" maxlength="500" placeholder="e.g. lose 20 lb, get stronger, back pain"></textarea></label>' +
+        '<div class="bk-wide bk-extras">' +
+          '<button type="button" class="bk-more" data-more="goal" aria-expanded="false">+ Add your goal <i>(optional)</i></button>' +
+          '<button type="button" class="bk-more" data-more="email" aria-expanded="' + (saved.email ? "true" : "false") + '"' + (saved.email ? " hidden" : "") + '>+ Add email for a calendar invite <i>(optional)</i></button>' +
+        "</div>" +
+        '<label class="bk-field bk-wide" data-extra="goal" hidden><span>Your goal</span><textarea name="goal" rows="2" maxlength="500" placeholder="e.g. lose 20 lb, rebuild after an injury, get strong for a trip"></textarea></label>' +
+        '<label class="bk-field bk-wide" data-extra="email"' + (saved.email ? "" : " hidden") + '><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="254" value="' + esc(saved.email || "") + '"></label>' +
         '<input name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       "</div>" +
       '<p class="consent">We\'ll text you a confirmation and reminders for your appointment. By booking, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>, and that Fig Performance may call or text this number about your consultation and services. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.</p>' +
       '<p class="form-status" role="alert" tabindex="-1"></p>' +
       '<button class="btn btn-gold btn-lg btn-block" type="submit">' + (request ? "Request my free consult" : "Confirm my free consultation") + "</button>" +
-      '<p class="bk-fine">Free &middot; No credit card &middot; About an hour, including your InBody scan</p>' +
-      "</form>";
+      '<p class="bk-fine">Free &middot; No credit card &middot; ' + (request ? "We\'ll text you to confirm" : "Instant confirmation") + "</p>" +
+      "</form>" +
+      '<p class="bk-talk">Prefer to talk? Call <a href="' + telHref() + '">' + esc(PHONE) + "</a> and we\'ll book it for you.</p>";
     root.innerHTML = html;
   }
 
@@ -126,6 +154,12 @@
   root.addEventListener("click", function (e) {
     var b = e.target.closest("button");
     if (!b || b.disabled || !root.contains(b)) return;
+    if (b.hasAttribute("data-more")) {
+      var which = b.getAttribute("data-more");
+      var box = root.querySelector('[data-extra="' + which + '"]');
+      if (box) { box.hidden = false; b.hidden = true; b.setAttribute("aria-expanded", "true"); var inp = box.querySelector("input, textarea"); if (inp) inp.focus(); }
+      return;
+    }
     if (b.hasAttribute("data-page")) {
       st.page = Math.max(0, Math.min(1, st.page + Number(b.getAttribute("data-page"))));
       render();
@@ -165,7 +199,7 @@
     var err = null, bad = null;
     if (name.length < 2) { err = "Please enter your name."; bad = "name"; }
     else if (digits(phone).length !== 10) { err = "Please enter a 10-digit mobile number so we can text your confirmation."; bad = "phone"; }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err = "Please enter a valid email."; bad = "email"; }
+    else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err = "Please check your email, or leave it blank."; bad = "email"; }
     else if (st.mode === "request" && when.length < 2) { err = "Tell us a day and time that suits you."; bad = "when"; }
     form.querySelectorAll("input").forEach(function (i) { i.removeAttribute("aria-invalid"); });
     if (err) {
@@ -180,17 +214,20 @@
     status.className = "form-status"; status.textContent = "";
 
     var lead = {
-      "Name": name, "Mobile": phone, "Email": email, "Goal": goal || "(not given)",
+      "Name": name, "Mobile": phone, "Email": email || "(not given)", "Goal": goal || "(not given)", "Came from": source(),
       "Consent": "Yes: agreed to Privacy Policy & Terms and to calls/texts about consultation & services (STOP to opt out; not a condition of purchase). Policy version " + POLICY,
       "Submitted from": "figperformance.com booking",
-      _template: "table", _captcha: "false", _replyto: email
+      _template: "table", _captcha: "false"
     };
+    if (email) lead._replyto = email;
+    partialSent = true;                                         // a real submit replaces the "unfinished" alert
 
     var done = function (booked, result) {
       lead["Status"] = booked ? "BOOKED in Calendly" : "Needs a time: text them to confirm";
       lead["Appointment"] = booked ? fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) + " (Pacific)" : (when || "(see note)");
       lead._subject = (booked ? "New consult booked: " : "Consult request: ") + name + " · " + lead["Appointment"];
       sendLead(lead);
+      remember({ name: name, phone: phone, email: email });
       showDone(name, booked, result);
     };
 
@@ -199,7 +236,7 @@
     fetch("/api/booking", {
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website") })
+      body: JSON.stringify(Object.assign({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website") }, utm))
     })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
       .then(function (r) {
@@ -207,11 +244,17 @@
         btn.disabled = false; btn.textContent = label;
         status.className = "form-status err";
         if (r.status === 409) {
-          status.textContent = "Someone just took that time. Please pick another.";
-          var times = st.slots[st.day] || []; st.slots[st.day] = times.filter(function (t) { return t !== st.time; });
-          st.time = null; setTimeout(function () { render(); }, 1600);
+          status.textContent = "That time was just taken. Here are the next openings.";
+          var taken = st.time; st.time = null; st.slots = {}; st.loaded = {};
+          setTimeout(function () {
+            loadAll().then(function () {
+              (st.slots[st.day] || []).length || (st.day = dayList.filter(function (k) { return (st.slots[k] || []).length; })[0] || null);
+              st.mode = st.day ? "pick" : "request"; render();
+            }).catch(function () { st.mode = "request"; render(); });
+          }, 1400);
+          void taken;
         } else if (r.status === 400) {
-          status.textContent = r.j.error === "phone" ? "Please check your mobile number." : r.j.error === "email" ? "Please check your email." : "Please check your details and try again.";
+          status.textContent = r.j.error === "phone" ? "Please check your mobile number." : r.j.error === "email" ? "Please check your email, or leave it blank." : "Please check your details and try again.";
         } else {
           // Booking system trouble: don't lose them. Send Dan the request with the time they picked.
           when = fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) + " (online booking failed, please confirm)";
@@ -224,6 +267,49 @@
         done(false);
       });
   });
+
+  /* Unfinished bookings: if someone types a name and a valid mobile, then leaves without
+     confirming, Dan still gets their details. They did NOT agree to texts, so the email says
+     call only. Sent once per set of details. */
+  var partialSent = false, partialSig = "", idleTimer = null;
+  function reportUnfinished(reason) {
+    if (partialSent || st.mode === "done") return;
+    var form = root.querySelector(".bk-form"); if (!form) return;
+    var name = (form.elements.name || {}).value || "", phone = (form.elements.phone || {}).value || "";
+    if (name.trim().length < 2 || digits(phone).length !== 10 || (form.elements.website && form.elements.website.value)) return;
+    var sig = name.trim() + "|" + digits(phone); if (sig === partialSig) return; partialSig = sig;
+    var fd = new FormData();
+    fd.append("Status", "UNFINISHED: typed their details but did not book. CALL ONLY (no text consent).");
+    fd.append("Name", name.trim()); fd.append("Mobile", phone.trim());
+    fd.append("Email", ((form.elements.email || {}).value || "").trim() || "(not given)");
+    fd.append("Goal", ((form.elements.goal || {}).value || "").trim() || "(not given)");
+    fd.append("Time they were looking at", st.time ? fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) : "(none picked)");
+    fd.append("Came from", source()); fd.append("Why sent", reason);
+    fd.append("_subject", "Unfinished booking: " + name.trim() + " (call, don't text)");
+    fd.append("_template", "table"); fd.append("_captcha", "false");
+    var sent = false;
+    try { if (navigator.sendBeacon) sent = navigator.sendBeacon(LEAD_ENDPOINT, fd); } catch (e) {}
+    if (!sent) { try { fetch(LEAD_ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true, body: fd }); } catch (e) {} }
+  }
+  root.addEventListener("input", function () {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () { reportUnfinished("stopped typing for 2 minutes"); }, 120000);
+  });
+  window.addEventListener("pagehide", function () { reportUnfinished("left the page"); });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") reportUnfinished("switched away from the page"); });
+
+  /* After booking: an "Add to my calendar" file, made in the browser. */
+  function icsHref() {
+    var s = new Date(st.time), e = new Date(s.getTime() + 60 * 60000);
+    var f = function (d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); };
+    var body = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fig Performance//Booking//EN", "BEGIN:VEVENT",
+      "UID:" + f(s) + "-" + Math.random().toString(36).slice(2) + "@figperformance.com", "DTSTAMP:" + f(new Date()),
+      "DTSTART:" + f(s), "DTEND:" + f(e), "SUMMARY:Free consultation at Fig Performance",
+      "LOCATION:Fig Performance\\, 1284 E. Yorba Linda Blvd\\, Placentia\\, CA 92870",
+      "DESCRIPTION:InBody scan\\, assessment and game plan. Wear workout clothes. Questions: " + PHONE,
+      "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+    try { return URL.createObjectURL(new Blob([body], { type: "text/calendar" })); } catch (e) { return null; }
+  }
 
   function sendLead(data) {
     try {
@@ -246,7 +332,10 @@
         (booked
           ? '<h3 class="q-title" tabindex="-1">You\'re booked, ' + first + ".</h3><p><strong>" + when + "</strong> (Pacific)<br>Fig Performance &middot; 1284 E. Yorba Linda Blvd, Placentia</p>" +
             '<ul class="done-steps"><li>We\'re texting you a confirmation now, plus a reminder before your visit.</li><li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
-            (result && result.reschedule_url ? '<p class="bk-fine"><a href="' + esc(result.reschedule_url) + '" target="_blank" rel="noopener">Need a different time?</a></p>' : "")
+            (function () { var h = icsHref(); return h ? '<a class="btn btn-secondary" href="' + h + '" download="fig-performance-consult.ics">Add to my calendar</a>' : ""; })() +
+            (result && result.reschedule_url ? '<p class="bk-fine"><a href="' + esc(result.reschedule_url) + '" target="_blank" rel="noopener">Need a different time?</a>' +
+              (result.cancel_url ? ' &middot; <a href="' + esc(result.cancel_url) + '" target="_blank" rel="noopener">Cancel</a>' : "") + "</p>" : "") +
+            '<p class="bk-fine">Questions? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>"
           : '<h3 class="q-title" tabindex="-1">Got it, ' + first + ".</h3><p>We'll text you shortly to lock in your time. Your consult is free.</p>" +
             '<p class="bk-fine">Can\'t wait? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>") +
       "</div>";

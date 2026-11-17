@@ -1049,3 +1049,15 @@ address { font-style: normal; }
   .bk-day-row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 6px; padding-bottom: 4px; }
   .bk-day { flex: 0 0 56px; scroll-snap-align: start; }
 }
+.bk-note { font-weight: 400; font-size: .78rem; color: var(--muted); line-height: 1.4; }
+.bk-extras { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.bk-more { background: none; border: 0; padding: 6px 0; font: inherit; font-size: .9rem; font-weight: 600; color: var(--navy); cursor: pointer; text-align: left; }
+.bk-more i { font-weight: 400; color: var(--muted); }
+.bk-more:hover { color: var(--gold-text); }
+.bk-more:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.bk-talk { margin: 16px 0 0; text-align: center; font-size: .9rem; color: var(--muted); }
+.bk-talk a { color: var(--navy); font-weight: 700; white-space: nowrap; }
+.quiz-done .btn-secondary { margin-top: 4px; }
+.section-navy .booking.quiz .btn.btn-secondary { color: var(--navy); border-color: var(--navy); }
+.section-navy .booking.quiz .btn.btn-secondary:hover { background: var(--navy); color: #fff; }
+.bk-fine a { white-space: nowrap; }
