@@ -12,6 +12,7 @@
  *                        the booking uses this address instead. Default: trainat@figperformance.com
  */
 "use strict";
+const sms = require("./_sms.js");
 
 const API = "https://api.calendly.com";
 const TZ = "America/Los_Angeles";
@@ -108,7 +109,8 @@ async function book(req, res) {
   // Like Train With Dave: only name + mobile are required. Calendly still needs an email, so a
   // booking without one uses the gym's inbox (Dan then also gets Calendly's emails for it).
   const inbox = (process.env.BOOKING_INBOX || "trainat@figperformance.com").trim();
-  const invitee = { name, email: email || inbox, timezone: TZ, text_reminder_number: phone };
+  const invitee = { name, email: email || inbox, timezone: TZ };
+  if (!sms.configured()) invitee.text_reminder_number = phone;   // Calendly texts only when our own texting is off
   const payload = {
     event_type: et.uri,
     start_time: start,
@@ -118,7 +120,8 @@ async function book(req, res) {
       utm_medium: clean(b.utm_medium, 100) || "website",
       utm_campaign: clean(b.utm_campaign, 100) || "native-booking",
       utm_content: clean(b.utm_content, 100) || undefined,
-      utm_term: clean(b.utm_term, 100) || undefined
+      // The mobile rides along here so api/calendly-hook.js can match reminders to this booking.
+      utm_term: phone
     }
   };
   let r = await calendly("/invitees", { method: "POST", body: JSON.stringify(payload) });
@@ -135,12 +138,16 @@ async function book(req, res) {
     return send(res, 502, { error: "book_failed" });
   }
   const v = r.j.resource || {};
+  // Our own texting (Twilio), when it's set up: confirmation now. The reminders are scheduled by
+  // api/calendly-hook.js when Calendly reports the booking, so moves and cancels stay in step.
+  let texted = false;
+  try { texted = !!(await sms.sendText(phone, sms.confirmationText(name, start, false))); } catch (e) { console.error("confirm text failed", e && e.message); }
   return send(res, 200, {
     ok: true,
     start,
     reschedule_url: v.reschedule_url || null,
     cancel_url: v.cancel_url || null,
-    texting: !!invitee.text_reminder_number
+    texting: texted || !!invitee.text_reminder_number
   });
 }
 

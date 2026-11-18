@@ -5,5 +5,7 @@ Allow: /
 # Client signing pages (also noindex): keep out of search results.
 Disallow: /sign
 Disallow: /signed
+# Staff text inbox (password protected, noindex).
+Disallow: /inbox
 
 Sitemap: https://www.figperformance.com/sitemap.xml

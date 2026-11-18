@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Text inbox | Fig Performance</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f1f3d">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/styles.css?v=49">
+  <link rel="stylesheet" href="/assets/inbox.css?v=1">
+</head>
+<body class="inbox-page">
+  <header class="ib-top">
+    <a class="ib-brand" href="/">Fig Performance</a>
+    <span class="ib-title">Text inbox</span>
+    <button type="button" class="ib-link" id="ib-logout" hidden>Sign out</button>
+  </header>
+
+  <main id="ib-main">
+    <!-- Sign in -->
+    <form class="ib-login" id="ib-login" hidden>
+      <h1>Text inbox</h1>
+      <p>Staff only. Enter the inbox password.</p>
+      <label for="ib-pw">Password</label>
+      <input id="ib-pw" type="password" autocomplete="current-password" required>
+      <p class="ib-status" id="ib-login-status" role="alert"></p>
+      <button class="btn btn-primary btn-block" type="submit">Open inbox</button>
+    </form>
+
+    <!-- Not set up yet -->
+    <section class="ib-setup" id="ib-setup" hidden>
+      <h1>Texting isn&rsquo;t switched on yet</h1>
+      <p id="ib-setup-msg"></p>
+    </section>
+
+    <!-- Inbox -->
+    <section class="ib-app" id="ib-app" hidden>
+      <aside class="ib-list" aria-label="Conversations">
+        <form class="ib-new" id="ib-new">
+          <label for="ib-new-to">Text a new number</label>
+          <div class="ib-row">
+            <input id="ib-new-to" type="tel" inputmode="tel" placeholder="(714) 555-0123" autocomplete="off">
+            <button class="ib-btn" type="submit">Open</button>
+          </div>
+        </form>
+        <p class="ib-status" id="ib-list-status" role="status"></p>
+        <ul id="ib-convos"></ul>
+        <button type="button" class="ib-link" id="ib-connect">Connect Calendly (so reminders follow cancels and reschedules)</button>
+        <p class="ib-status" id="ib-connect-status" role="status"></p>
+      </aside>
+
+      <section class="ib-thread" id="ib-thread" aria-live="polite">
+        <div class="ib-thread-head">
+          <button type="button" class="ib-link ib-back" id="ib-back">&larr; All conversations</button>
+          <h2 id="ib-who">Pick a conversation</h2>
+          <a id="ib-call" class="ib-link" hidden>Call</a>
+        </div>
+        <div class="ib-msgs" id="ib-msgs"><p class="ib-empty">Your texts with clients show up here.</p></div>
+        <div class="ib-pending" id="ib-pending" hidden></div>
+        <form class="ib-compose" id="ib-compose" hidden>
+          <label class="sr-only" for="ib-text">Message</label>
+          <textarea id="ib-text" rows="2" maxlength="1200" placeholder="Type a text&hellip;" required></textarea>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+        <p class="ib-status" id="ib-send-status" role="alert"></p>
+      </section>
+    </section>
+  </main>
+  <script src="/assets/inbox.js?v=1" defer></script>
+</body>
+</html>
