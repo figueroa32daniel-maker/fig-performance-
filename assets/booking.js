@@ -89,7 +89,7 @@
     if (st.mode === "pick") {
       html += '<p class="bk-label"><span>1</span> Pick a day</p>';
       html += '<div class="bk-days" role="group" aria-label="Days">';
-      var narrow = window.matchMedia && window.matchMedia("(max-width: 420px)").matches;
+      var narrow = root.clientWidth > 0 && root.clientWidth <= 520;   // matches the container rule in styles.css (480px inside the padding)
       var first = narrow ? 0 : st.page * 7, last = narrow ? DAYS : first + 7;
       html += '<button type="button" class="bk-page" data-page="-1" aria-label="Earlier days"' + (st.page === 0 ? " disabled" : "") + '><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>';
       html += '<div class="bk-day-row">';
@@ -180,9 +180,26 @@
     }
   });
 
+  /* Each error sits under its own field and is read out with it (aria-describedby). */
+  function clearFieldErrors(form) {
+    form.querySelectorAll(".bk-err").forEach(function (n) { n.remove(); });
+    form.querySelectorAll("[aria-invalid]").forEach(function (i) { i.removeAttribute("aria-invalid"); i.removeAttribute("aria-describedby"); });
+  }
+  function fieldError(form, name, msg) {
+    var f = form.elements[name]; if (!f) return;
+    var box = f.closest("[data-extra]"); if (box && box.hidden) { box.hidden = false; }
+    var note = document.createElement("small");
+    note.className = "bk-err"; note.id = "bk-err-" + name; note.setAttribute("role", "alert"); note.textContent = msg;
+    f.insertAdjacentElement("afterend", note);
+    f.setAttribute("aria-invalid", "true"); f.setAttribute("aria-describedby", note.id); f.focus();
+  }
+
   root.addEventListener("input", function (e) {
     var f = e.target.closest(".bk-form"); if (!f) return;
-    e.target.removeAttribute("aria-invalid");
+    if (e.target.hasAttribute("aria-invalid")) {
+      var n = f.querySelector("#" + e.target.getAttribute("aria-describedby")); if (n) n.remove();
+      e.target.removeAttribute("aria-invalid"); e.target.removeAttribute("aria-describedby");
+    }
     var s = f.querySelector(".form-status.err"); if (s) { s.className = "form-status"; s.textContent = ""; }
   });
 
@@ -201,12 +218,8 @@
     else if (digits(phone).length !== 10) { err = "Please enter a 10-digit mobile number so we can text your confirmation."; bad = "phone"; }
     else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err = "Please check your email, or leave it blank."; bad = "email"; }
     else if (st.mode === "request" && when.length < 2) { err = "Tell us a day and time that suits you."; bad = "when"; }
-    form.querySelectorAll("input").forEach(function (i) { i.removeAttribute("aria-invalid"); });
-    if (err) {
-      status.className = "form-status err"; status.textContent = err;
-      var f = form.elements[bad]; if (f) { f.setAttribute("aria-invalid", "true"); f.focus(); }
-      return;
-    }
+    clearFieldErrors(form);
+    if (err) { fieldError(form, bad, err); return; }
     if (v("website")) return;                                    // bot
     if (Date.now() - loadedAt < 2500) { status.className = "form-status err"; status.textContent = "Please check your details, then tap the button again."; loadedAt = 0; return; }
 
@@ -243,7 +256,11 @@
         if (r.status === 200 && r.j.ok) return done(true, r.j);
         btn.disabled = false; btn.textContent = label;
         status.className = "form-status err";
-        if (r.status === 409) {
+        if (r.status === 409 && r.j.error === "already_booked") {
+          status.textContent = "This number already has a consult booked. To change it, call or text " + PHONE + ".";
+        } else if (r.status === 429) {
+          status.textContent = "Too many tries from this connection. Please call or text " + PHONE + " and we'll book it for you.";
+        } else if (r.status === 409) {
           status.textContent = "That time was just taken. Here are the next openings.";
           var taken = st.time; st.time = null; st.slots = {}; st.loaded = {};
           setTimeout(function () {
@@ -254,7 +271,12 @@
           }, 1400);
           void taken;
         } else if (r.status === 400) {
-          status.textContent = r.j.error === "phone" ? "Please check your mobile number." : r.j.error === "email" ? "Please check your email, or leave it blank." : "Please check your details and try again.";
+          status.className = "form-status";
+          if (r.j.error === "phone") fieldError(form, "phone", "Please check your mobile number.");
+          else if (r.j.error === "email") fieldError(form, "email", "Please check your email, or leave it blank.");
+          else if (r.j.error === "name") fieldError(form, "name", "Please enter your name.");
+          else { status.className = "form-status err"; status.textContent = "Please check your details and try again."; }
+          return;
         } else {
           // Booking system trouble: don't lose them. Send Dan the request with the time they picked.
           when = fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) + " (online booking failed, please confirm)";
@@ -333,8 +355,8 @@
           ? '<h3 class="q-title" tabindex="-1">You\'re booked, ' + first + ".</h3><p><strong>" + when + "</strong> (Pacific)<br>Fig Performance &middot; 1284 E. Yorba Linda Blvd, Placentia</p>" +
             '<ul class="done-steps"><li>We\'re texting you a confirmation now, plus a reminder before your visit.</li><li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
             (function () { var h = icsHref(); return h ? '<a class="btn btn-secondary" href="' + h + '" download="fig-performance-consult.ics">Add to my calendar</a>' : ""; })() +
-            (result && result.reschedule_url ? '<p class="bk-fine"><a href="' + esc(result.reschedule_url) + '" target="_blank" rel="noopener">Need a different time?</a>' +
-              (result.cancel_url ? ' &middot; <a href="' + esc(result.cancel_url) + '" target="_blank" rel="noopener">Cancel</a>' : "") + "</p>" : "") +
+            (result && /^https:\/\/calendly\.com\//.test(result.reschedule_url || "") ? '<p class="bk-fine"><a href="' + esc(result.reschedule_url) + '" target="_blank" rel="noopener">Need a different time?</a>' +
+              (/^https:\/\/calendly\.com\//.test(result.cancel_url || "") ? ' &middot; <a href="' + esc(result.cancel_url) + '" target="_blank" rel="noopener">Cancel</a>' : "") + "</p>" : "") +
             '<p class="bk-fine">Questions? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>"
           : '<h3 class="q-title" tabindex="-1">Got it, ' + first + ".</h3><p>We'll text you shortly to lock in your time. Your consult is free.</p>" +
             '<p class="bk-fine">Can\'t wait? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>") +
