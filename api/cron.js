@@ -19,8 +19,10 @@ function eligible(lead) {
 
 module.exports = async function handler(req, res) {
   try {
-    if (!db.configured() || !sms.configured()) return done(res, 200, { ok: true, skipped: "not set up" });
+    if (!db.configured()) return done(res, 200, { ok: true, skipped: "not set up" });
     if (sms.tooMany("cron", 6, 3600 * 1000)) return done(res, 429, { error: "slow_down" });
+    try { await db.ensureFixed(3); } catch (e) { console.error("fixed sessions fill failed", e && e.message); }   // keeps fixed weekly clients on the calendar
+    if (!sms.configured()) return done(res, 200, { ok: true, skipped: "texting not set up" });
     if (sms.quietHours()) return done(res, 200, { ok: true, skipped: "quiet hours" });
     const s = await db.settings(), now = Date.now();
     let sent = 0;

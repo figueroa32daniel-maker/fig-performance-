@@ -30,12 +30,12 @@
     }
     card.appendChild(el("p", "mg-kicker", "Free consult" + (b.first && b.first !== "there" ? " for " + b.first : "")));
     card.appendChild(el("h1", "", fLong.format(when) + " at " + fTime.format(when)));
-    card.appendChild(el("p", "", "Pacific time. Fig Performance, 1284 E. Yorba Linda Blvd, Placentia. About an hour, starting with your InBody scan. Wear workout clothes."));
+    card.appendChild(el("p", "", "Pacific time. Fig Performance, 1284 E. Yorba Linda Blvd, Placentia. Plan on about an hour and 15 minutes, starting with your InBody scan. Wear workout clothes."));
     if (!b.canChange) { card.appendChild(el("p", "ib-status", "This consult has passed. Want another? Book a new time on our home page.")); root.appendChild(card); return; }
     var row = el("div", "mg-actions");
     var cal = el("a", "btn btn-primary", "Add to my calendar"); cal.href = "/api/cal?b=" + encodeURIComponent(t); row.appendChild(cal);
     var g = el("a", "btn btn-secondary", "Add to Google Calendar");
-    var s = when.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""), e = new Date(when.getTime() + 36e5).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    var s = when.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""), e = new Date(when.getTime() + 90 * 6e4).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     g.href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("Free consultation at Fig Performance") + "&dates=" + s + "/" + e +
       "&location=" + encodeURIComponent("Fig Performance, 1284 E. Yorba Linda Blvd, Placentia, CA 92870");
     g.target = "_blank"; g.rel = "noopener"; row.appendChild(g);

@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=5">
+  <link rel="stylesheet" href="/assets/inbox.css?v=6">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
@@ -100,7 +100,7 @@
     <!-- Clients -->
     <section class="ib-panel" id="ib-clients" hidden>
       <h1>Clients</h1>
-      <p class="ib-help">Your training clients. Add them once, then put them on the schedule or text them from here.</p>
+      <p class="ib-help">Your training clients. Add them once, then put them on the schedule or text them from here. Give a client a fixed weekly time and it goes on your calendar by itself, three weeks ahead. Sessions are one hour.</p>
       <form id="ib-cl-form" class="ib-ses-form">
         <label>Name<input id="ib-cl-name" maxlength="60" autocomplete="off" required></label>
         <label>Mobile<input id="ib-cl-phone" type="tel" inputmode="tel" placeholder="(714) 555-0123" autocomplete="off" required></label>
@@ -123,7 +123,7 @@
       <h1>Settings</h1>
       <form id="ib-set-form">
         <h2>Consult hours</h2>
-        <p class="ib-help">The times people can book on the website. One-hour consults starting on the hour. Leave a day on Closed to take no bookings.</p>
+        <p class="ib-help">The window for consults each day. A consult blocks 90 minutes, start times are offered every 30 minutes, and each one has to finish by the end time. Hours with a client session on them are skipped automatically. Leave a day on Closed to take no bookings.</p>
         <div id="ib-hours"></div>
         <div class="ib-two">
           <label>Earliest booking (hours from now)<input id="ib-notice" type="number" min="0" max="72" inputmode="numeric"></label>
@@ -145,6 +145,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=5" defer></script>
+  <script src="/assets/inbox.js?v=6" defer></script>
 </body>
 </html>

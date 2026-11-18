@@ -19,7 +19,7 @@ module.exports = async function handler(req, res) {
       if (!b || b.status === "cancelled") { res.statusCode = 404; return res.end("not found"); }
       const ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fig Performance//Consults//EN", "METHOD:PUBLISH", "BEGIN:VEVENT",
         "UID:" + b.id.slice(0, 12) + "-client@figperformance.com", "DTSTAMP:" + stamp(b.created), "DTSTART:" + stamp(b.start),
-        "DTEND:" + stamp(Date.parse(b.start) + 3600 * 1000), "SUMMARY:Free consultation at Fig Performance",
+        "DTEND:" + stamp(Date.parse(b.start) + (b.minutes || 90) * 60000), "SUMMARY:Free consultation at Fig Performance",
         "LOCATION:" + esc("Fig Performance, " + sms.ADDRESS + ", CA 92870"),
         "DESCRIPTION:" + esc("InBody scan, assessment and game plan with Coach Dan. Wear workout clothes.\nQuestions: (714) 396-7178"),
         "BEGIN:VALARM", "TRIGGER:-PT2H", "ACTION:DISPLAY", "DESCRIPTION:Consult at Fig Performance", "END:VALARM", "END:VEVENT", "END:VCALENDAR"].join("\r\n");
@@ -33,9 +33,13 @@ module.exports = async function handler(req, res) {
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fig Performance//Consults//EN", "X-WR-CALNAME:Fig Performance consults", "X-PUBLISHED-TTL:PT30M"];
     list.forEach(b => {
       lines.push("BEGIN:VEVENT", "UID:" + b.id + "@figperformance.com", "DTSTAMP:" + stamp(b.created), "DTSTART:" + stamp(b.start),
-        "DTEND:" + stamp(Date.parse(b.start) + 3600 * 1000), "SUMMARY:" + esc("Consult: " + b.name),
+        "DTEND:" + stamp(Date.parse(b.start) + (b.minutes || 90) * 60000), "SUMMARY:" + esc("Consult: " + b.name),
         "LOCATION:" + esc("Fig Performance, " + sms.ADDRESS),
         "DESCRIPTION:" + esc(sms.prettyPhone(b.phone) + (b.goal ? "\nGoal: " + b.goal : "") + "\nStatus: " + b.status), "END:VEVENT");
+    });
+    (await db.sessionsBetween(now - 7 * 864e5, now + 30 * 864e5)).forEach(s => {
+      lines.push("BEGIN:VEVENT", "UID:" + s.id + "@figperformance.com", "DTSTAMP:" + stamp(s.created), "DTSTART:" + stamp(s.start),
+        "DTEND:" + stamp(Date.parse(s.start) + 3600 * 1000), "SUMMARY:" + esc("Training: " + s.name), "END:VEVENT");
     });
     lines.push("END:VCALENDAR");
     res.statusCode = 200;

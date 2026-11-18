@@ -212,8 +212,14 @@ module.exports = async function handler(req, res) {
         const phone = sms.usPhone(b.phone), name = String(b.name || "").replace(/[<>\u0000-\u001F]/g, "").trim().slice(0, 60);
         if (!phone) return send(res, 400, { error: "phone" });
         let list = (await db.clients()).filter(c => c.phone !== phone);
-        if (!b.remove) { if (name.length < 2) return send(res, 400, { error: "name" }); list.push({ phone, name, note: String(b.note || "").replace(/[<>]/g, "").trim().slice(0, 200) }); }
+        if (!b.remove) {
+          if (name.length < 2) return send(res, 400, { error: "name" });
+          const fixed = (Array.isArray(b.fixed) ? b.fixed : []).filter(f => db.DAYS.indexOf(f.dow) >= 0 && +f.hour >= 4 && +f.hour <= 21)
+            .map(f => ({ dow: f.dow, hour: +f.hour })).slice(0, 14);
+          list.push({ phone, name, note: String(b.note || "").replace(/[<>]/g, "").trim().slice(0, 200), fixed });
+        }
         await db.saveClients(list);
+        if (!b.remove) await db.ensureFixed(3);
         return send(res, 200, { ok: true, clients: await db.clients() });
       }
       if (b.action === "session") {
@@ -257,7 +263,7 @@ module.exports = async function handler(req, res) {
         const ws = db.weekStart(want), from = ws.getTime(), to = from + 7 * 864e5 - 1;
         const [ses, bks, cl] = await Promise.all([db.sessionsBetween(from, to), db.bookingsBetween(from, to), db.clients()]);
         return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(),
-          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start })),
+          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed })),
           consults: bks.filter(b => b.status !== "cancelled").map(b => ({ id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })) });
       }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {

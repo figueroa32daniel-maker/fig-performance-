@@ -8,7 +8,9 @@
  *   settings            JSON  consult hours, blocked dates, notice, follow-up texts
  *   bk:<id>             JSON  one booking (id doubles as the private "manage my booking" code)
  *   bk:byStart          ZSET  booking ids scored by start time
- *   slot:<startISO>     the booking id holding that time (SET NX = no double bookings)
+ *   slot:<cellISO>      who holds one 30-minute cell of the calendar (SET NX = no double bookings).
+ *                       A consult holds 3 cells (90 minutes); a client session holds 2 (60 minutes).
+ *   skip:<phone>:<iso>  "don't re-add this fixed weekly session" (Dan removed that one week)
  *   lead:<+1phone>      JSON  one person: name, status, consent record, follow-up position
  *   clients             JSON  Dan's training clients (his contact list): [{phone, name, note}]
  *   ses:<id>            JSON  one client training session {id, phone, name, start}
@@ -21,6 +23,9 @@
 const crypto = require("crypto");
 
 const TZ = "America/Los_Angeles";
+const CELL = 30 * 60 * 1000;      // the calendar grid
+const CONSULT_MIN = 90;            // Dan: consult runs about 1 h 10, blocked as 1 h 30
+const SESSION_MIN = 60;
 function url() { return process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || ""; }
 function token() { return process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || ""; }
 function configured() { return !!(url() && token()); }
@@ -100,7 +105,8 @@ function zonedToUtc(dateStr, hhmm) {                 // "2026-11-21", "17:00" in
   return null;                                       // a time that doesn't exist (spring-forward hour)
 }
 
-/* Every time the settings allow from now through daysAhead, before removing taken ones. */
+/* Every consult start the settings allow from now through daysAhead (every 30 minutes; the consult
+   must finish by the day's end time), before removing taken ones. */
 function candidateSlots(s, now) {
   const out = [], earliest = now + s.noticeHours * 3600 * 1000;
   for (let i = 0; i <= s.daysAhead; i++) {
@@ -108,27 +114,49 @@ function candidateSlots(s, now) {
     if (s.blocked.indexOf(day) >= 0) continue;
     const dow = pacificParts(new Date(day + "T20:00:00Z")).dow;      // noon-ish Pacific on that date
     const h = s.hours[dow]; if (!h) continue;
-    for (let hr = +h.from.slice(0, 2); hr < +h.to.slice(0, 2); hr++) {
-      const d = zonedToUtc(day, String(hr).padStart(2, "0") + ":00");
-      if (d && d.getTime() >= earliest) out.push(d.toISOString().replace(".000Z", "Z"));
+    const open = zonedToUtc(day, h.from), close = zonedToUtc(day, h.to);
+    if (!open || !close) continue;
+    for (let t = open.getTime(); t + CONSULT_MIN * 60000 <= close.getTime(); t += CELL) {
+      if (t >= earliest) out.push(iso(t));
     }
   }
   return out;
 }
-async function openSlots(now) {
+function iso(ms) { return new Date(ms).toISOString().replace(".000Z", "Z"); }
+function cellsFor(startIso, minutes) {
+  const out = [], t0 = Date.parse(startIso);
+  for (let t = t0; t < t0 + minutes * 60000; t += CELL) out.push(iso(t));
+  return out;
+}
+/* Take every cell or none. */
+async function lockCells(cells, id) {
+  const ttl = String(Math.max(3600, Math.round((Date.parse(cells[cells.length - 1]) - Date.now()) / 1000) + 86400));
+  const got = await pipeline(cells.map(c => ["SET", "slot:" + c, id, "NX", "EX", ttl]));
+  if (got.every(x => x === "OK")) return true;
+  const mine = cells.filter((c, i) => got[i] === "OK");
+  if (mine.length) await pipeline(mine.map(c => ["DEL", "slot:" + c]));
+  return false;
+}
+async function freeCells(cells, id) {
+  const held = await cmd.apply(null, ["MGET"].concat(cells.map(c => "slot:" + c)));
+  const mine = cells.filter((c, i) => held[i] === id);
+  if (mine.length) await pipeline(mine.map(c => ["DEL", "slot:" + c]));
+}
+async function openSlots(now, ignoreId) {             // ignoreId: a booking being moved doesn't block itself
   const s = await settings(), all = candidateSlots(s, now || Date.now());
   if (!all.length) return [];
-  const taken = await cmd.apply(null, ["MGET"].concat(all.map(x => "slot:" + x)));
-  return all.filter((x, i) => !taken[i]);
+  const cells = Array.from(new Set(all.flatMap(x => cellsFor(x, CONSULT_MIN))));
+  const held = await cmd.apply(null, ["MGET"].concat(cells.map(c => "slot:" + c)));
+  const busy = new Set(cells.filter((c, i) => held[i] && held[i] !== ignoreId));
+  return all.filter(x => cellsFor(x, CONSULT_MIN).every(c => !busy.has(c)));
 }
 
 /* ---------- bookings ---------- */
 function newId() { return crypto.randomBytes(18).toString("base64url"); }
 async function createBooking(b) {                    // returns the booking, or null if the time was just taken
-  const id = newId(), ttl = Math.max(3600, Math.round((Date.parse(b.start) - Date.now()) / 1000) + 86400);
-  const got = await cmd("SET", "slot:" + b.start, id, "NX", "EX", String(ttl));
-  if (got !== "OK") return null;
-  const rec = Object.assign({ id, status: "booked", created: new Date().toISOString() }, b);
+  const id = newId();
+  if (!(await lockCells(cellsFor(b.start, CONSULT_MIN), id))) return null;
+  const rec = Object.assign({ id, status: "booked", minutes: CONSULT_MIN, created: new Date().toISOString() }, b);
   await pipeline([["SET", "bk:" + id, JSON.stringify(rec)], ["ZADD", "bk:byStart", String(Date.parse(b.start)), id]]);
   return rec;
 }
@@ -137,14 +165,18 @@ async function saveBooking(rec) { return setJSON("bk:" + rec.id, rec); }
 async function cancelBooking(rec, by) {
   if (rec.status === "cancelled") return rec;
   rec.status = "cancelled"; rec.cancelledBy = by; rec.cancelledAt = new Date().toISOString();
-  await pipeline([["SET", "bk:" + rec.id, JSON.stringify(rec)], ["DEL", "slot:" + rec.start]]);
+  await setJSON("bk:" + rec.id, rec);
+  await freeCells(cellsFor(rec.start, rec.minutes || CONSULT_MIN), rec.id);
   return rec;
 }
 async function moveBooking(rec, newStart) {          // returns false if the new time is taken
-  const ttl = Math.max(3600, Math.round((Date.parse(newStart) - Date.now()) / 1000) + 86400);
-  if ((await cmd("SET", "slot:" + newStart, rec.id, "NX", "EX", String(ttl))) !== "OK") return false;
-  const old = rec.start; rec.start = newStart; rec.moved = (rec.moved || 0) + 1;
-  await pipeline([["SET", "bk:" + rec.id, JSON.stringify(rec)], ["DEL", "slot:" + old], ["ZADD", "bk:byStart", String(Date.parse(newStart)), rec.id]]);
+  const mins = rec.minutes || CONSULT_MIN, oldCells = cellsFor(rec.start, mins), newCells = cellsFor(newStart, mins);
+  // Cells the booking already holds stay held; only the new ones need taking.
+  const need = newCells.filter(c => oldCells.indexOf(c) < 0);
+  if (need.length && !(await lockCells(need, rec.id))) return false;
+  await freeCells(oldCells.filter(c => newCells.indexOf(c) < 0), rec.id);
+  rec.start = newStart; rec.moved = (rec.moved || 0) + 1;
+  await pipeline([["SET", "bk:" + rec.id, JSON.stringify(rec)], ["ZADD", "bk:byStart", String(Date.parse(newStart)), rec.id]]);
   return true;
 }
 async function bookingsBetween(fromMs, toMs) {
@@ -157,21 +189,41 @@ async function clients() { return ((await getJSON("clients")) || []).sort((a, b)
 async function saveClients(list) { return setJSON("clients", list.slice(0, 400)); }
 function validHourStart(iso) { return /^\d{4}-\d{2}-\d{2}T\d{2}:00:00Z$/.test(String(iso)) && !isNaN(Date.parse(iso)); }
 /* Returns the session, or null when that hour is already taken (by a session or a consult). */
-async function addSession(c, startIso) {
+async function addSession(c, startIso, fixed) {
   if (!validHourStart(startIso)) return null;
-  const id = "s_" + newId(), ttl = Math.max(3600, Math.round((Date.parse(startIso) - Date.now()) / 1000) + 86400);
-  if ((await cmd("SET", "slot:" + startIso, id, "NX", "EX", String(ttl))) !== "OK") return null;
-  const rec = { id, phone: c.phone, name: c.name, start: startIso, created: new Date().toISOString() };
-  await pipeline([["SET", "ses:" + id, JSON.stringify(rec), "EX", String(ttl + 60 * 86400)], ["ZADD", "ses:byStart", String(Date.parse(startIso)), id]]);
+  const id = "s_" + newId();
+  if (!(await lockCells(cellsFor(startIso, SESSION_MIN), id))) return null;
+  const rec = { id, phone: c.phone, name: c.name, start: startIso, fixed: !!fixed, created: new Date().toISOString() };
+  const ttl = String(Math.max(3600, Math.round((Date.parse(startIso) - Date.now()) / 1000)) + 90 * 86400);
+  await pipeline([["SET", "ses:" + id, JSON.stringify(rec), "EX", ttl], ["ZADD", "ses:byStart", String(Date.parse(startIso)), id]]);
   return rec;
 }
 async function removeSession(id) {
   if (!/^s_[A-Za-z0-9_-]{20,40}$/.test(String(id || ""))) return false;
   const rec = await getJSON("ses:" + id); if (!rec) return false;
-  const holder = await cmd("GET", "slot:" + rec.start);
+  await freeCells(cellsFor(rec.start, SESSION_MIN), id);
   const cmds = [["DEL", "ses:" + id], ["ZREM", "ses:byStart", id]];
-  if (holder === id) cmds.push(["DEL", "slot:" + rec.start]);
+  // A fixed weekly session removed for one week must not be put straight back by the weekly fill.
+  if (rec.fixed && Date.parse(rec.start) > Date.now()) cmds.push(["SET", "skip:" + rec.phone + ":" + rec.start, "1", "EX", String(Math.round((Date.parse(rec.start) - Date.now()) / 1000) + 86400)]);
   await pipeline(cmds); return true;
+}
+/* Clients with fixed weekly times ("Tuesday 5 AM, never changes"): keep the next few weeks filled in. */
+async function ensureFixed(weeksAhead) {
+  const list = (await clients()).filter(c => Array.isArray(c.fixed) && c.fixed.length), now = Date.now();
+  let added = 0;
+  for (const c of list) {
+    for (let i = 0; i < (weeksAhead || 3) * 7; i++) {
+      const day = dateKey(new Date(now + i * 864e5)), dow = pacificParts(new Date(day + "T20:00:00Z")).dow;
+      for (const f of c.fixed.filter(x => x.dow === dow)) {
+        const at = zonedToUtc(day, String(f.hour).padStart(2, "0") + ":00");
+        if (!at || at.getTime() < now) continue;
+        const startIso = iso(at.getTime());
+        if (await cmd("GET", "skip:" + c.phone + ":" + startIso)) continue;
+        if (await addSession(c, startIso, true)) added++;
+      }
+    }
+  }
+  return added;
 }
 async function sessionsBetween(fromMs, toMs) {
   const ids = await cmd("ZRANGEBYSCORE", "ses:byStart", String(fromMs), String(toMs), "LIMIT", "0", "500");
@@ -197,4 +249,4 @@ async function dueFollowups(nowMs) { return (await cmd("ZRANGEBYSCORE", "fu:due"
 module.exports = { TZ, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
-  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart };
+  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, CONSULT_MIN, SESSION_MIN };

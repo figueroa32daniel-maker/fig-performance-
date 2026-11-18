@@ -108,7 +108,8 @@ async function manage(req, res, b) {
   if (b.action === "move") {
     const start = clean(b.start, 40);
     if ((rec.moved || 0) >= 3) return send(res, 409, { error: "too_many_moves" });
-    if ((await db.openSlots()).indexOf(start) < 0 || !(await db.moveBooking(rec, start))) return send(res, 409, { error: "taken" });
+    if (start === rec.start) return send(res, 200, { ok: true, texting: false, booking: pub(rec) });
+    if ((await db.openSlots(null, rec.id)).indexOf(start) < 0 || !(await db.moveBooking(rec, start))) return send(res, 409, { error: "taken" });
     if (lead.phone) { lead.lastStart = start; await db.saveLead(lead); }
     const texted = lead.optedOut ? false : await sendBookingTexts(rec, true);
     const w = sms.when(start);
@@ -123,7 +124,7 @@ module.exports = async function handler(req, res) {
     if (!db.configured()) return send(res, 503, { error: "not_configured" });
     if (req.method === "GET") {
       const slots = await db.openSlots();
-      return send(res, 200, { duration: 60, slots }, "public, max-age=0, s-maxage=30, stale-while-revalidate=30");
+      return send(res, 200, { duration: db.CONSULT_MIN, slots }, "public, max-age=0, s-maxage=30, stale-while-revalidate=30");
     }
     if (req.method === "POST") {
       if (!String(req.headers["content-type"] || "").includes("application/json")) return send(res, 415, { error: "json_only" });

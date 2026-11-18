@@ -249,7 +249,7 @@
       for (var i = 0; i < 7; i++) { var k = addDays(weekOf, i), od = el("option", "", dayLabel(k, true)); od.value = k; if (k === keep) od.selected = true; ds.appendChild(od); }
       var hs = $("ib-ses-hour"); if (!hs.options.length) for (var h = 4; h <= 21; h++) { var oh = el("option", "", hourLabel(h)); oh.value = h; hs.appendChild(oh); }
       var box = $("ib-wk-days"); box.textContent = "";
-      var items = r.j.sessions.map(function (s) { return { kind: "session", id: s.id, name: s.name, phone: s.phone, start: s.start }; })
+      var items = r.j.sessions.map(function (s) { return { kind: "session", id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: s.fixed }; })
         .concat(r.j.consults.map(function (c) { return { kind: "consult", name: c.name, phone: c.phone, start: c.start, confirmed: c.confirmed, status: c.status }; }));
       for (var d = 0; d < 7; d++) {
         var key = addDays(weekOf, d), todays = items.filter(function (x) { return pacKey.format(new Date(x.start)) === key; }).sort(function (a, b) { return Date.parse(a.start) - Date.parse(b.start); });
@@ -258,7 +258,8 @@
         todays.forEach(function (x) {
           var row = el("div", "ib-wk-row" + (x.kind === "consult" ? " is-consult" : ""));
           row.appendChild(el("strong", "", pacTime.format(new Date(x.start))));
-          row.appendChild(el("span", "ib-wk-name", (x.kind === "consult" ? "Consult: " : "") + x.name));
+          row.appendChild(el("span", "ib-wk-name", (x.kind === "consult" ? "Consult (90 min): " : "") + x.name));
+          if (x.kind === "session" && x.fixed) row.appendChild(el("span", "ib-tag", "Fixed weekly"));
           if (x.kind === "consult") row.appendChild(el("span", "ib-tag", x.status === "booked" ? (x.confirmed ? "Confirmed" : "Not confirmed yet") : (STATUS[x.status] || x.status)));
           else {
             var rm = el("button", "ib-link", "Remove"); rm.type = "button";
@@ -308,6 +309,26 @@
         api("POST", { action: "client", phone: c.phone, remove: true }).then(function (r) { if (r.j.ok) renderClients(r.j.clients, texting); });
       });
       row.appendChild(rm); box.appendChild(row);
+      // Fixed weekly times: these go on the calendar by themselves, three weeks ahead.
+      var fx = el("div", "ib-fixed"), fixed = (c.fixed || []).slice();
+      function saveFixed(next) { api("POST", { action: "client", phone: c.phone, name: c.name, note: c.note || "", fixed: next }).then(function (r) { if (r.j.ok) renderClients(r.j.clients, texting); }); }
+      fx.appendChild(el("span", "ib-fixed-label", fixed.length ? "Fixed every week:" : "No fixed weekly time."));
+      fixed.forEach(function (f, i) {
+        var chip = el("button", "ib-tag ib-chip", DAYNAME[f.dow] + " " + hourLabel(f.hour) + "  \u00d7"); chip.type = "button";
+        chip.setAttribute("aria-label", "Remove fixed time " + DAYNAME[f.dow] + " " + hourLabel(f.hour));
+        chip.addEventListener("click", function () { saveFixed(fixed.filter(function (_, k) { return k !== i; })); });
+        fx.appendChild(chip);
+      });
+      var ds = el("select", "ib-select"); ds.setAttribute("aria-label", "Day for " + c.name);
+      DAYS.forEach(function (d) { var o = el("option", "", d[1]); o.value = d[0]; ds.appendChild(o); });
+      var hs = el("select", "ib-select"); hs.setAttribute("aria-label", "Time for " + c.name);
+      for (var h = 4; h <= 21; h++) { var oh = el("option", "", hourLabel(h)); oh.value = h; hs.appendChild(oh); }
+      var add = el("button", "ib-btn ib-btn-light", "Add fixed time"); add.type = "button";
+      add.addEventListener("click", function () {
+        if (fixed.some(function (f) { return f.dow === ds.value && f.hour === +hs.value; })) return;
+        saveFixed(fixed.concat([{ dow: ds.value, hour: +hs.value }]));
+      });
+      fx.appendChild(ds); fx.appendChild(hs); fx.appendChild(add); box.appendChild(fx);
     });
   }
   $("ib-cl-form").addEventListener("submit", function (e) {
@@ -320,6 +341,7 @@
   });
 
   /* ----- Settings tab ----- */
+  var DAYNAME = { mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat", sun: "Sun" };
   var DAYS = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];
   var settings = null;
   function hourLabel(h) { return (h % 12 || 12) + ":00 " + (h < 12 ? "AM" : "PM"); }
