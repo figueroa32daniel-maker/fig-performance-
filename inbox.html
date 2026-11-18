@@ -155,6 +155,12 @@
         <p class="ib-help">The assistant remembers when each client usually trains (from your last 8 weeks). Clients with a steady schedule are offered their usual times and just reply YES. Everyone else is asked what works. Clients with a fixed weekly time are never asked.</p>
         <p class="ib-help" id="ib-ai-need" hidden>Not connected yet: the assistant needs its AI key added in Vercel before it can answer.</p>
         <label class="ib-block">What the assistant is allowed to tell people (it will not say anything that is not written here)<textarea id="ib-ai-facts" rows="5" maxlength="3000"></textarea></label>
+        <h2>Try the assistant</h2>
+        <p class="ib-help">Pick a client and type a text the way they would. You see what the assistant would answer and what it would do. Nothing is booked and no text is sent.</p>
+        <label class="ib-block">Client<select id="ib-try-who" class="ib-select"></select></label>
+        <label class="ib-block">Their text<textarea id="ib-try-text" rows="2" maxlength="600" placeholder="Can I do Tuesday and Thursday at 5pm?"></textarea></label>
+        <button class="ib-btn ib-btn-light" type="button" id="ib-try-go">See the reply</button>
+        <p class="ib-help" id="ib-try-out" role="status"></p>
         <p class="ib-status" id="ib-set-status" role="alert"></p>
         <button class="btn btn-primary" type="submit">Save settings</button>
       </form>
@@ -163,6 +169,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=9" defer></script>
+  <script src="/assets/inbox.js?v=10" defer></script>
 </body>
 </html>

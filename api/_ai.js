@@ -111,13 +111,13 @@ async function claude(body, signal) {
 async function handle(from, text, opts) {
   opts = opts || {};
   const now = opts.now || Date.now();
-  const s = await db.settings();
-  if (!s.ai.on || !configured() || !db.configured()) return null;
+  const s = await db.settings(), dry = !!opts.dry;      // dry = Dan trying it out in Settings: nothing is booked, sent or remembered
+  if ((!s.ai.on && !dry) || !configured() || !db.configured()) return null;
   const rk = "ai:rate:" + from + ":" + Math.floor(now / 3600e3);                  // a runaway loop can't run up a bill
   const n = (await db.pipeline([["INCR", rk], ["EXPIRE", rk, "3700"]]))[0];
   if (+n > 12) return null;
   const thread = (await db.getJSON("ai:thr:" + from)) || [];
-  if (thread.some(m => m.r === "d" && now - m.at < 45 * 60000)) return null;      // Dan just texted them himself: stay out of it
+  if (!dry && thread.some(m => m.r === "d" && now - m.at < 45 * 60000)) return null;      // Dan just texted them himself: stay out of it
   const client = (await db.clients()).find(c => c.phone === from) || null;
   const lead = client ? null : await db.getLead(from);
   if (!client && !(lead && lead.name)) return null;                             // strangers always go to Dan
@@ -137,14 +137,15 @@ async function handle(from, text, opts) {
     if (name === "notify_if_opens") {
       if (t.no) return "Not added: " + t.no + ".";
       const ttl = String(Math.max(600, Math.round((Date.parse(t.iso) - now) / 1000)));
-      await db.pipeline([["ZADD", "wait:" + t.iso, String(now), from], ["EXPIRE", "wait:" + t.iso, ttl]]);
+      if (!dry) await db.pipeline([["ZADD", "wait:" + t.iso, String(now), from], ["EXPIRE", "wait:" + t.iso, ttl]]);
       did.push("waitlisted for " + label(t.iso));
       return "On the waitlist for " + label(t.iso) + ". They will get a text if it opens.";
     }
     if (name === "book_session") {
       if (t.no) return "Not booked: " + t.no + ".";
       if (mine.some(x => x.start === t.iso)) return "They already have that session.";
-      const rec = await db.addSession(client, t.iso, false, "assistant");
+      const rec = dry ? ((await freeHours(String(a.date), now)).indexOf(t.iso) >= 0 ? { start: t.iso, phone: from } : null)
+        : await db.addSession(client, t.iso, false, "assistant");
       if (!rec) {
         const f = await freeHours(String(a.date), now);
         return "Not booked: that time is taken. " + (f.length ? "Open that day: " + f.map(x => sms.when(x).time).join(", ") + "." : "Nothing else open that day.");
@@ -158,13 +159,14 @@ async function handle(from, text, opts) {
       const rec = mine.find(x => x.start === at);
       if (!rec) return "They have no session at that time.";
       if (Date.parse(rec.start) - now < 24 * 3600e3) { handoff = "wants to cancel " + label(rec.start) + " (inside 24 hours)"; return "Not cancelled: it starts within 24 hours, so Dan handles it. Dan has been told."; }
-      await db.removeSession(rec.id); mine.splice(mine.indexOf(rec), 1); did.push("cancelled " + label(rec.start));
+      if (!dry) await db.removeSession(rec.id);
+      mine.splice(mine.indexOf(rec), 1); did.push("cancelled " + label(rec.start));
       return "cancelled " + label(rec.start);
     }
     return "unknown tool";
   }
 
-  const messages = thread.slice(-8).filter(m => m.r !== "d").map(m => ({ role: m.r === "a" ? "assistant" : "user", content: m.t }));
+  const messages = (dry ? [] : thread).slice(-8).filter(m => m.r !== "d").map(m => ({ role: m.r === "a" ? "assistant" : "user", content: m.t }));
   // The API needs a user turn first. If the assistant spoke first (the Sunday check-in), keep that message:
   // a bare "YES" only makes sense with it.
   if (messages.length && messages[0].role !== "user") messages.unshift({ role: "user", content: "(No message from them yet. You texted first.)" });
@@ -188,6 +190,7 @@ async function handle(from, text, opts) {
     }
   } catch (e) {
     console.error("assistant failed", e && e.message);
+    if (dry) { clearTimeout(timer); return { error: String(e && e.message || "failed").slice(0, 80) }; }
     if (!did.length) { clearTimeout(timer); return null; }                       // nothing changed: let Dan answer
     reply = "";                                                                  // something was booked: still tell them, plainly
   }
@@ -196,7 +199,7 @@ async function handle(from, text, opts) {
   if (!reply) reply = did.length ? "Done: " + did.join(", ") + "." : (handoff ? "Got it. Dan will get back to you shortly." : "");
   if (!reply) return null;
   if (!/assistant/i.test(reply)) reply += SIGN;
-  await note(from, "c", text, now); await note(from, "a", reply, now);
+  if (!dry) { await note(from, "c", text, now); await note(from, "a", reply, now); }
   return { reply, did, handoff, who };
 }
 

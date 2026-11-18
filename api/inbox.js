@@ -252,6 +252,13 @@ module.exports = async function handler(req, res) {
         c.reviewAsked = new Date().toISOString(); await db.saveClients(list);
         return send(res, 200, { ok: true, clients: await db.clients() });
       }
+      if (b.action === "assistant_try") {                  // Settings tab: see what the assistant would say. Nothing is booked or sent.
+        if (!ai.configured()) return send(res, 503, { error: "not_configured", need: "AI_KEY" });
+        const phone = sms.usPhone(b.phone), text = String(b.text || "").trim().slice(0, 600);
+        if (!phone || !text) return send(res, 400, { error: "input" });
+        const out = await ai.handle(phone, text, { dry: true, timeoutMs: 20000 });
+        return send(res, 200, out ? (out.error ? { ok: false, error: out.error } : { ok: true, reply: out.reply, did: out.did, handoff: out.handoff }) : { ok: false, error: "no_reply" });
+      }
       if (b.action === "copy_week") {
         const from = db.zonedToUtc(String(b.from), "00:00"), to = db.zonedToUtc(String(b.to), "00:00");
         if (!from || !to) return send(res, 400, { error: "week" });

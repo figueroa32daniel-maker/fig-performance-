@@ -368,6 +368,15 @@
   });
 
   /* ----- Settings tab ----- */
+  $("ib-try-go").addEventListener("click", function () {
+    var out = $("ib-try-out"), bt = $("ib-try-go"); if (!$("ib-try-who").value || !$("ib-try-text").value.trim()) { out.textContent = "Pick a client and type a text first."; return; }
+    bt.disabled = true; out.textContent = "Thinking...";
+    api("POST", { action: "assistant_try", phone: $("ib-try-who").value, text: $("ib-try-text").value }).then(function (r) {
+      bt.disabled = false;
+      if (r.j && r.j.ok) out.textContent = "It would reply: \u201c" + r.j.reply + "\u201d" + (r.j.did.length ? "  It would have: " + r.j.did.join(", ") + "." : "  No schedule change.") + (r.j.handoff ? "  Passed to you: " + r.j.handoff + "." : "");
+      else out.textContent = r.j && r.j.error === "not_configured" ? "The AI key is not connected yet." : "The assistant could not answer (" + ((r.j && r.j.error) || "error") + ").";
+    });
+  });
   var DAYNAME = { mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat", sun: "Sun" };
   var DAYS = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];
   var settings = null;
@@ -409,6 +418,11 @@
         wrap.appendChild(ta); f.appendChild(wrap);
       });
       $("ib-noshow").value = settings.noShowText;
+      api("GET", { view: "week" }).then(function (w) {
+        var sel = $("ib-try-who"); sel.textContent = "";
+        ((w.j && w.j.clients) || []).forEach(function (c) { var o = el("option", "", c.name); o.value = c.phone; sel.appendChild(o); });
+        if (!sel.options.length) { var o = el("option", "", "Add a client on the Clients tab first"); o.value = ""; sel.appendChild(o); }
+      });
       $("ib-mc-on").checked = settings.missedCall.on; $("ib-mc-ring").checked = settings.missedCall.ring; $("ib-mc-text").value = settings.missedCall.text;
       $("ib-rem-on").checked = settings.sessionReminders;
       $("ib-rv-link").value = settings.review.link; $("ib-rv-text").value = settings.review.text;
