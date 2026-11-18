@@ -7,6 +7,7 @@
 "use strict";
 const sms = require("./_sms.js");
 const db = require("./_db.js");
+const ai = require("./_ai.js");
 
 function twiml(res) {
   res.statusCode = 200;
@@ -29,12 +30,15 @@ module.exports = async function handler(req, res) {
     if (!sms.validTwilioSignature(req, p)) { res.statusCode = 403; return res.end("forbidden"); }
     const from = sms.usPhone(p.From), body = String(p.Body || "").trim();
     const dan = sms.usPhone(process.env.DAN_MOBILE);
-    const word = body.toLowerCase().replace(/[^a-z]/g, "");
+    // Keywords count only when they are the whole message ("Cancel", "STOP."), the way carriers treat them.
+    // "Cancel 11/24 at 5" is a scheduling request, not an opt-out.
+    const word = /^[\s"'.!]*[a-z]+[\s"'.!]*$/i.test(body) ? body.toLowerCase().replace(/[^a-z]/g, "") : "";
     const stop = /^(stop|stopall|unsubscribe|cancel|end|quit|optout|revoke)$/.test(word);
     const start = /^(start|unstop|yes)$/.test(word) && false;      // "YES" is a confirmation here, never a re-subscribe
     const resub = /^(start|unstop)$/.test(word);
     // Twilio itself blocks texts to anyone who sent STOP. We also record it, cancel their reminders
     // and take them off every follow-up, so nothing is even attempted.
+    let optedOut = false;
     if (from && db.configured()) {
       try {
         const lead = (await db.getLead(from)) || { phone: from, created: new Date().toISOString(), status: "new" };
@@ -51,13 +55,23 @@ module.exports = async function handler(req, res) {
             }
           }
         }
+        optedOut = !!lead.optedOut;
         await db.saveLead(lead);
       } catch (e) { console.error("lead update failed", e && e.message); }
     }
     void start;
-    if (from && dan && from !== dan && !stop && !resub && !/^(help|info)$/.test(word)) {
-      await sms.sendText(dan, "Fig inbox: " + sms.prettyPhone(from) + " replied: \"" +
-        body.slice(0, 200) + "\". Answer at figperformance.com/inbox");
+    if (from && from !== dan && !stop && !resub && !/^(help|info)$/.test(word)) {
+      // The assistant answers clients (and books what they ask for) when Dan has it switched on.
+      // Anything it can't do, or any error, falls through to the plain "someone replied" nudge.
+      let done = null;
+      if (!optedOut && body) { try { done = await ai.handle(from, body); } catch (e) { console.error("assistant error", e && e.message); } }
+      if (done) await sms.sendText(from, done.reply);
+      if (dan) {
+        const head = "Fig inbox: " + (done ? done.who : sms.prettyPhone(from)) + ": \"" + body.slice(0, 160) + "\". ";
+        await sms.sendText(dan, head + (done
+          ? "Assistant " + (done.did.length ? done.did.join(", ") : "answered") + (done.handoff ? ". NEEDS YOU: " + done.handoff : "") + ". figperformance.com/inbox"
+          : "Answer at figperformance.com/inbox"));
+      }
     }
     return twiml(res);
   } catch (e) {

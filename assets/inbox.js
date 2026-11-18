@@ -249,7 +249,7 @@
       for (var i = 0; i < 7; i++) { var k = addDays(weekOf, i), od = el("option", "", dayLabel(k, true)); od.value = k; if (k === keep) od.selected = true; ds.appendChild(od); }
       var hs = $("ib-ses-hour"); if (!hs.options.length) for (var h = 4; h <= 21; h++) { var oh = el("option", "", hourLabel(h)); oh.value = h; hs.appendChild(oh); }
       var box = $("ib-wk-days"); box.textContent = "";
-      var items = r.j.sessions.map(function (s) { return { kind: "session", id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: s.fixed }; })
+      var items = r.j.sessions.map(function (s) { return { kind: "session", id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: s.fixed, by: s.by }; })
         .concat(r.j.consults.map(function (c) { return { kind: "consult", name: c.name, phone: c.phone, start: c.start, confirmed: c.confirmed, status: c.status }; }));
       for (var d = 0; d < 7; d++) {
         var key = addDays(weekOf, d), todays = items.filter(function (x) { return pacKey.format(new Date(x.start)) === key; }).sort(function (a, b) { return Date.parse(a.start) - Date.parse(b.start); });
@@ -260,6 +260,7 @@
           row.appendChild(el("strong", "", pacTime.format(new Date(x.start))));
           row.appendChild(el("span", "ib-wk-name", (x.kind === "consult" ? "Consult (90 min): " : "") + x.name));
           if (x.kind === "session" && x.fixed) row.appendChild(el("span", "ib-tag", "Fixed weekly"));
+          if (x.kind === "session" && x.by === "assistant") row.appendChild(el("span", "ib-tag", "Booked by assistant"));
           if (x.kind === "consult") row.appendChild(el("span", "ib-tag", x.status === "booked" ? (x.confirmed ? "Confirmed" : "Not confirmed yet") : (STATUS[x.status] || x.status)));
           else {
             var rm = el("button", "ib-link", "Remove"); rm.type = "button";
@@ -382,6 +383,9 @@
         wrap.appendChild(ta); f.appendChild(wrap);
       });
       $("ib-noshow").value = settings.noShowText;
+      $("ib-ai-on").checked = !!(settings.ai && settings.ai.on);
+      $("ib-ai-facts").value = (settings.ai && settings.ai.facts) || "";
+      $("ib-ai-need").hidden = !!r.j.assistant;
     });
   }
   $("ib-block-add").addEventListener("click", function () {
@@ -401,6 +405,7 @@
     settings.noticeHours = +$("ib-notice").value; settings.daysAhead = +$("ib-ahead").value;
     settings.followups = [].map.call(document.querySelectorAll(".ib-follow-row"), function (w) { return { day: +w.querySelector(".ib-follow-day").value, text: w.querySelector(".ib-follow-text").value }; });
     settings.noShowText = $("ib-noshow").value;
+    settings.ai = { on: $("ib-ai-on").checked, facts: $("ib-ai-facts").value };
     var btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; st.className = "ib-status"; st.textContent = "Saving…";
     api("POST", { action: "settings", settings: settings }).then(function (r) {
       btn.disabled = false;

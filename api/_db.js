@@ -61,6 +61,8 @@ const DEFAULTS = {
     { day: 21, text: "Hi {first}, it's Coach Dan at Fig Performance. Still thinking about getting stronger? I have a couple of training spots open. Reply here and I'll set it up. Reply STOP to opt out." },
     { day: 45, text: "Hi {first}, Coach Dan at Fig Performance. Last note from me: if the timing is better now, reply and we'll pick up where we left off. Reply STOP to opt out." }
   ],
+  // The texting assistant. Off until Dan turns it on. "facts" is the only information it may give out.
+  ai: { on: false, facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
   noShowText: "Hi {first}, Coach Dan at Fig Performance. Sorry we missed each other today. Want to pick a new time? Reply here or book at figperformance.com. Reply STOP to opt out."
 };
 function cleanSettings(s) {
@@ -77,6 +79,10 @@ function cleanSettings(s) {
     const f = s.followups.map(x => ({ day: Math.max(1, Math.min(120, Math.round(+x.day || 0))), text: String(x.text || "").trim().slice(0, 600) }))
       .filter(x => x.text).sort((a, b) => a.day - b.day).slice(0, 6);
     out.followups = f.map(withStop);
+  }
+  if (s.ai && typeof s.ai === "object") {
+    out.ai.on = s.ai.on === true;
+    if (typeof s.ai.facts === "string" && s.ai.facts.trim()) out.ai.facts = s.ai.facts.trim().slice(0, 3000);
   }
   if (typeof s.noShowText === "string" && s.noShowText.trim()) out.noShowText = withStop({ text: s.noShowText.trim().slice(0, 600) }).text;
   return out;
@@ -189,11 +195,12 @@ async function clients() { return ((await getJSON("clients")) || []).sort((a, b)
 async function saveClients(list) { return setJSON("clients", list.slice(0, 400)); }
 function validHourStart(iso) { return /^\d{4}-\d{2}-\d{2}T\d{2}:00:00Z$/.test(String(iso)) && !isNaN(Date.parse(iso)); }
 /* Returns the session, or null when that hour is already taken (by a session or a consult). */
-async function addSession(c, startIso, fixed) {
+async function addSession(c, startIso, fixed, by) {
   if (!validHourStart(startIso)) return null;
   const id = "s_" + newId();
   if (!(await lockCells(cellsFor(startIso, SESSION_MIN), id))) return null;
   const rec = { id, phone: c.phone, name: c.name, start: startIso, fixed: !!fixed, created: new Date().toISOString() };
+  if (by) rec.by = by;
   const ttl = String(Math.max(3600, Math.round((Date.parse(startIso) - Date.now()) / 1000)) + 90 * 86400);
   await pipeline([["SET", "ses:" + id, JSON.stringify(rec), "EX", ttl], ["ZADD", "ses:byStart", String(Date.parse(startIso)), id]]);
   return rec;
@@ -249,4 +256,4 @@ async function dueFollowups(nowMs) { return (await cmd("ZRANGEBYSCORE", "fu:due"
 module.exports = { TZ, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
-  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, CONSULT_MIN, SESSION_MIN };
+  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, cellsFor, CONSULT_MIN, SESSION_MIN };

@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=6">
+  <link rel="stylesheet" href="/assets/inbox.css?v=7">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
@@ -137,6 +137,11 @@
         <p class="ib-help">Sent after a consult you mark &ldquo;Showed&rdquo; or &ldquo;No-show&rdquo;, only to people who ticked the optional texts box, never to anyone who replied STOP, and only between 9 AM and 8 PM. They stop as soon as the person replies or you mark them Signed up or Not interested. Use {first} for their first name. &ldquo;Reply STOP to opt out&rdquo; is added if you leave it off.</p>
         <div id="ib-follow"></div>
         <label class="ib-block">Text after a no-show<textarea id="ib-noshow" rows="3" maxlength="600"></textarea></label>
+        <h2>Texting assistant</h2>
+        <p class="ib-help">When this is on, clients on your Clients list can text the days and times they want and the assistant puts them on your Week if the hour is free. It offers other times when it is taken, sends anything else to you, and texts you everything it does. It never changes a session inside 24 hours.</p>
+        <label class="ib-check"><input type="checkbox" id="ib-ai-on"> Let the assistant answer clients and book their sessions</label>
+        <p class="ib-help" id="ib-ai-need" hidden>Not connected yet: the assistant needs its AI key added in Vercel before it can answer.</p>
+        <label class="ib-block">What the assistant is allowed to tell people (it will not say anything that is not written here)<textarea id="ib-ai-facts" rows="5" maxlength="3000"></textarea></label>
         <p class="ib-status" id="ib-set-status" role="alert"></p>
         <button class="btn btn-primary" type="submit">Save settings</button>
       </form>
@@ -145,6 +150,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=6" defer></script>
+  <script src="/assets/inbox.js?v=7" defer></script>
 </body>
 </html>

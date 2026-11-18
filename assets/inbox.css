@@ -123,3 +123,7 @@ a.ib-link { padding: 0 8px; min-width: 44px; justify-content: center; }
 .ib-chip { margin-left: 0; min-height: 44px; cursor: pointer; font: inherit; font-size: .85rem; color: var(--navy); background: var(--white); }
 .ib-chip:hover { border-color: var(--navy); }
 .ib-fixed .ib-btn { min-height: 44px; }
+
+/* Assistant on/off switch on the Settings tab */
+.ib-panel label.ib-check { display: flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 8px; cursor: pointer; }
+.ib-panel label.ib-check input { width: 22px; height: 22px; min-height: 0; margin: 0; padding: 0; flex: none; accent-color: var(--navy); }

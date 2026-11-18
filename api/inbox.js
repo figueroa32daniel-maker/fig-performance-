@@ -21,6 +21,7 @@
 const crypto = require("crypto");
 const sms = require("./_sms.js");
 const db = require("./_db.js");
+const ai = require("./_ai.js");
 
 const COOKIE = "__Host-fig_inbox";
 const DAYS = 30;
@@ -192,6 +193,7 @@ module.exports = async function handler(req, res) {
         if (!text || text.length > 1200) return send(res, 400, { error: "body" });
         if (db.configured()) { const l = await db.getLead(to); if (l && l.optedOut) return send(res, 409, { error: "opted_out" }); }
         const m = await sms.sendText(to, text);
+        if (m && db.configured()) await ai.note(to, "d", text);          // the assistant stays quiet while Dan is in the conversation
         return m ? send(res, 200, { ok: true }) : send(res, 502, { error: "send_failed" });
       }
       if (b.action === "cancel") {
@@ -270,7 +272,7 @@ module.exports = async function handler(req, res) {
         if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
         if (q.get("view") === "schedule") return send(res, 200, { bookings: await schedule(), texting: sms.configured() });
         const host = req.headers["x-forwarded-host"] || req.headers.host;
-        return send(res, 200, { settings: await db.settings(), texting: sms.configured(), feed: "https://" + host + "/api/cal?k=" + sms.feedKey() });
+        return send(res, 200, { settings: await db.settings(), texting: sms.configured(), assistant: ai.configured(), feed: "https://" + host + "/api/cal?k=" + sms.feedKey() });
       }
       if (!sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
       if (q.get("view") === "thread") {
