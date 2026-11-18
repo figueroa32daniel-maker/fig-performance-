@@ -13,7 +13,7 @@
   var TZ = "America/Los_Angeles";
   var DAYS = 14;
   var PHONE = (window.CONFIG && CONFIG.PHONE) || "(714) 396-7178";
-  var LEAD_ENDPOINT = (window.CONFIG && CONFIG.FORM_ENDPOINT) || "https://formsubmit.co/ajax/trainat@figperformance.com";
+  var LEAD_ENDPOINT = (window.CONFIG && CONFIG.FORM_ENDPOINT) || "https://formsubmit.co/ajax/figueroa32daniel@gmail.com";
   var POLICY = (window.CONFIG && CONFIG.POLICY_VERSION) || "";
   var loadedAt = Date.now();
 
@@ -217,7 +217,7 @@
       "Name": name, "Mobile": phone, "Email": email || "(not given)", "Goal": goal || "(not given)", "Came from": source(),
       "Consent": "Yes: agreed to Privacy Policy & Terms and to calls/texts about consultation & services (STOP to opt out; not a condition of purchase). Policy version " + POLICY,
       "Submitted from": "figperformance.com booking",
-      _template: "table", _captcha: "false"
+      _template: "table", _captcha: "false", _cc: "trainat@figperformance.com"
     };
     if (email) lead._replyto = email;
     partialSent = true;                                         // a real submit replaces the "unfinished" alert
@@ -286,7 +286,7 @@
     fd.append("Time they were looking at", st.time ? fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) : "(none picked)");
     fd.append("Came from", source()); fd.append("Why sent", reason);
     fd.append("_subject", "Unfinished booking: " + name.trim() + " (call, don't text)");
-    fd.append("_template", "table"); fd.append("_captcha", "false");
+    fd.append("_template", "table"); fd.append("_captcha", "false"); fd.append("_cc", "trainat@figperformance.com");
     var sent = false;
     try { if (navigator.sendBeacon) sent = navigator.sendBeacon(LEAD_ENDPOINT, fd); } catch (e) {}
     if (!sent) { try { fetch(LEAD_ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true, body: fd }); } catch (e) {} }
