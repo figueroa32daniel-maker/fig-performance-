@@ -265,7 +265,7 @@ module.exports = async function handler(req, res) {
         const ws = db.weekStart(want), from = ws.getTime(), to = from + 7 * 864e5 - 1;
         const [ses, bks, cl] = await Promise.all([db.sessionsBetween(from, to), db.bookingsBetween(from, to), db.clients()]);
         return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(),
-          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed })),
+          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed, by: s.by || "" })),
           consults: bks.filter(b => b.status !== "cancelled").map(b => ({ id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })) });
       }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {
