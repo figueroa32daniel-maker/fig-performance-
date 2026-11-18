@@ -11,6 +11,7 @@
 const sms = require("./_sms.js");
 const db = require("./_db.js");
 const ai = require("./_ai.js");
+const health = require("./health.js");
 
 function done(res, code, body) { res.statusCode = code; res.setHeader("Content-Type", "application/json"); res.setHeader("Cache-Control", "no-store"); res.end(JSON.stringify(body)); }
 function eligible(lead) {
@@ -22,6 +23,10 @@ module.exports = async function handler(req, res) {
   try {
     if (!db.configured()) return done(res, 200, { ok: true, skipped: "not set up" });
     if (sms.tooMany("cron", 6, 3600 * 1000)) return done(res, 429, { error: "slow_down" });
+    const now0 = Date.now();
+    try { await db.cmd("SET", "health:cron", String(now0)); } catch (e) { /* heartbeat for /api/health */ }
+    let low = [];
+    try { low = (await db.tallySessions(now0)).low; } catch (e) { console.error("session count failed", e && e.message); }   // sessions that happened come off each client's count
     try { await db.ensureFixed(3); } catch (e) { console.error("fixed sessions fill failed", e && e.message); }   // keeps fixed weekly clients on the calendar
     if (!sms.configured()) return done(res, 200, { ok: true, skipped: "texting not set up" });
     if (sms.quietHours()) return done(res, 200, { ok: true, skipped: "quiet hours" });
@@ -42,6 +47,27 @@ module.exports = async function handler(req, res) {
       const next = s.followups[step + 1];
       if (next) await db.scheduleFollowup(phone, Date.parse(lead.followBase) + next.day * 864e5);
     }
+    // Session reminders: everyone training tomorrow gets one text this morning.
+    if (s.sessionReminders) {
+      try {
+        const tomorrow = db.dateKey(new Date(now + 864e5)), from = db.zonedToUtc(tomorrow, "00:00").getTime();
+        const byPhone = new Map();
+        (await db.sessionsBetween(from, from + 864e5 - 1)).forEach(x => { if (db.dateKey(new Date(x.start)) === tomorrow) byPhone.set(x.phone, (byPhone.get(x.phone) || []).concat([x])); });
+        for (const [phone, list] of byPhone) {
+          if ((await db.cmd("SET", "rem:" + phone + ":" + tomorrow, "1", "NX", "EX", "172800")) !== "OK") continue;
+          const lead = await db.getLead(phone); if (lead && lead.optedOut) continue;
+          const w = sms.when(list[0].start);
+          await sms.sendText(phone, "Hi " + sms.first(list[0].name) + ", reminder from Fig Performance: you train tomorrow (" + w.day.split(",")[0] + ") at " +
+            list.map(x => sms.when(x.start).time).join(" and ") + ". Need to change it? Just text back here.");
+        }
+      } catch (e) { console.error("session reminders failed", e && e.message); }
+    }
+    if (low.length) await sms.tellDan("Fig inbox: " + low.map(x => x.name + " has " + x.credits + " session" + (x.credits === 1 ? "" : "s") + " left").join("; ") + ".");
+    // Self-check: if a part of the system is down, Dan hears about it the same morning.
+    try {
+      const hc = await health.check();
+      if (!hc.ok && (await db.cmd("SET", "health:told:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") await sms.tellDan("Fig system check: problem with " + hc.problems.join(", ") + ". Claude's monitor will look at it; details at figperformance.com/api/health");
+    } catch (e) { console.error("health check failed", e && e.message); }
     // Sunday morning: the assistant asks clients with nothing booked what times they want this week.
     try {
       const asked = await ai.weeklyAsk(now);

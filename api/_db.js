@@ -63,6 +63,12 @@ const DEFAULTS = {
   ],
   // The texting assistant. Off until Dan turns it on. "facts" is the only information it may give out.
   ai: { on: false, weeklyAsk: false, facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
+  // Missed-call text-back: a caller Dan couldn't answer gets one text so the lead isn't lost.
+  // ring: true = calls to the gym number ring Dan's cell first; false = his carrier already tried him (call forwarding).
+  missedCall: { on: true, ring: true, text: "Hi, this is Coach Dan at Fig Performance. Sorry I missed your call, I'm probably coaching. Text me here and I'll get right back to you, or book a free consult at figperformance.com. Reply STOP to opt out." },
+  sessionReminders: true,      // text each client the morning before a training session
+  // Google review request. Sent only when Dan presses "Ask for a review" on a client. No link, no button.
+  review: { link: "", text: "Hi {first}, Coach Dan at Fig Performance. If training here has helped you, would you leave a quick Google review? It means a lot: {link} Reply STOP to opt out." },
   noShowText: "Hi {first}, Coach Dan at Fig Performance. Sorry we missed each other today. Want to pick a new time? Reply here or book at figperformance.com. Reply STOP to opt out."
 };
 function cleanSettings(s) {
@@ -84,6 +90,20 @@ function cleanSettings(s) {
     out.ai.on = s.ai.on === true;
     out.ai.weeklyAsk = s.ai.weeklyAsk === true;
     if (typeof s.ai.facts === "string" && s.ai.facts.trim()) out.ai.facts = s.ai.facts.trim().slice(0, 3000);
+  }
+  if (s.missedCall && typeof s.missedCall === "object") {
+    out.missedCall.on = s.missedCall.on !== false; out.missedCall.ring = s.missedCall.ring !== false;
+    if (typeof s.missedCall.text === "string" && s.missedCall.text.trim()) out.missedCall.text = withStop({ text: s.missedCall.text.trim().slice(0, 480) }).text;
+  }
+  if (typeof s.sessionReminders === "boolean") out.sessionReminders = s.sessionReminders;
+  if (s.review && typeof s.review === "object") {
+    const link = String(s.review.link || "").trim();
+    if (/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}\/[^\s<>"']{0,300}$/i.test(link)) out.review.link = link;
+    if (typeof s.review.text === "string" && s.review.text.trim()) {
+      let t = withStop({ text: s.review.text.trim().slice(0, 480) }).text;
+      if (t.indexOf("{link}") < 0) t = t.replace(/\s*Reply STOP to opt out\.\s*$/i, "") + " {link} Reply STOP to opt out.";
+      out.review.text = t;
+    }
   }
   if (typeof s.noShowText === "string" && s.noShowText.trim()) out.noShowText = withStop({ text: s.noShowText.trim().slice(0, 600) }).text;
   return out;
@@ -174,6 +194,7 @@ async function cancelBooking(rec, by) {
   rec.status = "cancelled"; rec.cancelledBy = by; rec.cancelledAt = new Date().toISOString();
   await setJSON("bk:" + rec.id, rec);
   await freeCells(cellsFor(rec.start, rec.minutes || CONSULT_MIN), rec.id);
+  await freed(rec.start, rec.minutes || CONSULT_MIN);
   return rec;
 }
 async function moveBooking(rec, newStart) {          // returns false if the new time is taken
@@ -182,8 +203,10 @@ async function moveBooking(rec, newStart) {          // returns false if the new
   const need = newCells.filter(c => oldCells.indexOf(c) < 0);
   if (need.length && !(await lockCells(need, rec.id))) return false;
   await freeCells(oldCells.filter(c => newCells.indexOf(c) < 0), rec.id);
+  const was = rec.start;
   rec.start = newStart; rec.moved = (rec.moved || 0) + 1;
   await pipeline([["SET", "bk:" + rec.id, JSON.stringify(rec)], ["ZADD", "bk:byStart", String(Date.parse(newStart)), rec.id]]);
+  await freed(was, mins);
   return true;
 }
 async function bookingsBetween(fromMs, toMs) {
@@ -206,14 +229,43 @@ async function addSession(c, startIso, fixed, by) {
   await pipeline([["SET", "ses:" + id, JSON.stringify(rec), "EX", ttl], ["ZADD", "ses:byStart", String(Date.parse(startIso)), id]]);
   return rec;
 }
-async function removeSession(id) {
+/* charge = a late cancel or no-show: the client loses that session from their count. */
+async function removeSession(id, charge) {
   if (!/^s_[A-Za-z0-9_-]{20,40}$/.test(String(id || ""))) return false;
   const rec = await getJSON("ses:" + id); if (!rec) return false;
+  if (charge && !rec.counted) await useCredit(rec.phone, 1);
   await freeCells(cellsFor(rec.start, SESSION_MIN), id);
   const cmds = [["DEL", "ses:" + id], ["ZREM", "ses:byStart", id]];
   // A fixed weekly session removed for one week must not be put straight back by the weekly fill.
   if (rec.fixed && Date.parse(rec.start) > Date.now()) cmds.push(["SET", "skip:" + rec.phone + ":" + rec.start, "1", "EX", String(Math.round((Date.parse(rec.start) - Date.now()) / 1000) + 86400)]);
-  await pipeline(cmds); return true;
+  await pipeline(cmds);
+  await freed(rec.start, SESSION_MIN);
+  return true;
+}
+/* Time came free: let the waitlist know. (Loaded here, not at the top, because the assistant file loads this one.) */
+async function freed(startIso, minutes) { try { await require("./_ai.js").offerFreed(startIso, minutes); } catch (e) { /* never block a cancel */ } }
+/*
+ * Session count. A client can have "sessions left" (credits). It goes down by one for every session that
+ * has happened, and for a late cancel or no-show Dan marks. Clients with no count set are not tracked.
+ * Returns the client after the change, or null if they are not being counted.
+ */
+async function useCredit(phone, n) {
+  const list = await clients(), c = list.find(x => x.phone === phone);
+  if (!c || !Number.isFinite(c.credits)) return null;
+  c.credits = c.credits - n; await saveClients(list); return c;
+}
+/* Called by the daily job: count every session that has finished and hasn't been counted yet. */
+async function tallySessions(now) {
+  const done = (await sessionsBetween(now - 10 * 864e5, now - SESSION_MIN * 60000)).filter(x => !x.counted), low = [];
+  for (const rec of done) {
+    rec.counted = true;
+    await cmd("SET", "ses:" + rec.id, JSON.stringify(rec), "KEEPTTL");
+    await useCredit(rec.phone, 1);
+  }
+  // Tell Dan about anyone this run brought down to 2 or fewer, using where they ended up.
+  const touched = new Set(done.map(x => x.phone));
+  (await clients()).forEach(c => { if (touched.has(c.phone) && Number.isFinite(c.credits) && c.credits <= 2) low.push({ name: c.name, credits: c.credits }); });
+  return { counted: done.length, low };
 }
 /* Clients with fixed weekly times ("Tuesday 5 AM, never changes"): keep the next few weeks filled in. */
 async function ensureFixed(weeksAhead) {
@@ -257,4 +309,4 @@ async function dueFollowups(nowMs) { return (await cmd("ZRANGEBYSCORE", "fu:due"
 module.exports = { TZ, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
-  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, cellsFor, CONSULT_MIN, SESSION_MIN };
+  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, useCredit, tallySessions, cellsFor, CONSULT_MIN, SESSION_MIN };

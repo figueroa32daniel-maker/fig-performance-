@@ -127,3 +127,7 @@ a.ib-link { padding: 0 8px; min-width: 44px; justify-content: center; }
 /* Assistant on/off switch on the Settings tab */
 .ib-panel label.ib-check { display: flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 8px; cursor: pointer; }
 .ib-panel label.ib-check input { width: 22px; height: 22px; min-height: 0; margin: 0; padding: 0; flex: none; accent-color: var(--navy); }
+
+/* Session count on the Clients tab */
+.ib-panel input.ib-num { display: inline-block; width: 84px; margin: 0 8px 0 0; }
+.ib-fixed .ib-link { margin-right: 16px; }

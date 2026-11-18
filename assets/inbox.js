@@ -266,6 +266,13 @@
             var rm = el("button", "ib-link", "Remove"); rm.type = "button";
             rm.addEventListener("click", function () { rm.disabled = true; api("POST", { action: "session_remove", id: x.id }).then(loadWeek); });
             row.appendChild(rm);
+            // Inside 24 hours (or already past) for a client whose sessions are counted: Dan can take it off and still count it.
+            var cl = (r.j.clients || []).filter(function (c) { return c.phone === x.phone; })[0];
+            if (cl && typeof cl.credits === "number" && !x.counted && Date.parse(x.start) - Date.now() < 24 * 3600 * 1000) {
+              var lc = el("button", "ib-link", "Late cancel / no-show (counts)"); lc.type = "button";
+              lc.addEventListener("click", function () { lc.disabled = true; api("POST", { action: "session_remove", id: x.id, charge: true }).then(loadWeek); });
+              row.appendChild(lc);
+            }
           }
           box.appendChild(row);
         });
@@ -294,8 +301,9 @@
 
   /* ----- Clients tab ----- */
   function loadClients() {
-    api("GET", { view: "week" }).then(function (r) { if (!handle(r)) return; show("clients"); renderClients(r.j.clients, r.j.texting); });
+    api("GET", { view: "week" }).then(function (r) { if (!handle(r)) return; show("clients"); monthCount = r.j.month || {}; hasReviewLink = !!r.j.reviewLink; renderClients(r.j.clients, r.j.texting); });
   }
+  var monthCount = {}, hasReviewLink = false;
   function renderClients(list, texting) {
     var box = $("ib-cl-list"); box.textContent = "";
     if (!list.length) box.appendChild(el("p", "ib-help", "No clients yet."));
@@ -330,6 +338,24 @@
         saveFixed(fixed.concat([{ dow: ds.value, hour: +hs.value }]));
       });
       fx.appendChild(ds); fx.appendChild(hs); fx.appendChild(add); box.appendChild(fx);
+      // Session count: how many they have left, and a quick way to add a new pack when they pay.
+      var cr = el("div", "ib-fixed"), counted = typeof c.credits === "number";
+      function saveCount(extra) { var p = { action: "client", phone: c.phone, name: c.name, note: c.note || "", fixed: fixed }; for (var k in extra) p[k] = extra[k]; api("POST", p).then(function (r) { if (r.j.ok) renderClients(r.j.clients, texting); }); }
+      cr.appendChild(el("span", "ib-fixed-label", (counted ? "Sessions left: " + c.credits + ". " : "Sessions not counted. ") + "This month: " + (monthCount[c.phone] || 0) + " on the schedule."));
+      var num = el("input"); num.type = "number"; num.min = 1; num.max = 100; num.value = 12; num.className = "ib-num"; num.setAttribute("aria-label", "Sessions to add for " + c.name);
+      var addP = el("button", "ib-btn ib-btn-light", counted ? "Add sessions" : "Start counting"); addP.type = "button";
+      addP.addEventListener("click", function () { var n = Math.round(+num.value); if (n > 0) saveCount(counted ? { add: n } : { credits: n }); });
+      cr.appendChild(num); cr.appendChild(addP);
+      if (counted) { var stop = el("button", "ib-link", "Stop counting"); stop.type = "button"; stop.addEventListener("click", function () { saveCount({ credits: null }); }); cr.appendChild(stop); }
+      if (hasReviewLink && texting) {
+        var rv = el("button", "ib-link", c.reviewAsked ? "Review asked" : "Ask for a Google review"); rv.type = "button"; rv.disabled = !!c.reviewAsked;
+        rv.addEventListener("click", function () {
+          if (rv.getAttribute("data-sure") !== "1") { rv.setAttribute("data-sure", "1"); rv.textContent = "Tap again to send the review text"; return; }
+          rv.disabled = true; api("POST", { action: "review", phone: c.phone }).then(function (r) { if (r.j.ok) renderClients(r.j.clients, texting); else rv.textContent = r.j.error === "opted_out" ? "They replied STOP" : "Could not send"; });
+        });
+        cr.appendChild(rv);
+      }
+      box.appendChild(cr);
     });
   }
   $("ib-cl-form").addEventListener("submit", function (e) {
@@ -383,6 +409,9 @@
         wrap.appendChild(ta); f.appendChild(wrap);
       });
       $("ib-noshow").value = settings.noShowText;
+      $("ib-mc-on").checked = settings.missedCall.on; $("ib-mc-ring").checked = settings.missedCall.ring; $("ib-mc-text").value = settings.missedCall.text;
+      $("ib-rem-on").checked = settings.sessionReminders;
+      $("ib-rv-link").value = settings.review.link; $("ib-rv-text").value = settings.review.text;
       $("ib-ai-on").checked = !!(settings.ai && settings.ai.on);
       $("ib-ai-weekly").checked = !!(settings.ai && settings.ai.weeklyAsk);
       $("ib-ai-facts").value = (settings.ai && settings.ai.facts) || "";
@@ -406,6 +435,9 @@
     settings.noticeHours = +$("ib-notice").value; settings.daysAhead = +$("ib-ahead").value;
     settings.followups = [].map.call(document.querySelectorAll(".ib-follow-row"), function (w) { return { day: +w.querySelector(".ib-follow-day").value, text: w.querySelector(".ib-follow-text").value }; });
     settings.noShowText = $("ib-noshow").value;
+    settings.missedCall = { on: $("ib-mc-on").checked, ring: $("ib-mc-ring").checked, text: $("ib-mc-text").value };
+    settings.sessionReminders = $("ib-rem-on").checked;
+    settings.review = { link: $("ib-rv-link").value, text: $("ib-rv-text").value };
     settings.ai = { on: $("ib-ai-on").checked, weeklyAsk: $("ib-ai-weekly").checked, facts: $("ib-ai-facts").value };
     var btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; st.className = "ib-status"; st.textContent = "Saving…";
     api("POST", { action: "settings", settings: settings }).then(function (r) {

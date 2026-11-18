@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=7">
+  <link rel="stylesheet" href="/assets/inbox.css?v=8">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
@@ -137,6 +137,17 @@
         <p class="ib-help">Sent after a consult you mark &ldquo;Showed&rdquo; or &ldquo;No-show&rdquo;, only to people who ticked the optional texts box, never to anyone who replied STOP, and only between 9 AM and 8 PM. They stop as soon as the person replies or you mark them Signed up or Not interested. Use {first} for their first name. &ldquo;Reply STOP to opt out&rdquo; is added if you leave it off.</p>
         <div id="ib-follow"></div>
         <label class="ib-block">Text after a no-show<textarea id="ib-noshow" rows="3" maxlength="600"></textarea></label>
+        <h2>Client session reminders</h2>
+        <label class="ib-check"><input type="checkbox" id="ib-rem-on"> Text each client the morning before they train</label>
+        <h2>Missed calls</h2>
+        <p class="ib-help">When someone calls the gym&rsquo;s texting number and you can&rsquo;t pick up, they get this text once, and you get a text saying who called. Nobody who replied STOP is texted.</p>
+        <label class="ib-check"><input type="checkbox" id="ib-mc-on"> Text people back when I miss their call</label>
+        <label class="ib-check"><input type="checkbox" id="ib-mc-ring"> Ring my cell phone first</label>
+        <label class="ib-block">Missed-call text<textarea id="ib-mc-text" rows="3" maxlength="480"></textarea></label>
+        <h2>Google reviews</h2>
+        <p class="ib-help">Paste your Google review link here and an &ldquo;Ask for a Google review&rdquo; button appears next to each client. It sends one text, only when you press it, and never twice to the same person within 6 months.</p>
+        <label class="ib-block">Your Google review link<input id="ib-rv-link" type="url" inputmode="url" placeholder="https://g.page/r/..." maxlength="320"></label>
+        <label class="ib-block">Review text (keep {first} and {link})<textarea id="ib-rv-text" rows="3" maxlength="480"></textarea></label>
         <h2>Texting assistant</h2>
         <p class="ib-help">When this is on, clients on your Clients list can text the days and times they want and the assistant puts them on your Week if the hour is free. It offers other times when it is taken, sends anything else to you, and texts you everything it does. It never changes a session inside 24 hours.</p>
         <label class="ib-check"><input type="checkbox" id="ib-ai-on"> Let the assistant answer clients and book their sessions</label>
@@ -152,6 +163,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=8" defer></script>
+  <script src="/assets/inbox.js?v=9" defer></script>
 </body>
 </html>

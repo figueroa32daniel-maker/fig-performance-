@@ -218,7 +218,13 @@ module.exports = async function handler(req, res) {
           if (name.length < 2) return send(res, 400, { error: "name" });
           const fixed = (Array.isArray(b.fixed) ? b.fixed : []).filter(f => db.DAYS.indexOf(f.dow) >= 0 && +f.hour >= 4 && +f.hour <= 21)
             .map(f => ({ dow: f.dow, hour: +f.hour })).slice(0, 14);
-          list.push({ phone, name, note: String(b.note || "").replace(/[<>]/g, "").trim().slice(0, 200), fixed });
+          const old = (await db.clients()).find(c => c.phone === phone) || {};
+          const next = Object.assign({}, old, { phone, name, note: String(b.note || "").replace(/[<>]/g, "").trim().slice(0, 200), fixed });
+          // Sessions left: a number starts or corrects the count, "" or null stops counting, add: N tops it up.
+          if (b.credits === null || b.credits === "") delete next.credits;
+          else if (b.credits !== undefined && Number.isFinite(+b.credits)) next.credits = Math.max(-50, Math.min(500, Math.round(+b.credits)));
+          if (Number.isFinite(+b.add) && +b.add > 0) next.credits = Math.min(500, (Number.isFinite(next.credits) ? next.credits : 0) + Math.round(+b.add));
+          list.push(next);
         }
         await db.saveClients(list);
         if (!b.remove) await db.ensureFixed(3);
@@ -233,7 +239,19 @@ module.exports = async function handler(req, res) {
         const rec = await db.addSession(c, at.toISOString().replace(".000Z", "Z"));
         return rec ? send(res, 200, { ok: true, session: rec }) : send(res, 409, { error: "taken" });
       }
-      if (b.action === "session_remove") return send(res, 200, { ok: await db.removeSession(b.id) });
+      if (b.action === "session_remove") return send(res, 200, { ok: await db.removeSession(b.id, b.charge === true) });
+      if (b.action === "review") {                         // one Google review request, only when Dan presses the button
+        if (!sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
+        const phone = sms.usPhone(b.phone), list = await db.clients(), c = list.find(x => x.phone === phone), s = await db.settings();
+        if (!c) return send(res, 400, { error: "client" });
+        if (!s.review.link) return send(res, 400, { error: "no_link" });
+        const l = await db.getLead(phone); if (l && l.optedOut) return send(res, 409, { error: "opted_out" });
+        if (c.reviewAsked && Date.now() - Date.parse(c.reviewAsked) < 180 * 864e5) return send(res, 409, { error: "already_asked" });
+        const m = await sms.sendText(phone, s.review.text.replace(/\{first\}/g, sms.first(c.name)).replace(/\{link\}/g, s.review.link));
+        if (!m) return send(res, 502, { error: "send_failed" });
+        c.reviewAsked = new Date().toISOString(); await db.saveClients(list);
+        return send(res, 200, { ok: true, clients: await db.clients() });
+      }
       if (b.action === "copy_week") {
         const from = db.zonedToUtc(String(b.from), "00:00"), to = db.zonedToUtc(String(b.to), "00:00");
         if (!from || !to) return send(res, 400, { error: "week" });
@@ -264,8 +282,11 @@ module.exports = async function handler(req, res) {
         const want = /^\d{4}-\d{2}-\d{2}$/.test(q.get("start") || "") ? new Date(q.get("start") + "T20:00:00Z") : new Date();
         const ws = db.weekStart(want), from = ws.getTime(), to = from + 7 * 864e5 - 1;
         const [ses, bks, cl] = await Promise.all([db.sessionsBetween(from, to), db.bookingsBetween(from, to), db.clients()]);
-        return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(),
-          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed, by: s.by || "" })),
+        // How many sessions each client has on the calendar this month (done and still to come).
+        const ym = db.dateKey(new Date()).slice(0, 7), m0 = db.zonedToUtc(ym + "-01", "00:00").getTime(), month = {};
+        (await db.sessionsBetween(m0, m0 + 32 * 864e5)).forEach(x => { if (db.dateKey(new Date(x.start)).slice(0, 7) === ym) month[x.phone] = (month[x.phone] || 0) + 1; });
+        return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(), month, reviewLink: !!(await db.settings()).review.link,
+          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed, by: s.by || "", counted: !!s.counted })),
           consults: bks.filter(b => b.status !== "cancelled").map(b => ({ id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })) });
       }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {

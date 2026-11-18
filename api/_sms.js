@@ -82,7 +82,11 @@ async function sendText(to, body, sendAt) {
     p.SendAt = sendAt.toISOString();
   }
   const r = await twilio("/Messages.json", p);
-  if (!r.ok) { console.error("twilio send failed", r.status, r.j && r.j.code); return null; }   // no message bodies or numbers in logs
+  if (!r.ok) {
+    console.error("twilio send failed", r.status, r.j && r.j.code);                           // no message bodies or numbers in logs
+    try { const db = require("./_db.js"); if (db.configured()) await db.pipeline([["INCR", "health:sendfail"], ["EXPIRE", "health:sendfail", "21600"]]); } catch (e) { /* counting failures is best-effort */ }
+    return null;
+  }
   return r.j;
 }
 
