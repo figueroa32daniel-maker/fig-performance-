@@ -10,7 +10,8 @@
  *   INBOX_PASSWORD                the password Dan types to open /inbox (12+ characters)
  *   DAN_MOBILE                    optional. Dan's own cell: gets a short text when a client replies
  *   SESSION_SECRET                optional. 32+ random characters. If unset, a secret is derived from
- *                                 the Twilio auth token (never from the inbox password, which is guessable).
+ *                                 the Twilio auth token or the database token (never from the inbox
+ *                                 password, which is guessable).
  */
 "use strict";
 const crypto = require("crypto");
@@ -53,7 +54,9 @@ function usPhone(v) {
 
 /* One strong secret for sign-in cookies, the Calendly hook address and booking signatures. */
 function secret(purpose) {
-  const base = (process.env.SESSION_SECRET || "").length >= 32 ? process.env.SESSION_SECRET : String(process.env.TWILIO_AUTH_TOKEN || "");
+  // Any one of these long random secrets works; the database token is there as soon as the database is connected.
+  const base = (process.env.SESSION_SECRET || "").length >= 32 ? process.env.SESSION_SECRET
+    : String(process.env.TWILIO_AUTH_TOKEN || process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || "");
   return crypto.createHmac("sha256", base).update("fig:" + purpose).digest();
 }
 function safeEqual(x, y) { const a = Buffer.from(String(x)), b = Buffer.from(String(y)); return a.length === b.length && crypto.timingSafeEqual(a, b); }

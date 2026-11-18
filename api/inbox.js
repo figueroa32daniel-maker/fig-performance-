@@ -158,7 +158,7 @@ module.exports = async function handler(req, res) {
   try {
     const pw = process.env.INBOX_PASSWORD || "";
     if (pw.length < 12) return send(res, 503, { error: "not_configured", need: "INBOX_PASSWORD" });
-    if (!process.env.TWILIO_AUTH_TOKEN && (process.env.SESSION_SECRET || "").length < 32) return send(res, 503, { error: "not_configured", need: "TWILIO" });
+    if (!process.env.TWILIO_AUTH_TOKEN && !db.configured() && (process.env.SESSION_SECRET || "").length < 32) return send(res, 503, { error: "not_configured", need: "DATABASE" });
     if (!sameSite(req)) return send(res, 403, { error: "forbidden" });
 
     if (req.method === "POST") {
