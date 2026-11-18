@@ -109,3 +109,12 @@ a.ib-link { display: inline-flex; align-items: center; }
   .ib-app { height: calc(100vh - 93px); height: calc(100dvh - 93px); }
 }
 a.ib-link { padding: 0 8px; min-width: 44px; justify-content: center; }
+.ib-weeknav { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 8px 0; color: var(--navy); }
+.ib-ses-form { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 10px; align-items: end; margin: 12px 0 4px; }
+.ib-ses-form .ib-select { display: block; width: 100%; margin-top: 4px; }
+.ib-ses-form .btn { margin: 0; min-height: 44px; }
+.ib-wk-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; background: var(--white); border: 1px solid var(--line); padding: 4px 12px; margin-bottom: 6px; min-height: 52px; }
+.ib-wk-row strong { min-width: 84px; color: var(--navy); }
+.ib-wk-name { flex: 1; min-width: 140px; }
+.ib-wk-row.is-consult { border-top: 1px solid var(--gold); background: var(--cream); }
+@media (max-width: 560px) { .ib-ses-form { grid-template-columns: 1fr; } .ib-tabs button { padding: 0 7px; font-size: .68rem; letter-spacing: .06em; } }

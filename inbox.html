@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=4">
+  <link rel="stylesheet" href="/assets/inbox.css?v=5">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
@@ -20,7 +20,9 @@
     <span class="ib-title">Inbox</span>
     <nav class="ib-tabs" id="ib-tabs" aria-label="Sections" hidden>
       <button type="button" data-tab="texts" aria-current="true">Texts</button>
-      <button type="button" data-tab="schedule">Schedule</button>
+      <button type="button" data-tab="week">Week</button>
+      <button type="button" data-tab="schedule">Consults</button>
+      <button type="button" data-tab="clients">Clients</button>
       <button type="button" data-tab="settings">Settings</button>
     </nav>
     <button type="button" class="ib-link" id="ib-logout" hidden>Sign out</button>
@@ -75,6 +77,40 @@
       </section>
     </section>
 
+    <!-- Week: client sessions + consults on one schedule -->
+    <section class="ib-panel" id="ib-week" hidden>
+      <h1>Your week</h1>
+      <div class="ib-weeknav">
+        <button type="button" class="ib-btn ib-btn-light" id="ib-wk-prev">&larr; Earlier</button>
+        <strong id="ib-wk-label"></strong>
+        <button type="button" class="ib-btn ib-btn-light" id="ib-wk-next">Later &rarr;</button>
+      </div>
+      <p class="ib-help">Client sessions and consults share this schedule. Any hour with a session on it is hidden from the website, so nobody can book a consult over a client.</p>
+      <form id="ib-ses-form" class="ib-ses-form">
+        <label>Client<select id="ib-ses-client" class="ib-select" required></select></label>
+        <label>Day<select id="ib-ses-day" class="ib-select" required></select></label>
+        <label>Time<select id="ib-ses-hour" class="ib-select" required></select></label>
+        <button class="btn btn-primary" type="submit">Add session</button>
+      </form>
+      <p class="ib-status" id="ib-wk-status" role="alert"></p>
+      <div id="ib-wk-days"></div>
+      <button type="button" class="ib-link" id="ib-wk-copy">Repeat last week&rsquo;s client sessions in this week</button>
+    </section>
+
+    <!-- Clients -->
+    <section class="ib-panel" id="ib-clients" hidden>
+      <h1>Clients</h1>
+      <p class="ib-help">Your training clients. Add them once, then put them on the schedule or text them from here.</p>
+      <form id="ib-cl-form" class="ib-ses-form">
+        <label>Name<input id="ib-cl-name" maxlength="60" autocomplete="off" required></label>
+        <label>Mobile<input id="ib-cl-phone" type="tel" inputmode="tel" placeholder="(714) 555-0123" autocomplete="off" required></label>
+        <label>Note (optional)<input id="ib-cl-note" maxlength="200" autocomplete="off"></label>
+        <button class="btn btn-primary" type="submit">Add client</button>
+      </form>
+      <p class="ib-status" id="ib-cl-status" role="alert"></p>
+      <div id="ib-cl-list"></div>
+    </section>
+
     <!-- Schedule -->
     <section class="ib-panel" id="ib-schedule" hidden>
       <h1>Consults</h1>
@@ -109,6 +145,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=4" defer></script>
+  <script src="/assets/inbox.js?v=5" defer></script>
 </body>
 </html>

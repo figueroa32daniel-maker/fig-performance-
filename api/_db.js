@@ -10,6 +10,11 @@
  *   bk:byStart          ZSET  booking ids scored by start time
  *   slot:<startISO>     the booking id holding that time (SET NX = no double bookings)
  *   lead:<+1phone>      JSON  one person: name, status, consent record, follow-up position
+ *   clients             JSON  Dan's training clients (his contact list): [{phone, name, note}]
+ *   ses:<id>            JSON  one client training session {id, phone, name, start}
+ *   ses:byStart         ZSET  session ids scored by start time
+ *                       A session holds slot:<startISO> exactly like a consult does, so the
+ *                       website can never offer a consult at a time Dan is training someone.
  *   fu:due              ZSET  phones scored by when their next follow-up text is due
  */
 "use strict";
@@ -147,6 +152,38 @@ async function bookingsBetween(fromMs, toMs) {
   return (await getMany((ids || []).map(i => "bk:" + i))).filter(Boolean).sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
 }
 
+/* ---------- training clients and their sessions ---------- */
+async function clients() { return ((await getJSON("clients")) || []).sort((a, b) => a.name.localeCompare(b.name)); }
+async function saveClients(list) { return setJSON("clients", list.slice(0, 400)); }
+function validHourStart(iso) { return /^\d{4}-\d{2}-\d{2}T\d{2}:00:00Z$/.test(String(iso)) && !isNaN(Date.parse(iso)); }
+/* Returns the session, or null when that hour is already taken (by a session or a consult). */
+async function addSession(c, startIso) {
+  if (!validHourStart(startIso)) return null;
+  const id = "s_" + newId(), ttl = Math.max(3600, Math.round((Date.parse(startIso) - Date.now()) / 1000) + 86400);
+  if ((await cmd("SET", "slot:" + startIso, id, "NX", "EX", String(ttl))) !== "OK") return null;
+  const rec = { id, phone: c.phone, name: c.name, start: startIso, created: new Date().toISOString() };
+  await pipeline([["SET", "ses:" + id, JSON.stringify(rec), "EX", String(ttl + 60 * 86400)], ["ZADD", "ses:byStart", String(Date.parse(startIso)), id]]);
+  return rec;
+}
+async function removeSession(id) {
+  if (!/^s_[A-Za-z0-9_-]{20,40}$/.test(String(id || ""))) return false;
+  const rec = await getJSON("ses:" + id); if (!rec) return false;
+  const holder = await cmd("GET", "slot:" + rec.start);
+  const cmds = [["DEL", "ses:" + id], ["ZREM", "ses:byStart", id]];
+  if (holder === id) cmds.push(["DEL", "slot:" + rec.start]);
+  await pipeline(cmds); return true;
+}
+async function sessionsBetween(fromMs, toMs) {
+  const ids = await cmd("ZRANGEBYSCORE", "ses:byStart", String(fromMs), String(toMs), "LIMIT", "0", "500");
+  return (await getMany((ids || []).map(i => "ses:" + i))).filter(Boolean).sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
+}
+/* Monday 00:00 Pacific of the week containing `d`, as a Date. */
+function weekStart(d) {
+  const key = dateKey(d), dow = DAYS.indexOf(pacificParts(new Date(key + "T20:00:00Z")).dow);     // 0 = Sunday
+  const back = (dow + 6) % 7, monday = dateKey(new Date(Date.parse(key + "T20:00:00Z") - back * 864e5));
+  return zonedToUtc(monday, "00:00");
+}
+
 /* ---------- leads ---------- */
 const LEAD_STATUSES = ["new", "booked", "showed", "no_show", "signed_up", "not_interested"];
 async function getLead(phone) { return getJSON("lead:" + phone); }
@@ -159,4 +196,5 @@ async function dueFollowups(nowMs) { return (await cmd("ZRANGEBYSCORE", "fu:due"
 
 module.exports = { TZ, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
-  getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups };
+  getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
+  clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart };

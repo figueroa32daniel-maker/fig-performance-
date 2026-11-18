@@ -17,6 +17,7 @@
   function show(which) {                       // which: login | setup | app (texts) | schedule | settings
     login.hidden = which !== "login"; setup.hidden = which !== "setup"; app.hidden = which !== "app";
     $("ib-schedule").hidden = which !== "schedule"; $("ib-settings").hidden = which !== "settings";
+    $("ib-week").hidden = which !== "week"; $("ib-clients").hidden = which !== "clients";
     if (which === "login") signedIn = false;
     logout.hidden = !signedIn; tabs.hidden = !signedIn;
     if (which !== "app") { clearInterval(timer); timer = null; }
@@ -24,7 +25,7 @@
   function setTab(name) {
     tab = name;
     tabs.querySelectorAll("button").forEach(function (b) { if (b.getAttribute("data-tab") === name) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
-    if (name === "texts") start(); else if (name === "schedule") loadSchedule(); else loadSettings();
+    if (name === "texts") start(); else if (name === "schedule") loadSchedule(); else if (name === "week") loadWeek(); else if (name === "clients") loadClients(); else loadSettings();
   }
   tabs.addEventListener("click", function (e) { var b = e.target.closest("button[data-tab]"); if (b) setTab(b.getAttribute("data-tab")); });
   var STATUS = { "new": "New", booked: "Booked", showed: "Showed", no_show: "No-show", signed_up: "Signed up", not_interested: "Not interested" };
@@ -228,6 +229,95 @@
       });
     });
   }
+
+  /* ----- Week tab: client sessions + consults ----- */
+  var weekOf = null, weekData = null;
+  function addDays(key, n) { var d = new Date(key + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function dayLabel(key, long) { return new Date(key + "T12:00:00Z").toLocaleDateString([], long ? { timeZone: "UTC", weekday: "long", month: "short", day: "numeric" } : { timeZone: "UTC", month: "short", day: "numeric" }); }
+  var pacKey = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit" });
+  var pacTime = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
+  function loadWeek() {
+    var q = { view: "week" }; if (weekOf) q.start = weekOf;
+    return api("GET", q).then(function (r) {
+      if (!handle(r)) return;
+      show("week"); weekData = r.j; weekOf = r.j.weekStart;
+      $("ib-wk-label").textContent = dayLabel(weekOf) + " to " + dayLabel(addDays(weekOf, 6));
+      var cs = $("ib-ses-client"); cs.textContent = "";
+      if (!r.j.clients.length) { var o0 = el("option", "", "Add clients on the Clients tab first"); o0.value = ""; cs.appendChild(o0); }
+      r.j.clients.forEach(function (c) { var o = el("option", "", c.name); o.value = c.phone; cs.appendChild(o); });
+      var ds = $("ib-ses-day"), keep = ds.value; ds.textContent = "";
+      for (var i = 0; i < 7; i++) { var k = addDays(weekOf, i), od = el("option", "", dayLabel(k, true)); od.value = k; if (k === keep) od.selected = true; ds.appendChild(od); }
+      var hs = $("ib-ses-hour"); if (!hs.options.length) for (var h = 4; h <= 21; h++) { var oh = el("option", "", hourLabel(h)); oh.value = h; hs.appendChild(oh); }
+      var box = $("ib-wk-days"); box.textContent = "";
+      var items = r.j.sessions.map(function (s) { return { kind: "session", id: s.id, name: s.name, phone: s.phone, start: s.start }; })
+        .concat(r.j.consults.map(function (c) { return { kind: "consult", name: c.name, phone: c.phone, start: c.start, confirmed: c.confirmed, status: c.status }; }));
+      for (var d = 0; d < 7; d++) {
+        var key = addDays(weekOf, d), todays = items.filter(function (x) { return pacKey.format(new Date(x.start)) === key; }).sort(function (a, b) { return Date.parse(a.start) - Date.parse(b.start); });
+        box.appendChild(el("h2", "", dayLabel(key, true)));
+        if (!todays.length) { box.appendChild(el("p", "ib-help", "Nothing booked.")); continue; }
+        todays.forEach(function (x) {
+          var row = el("div", "ib-wk-row" + (x.kind === "consult" ? " is-consult" : ""));
+          row.appendChild(el("strong", "", pacTime.format(new Date(x.start))));
+          row.appendChild(el("span", "ib-wk-name", (x.kind === "consult" ? "Consult: " : "") + x.name));
+          if (x.kind === "consult") row.appendChild(el("span", "ib-tag", x.status === "booked" ? (x.confirmed ? "Confirmed" : "Not confirmed yet") : (STATUS[x.status] || x.status)));
+          else {
+            var rm = el("button", "ib-link", "Remove"); rm.type = "button";
+            rm.addEventListener("click", function () { rm.disabled = true; api("POST", { action: "session_remove", id: x.id }).then(loadWeek); });
+            row.appendChild(rm);
+          }
+          box.appendChild(row);
+        });
+      }
+    });
+  }
+  $("ib-wk-prev").addEventListener("click", function () { weekOf = addDays(weekOf, -7); loadWeek(); });
+  $("ib-wk-next").addEventListener("click", function () { weekOf = addDays(weekOf, 7); loadWeek(); });
+  $("ib-ses-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var st = $("ib-wk-status"), phone = $("ib-ses-client").value; st.className = "ib-status"; st.textContent = "";
+    if (!phone) { st.className = "ib-status err"; st.textContent = "Add the client on the Clients tab first."; return; }
+    api("POST", { action: "session", phone: phone, date: $("ib-ses-day").value, hour: +$("ib-ses-hour").value }).then(function (r) {
+      if (!handle(r)) return;
+      if (r.j.ok) loadWeek();
+      else { st.className = "ib-status err"; st.textContent = r.j.error === "taken" ? "That hour already has a session or a consult on it." : "Couldn't add that. Check the day and time."; }
+    });
+  });
+  $("ib-wk-copy").addEventListener("click", function () {
+    var st = $("ib-wk-status"); st.className = "ib-status"; st.textContent = "Copying…";
+    api("POST", { action: "copy_week", from: addDays(weekOf, -7), to: weekOf }).then(function (r) {
+      if (!handle(r)) return;
+      loadWeek().then(function () { st.textContent = "Added " + r.j.added + " session" + (r.j.added === 1 ? "" : "s") + (r.j.skipped ? ". Skipped " + r.j.skipped + " (hour taken, already past, or client removed)." : "."); });
+    });
+  });
+
+  /* ----- Clients tab ----- */
+  function loadClients() {
+    api("GET", { view: "week" }).then(function (r) { if (!handle(r)) return; show("clients"); renderClients(r.j.clients, r.j.texting); });
+  }
+  function renderClients(list, texting) {
+    var box = $("ib-cl-list"); box.textContent = "";
+    if (!list.length) box.appendChild(el("p", "ib-help", "No clients yet."));
+    list.forEach(function (c) {
+      var row = el("div", "ib-wk-row");
+      row.appendChild(el("strong", "", c.name)); row.appendChild(el("span", "ib-wk-name", pretty(c.phone) + (c.note ? " · " + c.note : "")));
+      var t = el("button", "ib-link", "Text"); t.type = "button"; t.addEventListener("click", function () { setTab("texts"); openThread(c.phone); }); row.appendChild(t);
+      var call = el("a", "ib-link", "Call"); call.href = "tel:" + c.phone; row.appendChild(call);
+      var rm = el("button", "ib-link", "Remove"); rm.type = "button";
+      rm.addEventListener("click", function () {
+        if (rm.getAttribute("data-sure") !== "1") { rm.setAttribute("data-sure", "1"); rm.textContent = "Tap again to remove"; return; }
+        api("POST", { action: "client", phone: c.phone, remove: true }).then(function (r) { if (r.j.ok) renderClients(r.j.clients, texting); });
+      });
+      row.appendChild(rm); box.appendChild(row);
+    });
+  }
+  $("ib-cl-form").addEventListener("submit", function (e) {
+    e.preventDefault(); var st = $("ib-cl-status"); st.className = "ib-status"; st.textContent = "";
+    api("POST", { action: "client", name: $("ib-cl-name").value, phone: $("ib-cl-phone").value, note: $("ib-cl-note").value }).then(function (r) {
+      if (!handle(r)) return;
+      if (r.j.ok) { e.target.reset(); renderClients(r.j.clients); $("ib-cl-name").focus(); }
+      else { st.className = "ib-status err"; st.textContent = r.j.error === "phone" ? "Check the mobile number (10 digits)." : "Enter the client's name."; }
+    });
+  });
 
   /* ----- Settings tab ----- */
   var DAYS = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];

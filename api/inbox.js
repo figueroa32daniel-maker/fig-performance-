@@ -10,6 +10,11 @@
  *   POST {action:"booking", id, set}        -> showed | no_show | cancel
  *   POST {action:"lead", phone, status}     -> new | booked | showed | no_show | signed_up | not_interested
  *   POST {action:"settings", settings}      -> save hours, days off, follow-up texts
+ *   GET  ?view=week&start=YYYY-MM-DD        -> one week: client sessions + consults, and the client list
+ *   POST {action:"client", phone, name, note, remove?}   -> add, rename or remove a training client
+ *   POST {action:"session", phone, date, hour}           -> put a client on the schedule (one hour)
+ *   POST {action:"session_remove", id}                   -> take a session off
+ *   POST {action:"copy_week", from, to}                  -> repeat one week's client sessions in another week
  * Texts are read live from Twilio; bookings, leads and settings come from the database.
  */
 "use strict";
@@ -203,6 +208,38 @@ module.exports = async function handler(req, res) {
         await setLeadStatus(lead, b.status);
         return send(res, 200, { ok: true });
       }
+      if (b.action === "client") {
+        const phone = sms.usPhone(b.phone), name = String(b.name || "").replace(/[<>\u0000-\u001F]/g, "").trim().slice(0, 60);
+        if (!phone) return send(res, 400, { error: "phone" });
+        let list = (await db.clients()).filter(c => c.phone !== phone);
+        if (!b.remove) { if (name.length < 2) return send(res, 400, { error: "name" }); list.push({ phone, name, note: String(b.note || "").replace(/[<>]/g, "").trim().slice(0, 200) }); }
+        await db.saveClients(list);
+        return send(res, 200, { ok: true, clients: await db.clients() });
+      }
+      if (b.action === "session") {
+        const phone = sms.usPhone(b.phone), c = (await db.clients()).find(x => x.phone === phone);
+        if (!c) return send(res, 400, { error: "client" });
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(String(b.date)) || !(+b.hour >= 4 && +b.hour <= 21)) return send(res, 400, { error: "time" });
+        const at = db.zonedToUtc(b.date, String(+b.hour).padStart(2, "0") + ":00");
+        if (!at) return send(res, 400, { error: "time" });
+        const rec = await db.addSession(c, at.toISOString().replace(".000Z", "Z"));
+        return rec ? send(res, 200, { ok: true, session: rec }) : send(res, 409, { error: "taken" });
+      }
+      if (b.action === "session_remove") return send(res, 200, { ok: await db.removeSession(b.id) });
+      if (b.action === "copy_week") {
+        const from = db.zonedToUtc(String(b.from), "00:00"), to = db.zonedToUtc(String(b.to), "00:00");
+        if (!from || !to) return send(res, 400, { error: "week" });
+        const src = await db.sessionsBetween(from.getTime(), from.getTime() + 7 * 864e5 - 1), known = await db.clients();
+        let added = 0, skipped = 0;
+        for (const s of src) {
+          const c = known.find(x => x.phone === s.phone); if (!c) { skipped++; continue; }
+          const pp = db.pacificParts(new Date(s.start)), dayOffset = Math.round((Date.parse(db.dateKey(new Date(s.start)) + "T12:00:00Z") - Date.parse(db.dateKey(from) + "T12:00:00Z")) / 864e5);
+          const date = db.dateKey(new Date(Date.parse(db.dateKey(to) + "T12:00:00Z") + dayOffset * 864e5));
+          const at = db.zonedToUtc(date, String(pp.hour).padStart(2, "0") + ":00");
+          if (at && at.getTime() > Date.now() && await db.addSession(c, at.toISOString().replace(".000Z", "Z"))) added++; else skipped++;
+        }
+        return send(res, 200, { ok: true, added, skipped });
+      }
       if (b.action === "settings") {
         const clean = db.cleanSettings(b.settings);
         await db.setJSON("settings", clean);
@@ -214,6 +251,15 @@ module.exports = async function handler(req, res) {
     if (req.method === "GET") {
       if (!signedIn(req)) return send(res, 401, { error: "sign_in" });
       const q = new URL(req.url, "http://x").searchParams;
+      if (q.get("view") === "week") {
+        if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
+        const want = /^\d{4}-\d{2}-\d{2}$/.test(q.get("start") || "") ? new Date(q.get("start") + "T20:00:00Z") : new Date();
+        const ws = db.weekStart(want), from = ws.getTime(), to = from + 7 * 864e5 - 1;
+        const [ses, bks, cl] = await Promise.all([db.sessionsBetween(from, to), db.bookingsBetween(from, to), db.clients()]);
+        return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(),
+          sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start })),
+          consults: bks.filter(b => b.status !== "cancelled").map(b => ({ id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })) });
+      }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {
         if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
         if (q.get("view") === "schedule") return send(res, 200, { bookings: await schedule(), texting: sms.configured() });
