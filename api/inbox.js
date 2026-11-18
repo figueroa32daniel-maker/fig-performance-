@@ -1,17 +1,21 @@
 /*
- * The texting inbox behind figperformance.com/inbox (Dan only).
- *   POST {action:"login", password}            -> sets a 30-day sign-in cookie
- *   POST {action:"logout"}
- *   GET  ?view=list                             -> conversations, newest first
- *   GET  ?view=thread&with=+1714...             -> every text with one person (and pending reminders)
- *   POST {action:"send", to, body}              -> text someone from the gym's number
- *   POST {action:"cancel", sid}                 -> cancel one pending reminder
- *   POST {action:"connect"}                     -> subscribe to Calendly so reminders follow the calendar
- * Messages are read live from Twilio; nothing is stored on the website.
+ * The staff side of the system, behind figperformance.com/inbox (Dan only).
+ *   POST {action:"login", password} / {action:"logout"}
+ *   GET  ?view=list                         -> text conversations, newest first, with each lead's status
+ *   GET  ?view=thread&with=+1714...         -> every text with one person, pending reminders, their lead card
+ *   GET  ?view=schedule                     -> consults: last 7 days through the next 30
+ *   GET  ?view=settings                     -> consult hours, days off, follow-up texts, calendar feed link
+ *   POST {action:"send", to, body}          -> text someone from the gym's number
+ *   POST {action:"cancel", sid}             -> cancel one pending reminder
+ *   POST {action:"booking", id, set}        -> showed | no_show | cancel
+ *   POST {action:"lead", phone, status}     -> new | booked | showed | no_show | signed_up | not_interested
+ *   POST {action:"settings", settings}      -> save hours, days off, follow-up texts
+ * Texts are read live from Twilio; bookings, leads and settings come from the database.
  */
 "use strict";
 const crypto = require("crypto");
 const sms = require("./_sms.js");
+const db = require("./_db.js");
 
 const COOKIE = "__Host-fig_inbox";
 const DAYS = 30;
@@ -78,7 +82,11 @@ async function list() {
       needsReply: !!(sent[0] && sent[0].inbound),
       pending: msgs.filter(m => m.status === "scheduled").length
     };
-  }).filter(c => c.at).sort((a, b) => Date.parse(b.at) - Date.parse(a.at));
+  }).filter(c => c.at).sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 150);
+  if (db.configured() && convos.length) {
+    const leads = await db.getLeads(convos.map(c => c.with));
+    convos.forEach((c, i) => { const l = leads[i]; if (l) { c.name = l.name ? sms.first(l.name) : c.name; c.status = l.status; c.optedOut = !!l.optedOut; } });
+  }
   return convos;
 }
 
@@ -87,28 +95,63 @@ async function thread(num) {
   const msgs = to.concat(from).map(slim).filter(m => m.status !== "canceled");
   const sent = msgs.filter(m => m.at).sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
   const pending = to.filter(m => m.status === "scheduled").reverse().map(m => ({ sid: m.sid, body: m.body, status: "scheduled" }));
-  return { with: num, name: nameFrom(sent), messages: sent, pending };
+  const out = { with: num, name: nameFrom(sent), messages: sent, pending, lead: null };
+  if (db.configured()) {
+    const l = await db.getLead(num);
+    if (l) {
+      const bk = l.bookingId ? await db.getBooking(l.bookingId) : null;
+      out.name = l.name || out.name;
+      out.lead = { name: l.name, status: l.status, goal: l.goal || "", optedOut: !!l.optedOut, marketing: !!(l.consent && l.consent.marketingTexts),
+        consentAt: l.consent ? l.consent.at : null, followStep: l.followStep || 0,
+        booking: bk ? { id: bk.id, start: bk.start, status: bk.status, confirmed: !!bk.confirmed } : null };
+    }
+  }
+  return out;
 }
 
-async function connectCalendly(req) {
-  const tok = process.env.CALENDLY_TOKEN;
-  if (!tok) return { ok: false, error: "Add the Calendly key first." };
-  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production") return { ok: false, error: "Do this on the live site (www.figperformance.com/inbox), not a preview." };
-  const h = { Authorization: "Bearer " + tok, "Content-Type": "application/json" };
-  const me = await (await fetch("https://api.calendly.com/users/me", { headers: h })).json();
-  if (!me.resource) return { ok: false, error: "Calendly didn't accept the key." };
-  const host = req.headers["x-forwarded-host"] || req.headers.host;
-  const url = "https://" + host + "/api/calendly-hook?k=" + sms.hookKey();
-  const q = "organization=" + encodeURIComponent(me.resource.current_organization) + "&user=" + encodeURIComponent(me.resource.uri) + "&scope=user";
-  const existing = await (await fetch("https://api.calendly.com/webhook_subscriptions?" + q, { headers: h })).json();
-  if ((existing.collection || []).some(w => w.callback_url === url && w.state === "active")) return { ok: true, already: true };
-  const r = await fetch("https://api.calendly.com/webhook_subscriptions", {
-    method: "POST", headers: h,
-    body: JSON.stringify({ url, events: ["invitee.created", "invitee.canceled"], organization: me.resource.current_organization, user: me.resource.uri, scope: "user" })
-  });
-  if (r.ok) return { ok: true };
-  const j = await r.json().catch(() => ({}));
-  return { ok: false, error: (j.message || j.title || "Calendly refused the connection.").slice(0, 200) };
+async function schedule() {
+  const now = Date.now(), list = await db.bookingsBetween(now - 7 * 864e5, now + 30 * 864e5);
+  const leads = await db.getLeads(list.map(b => b.phone));
+  return list.map((b, i) => ({ id: b.id, name: b.name, phone: b.phone, goal: b.goal || "", start: b.start, status: b.status, confirmed: !!b.confirmed,
+    source: b.source || "", leadStatus: leads[i] ? leads[i].status : null, optedOut: !!(leads[i] && leads[i].optedOut),
+    marketing: !!(leads[i] && leads[i].consent && leads[i].consent.marketingTexts) }));
+}
+
+/* Dan marks what happened. "Showed" and "no-show" start the follow-up plan (marketing texts only with consent). */
+async function setLeadStatus(lead, status, baseIso) {
+  const s = await db.settings();
+  lead.status = status;
+  await db.stopFollowups(lead.phone);
+  if ((status === "showed" || status === "no_show") && lead.consent && lead.consent.marketingTexts && !lead.optedOut && s.followups.length) {
+    lead.followBase = baseIso || new Date().toISOString(); lead.followStep = 0;
+    await db.scheduleFollowup(lead.phone, Math.max(Date.now() + 3600 * 1000, Date.parse(lead.followBase) + s.followups[0].day * 864e5));
+  }
+  await db.saveLead(lead);
+}
+async function markBooking(id, set) {
+  const bk = await db.getBooking(id);
+  if (!bk) return { ok: false, error: "not_found" };
+  const lead = (await db.getLead(bk.phone)) || { phone: bk.phone, name: bk.name, created: new Date().toISOString() };
+  if (set === "cancel") {
+    if (bk.status !== "booked") return { ok: false, error: "closed" };
+    const oldStart = bk.start;
+    await db.cancelBooking(bk, "dan");
+    if (sms.configured() && !lead.optedOut) { await sms.cancelScheduled(bk.phone); await sms.sendText(bk.phone, sms.cancelledText(bk.name, oldStart)); }
+    lead.status = "new"; await db.saveLead(lead);
+    return { ok: true };
+  }
+  if (set !== "showed" && set !== "no_show") return { ok: false, error: "set" };
+  if (bk.status === "cancelled") return { ok: false, error: "closed" };
+  const first = bk.status === "booked";
+  bk.status = set; await db.saveBooking(bk);
+  if (sms.configured()) await sms.cancelScheduled(bk.phone);
+  // One "sorry we missed you" text about their own appointment (not marketing), unless they opted out.
+  if (set === "no_show" && first && sms.configured() && !lead.optedOut && !sms.quietHours()) {
+    const s = await db.settings();
+    await sms.sendText(bk.phone, s.noShowText.replace(/\{first\}/g, sms.first(bk.name)));
+  }
+  await setLeadStatus(lead, set, bk.start);
+  return { ok: true };
 }
 
 module.exports = async function handler(req, res) {
@@ -137,11 +180,12 @@ module.exports = async function handler(req, res) {
         return send(res, 200, { ok: true });
       }
       if (!signedIn(req)) return send(res, 401, { error: "sign_in" });
-      if (!sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
+      if ((b.action === "send" || b.action === "cancel") && !sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
       if (b.action === "send") {
         const to = sms.usPhone(b.to), text = String(b.body || "").trim();
         if (!to) return send(res, 400, { error: "phone" });
         if (!text || text.length > 1200) return send(res, 400, { error: "body" });
+        if (db.configured()) { const l = await db.getLead(to); if (l && l.optedOut) return send(res, 409, { error: "opted_out" }); }
         const m = await sms.sendText(to, text);
         return m ? send(res, 200, { ok: true }) : send(res, 502, { error: "send_failed" });
       }
@@ -150,14 +194,33 @@ module.exports = async function handler(req, res) {
         const r = await sms.twilio("/Messages/" + b.sid + ".json", { Status: "canceled" });
         return send(res, r.ok ? 200 : 502, { ok: r.ok });
       }
-      if (b.action === "connect") return send(res, 200, await connectCalendly(req));
+      if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
+      if (b.action === "booking") return send(res, 200, await markBooking(b.id, b.set));
+      if (b.action === "lead") {
+        const phone = sms.usPhone(b.phone);
+        if (!phone || db.LEAD_STATUSES.indexOf(b.status) < 0) return send(res, 400, { error: "lead" });
+        const lead = (await db.getLead(phone)) || { phone, created: new Date().toISOString() };
+        await setLeadStatus(lead, b.status);
+        return send(res, 200, { ok: true });
+      }
+      if (b.action === "settings") {
+        const clean = db.cleanSettings(b.settings);
+        await db.setJSON("settings", clean);
+        return send(res, 200, { ok: true, settings: clean });
+      }
       return send(res, 400, { error: "action" });
     }
 
     if (req.method === "GET") {
       if (!signedIn(req)) return send(res, 401, { error: "sign_in" });
-      if (!sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
       const q = new URL(req.url, "http://x").searchParams;
+      if (q.get("view") === "schedule" || q.get("view") === "settings") {
+        if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
+        if (q.get("view") === "schedule") return send(res, 200, { bookings: await schedule(), texting: sms.configured() });
+        const host = req.headers["x-forwarded-host"] || req.headers.host;
+        return send(res, 200, { settings: await db.settings(), texting: sms.configured(), feed: "https://" + host + "/api/cal?k=" + sms.feedKey() });
+      }
+      if (!sms.configured()) return send(res, 503, { error: "not_configured", need: "TWILIO" });
       if (q.get("view") === "thread") {
         const num = sms.usPhone(q.get("with"));
         if (!num) return send(res, 400, { error: "phone" });

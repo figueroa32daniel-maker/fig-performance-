@@ -3,21 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Text inbox | Fig Performance</title>
+  <title>Inbox | Fig Performance</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#0f1f3d">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="/assets/styles.css?v=50">
+  <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=3">
+  <link rel="stylesheet" href="/assets/inbox.css?v=4">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
     <a class="ib-brand" href="/">Fig Performance</a>
-    <span class="ib-title">Text inbox</span>
+    <span class="ib-title">Inbox</span>
+    <nav class="ib-tabs" id="ib-tabs" aria-label="Sections" hidden>
+      <button type="button" data-tab="texts" aria-current="true">Texts</button>
+      <button type="button" data-tab="schedule">Schedule</button>
+      <button type="button" data-tab="settings">Settings</button>
+    </nav>
     <button type="button" class="ib-link" id="ib-logout" hidden>Sign out</button>
   </header>
 
@@ -50,8 +55,6 @@
         </form>
         <p class="ib-status" id="ib-list-status" role="status"></p>
         <ul id="ib-convos"></ul>
-        <button type="button" class="ib-link" id="ib-connect">Connect Calendly (so reminders follow cancels and reschedules)</button>
-        <p class="ib-status" id="ib-connect-status" role="status"></p>
       </aside>
 
       <section class="ib-thread" id="ib-thread" aria-live="polite">
@@ -60,6 +63,7 @@
           <h2 id="ib-who">Pick a conversation</h2>
           <a id="ib-call" class="ib-link" hidden>Call</a>
         </div>
+        <div class="ib-lead" id="ib-lead" hidden></div>
         <div class="ib-msgs" id="ib-msgs"><p class="ib-empty">Your texts with clients show up here.</p></div>
         <div class="ib-pending" id="ib-pending" hidden></div>
         <form class="ib-compose" id="ib-compose" hidden>
@@ -70,7 +74,41 @@
         <p class="ib-status" id="ib-send-status" role="alert"></p>
       </section>
     </section>
+
+    <!-- Schedule -->
+    <section class="ib-panel" id="ib-schedule" hidden>
+      <h1>Consults</h1>
+      <p class="ib-status" id="ib-sched-status" role="status"></p>
+      <div id="ib-sched"></div>
+    </section>
+
+    <!-- Settings -->
+    <section class="ib-panel" id="ib-settings" hidden>
+      <h1>Settings</h1>
+      <form id="ib-set-form">
+        <h2>Consult hours</h2>
+        <p class="ib-help">The times people can book on the website. One-hour consults starting on the hour. Leave a day on Closed to take no bookings.</p>
+        <div id="ib-hours"></div>
+        <div class="ib-two">
+          <label>Earliest booking (hours from now)<input id="ib-notice" type="number" min="0" max="72" inputmode="numeric"></label>
+          <label>How many days ahead people can book<input id="ib-ahead" type="number" min="1" max="30" inputmode="numeric"></label>
+        </div>
+        <h2>Days off</h2>
+        <p class="ib-help">No bookings on these dates.</p>
+        <div class="ib-row"><input id="ib-block-date" type="date" aria-label="Date to block"><button type="button" class="ib-btn" id="ib-block-add">Block</button></div>
+        <ul id="ib-blocked" class="ib-chips"></ul>
+        <h2>Follow-up texts</h2>
+        <p class="ib-help">Sent after a consult you mark &ldquo;Showed&rdquo; or &ldquo;No-show&rdquo;, only to people who ticked the optional texts box, never to anyone who replied STOP, and only between 9 AM and 8 PM. They stop as soon as the person replies or you mark them Signed up or Not interested. Use {first} for their first name. &ldquo;Reply STOP to opt out&rdquo; is added if you leave it off.</p>
+        <div id="ib-follow"></div>
+        <label class="ib-block">Text after a no-show<textarea id="ib-noshow" rows="3" maxlength="600"></textarea></label>
+        <p class="ib-status" id="ib-set-status" role="alert"></p>
+        <button class="btn btn-primary" type="submit">Save settings</button>
+      </form>
+      <h2>Your calendar</h2>
+      <p class="ib-help">Subscribe to this private link in Apple Calendar (File &rarr; New Calendar Subscription) or Google Calendar (Other calendars &rarr; From URL) and every consult shows up on your own calendar. Don&rsquo;t share the link.</p>
+      <input id="ib-feed" type="text" readonly aria-label="Calendar link">
+    </section>
   </main>
-  <script src="/assets/inbox.js?v=3" defer></script>
+  <script src="/assets/inbox.js?v=4" defer></script>
 </body>
 </html>

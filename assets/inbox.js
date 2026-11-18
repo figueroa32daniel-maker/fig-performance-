@@ -13,11 +13,21 @@
       return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; });
     });
   }
-  function show(which) {
+  var tabs = $("ib-tabs"), tab = "texts", signedIn = false;
+  function show(which) {                       // which: login | setup | app (texts) | schedule | settings
     login.hidden = which !== "login"; setup.hidden = which !== "setup"; app.hidden = which !== "app";
-    logout.hidden = which !== "app";
+    $("ib-schedule").hidden = which !== "schedule"; $("ib-settings").hidden = which !== "settings";
+    if (which === "login") signedIn = false;
+    logout.hidden = !signedIn; tabs.hidden = !signedIn;
     if (which !== "app") { clearInterval(timer); timer = null; }
   }
+  function setTab(name) {
+    tab = name;
+    tabs.querySelectorAll("button").forEach(function (b) { if (b.getAttribute("data-tab") === name) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
+    if (name === "texts") start(); else if (name === "schedule") loadSchedule(); else loadSettings();
+  }
+  tabs.addEventListener("click", function (e) { var b = e.target.closest("button[data-tab]"); if (b) setTab(b.getAttribute("data-tab")); });
+  var STATUS = { "new": "New", booked: "Booked", showed: "Showed", no_show: "No-show", signed_up: "Signed up", not_interested: "Not interested" };
   function pretty(n) { var m = /^\+1(\d{3})(\d{3})(\d{4})$/.exec(n || ""); return m ? "(" + m[1] + ") " + m[2] + "-" + m[3] : (n || ""); }
   function ago(iso) {
     var d = new Date(iso), now = new Date();
@@ -30,11 +40,15 @@
   function handle(r) {                         // shared handling for "signed out" and "not set up"
     if (r.status === 401) { show("login"); $("ib-pw").focus(); return false; }
     if (r.status === 503) {
+      if (r.j.need !== "INBOX_PASSWORD") signedIn = true;
       $("ib-setup-msg").textContent = r.j.need === "INBOX_PASSWORD"
         ? "The inbox password hasn't been added in Vercel yet (INBOX_PASSWORD, at least 12 characters)."
-        : "The texting account (Twilio) hasn't been connected in Vercel yet. Once its three keys are added, your conversations show up here.";
+        : r.j.need === "DATABASE"
+          ? "The database hasn't been added in Vercel yet (Storage tab). Bookings, hours and follow-ups need it."
+          : "The texting account (Twilio) hasn't been connected in Vercel yet. Once its three keys are added, your conversations show up here. The Schedule and Settings tabs work without it.";
       show("setup"); return false;
     }
+    signedIn = true;
     return true;
   }
 
@@ -55,6 +69,8 @@
         if (current === c.with) b.setAttribute("aria-current", "true");
         var top = el("div", "ib-convo-top"), name = el("span", "ib-convo-name", c.name ? c.name + " · " + pretty(c.with) : pretty(c.with));
         if (c.needsReply) name.appendChild(el("span", "ib-badge", "Replied"));
+        if (c.optedOut) name.appendChild(el("span", "ib-badge ib-badge-stop", "Opted out"));
+        else if (c.status && STATUS[c.status]) name.appendChild(el("span", "ib-tag", STATUS[c.status]));
         top.appendChild(name); top.appendChild(el("span", "ib-convo-time", ago(c.at)));
         b.appendChild(top);
         b.appendChild(el("p", "ib-convo-last", (c.lastInbound ? "" : "You: ") + c.last));
@@ -100,7 +116,8 @@
         var left = el("span"); left.appendChild(el("strong", "", "Scheduled reminder  ")); left.appendChild(txt);
         row.appendChild(left); row.appendChild(btn); pend.appendChild(row);
       });
-      $("ib-compose").hidden = false;
+      renderLead(num, t.lead);
+      $("ib-compose").hidden = !!(t.lead && t.lead.optedOut);
       document.querySelectorAll(".ib-convo").forEach(function (b) {
         if (b.getAttribute("data-with") === num) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current");
       });
@@ -122,7 +139,7 @@
       btn.disabled = false;
       if (!handle(r)) return;
       if (r.status === 200 && r.j.ok) { ta.value = ""; openThread(current); loadList(true); }
-      else { st.className = "ib-status err"; st.textContent = "That text didn't send. Check the number and try again."; }
+      else { st.className = "ib-status err"; st.textContent = r.j.error === "opted_out" ? "This person replied STOP. You can't text them unless they text START." : "That text didn't send. Check the number and try again."; }
     }).catch(function () { btn.disabled = false; st.className = "ib-status err"; st.textContent = "No connection. Try again."; });
   });
   $("ib-text").addEventListener("keydown", function (e) {
@@ -138,12 +155,146 @@
     openThread("+1" + d).then(function () { $("ib-text").focus(); });
   });
 
-  $("ib-connect").addEventListener("click", function () {
-    var st = $("ib-connect-status"); st.className = "ib-status"; st.textContent = "Connecting…";
-    api("POST", { action: "connect" }).then(function (r) {
+  /* ----- lead card (status, consent, booking) above a conversation ----- */
+  function statusSelect(current, onChange) {
+    var s = el("select", "ib-select"); s.setAttribute("aria-label", "Lead status");
+    Object.keys(STATUS).forEach(function (k) { var o = el("option", "", STATUS[k]); o.value = k; if (k === current) o.selected = true; s.appendChild(o); });
+    s.addEventListener("change", function () { onChange(s.value, s); });
+    return s;
+  }
+  function renderLead(num, lead) {
+    var box = $("ib-lead"); box.textContent = ""; box.hidden = !lead;
+    if (!lead) return;
+    var row = el("div", "ib-lead-row");
+    row.appendChild(statusSelect(lead.status || "new", function (v, s) {
+      s.disabled = true;
+      api("POST", { action: "lead", phone: num, status: v }).then(function () { s.disabled = false; loadList(true); });
+    }));
+    if (lead.booking) {
+      var d = new Date(lead.booking.start);
+      row.appendChild(el("span", "ib-tag", "Consult " + d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) + ", " +
+        d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) + (lead.booking.status === "booked" ? (lead.booking.confirmed ? " · confirmed" : " · not confirmed yet") : " · " + (STATUS[lead.booking.status] || lead.booking.status))));
+    }
+    row.appendChild(el("span", "ib-tag" + (lead.optedOut ? " ib-badge-stop" : ""), lead.optedOut ? "Replied STOP: no texts" : (lead.marketing ? "OK to send follow-up texts" : "Appointment texts only (no marketing consent)")));
+    box.appendChild(row);
+    if (lead.goal) box.appendChild(el("p", "ib-help", "Goal: " + lead.goal));
+  }
+
+  /* ----- Schedule tab ----- */
+  function loadSchedule() {
+    $("ib-sched-status").textContent = "Loading…";
+    api("GET", { view: "schedule" }).then(function (r) {
       if (!handle(r)) return;
-      if (r.j.ok) st.textContent = r.j.already ? "Already connected." : "Connected. Reminders now follow your calendar.";
-      else { st.className = "ib-status err"; st.textContent = r.j.error || "Couldn't connect."; }
+      show("schedule");
+      var box = $("ib-sched"), list = r.j.bookings || [], now = Date.now(); box.textContent = "";
+      $("ib-sched-status").textContent = list.length ? "" : "No consults yet. Set your hours on the Settings tab and bookings will appear here.";
+      var groups = [["Needs marking", list.filter(function (b) { return b.status === "booked" && Date.parse(b.start) < now; })],
+        ["Coming up", list.filter(function (b) { return b.status === "booked" && Date.parse(b.start) >= now; })],
+        ["Past 7 days", list.filter(function (b) { return b.status !== "booked"; }).reverse()]];
+      groups.forEach(function (g) {
+        if (!g[1].length) return;
+        box.appendChild(el("h2", "", g[0]));
+        g[1].forEach(function (b) {
+          var d = new Date(b.start), card = el("div", "ib-bk");
+          var head = el("div", "ib-bk-head");
+          head.appendChild(el("strong", "", d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }) + ", " + d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })));
+          head.appendChild(el("span", "", b.name + " · " + pretty(b.phone)));
+          card.appendChild(head);
+          var tags = el("div", "ib-lead-row");
+          tags.appendChild(el("span", "ib-tag", b.status === "booked" ? (b.confirmed ? "Confirmed" : "Not confirmed yet") : (STATUS[b.status] || (b.status === "cancelled" ? "Cancelled" : b.status))));
+          if (b.optedOut) tags.appendChild(el("span", "ib-tag ib-badge-stop", "Replied STOP"));
+          else if (!b.marketing) tags.appendChild(el("span", "ib-tag", "No marketing consent"));
+          if (b.source && b.source !== "website") tags.appendChild(el("span", "ib-tag", "From: " + b.source));
+          card.appendChild(tags);
+          if (b.goal) card.appendChild(el("p", "ib-help", "Goal: " + b.goal));
+          var acts = el("div", "ib-bk-acts");
+          function act(label, set, cls) {
+            var bt = el("button", cls || "ib-btn ib-btn-light", label); bt.type = "button";
+            bt.addEventListener("click", function () {
+              if (set === "cancel" && bt.getAttribute("data-sure") !== "1") { bt.setAttribute("data-sure", "1"); bt.textContent = "Tap again to cancel it"; return; }
+              acts.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+              api("POST", { action: "booking", id: b.id, set: set }).then(loadSchedule);
+            });
+            acts.appendChild(bt);
+          }
+          if (b.status === "booked" && Date.parse(b.start) < now + 3600 * 1000) { act("Showed", "showed", "ib-btn"); act("No-show", "no_show"); }
+          if (b.status === "booked" && Date.parse(b.start) >= now) act("Cancel consult", "cancel");
+          var txt = el("button", "ib-link", "Open texts"); txt.type = "button";
+          txt.addEventListener("click", function () { setTab("texts"); openThread(b.phone); });
+          acts.appendChild(txt);
+          var call = el("a", "ib-link", "Call"); call.href = "tel:" + b.phone; acts.appendChild(call);
+          card.appendChild(acts); box.appendChild(card);
+        });
+      });
+    });
+  }
+
+  /* ----- Settings tab ----- */
+  var DAYS = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];
+  var settings = null;
+  function hourLabel(h) { return (h % 12 || 12) + ":00 " + (h < 12 ? "AM" : "PM"); }
+  function hourSelect(val, from, to, withClosed) {
+    var s = el("select", "ib-select");
+    if (withClosed) { var c = el("option", "", "Closed"); c.value = ""; s.appendChild(c); }
+    for (var h = from; h <= to; h++) { var o = el("option", "", hourLabel(h)); o.value = String(h).padStart(2, "0") + ":00"; if (o.value === val) o.selected = true; s.appendChild(o); }
+    return s;
+  }
+  function renderBlocked() {
+    var ul = $("ib-blocked"); ul.textContent = "";
+    settings.blocked.slice().sort().forEach(function (d) {
+      var li = el("li"), bt = el("button", "ib-link", "Remove"); bt.type = "button";
+      li.appendChild(el("span", "", new Date(d + "T12:00:00").toLocaleDateString([], { weekday: "short", month: "short", day: "numeric", year: "numeric" }) + " "));
+      bt.addEventListener("click", function () { settings.blocked = settings.blocked.filter(function (x) { return x !== d; }); renderBlocked(); });
+      li.appendChild(bt); ul.appendChild(li);
+    });
+  }
+  function loadSettings() {
+    api("GET", { view: "settings" }).then(function (r) {
+      if (!handle(r)) return;
+      show("settings"); settings = r.j.settings; $("ib-feed").value = r.j.feed || "";
+      var hours = $("ib-hours"); hours.textContent = "";
+      DAYS.forEach(function (d) {
+        var h = settings.hours[d[0]], row = el("div", "ib-hours-row"); row.setAttribute("data-day", d[0]);
+        row.appendChild(el("span", "ib-hours-day", d[1]));
+        var from = hourSelect(h ? h.from : "", 5, 20, true), to = hourSelect(h ? h.to : "18:00", 6, 21, false);
+        from.setAttribute("aria-label", d[1] + " first consult starts"); to.setAttribute("aria-label", d[1] + " last consult ends");
+        row.appendChild(from); row.appendChild(el("span", "", "to")); row.appendChild(to); hours.appendChild(row);
+      });
+      $("ib-notice").value = settings.noticeHours; $("ib-ahead").value = settings.daysAhead;
+      renderBlocked();
+      var f = $("ib-follow"); f.textContent = "";
+      settings.followups.forEach(function (x, i) {
+        var wrap = el("div", "ib-follow-row"), lab = el("label", "", "Text " + (i + 1) + ": days after the consult"), n = el("input"); n.type = "number"; n.min = "1"; n.max = "120"; n.value = x.day; n.className = "ib-follow-day";
+        lab.appendChild(n); wrap.appendChild(lab);
+        var ta = el("textarea"); ta.rows = 3; ta.maxLength = 600; ta.value = x.text; ta.className = "ib-follow-text"; ta.setAttribute("aria-label", "Follow-up text " + (i + 1));
+        wrap.appendChild(ta); f.appendChild(wrap);
+      });
+      $("ib-noshow").value = settings.noShowText;
+    });
+  }
+  $("ib-block-add").addEventListener("click", function () {
+    var v = $("ib-block-date").value; if (!v || !settings) return;
+    if (settings.blocked.indexOf(v) < 0) settings.blocked.push(v); $("ib-block-date").value = ""; renderBlocked();
+  });
+  $("ib-set-form").addEventListener("submit", function (e) {
+    e.preventDefault(); if (!settings) return;
+    var st = $("ib-set-status"), bad = null;
+    document.querySelectorAll(".ib-hours-row").forEach(function (row) {
+      var s = row.querySelectorAll("select"), d = row.getAttribute("data-day");
+      if (!s[0].value) settings.hours[d] = null;
+      else if (s[0].value >= s[1].value) bad = d;
+      else settings.hours[d] = { from: s[0].value, to: s[1].value };
+    });
+    if (bad) { st.className = "ib-status err"; st.textContent = "Check the hours: the end time has to be after the start time."; return; }
+    settings.noticeHours = +$("ib-notice").value; settings.daysAhead = +$("ib-ahead").value;
+    settings.followups = [].map.call(document.querySelectorAll(".ib-follow-row"), function (w) { return { day: +w.querySelector(".ib-follow-day").value, text: w.querySelector(".ib-follow-text").value }; });
+    settings.noShowText = $("ib-noshow").value;
+    var btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; st.className = "ib-status"; st.textContent = "Saving…";
+    api("POST", { action: "settings", settings: settings }).then(function (r) {
+      btn.disabled = false;
+      if (!handle(r)) return;
+      if (r.j.ok) { st.textContent = "Saved. The website is using these now."; loadSettings(); }
+      else { st.className = "ib-status err"; st.textContent = "Couldn't save. Try again."; }
     });
   });
 
@@ -154,7 +305,7 @@
     btn.disabled = true; st.className = "ib-status"; st.textContent = "";
     api("POST", { action: "login", password: $("ib-pw").value }).then(function (r) {
       btn.disabled = false; $("ib-pw").value = "";
-      if (r.status === 200) return start();
+      if (r.status === 200) { signedIn = true; return setTab("texts"); }
       if (r.status === 503) return handle(r);
       st.className = "ib-status err"; st.textContent = r.status === 429 ? "Too many tries. Wait 10 minutes and try again." : "That password isn't right.";
     });
@@ -163,9 +314,11 @@
 
   function start() {
     loadList().then(function () {
+      if (signedIn && !setup.hidden) { tabs.hidden = false; logout.hidden = false; }
       if (app.hidden || timer) return;
       timer = setInterval(function () {            // check for new texts every 20 seconds while the page is open
         if (document.visibilityState !== "visible") return;
+        if (tab !== "texts") return;
         loadList(true); if (current) openThread(current, true);
       }, 20000);
     });

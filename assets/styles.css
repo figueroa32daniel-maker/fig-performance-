@@ -1065,3 +1065,6 @@ address { font-style: normal; }
 .bk-day, .bk-time { transition: border-color .15s ease, background-color .15s ease, color .15s ease, transform .15s ease; }
 .bk-day:active:not(:disabled), .bk-time:active { transform: scale(.97); }
 .bk-fine a, .bk-talk a { display: inline-block; padding: 10px 0; }   /* 44px tap height for the small links */
+.bk-check { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; margin: 12px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); cursor: pointer; min-height: 44px; }
+.bk-check input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--navy); cursor: pointer; }
+.bk-check input:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }

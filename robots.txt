@@ -7,5 +7,6 @@ Disallow: /sign
 Disallow: /signed
 # Staff text inbox (password protected, noindex).
 Disallow: /inbox
+Disallow: /manage
 
 Sitemap: https://www.figperformance.com/sitemap.xml

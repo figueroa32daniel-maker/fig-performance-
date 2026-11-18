@@ -1,7 +1,7 @@
 /* ==========================================================
    Fig Performance: on-page consult booking.
    Pick a day -> pick a time -> name, mobile (required), email -> booked.
-   Talks to /api/booking (same site), which books into Calendly.
+   Talks to /api/booking (same site): the gym's own booking engine.
    If online booking is down, the same form sends Dan a request instead,
    so a visitor's number is never lost.
    ========================================================== */
@@ -141,7 +141,8 @@
         '<label class="bk-field bk-wide" data-extra="email"' + (saved.email ? "" : " hidden") + '><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="254" value="' + esc(saved.email || "") + '"></label>' +
         '<input name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       "</div>" +
-      '<p class="consent">We\'ll text you a confirmation and reminders for your appointment. By booking, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>, and that Fig Performance may call or text this number about your consultation and services. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.</p>' +
+      '<p class="consent">By booking, you agree that Fig Performance may text and call this number about your appointment (your confirmation, reminders and replies to your questions), and to our <a href="/privacy">Privacy Policy</a> and <a href="/terms#sms">Terms, including the text message terms</a>. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.</p>' +
+      '<label class="bk-check"><input type="checkbox" name="marketing" value="yes"><span>Optional: also text me training tips and offers from Fig Performance, up to 4 messages a month. Msg &amp; data rates may apply. Reply STOP to opt out. Not required to book or buy anything.</span></label>' +
       '<p class="form-status" role="alert" tabindex="-1"></p>' +
       '<button class="btn btn-gold btn-lg btn-block" type="submit">' + (request ? "Request my free consult" : "Confirm my free consultation") + "</button>" +
       '<p class="bk-fine">Free &middot; No credit card &middot; ' + (request ? "We\'ll text you to confirm" : "Instant confirmation") + "</p>" +
@@ -226,9 +227,10 @@
     btn.disabled = true; var label = btn.textContent; btn.textContent = st.mode === "request" ? "Sending…" : "Booking…";
     status.className = "form-status"; status.textContent = "";
 
+    var marketing = !!(form.elements.marketing && form.elements.marketing.checked);
     var lead = {
       "Name": name, "Mobile": phone, "Email": email || "(not given)", "Goal": goal || "(not given)", "Came from": source(),
-      "Consent": "Yes: agreed to Privacy Policy & Terms and to calls/texts about consultation & services (STOP to opt out; not a condition of purchase). Policy version " + POLICY,
+      "Consent": "Appointment texts/calls: yes (agreed at booking). Marketing texts: " + (marketing ? "YES (ticked the optional box)" : "no") + ". Policy version " + POLICY,
       "Submitted from": "figperformance.com booking",
       _template: "table", _captcha: "false", _cc: "trainat@figperformance.com"
     };
@@ -249,7 +251,8 @@
     fetch("/api/booking", {
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(Object.assign({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website") }, utm))
+      body: JSON.stringify(Object.assign({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website"),
+        consent: true, marketing: marketing, page: location.pathname }, utm))
     })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
       .then(function (r) {
@@ -353,10 +356,13 @@
         '<div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div>' +
         (booked
           ? '<h3 class="q-title" tabindex="-1">You\'re booked, ' + first + ".</h3><p><strong>" + when + "</strong> (Pacific)<br>Fig Performance &middot; 1284 E. Yorba Linda Blvd, Placentia</p>" +
-            '<ul class="done-steps"><li>We\'re texting you a confirmation now, plus a reminder before your visit.</li><li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
-            (function () { var h = icsHref(); return h ? '<a class="btn btn-secondary" href="' + h + '" download="fig-performance-consult.ics">Add to my calendar</a>' : ""; })() +
-            (result && /^https:\/\/calendly\.com\//.test(result.reschedule_url || "") ? '<p class="bk-fine"><a href="' + esc(result.reschedule_url) + '" target="_blank" rel="noopener">Need a different time?</a>' +
-              (/^https:\/\/calendly\.com\//.test(result.cancel_url || "") ? ' &middot; <a href="' + esc(result.cancel_url) + '" target="_blank" rel="noopener">Cancel</a>' : "") + "</p>" : "") +
+            '<ul class="done-steps"><li>' + (result && result.texting ? "We\'re texting you a confirmation now, plus a reminder before your visit." : "Your time is held. We\'ll be in touch before your visit.") + "</li>" + '<li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
+            (function () {
+              var id = result && /^\/manage\?t=[A-Za-z0-9_-]{20,40}$/.test(result.manage_url || "") ? result.manage_url.split("=")[1] : null;
+              var h = id ? "/api/cal?b=" + id : icsHref();
+              return h ? '<a class="btn btn-secondary" href="' + h + '"' + (id ? "" : ' download="fig-performance-consult.ics"') + ">Add to my calendar</a>" : "";
+            })() +
+            (result && /^\/manage\?t=[A-Za-z0-9_-]{20,40}$/.test(result.manage_url || "") ? '<p class="bk-fine"><a href="' + esc(result.manage_url) + '">Need to change or cancel?</a></p>' : "") +
             '<p class="bk-fine">Questions? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>"
           : '<h3 class="q-title" tabindex="-1">Got it, ' + first + ".</h3><p>We'll text you shortly to lock in your time. Your consult is free.</p>" +
             '<p class="bk-fine">Can\'t wait? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>") +

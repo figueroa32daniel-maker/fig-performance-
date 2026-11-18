@@ -1,7 +1,7 @@
 /*
  * Fig Performance texting helper (shared by the booking, inbox and webhook functions).
- * Twilio is the phone company here AND the message store: there is no separate database.
- * Every text sent or received lives in the Twilio account and the inbox page reads it from there.
+ * Twilio is the phone company here and also keeps the text history: the inbox page reads
+ * conversations from Twilio. Bookings, leads and settings live in the database (api/_db.js).
  *
  * Settings (Vercel > Project > Settings > Environment Variables). Never put these in site files:
  *   TWILIO_ACCOUNT_SID            starts with AC
@@ -56,8 +56,6 @@ function secret(purpose) {
   const base = (process.env.SESSION_SECRET || "").length >= 32 ? process.env.SESSION_SECRET : String(process.env.TWILIO_AUTH_TOKEN || "");
   return crypto.createHmac("sha256", base).update("fig:" + purpose).digest();
 }
-/* Proof that a phone number in a Calendly booking was put there by this website's booking form. */
-function phoneSig(phone) { return crypto.createHmac("sha256", secret("booking-phone")).update(String(phone)).digest("hex").slice(0, 32); }
 function safeEqual(x, y) { const a = Buffer.from(String(x)), b = Buffer.from(String(y)); return a.length === b.length && crypto.timingSafeEqual(a, b); }
 
 /* Best-effort limiter (per server instance). The real limit is a Vercel Firewall rule; this is a backstop. */
@@ -127,11 +125,27 @@ function when(iso) {
 function first(name) { return String(name || "there").trim().split(/\s+/)[0].replace(/[^\p{L}\p{N}'-]/gu, "").slice(0, 30) || "there"; }   // no dots: a name must never become a link
 
 /* The three texts every consult gets. Wording lives here so it's easy to change in one place. */
-function confirmationText(name, startIso, moved) {
+function confirmationText(name, startIso, moved, manageUrl) {
   const w = when(startIso);
   return "Hi " + first(name) + ", it's Coach Dan at Fig Performance. " +
     (moved ? "Your free consult is now " : "You're confirmed for your free consult ") + w.day + " at " + w.time +
-    ", " + ADDRESS + ". Questions or need to change it? Just reply here. Reply STOP to opt out.";
+    ", " + ADDRESS + ". Questions? Just reply here." + (manageUrl ? " Change or cancel: " + manageUrl : "") +
+    " Msg & data rates may apply. Reply STOP to opt out, HELP for help.";
+}
+function cancelledText(name, startIso) {
+  const w = when(startIso);
+  return "Hi " + first(name) + ", your free consult at Fig Performance on " + w.day + " at " + w.time +
+    " is cancelled. To pick a new time: figperformance.com/#consult or reply here. Reply STOP to opt out.";
+}
+function prettyPhone(p) { return String(p).replace(/^\+1(\d{3})(\d{3})(\d{4})$/, "($1) $2-$3"); }
+/* A heads-up to Dan's own phone. Never throws. */
+async function tellDan(text) {
+  try { const dan = usPhone(process.env.DAN_MOBILE); if (dan) await sendText(dan, text); } catch (e) { /* not critical */ }
+}
+/* Marketing texts may only go out 9 AM to 8 PM Pacific (federal rule is 8 AM to 9 PM local; this stays inside it). */
+function quietHours(now) {
+  const h = +new Intl.DateTimeFormat("en-US", { timeZone: TZ, hourCycle: "h23", hour: "2-digit" }).format(now || new Date());
+  return h < 9 || h >= 20;
 }
 async function scheduleReminders(phone, name, startIso) {
   const start = Date.parse(startIso), w = when(startIso);
@@ -157,7 +171,7 @@ function validTwilioSignature(req, params) {
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
-/* A secret only this site can compute, used to protect the Calendly webhook address. */
-function hookKey() { return secret("calendly-hook").toString("hex").slice(0, 40); }
+/* The private key in Dan's calendar-feed address. */
+function feedKey() { return secret("calendar-feed").toString("hex").slice(0, 40); }
 
-module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, hookKey, secret, phoneSig, safeEqual, tooMany, clientIp, first, when };
+module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, feedKey, secret, safeEqual, tooMany, clientIp, first, when, cancelledText, prettyPhone, tellDan, quietHours, ADDRESS };
