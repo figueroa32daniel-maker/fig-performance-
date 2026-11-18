@@ -13,7 +13,7 @@
 const crypto = require("crypto");
 const sms = require("./_sms.js");
 
-const COOKIE = "fig_inbox";
+const COOKIE = "__Host-fig_inbox";
 const DAYS = 30;
 
 function send(res, status, body) {
@@ -23,10 +23,10 @@ function send(res, status, body) {
   res.setHeader("X-Robots-Tag", "noindex");
   res.end(JSON.stringify(body));
 }
-function secret() { return crypto.createHmac("sha256", String(process.env.INBOX_PASSWORD)).update("inbox-session").digest(); }
+function secret() { return sms.secret("inbox-session"); }
 function sign(exp) { return exp + "." + crypto.createHmac("sha256", secret()).update(String(exp)).digest("hex"); }
 function signedIn(req) {
-  const m = /(?:^|;\s*)fig_inbox=([^;]+)/.exec(String(req.headers.cookie || ""));
+  const m = /(?:^|;\s*)__Host-fig_inbox=([^;]+)/.exec(String(req.headers.cookie || ""));
   if (!m) return false;
   const parts = decodeURIComponent(m[1]).split(".");
   const exp = Number(parts[0]);
@@ -65,7 +65,7 @@ function nameFrom(msgs) {                      // our own texts start "Hi Maria,
 
 async function list() {
   const dan = sms.usPhone(process.env.DAN_MOBILE);
-  const all = (await sms.listMessages()).map(slim).filter(m => m.with && m.with !== dan);
+  const all = (await sms.listMessages(null, 6)).map(slim).filter(m => m.with && m.with !== dan);   // up to 2,400 texts back
   const by = {};
   all.forEach(m => { (by[m.with] = by[m.with] || []).push(m); });   // Twilio returns newest first
   const convos = Object.keys(by).map(num => {
@@ -93,6 +93,7 @@ async function thread(num) {
 async function connectCalendly(req) {
   const tok = process.env.CALENDLY_TOKEN;
   if (!tok) return { ok: false, error: "Add the Calendly key first." };
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production") return { ok: false, error: "Do this on the live site (www.figperformance.com/inbox), not a preview." };
   const h = { Authorization: "Bearer " + tok, "Content-Type": "application/json" };
   const me = await (await fetch("https://api.calendly.com/users/me", { headers: h })).json();
   if (!me.resource) return { ok: false, error: "Calendly didn't accept the key." };
@@ -114,6 +115,7 @@ module.exports = async function handler(req, res) {
   try {
     const pw = process.env.INBOX_PASSWORD || "";
     if (pw.length < 12) return send(res, 503, { error: "not_configured", need: "INBOX_PASSWORD" });
+    if (!process.env.TWILIO_AUTH_TOKEN && (process.env.SESSION_SECRET || "").length < 32) return send(res, 503, { error: "not_configured", need: "TWILIO" });
     if (!sameSite(req)) return send(res, 403, { error: "forbidden" });
 
     if (req.method === "POST") {
@@ -121,6 +123,7 @@ module.exports = async function handler(req, res) {
       if (!ct.includes("application/json")) return send(res, 415, { error: "json_only" });
       const b = await body(req);
       if (b.action === "login") {
+        if (sms.tooMany("login:" + sms.clientIp(req), 8, 10 * 60 * 1000)) return send(res, 429, { error: "slow_down" });
         await sleep(700);                                    // slows password guessing
         const a = crypto.createHash("sha256").update(String(b.password || "")).digest();
         const want = crypto.createHash("sha256").update(pw).digest();

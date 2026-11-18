@@ -59,12 +59,7 @@ function clean(v, max) {
   return String(v == null ? "" : v).replace(/[\u0000-\u001F\u007F<>]/g, "").replace(/\s+/g, " ").trim().slice(0, max);
 }
 
-function usPhone(v) {
-  let d = String(v || "").replace(/\D/g, "");
-  if (d.length === 11 && d[0] === "1") d = d.slice(1);
-  if (d.length !== 10 || /^[01]/.test(d)) return null;
-  return "+1" + d;
-}
+const usPhone = sms.usPhone;
 
 async function getSlots(req, res) {
   const q = new URL(req.url, "http://x").searchParams;
@@ -95,6 +90,7 @@ async function readBody(req) {
 async function book(req, res) {
   const b = await readBody(req);
   if (clean(b.website, 200)) return send(res, 200, { ok: true });   // honeypot: bots get a fake success
+  if (sms.tooMany("book:" + sms.clientIp(req), 6, 3600 * 1000)) return send(res, 429, { error: "slow_down" });
   const name = clean(b.name, 80);
   const email = clean(b.email, 254).toLowerCase();
   const phone = usPhone(b.phone);
@@ -104,6 +100,13 @@ async function book(req, res) {
   if (!phone) return send(res, 400, { error: "phone" });
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return send(res, 400, { error: "email" });
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(start) || Date.parse(start) < Date.now()) return send(res, 400, { error: "start" });
+
+  // One active booking per mobile: stops scripts from booking (and texting) the same number over and over.
+  let alreadyTexted = false;
+  if (sms.configured()) {
+    try { alreadyTexted = await sms.recentlyTexted(phone, 24); } catch (e) { alreadyTexted = true; }
+    if (alreadyTexted) return send(res, 409, { error: "already_booked" });
+  }
 
   const et = await eventType();
   // Like Train With Dave: only name + mobile are required. Calendly still needs an email, so a
@@ -119,7 +122,8 @@ async function book(req, res) {
       utm_source: clean(b.utm_source, 100) || "figperformance.com",
       utm_medium: clean(b.utm_medium, 100) || "website",
       utm_campaign: clean(b.utm_campaign, 100) || "native-booking",
-      utm_content: clean(b.utm_content, 100) || undefined,
+      // Signature proving this phone came from our own form (checked by api/calendly-hook.js).
+      utm_content: sms.configured() ? sms.phoneSig(phone) : (clean(b.utm_content, 100) || undefined),
       // The mobile rides along here so api/calendly-hook.js can match reminders to this booking.
       utm_term: phone
     }
@@ -134,7 +138,7 @@ async function book(req, res) {
   if (!r.ok) {
     const msg = JSON.stringify(r.j);
     if (r.status === 409 || /not available|unavailable|already|taken|no longer/i.test(msg)) return send(res, 409, { error: "taken" });
-    console.error("calendly booking failed", r.status, msg.slice(0, 500));
+    console.error("calendly booking failed", r.status);
     return send(res, 502, { error: "book_failed" });
   }
   const v = r.j.resource || {};
@@ -151,7 +155,7 @@ async function book(req, res) {
   });
 }
 
-module.exports = async function handler(req, res) {
+async function handler(req, res) {
   try {
     if (!process.env.CALENDLY_TOKEN) return send(res, 503, { error: "not_configured" });
     if (req.method === "GET") return await getSlots(req, res);
@@ -166,4 +170,6 @@ module.exports = async function handler(req, res) {
     console.error("booking error", e && e.message);
     return send(res, e && e.code ? e.code : 500, { error: "server" });
   }
-};
+}
+handler.eventType = eventType;
+module.exports = handler;

@@ -71,6 +71,12 @@
     current = num; app.setAttribute("data-view", "thread");
     return api("GET", { view: "thread", with: num }).then(function (r) {
       if (!handle(r) || current !== num) return;
+      if (r.status !== 200) {
+        $("ib-who").textContent = num; $("ib-compose").hidden = true; $("ib-pending").hidden = true;
+        var mb = $("ib-msgs"); mb.textContent = ""; mb.removeAttribute("data-count");
+        mb.appendChild(el("p", "ib-empty", "This sender can't be opened here (not a regular US mobile number)."));
+        return;
+      }
       var t = r.j;
       $("ib-who").textContent = t.name ? t.name + " · " + pretty(num) : pretty(num);
       var call = $("ib-call"); call.hidden = false; call.href = "tel:" + num; call.textContent = "Call";
@@ -150,7 +156,7 @@
       btn.disabled = false; $("ib-pw").value = "";
       if (r.status === 200) return start();
       if (r.status === 503) return handle(r);
-      st.className = "ib-status err"; st.textContent = "That password isn't right.";
+      st.className = "ib-status err"; st.textContent = r.status === 429 ? "Too many tries. Wait 10 minutes and try again." : "That password isn't right.";
     });
   });
   logout.addEventListener("click", function () { api("POST", { action: "logout" }).then(function () { current = null; lastSig = ""; show("login"); }); });
