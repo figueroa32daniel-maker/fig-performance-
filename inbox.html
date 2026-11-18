@@ -140,6 +140,8 @@
         <h2>Texting assistant</h2>
         <p class="ib-help">When this is on, clients on your Clients list can text the days and times they want and the assistant puts them on your Week if the hour is free. It offers other times when it is taken, sends anything else to you, and texts you everything it does. It never changes a session inside 24 hours.</p>
         <label class="ib-check"><input type="checkbox" id="ib-ai-on"> Let the assistant answer clients and book their sessions</label>
+        <label class="ib-check"><input type="checkbox" id="ib-ai-weekly"> Every Sunday morning, text clients who have nothing booked and ask for their times</label>
+        <p class="ib-help">The assistant remembers when each client usually trains (from your last 8 weeks). Clients with a steady schedule are offered their usual times and just reply YES. Everyone else is asked what works. Clients with a fixed weekly time are never asked.</p>
         <p class="ib-help" id="ib-ai-need" hidden>Not connected yet: the assistant needs its AI key added in Vercel before it can answer.</p>
         <label class="ib-block">What the assistant is allowed to tell people (it will not say anything that is not written here)<textarea id="ib-ai-facts" rows="5" maxlength="3000"></textarea></label>
         <p class="ib-status" id="ib-set-status" role="alert"></p>
@@ -150,6 +152,6 @@
       <input id="ib-feed" type="text" readonly aria-label="Calendar link">
     </section>
   </main>
-  <script src="/assets/inbox.js?v=7" defer></script>
+  <script src="/assets/inbox.js?v=8" defer></script>
 </body>
 </html>

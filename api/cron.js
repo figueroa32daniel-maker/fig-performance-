@@ -10,6 +10,7 @@
 "use strict";
 const sms = require("./_sms.js");
 const db = require("./_db.js");
+const ai = require("./_ai.js");
 
 function done(res, code, body) { res.statusCode = code; res.setHeader("Content-Type", "application/json"); res.setHeader("Cache-Control", "no-store"); res.end(JSON.stringify(body)); }
 function eligible(lead) {
@@ -41,6 +42,11 @@ module.exports = async function handler(req, res) {
       const next = s.followups[step + 1];
       if (next) await db.scheduleFollowup(phone, Date.parse(lead.followBase) + next.day * 864e5);
     }
+    // Sunday morning: the assistant asks clients with nothing booked what times they want this week.
+    try {
+      const asked = await ai.weeklyAsk(now);
+      if (asked) await sms.tellDan("Fig assistant: asked " + asked + " client" + (asked > 1 ? "s" : "") + " for this week's times. Bookings will show on your Week.");
+    } catch (e) { console.error("weekly ask failed", e && e.message); }
     // Nudge Dan about yesterday's consults he hasn't marked (follow-ups only start once he does).
     const unmarked = (await db.bookingsBetween(now - 36 * 3600 * 1000, now - 2 * 3600 * 1000)).filter(b => b.status === "booked");
     if (unmarked.length && (await db.cmd("SET", "nudge:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") {

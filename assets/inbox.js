@@ -384,6 +384,7 @@
       });
       $("ib-noshow").value = settings.noShowText;
       $("ib-ai-on").checked = !!(settings.ai && settings.ai.on);
+      $("ib-ai-weekly").checked = !!(settings.ai && settings.ai.weeklyAsk);
       $("ib-ai-facts").value = (settings.ai && settings.ai.facts) || "";
       $("ib-ai-need").hidden = !!r.j.assistant;
     });
@@ -405,7 +406,7 @@
     settings.noticeHours = +$("ib-notice").value; settings.daysAhead = +$("ib-ahead").value;
     settings.followups = [].map.call(document.querySelectorAll(".ib-follow-row"), function (w) { return { day: +w.querySelector(".ib-follow-day").value, text: w.querySelector(".ib-follow-text").value }; });
     settings.noShowText = $("ib-noshow").value;
-    settings.ai = { on: $("ib-ai-on").checked, facts: $("ib-ai-facts").value };
+    settings.ai = { on: $("ib-ai-on").checked, weeklyAsk: $("ib-ai-weekly").checked, facts: $("ib-ai-facts").value };
     var btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; st.className = "ib-status"; st.textContent = "Saving…";
     api("POST", { action: "settings", settings: settings }).then(function (r) {
       btn.disabled = false;

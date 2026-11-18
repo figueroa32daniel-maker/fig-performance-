@@ -62,7 +62,7 @@ const DEFAULTS = {
     { day: 45, text: "Hi {first}, Coach Dan at Fig Performance. Last note from me: if the timing is better now, reply and we'll pick up where we left off. Reply STOP to opt out." }
   ],
   // The texting assistant. Off until Dan turns it on. "facts" is the only information it may give out.
-  ai: { on: false, facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
+  ai: { on: false, weeklyAsk: false, facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
   noShowText: "Hi {first}, Coach Dan at Fig Performance. Sorry we missed each other today. Want to pick a new time? Reply here or book at figperformance.com. Reply STOP to opt out."
 };
 function cleanSettings(s) {
@@ -82,6 +82,7 @@ function cleanSettings(s) {
   }
   if (s.ai && typeof s.ai === "object") {
     out.ai.on = s.ai.on === true;
+    out.ai.weeklyAsk = s.ai.weeklyAsk === true;
     if (typeof s.ai.facts === "string" && s.ai.facts.trim()) out.ai.facts = s.ai.facts.trim().slice(0, 3000);
   }
   if (typeof s.noShowText === "string" && s.noShowText.trim()) out.noShowText = withStop({ text: s.noShowText.trim().slice(0, 600) }).text;
