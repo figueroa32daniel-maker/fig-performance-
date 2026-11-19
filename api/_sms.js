@@ -69,7 +69,8 @@ function tooMany(key, max, windowMs) {
   if (hits.size > 5000) hits.clear();
   return arr.length > max;
 }
-function clientIp(req) { return String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown"; }
+// Vercel sets these itself from the real connection, so a visitor can't fake their address to dodge limits.
+function clientIp(req) { return String(req.headers["x-real-ip"] || req.headers["x-vercel-forwarded-for"] || req.headers["x-forwarded-for"] || "").split(",")[0].trim().slice(0, 64) || "unknown"; }
 
 /* Send a text now, or at `sendAt` (a Date) if given. Returns the Twilio message or null. */
 async function sendText(to, body, sendAt) {

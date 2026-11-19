@@ -355,7 +355,19 @@ async function carrierWatch(force) {
   return status;
 }
 
-module.exports = { TZ, carrierWatch, addNeed, needs, resolveNeed, logActivity, activity, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
+/* Rate limits that hold across all servers (in-memory counters reset on every new server instance).
+   Returns true when the caller is over the limit. If the database is down, it fails closed for logins
+   (failClosed) and open for everything else so bookings keep working. */
+async function over(key, max, windowSec, failClosed) {
+  if (!configured()) return !!failClosed;
+  try {
+    const k = "rl:" + key + ":" + Math.floor(Date.now() / 1000 / windowSec);
+    const n = (await pipeline([["INCR", k], ["EXPIRE", k, String(windowSec + 5)]]))[0];
+    return +n > max;
+  } catch (e) { return !!failClosed; }
+}
+
+module.exports = { TZ, over, carrierWatch, addNeed, needs, resolveNeed, logActivity, activity, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
   clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, useCredit, tallySessions, cellsFor, CONSULT_MIN, SESSION_MIN };

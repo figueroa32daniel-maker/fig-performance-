@@ -117,6 +117,7 @@ async function handle(from, text, opts) {
   const rk = "ai:rate:" + from + ":" + Math.floor(now / 3600e3);                  // a runaway loop can't run up a bill
   const n = (await db.pipeline([["INCR", rk], ["EXPIRE", rk, "3700"]]))[0];
   if (+n > 12) return null;
+  if (!dry && await db.over("ai:all", 300, 86400)) return null;                     // whole-site cap: a flood of texts can't run up the AI bill
   const thread = (await db.getJSON("ai:thr:" + from)) || [];
   if (!dry && thread.some(m => m.r === "d" && now - m.at < 45 * 60000)) return null;      // Dan just texted them himself: stay out of it
   const client = (await db.clients()).find(c => c.phone === from) || null;

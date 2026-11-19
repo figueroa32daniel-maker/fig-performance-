@@ -47,6 +47,16 @@ module.exports = async function handler(req, res) {
   try {
     if (!db.configured()) return done(res, 200, { ok: true, skipped: "not set up" });
     if (sms.tooMany("cron", 6, 3600 * 1000)) return done(res, 429, { error: "slow_down" });
+    // Only the scheduler may run this. With CRON_SECRET set in Vercel, Vercel sends it and nothing else gets in.
+    // Without it: one run a day, between 10 AM and 8 PM Pacific, so a stranger hitting this address can at most
+    // make the day's run happen a little early, never twice and never at night.
+    const auth = String(req.headers.authorization || ""), cs = process.env.CRON_SECRET || "";
+    if (cs.length >= 16) { if (!sms.safeEqual(auth, "Bearer " + cs)) return done(res, 401, { error: "unauthorized" }); }
+    else if (!process.env.CRON_OPEN) {
+      const h = +new Intl.DateTimeFormat("en-US", { timeZone: db.TZ, hourCycle: "h23", hour: "2-digit" }).format(new Date());
+      if (h < 10 || h >= 20) return done(res, 200, { ok: true, skipped: "outside daytime" });
+      if ((await db.cmd("SET", "cron:ran:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) !== "OK") return done(res, 200, { ok: true, skipped: "already ran today" });
+    }
     const now0 = Date.now();
     try { await db.cmd("SET", "health:cron", String(now0)); } catch (e) { /* heartbeat for /api/health */ }
     let low = [];

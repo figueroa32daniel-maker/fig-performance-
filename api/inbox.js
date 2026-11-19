@@ -34,7 +34,9 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 function secret() { return sms.secret("inbox-session"); }
-function sign(exp) { return exp + "." + crypto.createHmac("sha256", secret()).update(String(exp)).digest("hex"); }
+// The signature includes a fingerprint of the current password, so changing the password signs out every device.
+function pwPrint() { return crypto.createHash("sha256").update("fig-pw:" + (process.env.INBOX_PASSWORD || "")).digest("hex").slice(0, 16); }
+function sign(exp) { return exp + "." + crypto.createHmac("sha256", secret()).update(String(exp) + ":" + pwPrint()).digest("hex"); }
 function signedIn(req) {
   const m = /(?:^|;\s*)__Host-fig_inbox=([^;]+)/.exec(String(req.headers.cookie || ""));
   if (!m) return false;
@@ -197,11 +199,23 @@ module.exports = async function handler(req, res) {
       if (!ct.includes("application/json")) return send(res, 415, { error: "json_only" });
       const b = await body(req);
       if (b.action === "login") {
-        if (sms.tooMany("login:" + sms.clientIp(req), 8, 10 * 60 * 1000)) return send(res, 429, { error: "slow_down" });
+        // Password guessing: 8 tries per 10 minutes per address, and 30 wrong tries an hour from everywhere
+        // combined locks the login for the rest of that hour (and texts Dan once). Counted in the database,
+        // so it holds across servers.
+        const ip = sms.clientIp(req);
+        if (sms.tooMany("login:" + ip, 8, 10 * 60 * 1000) || await db.over("login:" + ip, 8, 600, true)) return send(res, 429, { error: "slow_down" });
+        if (db.configured() && +(await db.cmd("GET", "rl:loginfail:" + Math.floor(Date.now() / 3600000)) || 0) >= 30) return send(res, 429, { error: "slow_down" });
         await sleep(700);                                    // slows password guessing
         const a = crypto.createHash("sha256").update(String(b.password || "")).digest();
         const want = crypto.createHash("sha256").update(pw).digest();
-        if (!crypto.timingSafeEqual(a, want)) return send(res, 401, { error: "wrong_password" });
+        if (!crypto.timingSafeEqual(a, want)) {
+          if (db.configured()) {
+            const hk = "rl:loginfail:" + Math.floor(Date.now() / 3600000);
+            const n = (await db.pipeline([["INCR", hk], ["EXPIRE", hk, "3700"]]))[0];
+            if (+n === 30) await sms.tellDan("URGENT. Fig inbox: 30 wrong password tries in the last hour. The login is locked until the hour is up. If this wasn't you, change INBOX_PASSWORD in Vercel (Claude can walk you through it).");
+          }
+          return send(res, 401, { error: "wrong_password" });
+        }
         const exp = Date.now() + DAYS * 864e5;
         res.setHeader("Set-Cookie", COOKIE + "=" + encodeURIComponent(sign(exp)) + "; Path=/; Max-Age=" + DAYS * 86400 + "; HttpOnly; Secure; SameSite=Strict");
         return send(res, 200, { ok: true });

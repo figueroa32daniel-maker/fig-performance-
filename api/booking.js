@@ -62,7 +62,14 @@ async function tellDanIf(text, startIso) {
 
 async function book(req, res, b) {
   if (clean(b.website, 200)) return send(res, 200, { ok: true });            // honeypot: bots get a fake success
-  if (sms.tooMany("book:" + sms.clientIp(req), 6, 3600 * 1000)) return send(res, 429, { error: "slow_down" });
+  // Spam and "SMS pumping" guard: each booking sends texts, so bots booking with fake numbers would cost money.
+  // 6 bookings an hour per address, and at most 12 an hour / 40 a day for the whole site (far above a busy day).
+  const ip = sms.clientIp(req);
+  if (sms.tooMany("book:" + ip, 6, 3600 * 1000) || await db.over("book:" + ip, 6, 3600)) return send(res, 429, { error: "slow_down" });
+  if (await db.over("book:all:h", 12, 3600) || await db.over("book:all:d", 40, 86400)) {
+    if ((await db.cmd("SET", "spam:told:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") await sms.tellDan("URGENT. Fig: unusually many online bookings at once, so online booking is paused for now (likely a bot). Check figperformance.com/inbox. It reopens on its own.");
+    return send(res, 429, { error: "slow_down" });
+  }
   const name = clean(b.name, 80), email = clean(b.email, 254).toLowerCase(), phone = sms.usPhone(b.phone);
   const goal = clean(b.goal, 500), start = clean(b.start, 40);
   if (name.length < 2) return send(res, 400, { error: "name" });
@@ -109,7 +116,7 @@ async function book(req, res, b) {
 }
 
 async function manage(req, res, b) {
-  if (sms.tooMany("manage:" + sms.clientIp(req), 30, 3600 * 1000)) return send(res, 429, { error: "slow_down" });
+  if (sms.tooMany("manage:" + sms.clientIp(req), 30, 3600 * 1000) || await db.over("manage:" + sms.clientIp(req), 30, 3600)) return send(res, 429, { error: "slow_down" });
   const rec = await db.getBooking(b.t);
   if (!rec) return send(res, 404, { error: "not_found" });
   if (b.action === "manage") return send(res, 200, { ok: true, booking: pub(rec) });
