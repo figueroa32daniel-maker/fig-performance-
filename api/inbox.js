@@ -142,6 +142,7 @@ async function markBooking(id, set) {
     if (bk.status !== "booked") return { ok: false, error: "closed" };
     const oldStart = bk.start;
     await db.cancelBooking(bk, "dan");
+    if (bk.danSids && bk.danSids.length) { await sms.cancelSids(bk.danSids); bk.danSids = []; await db.saveBooking(bk); }
     if (sms.configured() && !lead.optedOut) { await sms.cancelScheduled(bk.phone); await sms.sendText(bk.phone, sms.cancelledText(bk.name, oldStart)); }
     lead.status = "new"; await db.saveLead(lead);
     return { ok: true };
@@ -149,6 +150,7 @@ async function markBooking(id, set) {
   if (set !== "showed" && set !== "no_show") return { ok: false, error: "set" };
   if (bk.status === "cancelled") return { ok: false, error: "closed" };
   const first = bk.status === "booked";
+  if (bk.danSids && bk.danSids.length) { await sms.cancelSids(bk.danSids); bk.danSids = []; }
   bk.status = set; await db.saveBooking(bk);
   if (sms.configured()) await sms.cancelScheduled(bk.phone);
   // One "sorry we missed you" text about their own appointment (not marketing), unless they opted out.

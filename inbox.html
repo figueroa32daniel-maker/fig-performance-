@@ -165,10 +165,11 @@
         <button class="btn btn-primary" type="submit">Save settings</button>
       </form>
       <h2>Your calendar</h2>
-      <p class="ib-help">Subscribe to this private link in Apple Calendar (File &rarr; New Calendar Subscription) or Google Calendar (Other calendars &rarr; From URL) and every consult shows up on your own calendar. Don&rsquo;t share the link.</p>
-      <input id="ib-feed" type="text" readonly aria-label="Calendar link">
+      <p class="ib-help">Add both links as calendar subscriptions (iPhone: Settings &rarr; Calendar &rarr; Accounts &rarr; Add Account &rarr; Other &rarr; Add Subscribed Calendar; Mac: File &rarr; New Calendar Subscription). Give each its own color. Don&rsquo;t share the links.</p>
+      <label class="ib-block">Consults (90-minute blocks)<input id="ib-feed-consults" type="text" readonly></label>
+      <label class="ib-block">Client training sessions (1 hour)<input id="ib-feed" type="text" readonly></label>
     </section>
   </main>
-  <script src="/assets/inbox.js?v=10" defer></script>
+  <script src="/assets/inbox.js?v=11" defer></script>
 </body>
 </html>

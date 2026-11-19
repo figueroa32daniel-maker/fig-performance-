@@ -166,6 +166,35 @@ async function scheduleReminders(phone, name, startIso) {
   return out.filter(Boolean).length;
 }
 
+/* Heads-ups to Dan's own phone before a consult: one early (5 AM that day, or 8 PM the night before for
+   a consult before 7 AM) and one an hour before. Returns the scheduled message IDs so a cancel or move can
+   pull exactly these two, never anything else queued for Dan. */
+function pacificClock(iso) {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: TZ, hourCycle: "h23", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(iso));
+  const get = t => +parts.find(x => x.type === t).value;
+  return get("hour") * 60 + get("minute");
+}
+async function scheduleDanReminders(b) {
+  const dan = usPhone(process.env.DAN_MOBILE);
+  if (!dan || !configured()) return [];
+  const start = Date.parse(b.start), w = when(b.start), mins = pacificClock(b.start);
+  const who = String(b.name || "").slice(0, 40) + ", " + prettyPhone(b.phone);
+  const early = mins >= 7 * 60
+    ? new Date(start - (mins - 5 * 60) * 60000)                 // 5:00 AM the same day
+    : new Date(start - (mins + 4 * 60) * 60000);               // 8:00 PM the night before
+  const out = [];
+  const a = await sendText(dan, "Fig: consult " + (mins >= 7 * 60 ? "today" : "tomorrow") + " at " + w.time + " with " + who + ". 90-min block.", early);
+  if (a && a.sid) out.push(a.sid);
+  const c = await sendText(dan, "Fig: consult in 1 hour (" + w.time + ") with " + who + ".", new Date(start - 3600 * 1000));
+  if (c && c.sid) out.push(c.sid);
+  return out;
+}
+async function cancelSids(sids) {
+  let n = 0;
+  for (const sid of sids || []) { try { const r = await twilio("/Messages/" + sid + ".json", { Status: "canceled" }); if (r.ok) n++; } catch (e) { /* already sent or gone */ } }
+  return n;
+}
+
 /* Twilio signs every webhook it sends. Reject anything that isn't really from Twilio. */
 function validTwilioSignature(req, params) {
   const sig = String(req.headers["x-twilio-signature"] || "");
@@ -181,4 +210,4 @@ function validTwilioSignature(req, params) {
 /* The private key in Dan's calendar-feed address. */
 function feedKey() { return secret("calendar-feed").toString("hex").slice(0, 40); }
 
-module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, feedKey, secret, safeEqual, tooMany, clientIp, first, when, cancelledText, prettyPhone, tellDan, quietHours, ADDRESS };
+module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, feedKey, secret, safeEqual, tooMany, clientIp, first, when, cancelledText, prettyPhone, tellDan, quietHours, scheduleDanReminders, cancelSids, ADDRESS };

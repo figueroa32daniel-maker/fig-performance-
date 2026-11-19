@@ -399,7 +399,7 @@
   function loadSettings() {
     api("GET", { view: "settings" }).then(function (r) {
       if (!handle(r)) return;
-      show("settings"); settings = r.j.settings; $("ib-feed").value = r.j.feed || "";
+      show("settings"); settings = r.j.settings; $("ib-feed").value = r.j.feed ? r.j.feed + "&only=training" : ""; $("ib-feed-consults").value = r.j.feed ? r.j.feed + "&only=consults" : "";
       var hours = $("ib-hours"); hours.textContent = "";
       DAYS.forEach(function (d) {
         var h = settings.hours[d[0]], row = el("div", "ib-hours-row"); row.setAttribute("data-day", d[0]);

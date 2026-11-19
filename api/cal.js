@@ -29,17 +29,19 @@ module.exports = async function handler(req, res) {
     }
     if (!sms.safeEqual(k, sms.feedKey())) { res.statusCode = 404; return res.end("not found"); }
     const now = Date.now();
+    const only = q.get("only");                              // "consults" or "training": one feed each, so Apple Calendar can color them differently
+    const wantConsults = only !== "training", wantTraining = only !== "consults";
     const list = (await db.bookingsBetween(now - 30 * 864e5, now + 60 * 864e5)).filter(b => b.status !== "cancelled");
-    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fig Performance//Consults//EN", "X-WR-CALNAME:Fig Performance consults", "X-PUBLISHED-TTL:PT30M"];
-    list.forEach(b => {
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Fig Performance//Consults//EN", "X-WR-CALNAME:" + (only === "consults" ? "Fig consults" : only === "training" ? "Fig training" : "Fig Performance"), "X-PUBLISHED-TTL:PT15M", "REFRESH-INTERVAL;VALUE=DURATION:PT15M"];
+    if (wantConsults) list.forEach(b => {
       lines.push("BEGIN:VEVENT", "UID:" + b.id + "@figperformance.com", "DTSTAMP:" + stamp(b.created), "DTSTART:" + stamp(b.start),
-        "DTEND:" + stamp(Date.parse(b.start) + (b.minutes || 90) * 60000), "SUMMARY:" + esc("Consult: " + b.name),
+        "DTEND:" + stamp(Date.parse(b.start) + (b.minutes || 90) * 60000), "SUMMARY:" + esc("CONSULT: " + b.name), "CATEGORIES:Consult",
         "LOCATION:" + esc("Fig Performance, " + sms.ADDRESS),
         "DESCRIPTION:" + esc(sms.prettyPhone(b.phone) + (b.goal ? "\nGoal: " + b.goal : "") + "\nStatus: " + b.status), "END:VEVENT");
     });
-    (await db.sessionsBetween(now - 7 * 864e5, now + 30 * 864e5)).forEach(s => {
+    if (wantTraining) (await db.sessionsBetween(now - 7 * 864e5, now + 30 * 864e5)).forEach(s => {
       lines.push("BEGIN:VEVENT", "UID:" + s.id + "@figperformance.com", "DTSTAMP:" + stamp(s.created), "DTSTART:" + stamp(s.start),
-        "DTEND:" + stamp(Date.parse(s.start) + 3600 * 1000), "SUMMARY:" + esc("Training: " + s.name), "END:VEVENT");
+        "DTEND:" + stamp(Date.parse(s.start) + 3600 * 1000), "SUMMARY:" + esc("Training: " + s.name), "CATEGORIES:Training", "END:VEVENT");
     });
     lines.push("END:VCALENDAR");
     res.statusCode = 200;

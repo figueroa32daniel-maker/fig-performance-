@@ -42,6 +42,15 @@ async function sendBookingTexts(b, moved) {
   } catch (e) { console.error("booking texts failed", e && e.message); return false; }
 }
 
+/* Dan's own heads-ups for this consult (separate from the client's texts; sent even if the client opted out). */
+async function danHeadsUp(b) {
+  try {
+    if (b.danSids && b.danSids.length) await sms.cancelSids(b.danSids);
+    b.danSids = b.status === "booked" ? await sms.scheduleDanReminders(b) : [];
+    await db.saveBooking(b);
+  } catch (e) { console.error("dan reminders failed", e && e.message); }
+}
+
 async function book(req, res, b) {
   if (clean(b.website, 200)) return send(res, 200, { ok: true });            // honeypot: bots get a fake success
   if (sms.tooMany("book:" + sms.clientIp(req), 6, 3600 * 1000)) return send(res, 429, { error: "slow_down" });
@@ -85,6 +94,7 @@ async function book(req, res, b) {
 
   const texted = lead.optedOut ? false : await sendBookingTexts(rec, false);
   const w = sms.when(start);
+  await danHeadsUp(rec);
   await sms.tellDan("New consult booked: " + name + ", " + w.day + " " + w.time + ", " + sms.prettyPhone(phone) + (goal ? ". Goal: " + goal.slice(0, 80) : ""));
   return send(res, 200, { ok: true, start, texting: texted, manage_url: "/manage?t=" + rec.id });
 }
@@ -102,6 +112,7 @@ async function manage(req, res, b) {
     const oldStart = rec.start;
     await db.cancelBooking(rec, "client");
     if (sms.configured() && !lead.optedOut) { try { await sms.cancelScheduled(rec.phone); await sms.sendText(rec.phone, sms.cancelledText(rec.name, oldStart)); } catch (e) { /* booking is cancelled either way */ } }
+    await danHeadsUp(rec);
     await sms.tellDan("Cancelled by client: " + rec.name + ", " + was.day + " " + was.time + ", " + sms.prettyPhone(rec.phone));
     return send(res, 200, { ok: true, booking: pub(rec) });
   }
@@ -113,6 +124,7 @@ async function manage(req, res, b) {
     if (lead.phone) { lead.lastStart = start; await db.saveLead(lead); }
     const texted = lead.optedOut ? false : await sendBookingTexts(rec, true);
     const w = sms.when(start);
+    await danHeadsUp(rec);
     await sms.tellDan("Rescheduled: " + rec.name + ", was " + was.day + " " + was.time + ", now " + w.day + " " + w.time);
     return send(res, 200, { ok: true, texting: texted, booking: pub(rec) });
   }
