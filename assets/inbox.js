@@ -297,6 +297,7 @@
             acts.appendChild(bt);
           }
           if (b.status === "booked" && Date.parse(b.start) < now + 3600 * 1000) { act("Showed", "showed", "ib-btn"); act("No-show", "no_show"); }
+          if (b.status === "showed" && b.autoShowed) { tags.appendChild(el("span", "ib-tag", "Marked automatically")); act("They didn't come: No-show", "no_show"); }
           if (b.status === "booked" && Date.parse(b.start) >= now) act("Cancel consult", "cancel");
           var txt = el("button", "ib-link", "Open texts"); txt.type = "button";
           txt.addEventListener("click", function () { setTab("texts"); openThread(b.phone); });

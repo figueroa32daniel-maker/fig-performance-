@@ -122,7 +122,7 @@ async function thread(num) {
 async function schedule() {
   const now = Date.now(), list = await db.bookingsBetween(now - 7 * 864e5, now + 30 * 864e5);
   const leads = await db.getLeads(list.map(b => b.phone));
-  return list.map((b, i) => ({ id: b.id, name: b.name, phone: b.phone, goal: b.goal || "", start: b.start, status: b.status, confirmed: !!b.confirmed,
+  return list.map((b, i) => ({ id: b.id, name: b.name, phone: b.phone, goal: b.goal || "", start: b.start, status: b.status, confirmed: !!b.confirmed, autoShowed: !!b.autoShowed,
     source: b.source || "", leadStatus: leads[i] ? leads[i].status : null, optedOut: !!(leads[i] && leads[i].optedOut),
     marketing: !!(leads[i] && leads[i].consent && leads[i].consent.marketingTexts) }));
 }
@@ -153,7 +153,8 @@ async function markBooking(id, set) {
   }
   if (set !== "showed" && set !== "no_show") return { ok: false, error: "set" };
   if (bk.status === "cancelled") return { ok: false, error: "closed" };
-  const first = bk.status === "booked";
+  const first = bk.status === "booked" || (bk.autoShowed && set === "no_show" && bk.status === "showed");   // Dan correcting an automatic "showed"
+  if (set === "no_show") bk.autoShowed = false;
   if (bk.danSids && bk.danSids.length) { await sms.cancelSids(bk.danSids); bk.danSids = []; }
   bk.status = set; await db.saveBooking(bk);
   if (sms.configured()) await sms.cancelScheduled(bk.phone);
@@ -164,6 +165,24 @@ async function markBooking(id, set) {
   }
   await setLeadStatus(lead, set, bk.start);
   return { ok: true };
+}
+
+/* The daily job marks consults Dan didn't mark by the next morning as "showed", so follow-ups start without him.
+   A consult with someone already on the Clients list counts as signed up (no sales follow-ups to a client). */
+async function autoMark(now) {
+  const list = (await db.bookingsBetween(now - 7 * 864e5, now - 12 * 3600e3)).filter(b => b.status === "booked");
+  const cl = await db.clients(), out = { showed: [], signed: [] };
+  for (const b of list) {
+    if (cl.some(c => c.phone === b.phone)) {
+      b.status = "showed"; await db.saveBooking(b);
+      const lead = (await db.getLead(b.phone)) || { phone: b.phone, name: b.name, created: new Date().toISOString() };
+      lead.status = "signed_up"; await db.stopFollowups(b.phone); await db.saveLead(lead);
+      out.signed.push(b.name); continue;
+    }
+    const r = await markBooking(b.id, "showed");
+    if (r.ok) { const fresh = await db.getBooking(b.id); fresh.autoShowed = true; await db.saveBooking(fresh); out.showed.push(b.name); }
+  }
+  return out;
 }
 
 module.exports = async function handler(req, res) {
@@ -336,3 +355,4 @@ module.exports = async function handler(req, res) {
     return send(res, 500, { error: "server" });
   }
 };
+module.exports.autoMark = autoMark;

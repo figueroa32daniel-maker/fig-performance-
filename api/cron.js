@@ -20,7 +20,8 @@ function eligible(lead) {
 }
 
 /* Dan's daily summary: today's schedule, what the assistant did, and the few things that need him. */
-async function digest(now, low, asked) {
+async function digest(now, low, asked, auto) {
+  auto = auto || { showed: [], signed: [] };
   const today = db.dateKey(new Date(now)), dayStart = db.zonedToUtc(today, "00:00").getTime(), dayEnd = dayStart + 864e5;
   const sessions = (await db.sessionsBetween(now, dayEnd)).length;
   const consults = (await db.bookingsBetween(now, dayEnd)).filter(b => b.status === "booked");
@@ -34,7 +35,9 @@ async function digest(now, low, asked) {
   if (asked) lines.push("Asked " + asked + " client" + (asked === 1 ? "" : "s") + " for this week's times.");
   if (open.length) lines.push(open.length + " message" + (open.length === 1 ? " needs" : "s need") + " you: " + open.slice(0, 2).map(n => n.who.split(" ")[0] + " (" + n.reason.slice(0, 40) + ")").join(", ") + ".");
   if (unconfirmed.length) lines.push("Not confirmed yet: " + unconfirmed.slice(0, 3).map(b => sms.first(b.name) + " " + sms.when(b.start).time).join(", ") + ".");
-  if (unmarked.length) lines.push(unmarked.length + " past consult" + (unmarked.length === 1 ? "" : "s") + " to mark showed or no-show.");
+  if (auto.showed.length) lines.push("Marked as showed: " + auto.showed.map(sms.first).join(", ") + " (follow-ups started; if they didn't come, tap No-show under Consults).");
+  if (auto.signed.length) lines.push("Already clients, marked signed up: " + auto.signed.map(sms.first).join(", ") + ".");
+  if (unmarked.length) lines.push(unmarked.length + " consult" + (unmarked.length === 1 ? "" : "s") + " from today still to mark.");
   if (low.length) lines.push("Low on sessions: " + low.map(x => sms.first(x.name) + " (" + x.credits + ")").join(", ") + ".");
   lines.push("figperformance.com/inbox");
   return lines.join(" ");
@@ -91,10 +94,13 @@ module.exports = async function handler(req, res) {
     // Sunday morning: the assistant asks clients with nothing booked what times they want this week.
     let asked = 0;
     try { asked = await ai.weeklyAsk(now); } catch (e) { console.error("weekly ask failed", e && e.message); }
+    // Consults Dan didn't mark by now count as "showed", so their follow-ups start on their own.
+    let auto = { showed: [], signed: [] };
+    try { auto = await require("./inbox.js").autoMark(now); } catch (e) { console.error("auto mark failed", e && e.message); }
     // ONE text to Dan a day with everything that isn't an emergency.
     try {
       if ((await db.cmd("SET", "digest:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") {
-        const text = await digest(now, low, asked);
+        const text = await digest(now, low, asked, auto);
         if (text) await sms.tellDan(text);
       }
     } catch (e) { console.error("digest failed", e && e.message); }
