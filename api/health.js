@@ -22,10 +22,12 @@ async function check() {
         const r = await sms.twilio(".json");                      // the account itself: are the keys good and the account active?
         const active = !!(r && r.ok && r.j && r.j.status === "active");
         out.texting = !active ? "account problem" : (fails >= 5 ? "sends failing" : "ok");
+        const c = await db.carrierWatch();
+        out.carrierApproval = c === "approved" ? "approved" : c === "failed" ? "rejected" : c === "in_review" ? "in review" : "unknown";
       }
     } catch (e) { out.database = "error"; }
   }
-  const bad = Object.keys(out).filter(k => ["ok", "ready", "off"].indexOf(out[k]) < 0 && !(k === "dailyJob" && out[k] === "never ran") && !(k === "booking" && out.database === "off"));
+  const bad = Object.keys(out).filter(k => ["ok", "ready", "off", "approved", "in review", "unknown"].indexOf(out[k]) < 0 && !(k === "dailyJob" && out[k] === "never ran") && !(k === "booking" && out.database === "off"));
   return { ok: bad.length === 0, problems: bad, checks: out, at: new Date().toISOString() };
 }
 

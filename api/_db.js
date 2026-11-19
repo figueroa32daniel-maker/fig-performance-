@@ -336,7 +336,26 @@ async function activity() {
   return ((await cmd("LRANGE", "activity", "0", "49")) || []).map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean);
 }
 
-module.exports = { TZ, addNeed, needs, resolveNeed, logActivity, activity, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
+/* Watches for carrier approval (at most every 20 minutes, from any page load or the daily job). The moment it is
+   approved, Dan gets one "you're live" text: that text arriving is itself the proof texting works. */
+async function carrierWatch(force) {
+  const sms = require("./_sms.js");
+  if (!configured() || !sms.configured()) return "unknown";
+  const last = await getJSON("a2p:status");
+  if (last && last.status === "approved") return "approved";
+  if (!force && last && Date.now() - Date.parse(last.at) < 20 * 60000) return last.status;
+  const status = await sms.carrierStatus();
+  await setJSON("a2p:status", { status, at: new Date().toISOString() });
+  if (status === "approved" && (await cmd("SET", "a2p:told", "1", "NX")) === "OK") {
+    await sms.tellDan("Fig Performance: you're approved and LIVE. Booking texts, reminders, the assistant and missed-call texts all work now. Reply to this text to test it.");
+  }
+  if (status === "failed" && (await cmd("SET", "a2p:failtold", "1", "NX", "EX", "604800")) === "OK") {
+    console.error("A2P campaign FAILED: check Twilio Trust Hub");
+  }
+  return status;
+}
+
+module.exports = { TZ, carrierWatch, addNeed, needs, resolveNeed, logActivity, activity, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
   clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, useCredit, tallySessions, cellsFor, CONSULT_MIN, SESSION_MIN };

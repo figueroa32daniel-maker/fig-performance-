@@ -195,6 +195,24 @@ async function cancelSids(sids) {
   return n;
 }
 
+/* Carrier approval of the texting registration (A2P 10DLC campaign). Until it says VERIFIED, carriers block our texts.
+   Returns "approved", "in_review", "failed" or "unknown". */
+async function carrierStatus() {
+  const mg = process.env.TWILIO_MESSAGING_SERVICE_SID;
+  if (!configured() || !mg) return "unknown";
+  try {
+    const sid = process.env.TWILIO_ACCOUNT_SID;
+    const r = await fetch("https://messaging.twilio.com/v1/Services/" + mg + "/Compliance/Usa2p",
+      { headers: { Authorization: "Basic " + Buffer.from(sid + ":" + process.env.TWILIO_AUTH_TOKEN).toString("base64") } });
+    if (!r.ok) return "unknown";
+    const j = await r.json(), list = (j && j.compliance) || [];
+    const st = list.map(c => String(c.campaign_status || "").toUpperCase());
+    if (st.includes("VERIFIED")) return "approved";
+    if (st.includes("FAILED")) return "failed";
+    return st.length ? "in_review" : "unknown";
+  } catch (e) { return "unknown"; }
+}
+
 /* Twilio signs every webhook it sends. Reject anything that isn't really from Twilio. */
 function validTwilioSignature(req, params) {
   const sig = String(req.headers["x-twilio-signature"] || "");
@@ -210,4 +228,4 @@ function validTwilioSignature(req, params) {
 /* The private key in Dan's calendar-feed address. */
 function feedKey() { return secret("calendar-feed").toString("hex").slice(0, 40); }
 
-module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, feedKey, secret, safeEqual, tooMany, clientIp, first, when, cancelledText, prettyPhone, tellDan, quietHours, scheduleDanReminders, cancelSids, ADDRESS };
+module.exports = { configured, twilio, usPhone, sendText, listMessages, recentlyTexted, cancelScheduled, confirmationText, scheduleReminders, validTwilioSignature, feedKey, secret, safeEqual, tooMany, clientIp, first, when, cancelledText, prettyPhone, tellDan, quietHours, scheduleDanReminders, cancelSids, carrierStatus, ADDRESS };

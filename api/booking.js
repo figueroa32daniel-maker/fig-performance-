@@ -145,6 +145,7 @@ module.exports = async function handler(req, res) {
     if (!db.configured()) return send(res, 503, { error: "not_configured" });
     if (req.method === "GET") {
       const slots = await db.openSlots();
+      try { await db.carrierWatch(); } catch (e) { /* never slows or breaks the calendar */ }
       return send(res, 200, { duration: db.CONSULT_MIN, slots }, "public, max-age=0, s-maxage=30, stale-while-revalidate=30");
     }
     if (req.method === "POST") {

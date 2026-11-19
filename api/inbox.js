@@ -325,6 +325,7 @@ module.exports = async function handler(req, res) {
       if (q.get("view") === "today") {                       // the home page: what needs Dan, today's schedule, what the assistant did
         if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
         const now = Date.now(), today = db.dateKey(new Date(now)), d0 = db.zonedToUtc(today, "00:00").getTime();
+        let carrier = "unknown"; try { carrier = await db.carrierWatch(); } catch (e) { /* shown as unknown */ }
         const [ses, bks, nd, act, st] = await Promise.all([db.sessionsBetween(d0, d0 + 864e5 - 1), db.bookingsBetween(d0, d0 + 2 * 864e5 - 1), db.needs(), db.activity(), db.settings()]);
         const tomorrowStart = d0 + 864e5;
         const items = ses.map(x => ({ kind: "session", id: x.id, name: x.name, phone: x.phone, start: x.start, by: x.by || "" }))
@@ -332,7 +333,7 @@ module.exports = async function handler(req, res) {
           .sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
         const upcomingConsults = bks.filter(b => b.status === "booked" && Date.parse(b.start) >= tomorrowStart).map(b => ({ name: b.name, phone: b.phone, start: b.start, confirmed: !!b.confirmed }));
         return send(res, 200, { now: new Date(now).toISOString(), assistant: { on: st.ai.on, ready: ai.configured(), alerts: st.ai.alerts },
-          texting: sms.configured(), needs: nd.filter(n => !n.done).slice(0, 20), activity: act.slice(0, 12), today: items, tomorrowConsults: upcomingConsults });
+          texting: sms.configured(), carrier, needs: nd.filter(n => !n.done).slice(0, 20), activity: act.slice(0, 12), today: items, tomorrowConsults: upcomingConsults });
       }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {
         if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });

@@ -94,6 +94,7 @@ module.exports = async function handler(req, res) {
     // Sunday morning: the assistant asks clients with nothing booked what times they want this week.
     let asked = 0;
     try { asked = await ai.weeklyAsk(now); } catch (e) { console.error("weekly ask failed", e && e.message); }
+    try { await db.carrierWatch(true); } catch (e) { console.error("carrier check failed", e && e.message); }
     // Consults Dan didn't mark by now count as "showed", so their follow-ups start on their own.
     let auto = { showed: [], signed: [] };
     try { auto = await require("./inbox.js").autoMark(now); } catch (e) { console.error("auto mark failed", e && e.message); }

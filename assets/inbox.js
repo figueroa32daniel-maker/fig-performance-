@@ -77,7 +77,9 @@
       ai.appendChild(document.createTextNode(j.assistant.on && j.assistant.ready
         ? "Assistant is answering texts. " + (j.assistant.alerts === "all" ? "You get a text for everything." : "You only get texted for emergencies.")
         : "Assistant is off. Texts go to you. Turn it on in Settings."));
-      $("td-status").textContent = j.texting ? "" : "Texting is waiting on carrier approval. Bookings still work; texts start once it's approved.";
+      $("td-status").textContent = !j.texting ? "Texting isn't connected yet." : j.carrier === "approved" ? ""
+        : j.carrier === "failed" ? "The carriers turned down the texting registration. Claude is fixing it; texts are paused until then."
+        : "Texting is waiting on carrier approval. Bookings still work; texts start the moment it's approved, and you'll get a text saying you're live.";
 
       var nd = $("td-needs"); nd.textContent = "";
       if (!j.needs.length) nd.appendChild(el("p", "td-empty", "Nothing needs you. The assistant has it covered."));
