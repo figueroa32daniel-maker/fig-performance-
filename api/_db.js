@@ -51,7 +51,9 @@ async function getMany(keys) {
 const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const DEFAULTS = {
   // No open times until Dan sets them on the inbox Settings tab: better no slots than wrong slots.
-  hours: { sun: null, mon: null, tue: null, wed: null, thu: null, fri: null, sat: null },   // e.g. { from: "16:00", to: "19:00" }
+  // Consults can be booked any time the gym is open that a client session doesn't already take (Dan, Nov 18 2026).
+  hours: { sun: null, mon: { from: "05:00", to: "20:00" }, tue: { from: "05:00", to: "20:00" }, wed: { from: "05:00", to: "20:00" },
+           thu: { from: "05:00", to: "20:00" }, fri: { from: "05:00", to: "20:00" }, sat: { from: "05:00", to: "12:00" } },
   blocked: [],                 // dates off, "YYYY-MM-DD"
   noticeHours: 3,              // earliest bookable time from now
   daysAhead: 14,
@@ -75,8 +77,9 @@ function cleanSettings(s) {
   s = s || {};
   const out = JSON.parse(JSON.stringify(DEFAULTS));
   DAYS.forEach(d => {
-    const h = (s.hours || {})[d];
-    if (h && /^\d{2}:00$/.test(h.from) && /^\d{2}:00$/.test(h.to) && h.from < h.to) out.hours[d] = { from: h.from, to: h.to };
+    if (!s.hours || !(d in s.hours)) return;                  // not saved yet: keep the gym-hours default
+    const h = s.hours[d];                                      // saved as closed (null) stays closed
+    out.hours[d] = h && /^\d{2}:00$/.test(h.from) && /^\d{2}:00$/.test(h.to) && h.from < h.to ? { from: h.from, to: h.to } : null;
   });
   if (Array.isArray(s.blocked)) out.blocked = s.blocked.filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x)).slice(0, 200);
   if (Number.isFinite(+s.noticeHours)) out.noticeHours = Math.max(0, Math.min(72, Math.round(+s.noticeHours)));
