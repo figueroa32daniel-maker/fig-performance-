@@ -51,6 +51,15 @@ async function danHeadsUp(b) {
   } catch (e) { console.error("dan reminders failed", e && e.message); }
 }
 
+/* Booking news for Dan's phone: only when he asked for everything, or when it changes today (a consult in the
+   next 12 hours cancelled or moved). The rest shows on the inbox's Today page and his daily summary. */
+async function tellDanIf(text, startIso) {
+  try {
+    const s = await db.settings(), soon = startIso && Date.parse(startIso) - Date.now() < 12 * 3600e3;
+    if (s.ai.alerts === "all" || soon) await sms.tellDan(text);
+  } catch (e) { /* not critical */ }
+}
+
 async function book(req, res, b) {
   if (clean(b.website, 200)) return send(res, 200, { ok: true });            // honeypot: bots get a fake success
   if (sms.tooMany("book:" + sms.clientIp(req), 6, 3600 * 1000)) return send(res, 429, { error: "slow_down" });
@@ -95,7 +104,7 @@ async function book(req, res, b) {
   const texted = lead.optedOut ? false : await sendBookingTexts(rec, false);
   const w = sms.when(start);
   await danHeadsUp(rec);
-  await sms.tellDan("New consult booked: " + name + ", " + w.day + " " + w.time + ", " + sms.prettyPhone(phone) + (goal ? ". Goal: " + goal.slice(0, 80) : ""));
+  await tellDanIf("New consult booked: " + name + ", " + w.day + " " + w.time + ", " + sms.prettyPhone(phone) + (goal ? ". Goal: " + goal.slice(0, 80) : ""), start);
   return send(res, 200, { ok: true, start, texting: texted, manage_url: "/manage?t=" + rec.id });
 }
 
@@ -113,11 +122,11 @@ async function manage(req, res, b) {
     await db.cancelBooking(rec, "client");
     if (sms.configured() && !lead.optedOut) { try { await sms.cancelScheduled(rec.phone); await sms.sendText(rec.phone, sms.cancelledText(rec.name, oldStart)); } catch (e) { /* booking is cancelled either way */ } }
     await danHeadsUp(rec);
-    await sms.tellDan("Cancelled by client: " + rec.name + ", " + was.day + " " + was.time + ", " + sms.prettyPhone(rec.phone));
+    await tellDanIf("Cancelled by client: " + rec.name + ", " + was.day + " " + was.time + ", " + sms.prettyPhone(rec.phone), oldStart);
     return send(res, 200, { ok: true, booking: pub(rec) });
   }
   if (b.action === "move") {
-    const start = clean(b.start, 40);
+    const start = clean(b.start, 40), oldStartMove = rec.start;
     if ((rec.moved || 0) >= 3) return send(res, 409, { error: "too_many_moves" });
     if (start === rec.start) return send(res, 200, { ok: true, texting: false, booking: pub(rec) });
     if ((await db.openSlots(null, rec.id)).indexOf(start) < 0 || !(await db.moveBooking(rec, start))) return send(res, 409, { error: "taken" });
@@ -125,7 +134,7 @@ async function manage(req, res, b) {
     const texted = lead.optedOut ? false : await sendBookingTexts(rec, true);
     const w = sms.when(start);
     await danHeadsUp(rec);
-    await sms.tellDan("Rescheduled: " + rec.name + ", was " + was.day + " " + was.time + ", now " + w.day + " " + w.time);
+    await tellDanIf("Rescheduled: " + rec.name + ", was " + was.day + " " + was.time + ", now " + w.day + " " + w.time, Date.parse(start) < Date.parse(oldStartMove) ? start : oldStartMove);
     return send(res, 200, { ok: true, texting: texted, booking: pub(rec) });
   }
   return send(res, 400, { error: "action" });

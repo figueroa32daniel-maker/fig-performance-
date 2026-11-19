@@ -91,7 +91,9 @@ async function list() {
   }).filter(c => c.at).sort((a, b) => Date.parse(b.at) - Date.parse(a.at)).slice(0, 150);
   if (db.configured() && convos.length) {
     const leads = await db.getLeads(convos.map(c => c.with));
-    convos.forEach((c, i) => { const l = leads[i]; if (l) { c.name = l.name ? sms.first(l.name) : c.name; c.status = l.status; c.optedOut = !!l.optedOut; } });
+    const cl = await db.clients();
+    convos.forEach((c, i) => { const l = leads[i]; if (l) { c.name = l.name ? sms.first(l.name) : c.name; c.status = l.status; c.optedOut = !!l.optedOut; }
+      const k = cl.find(x => x.phone === c.with); if (k) { c.name = k.name; c.client = true; } });
   }
   return convos;
 }
@@ -102,11 +104,13 @@ async function thread(num) {
   const sent = msgs.filter(m => m.at).sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
   const pending = to.filter(m => m.status === "scheduled").reverse().map(m => ({ sid: m.sid, body: m.body, status: "scheduled" }));
   const out = { with: num, name: nameFrom(sent), messages: sent, pending, lead: null };
+  const k = db.configured() ? (await db.clients()).find(x => x.phone === num) : null;
+  if (k) out.name = k.name;
   if (db.configured()) {
     const l = await db.getLead(num);
     if (l) {
       const bk = l.bookingId ? await db.getBooking(l.bookingId) : null;
-      out.name = l.name || out.name;
+      out.name = (k && k.name) || l.name || out.name;
       out.lead = { name: l.name, status: l.status, goal: l.goal || "", optedOut: !!l.optedOut, marketing: !!(l.consent && l.consent.marketingTexts),
         consentAt: l.consent ? l.consent.at : null, followStep: l.followStep || 0,
         booking: bk ? { id: bk.id, start: bk.start, status: bk.status, confirmed: !!bk.confirmed } : null };
@@ -254,6 +258,7 @@ module.exports = async function handler(req, res) {
         c.reviewAsked = new Date().toISOString(); await db.saveClients(list);
         return send(res, 200, { ok: true, clients: await db.clients() });
       }
+      if (b.action === "need_done") return send(res, 200, { ok: await db.resolveNeed(String(b.id || "")) });
       if (b.action === "assistant_try") {                  // Settings tab: see what the assistant would say. Nothing is booked or sent.
         if (!ai.configured()) return send(res, 503, { error: "not_configured", need: "AI_KEY" });
         const phone = sms.usPhone(b.phone), text = String(b.text || "").trim().slice(0, 600);
@@ -297,6 +302,18 @@ module.exports = async function handler(req, res) {
         return send(res, 200, { weekStart: db.dateKey(ws), clients: cl, texting: sms.configured(), month, reviewLink: !!(await db.settings()).review.link,
           sessions: ses.map(s => ({ id: s.id, name: s.name, phone: s.phone, start: s.start, fixed: !!s.fixed, by: s.by || "", counted: !!s.counted })),
           consults: bks.filter(b => b.status !== "cancelled").map(b => ({ id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })) });
+      }
+      if (q.get("view") === "today") {                       // the home page: what needs Dan, today's schedule, what the assistant did
+        if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });
+        const now = Date.now(), today = db.dateKey(new Date(now)), d0 = db.zonedToUtc(today, "00:00").getTime();
+        const [ses, bks, nd, act, st] = await Promise.all([db.sessionsBetween(d0, d0 + 864e5 - 1), db.bookingsBetween(d0, d0 + 2 * 864e5 - 1), db.needs(), db.activity(), db.settings()]);
+        const tomorrowStart = d0 + 864e5;
+        const items = ses.map(x => ({ kind: "session", id: x.id, name: x.name, phone: x.phone, start: x.start, by: x.by || "" }))
+          .concat(bks.filter(b => b.status !== "cancelled" && Date.parse(b.start) < tomorrowStart).map(b => ({ kind: "consult", id: b.id, name: b.name, phone: b.phone, start: b.start, status: b.status, confirmed: !!b.confirmed })))
+          .sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
+        const upcomingConsults = bks.filter(b => b.status === "booked" && Date.parse(b.start) >= tomorrowStart).map(b => ({ name: b.name, phone: b.phone, start: b.start, confirmed: !!b.confirmed }));
+        return send(res, 200, { now: new Date(now).toISOString(), assistant: { on: st.ai.on, ready: ai.configured(), alerts: st.ai.alerts },
+          texting: sms.configured(), needs: nd.filter(n => !n.done).slice(0, 20), activity: act.slice(0, 12), today: items, tomorrowConsults: upcomingConsults });
       }
       if (q.get("view") === "schedule" || q.get("view") === "settings") {
         if (!db.configured()) return send(res, 503, { error: "not_configured", need: "DATABASE" });

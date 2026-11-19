@@ -19,6 +19,27 @@ function eligible(lead) {
     (lead.status === "showed" || lead.status === "no_show") && lead.followBase;
 }
 
+/* Dan's daily summary: today's schedule, what the assistant did, and the few things that need him. */
+async function digest(now, low, asked) {
+  const today = db.dateKey(new Date(now)), dayStart = db.zonedToUtc(today, "00:00").getTime(), dayEnd = dayStart + 864e5;
+  const sessions = (await db.sessionsBetween(now, dayEnd)).length;
+  const consults = (await db.bookingsBetween(now, dayEnd)).filter(b => b.status === "booked");
+  const byAssistant = (await db.sessionsBetween(now - 864e5, now + 21 * 864e5)).filter(x => x.by === "assistant" && Date.parse(x.created || 0) > now - 864e5).length;
+  const open = (await db.needs()).filter(n => !n.done);
+  const unmarked = (await db.bookingsBetween(now - 36 * 3600e3, now - 2 * 3600e3)).filter(b => b.status === "booked");
+  const unconfirmed = (await db.bookingsBetween(now, now + 30 * 3600e3)).filter(b => b.status === "booked" && !b.confirmed);
+  const lines = ["Fig today: " + sessions + " session" + (sessions === 1 ? "" : "s") + " and " + consults.length + " consult" + (consults.length === 1 ? "" : "s") + " still ahead" +
+    (consults.length ? " (" + consults.slice(0, 3).map(b => sms.first(b.name) + " " + sms.when(b.start).time).join(", ") + ")" : "") + "."];
+  if (byAssistant) lines.push("Assistant booked " + byAssistant + " session" + (byAssistant === 1 ? "" : "s") + " in the last day.");
+  if (asked) lines.push("Asked " + asked + " client" + (asked === 1 ? "" : "s") + " for this week's times.");
+  if (open.length) lines.push(open.length + " message" + (open.length === 1 ? " needs" : "s need") + " you: " + open.slice(0, 2).map(n => n.who.split(" ")[0] + " (" + n.reason.slice(0, 40) + ")").join(", ") + ".");
+  if (unconfirmed.length) lines.push("Not confirmed yet: " + unconfirmed.slice(0, 3).map(b => sms.first(b.name) + " " + sms.when(b.start).time).join(", ") + ".");
+  if (unmarked.length) lines.push(unmarked.length + " past consult" + (unmarked.length === 1 ? "" : "s") + " to mark showed or no-show.");
+  if (low.length) lines.push("Low on sessions: " + low.map(x => sms.first(x.name) + " (" + x.credits + ")").join(", ") + ".");
+  lines.push("figperformance.com/inbox");
+  return lines.join(" ");
+}
+
 module.exports = async function handler(req, res) {
   try {
     if (!db.configured()) return done(res, 200, { ok: true, skipped: "not set up" });
@@ -62,27 +83,21 @@ module.exports = async function handler(req, res) {
         }
       } catch (e) { console.error("session reminders failed", e && e.message); }
     }
-    if (low.length) await sms.tellDan("Fig inbox: " + low.map(x => x.name + " has " + x.credits + " session" + (x.credits === 1 ? "" : "s") + " left").join("; ") + ".");
-    // Self-check: if a part of the system is down, Dan hears about it the same morning.
+    // Self-check: if a part of the system is down, Dan hears about it the same morning (on its own).
     try {
       const hc = await health.check();
       if (!hc.ok && (await db.cmd("SET", "health:told:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") await sms.tellDan("Fig system check: problem with " + hc.problems.join(", ") + ". Claude's monitor will look at it; details at figperformance.com/api/health");
     } catch (e) { console.error("health check failed", e && e.message); }
     // Sunday morning: the assistant asks clients with nothing booked what times they want this week.
+    let asked = 0;
+    try { asked = await ai.weeklyAsk(now); } catch (e) { console.error("weekly ask failed", e && e.message); }
+    // ONE text to Dan a day with everything that isn't an emergency.
     try {
-      const asked = await ai.weeklyAsk(now);
-      if (asked) await sms.tellDan("Fig assistant: asked " + asked + " client" + (asked > 1 ? "s" : "") + " for this week's times. Bookings will show on your Week.");
-    } catch (e) { console.error("weekly ask failed", e && e.message); }
-    // Nudge Dan about yesterday's consults he hasn't marked (follow-ups only start once he does).
-    const unmarked = (await db.bookingsBetween(now - 36 * 3600 * 1000, now - 2 * 3600 * 1000)).filter(b => b.status === "booked");
-    if (unmarked.length && (await db.cmd("SET", "nudge:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") {
-      await sms.tellDan("Fig inbox: " + unmarked.length + " recent consult" + (unmarked.length > 1 ? "s" : "") + " not marked yet (showed or no-show). figperformance.com/inbox");
-    }
-    // Show-up helper: who is coming in the next 30 hours and hasn't confirmed? Dan gets one text to call them.
-    const soon = (await db.bookingsBetween(now, now + 30 * 3600 * 1000)).filter(b => b.status === "booked" && !b.confirmed);
-    if (soon.length && (await db.cmd("SET", "unconfirmed:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") {
-      await sms.tellDan("Not confirmed yet: " + soon.slice(0, 5).map(b => sms.first(b.name) + " " + sms.when(b.start).day.split(",")[0] + " " + sms.when(b.start).time + " " + sms.prettyPhone(b.phone)).join("; ") + ". A quick call helps them show up.");
-    }
+      if ((await db.cmd("SET", "digest:" + db.dateKey(new Date()), "1", "NX", "EX", "90000")) === "OK") {
+        const text = await digest(now, low, asked);
+        if (text) await sms.tellDan(text);
+      }
+    } catch (e) { console.error("digest failed", e && e.message); }
     return done(res, 200, { ok: true, sent });
   } catch (e) {
     console.error("cron error", e && e.message);

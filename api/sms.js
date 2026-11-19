@@ -23,6 +23,9 @@ async function form(req) {
   return Object.fromEntries(new URLSearchParams(Buffer.concat(chunks).toString("utf8")));
 }
 
+// Words that mean "Dan should see this now", whatever the assistant decides.
+const EMERGENCY = /\b(emergency|911|ambulance|hospital|hurt|injur(ed|y)|bleeding|faint(ed)?|dizzy|chest pain|can'?t breathe|fell|locked out|can'?t get in|door('?s)? locked|fire|police)\b/i;
+
 module.exports = async function handler(req, res) {
   try {
     if (req.method !== "POST" || !sms.configured()) { res.statusCode = 404; return res.end("not found"); }
@@ -66,10 +69,19 @@ module.exports = async function handler(req, res) {
       let done = null;
       if (!optedOut && body) { try { done = await ai.handle(from, body); } catch (e) { console.error("assistant error", e && e.message); } }
       if (done) await sms.sendText(from, done.reply);
-      if (dan) {
-        const head = "Fig inbox: " + (done ? done.who : sms.prettyPhone(from)) + ": \"" + body.slice(0, 160) + "\". ";
+      // Dan's phone stays quiet unless it matters. An emergency, or a text the assistant could not handle
+      // (it is off, or it failed), reaches him right away. Everything else waits on the inbox's Today page
+      // and in his one daily summary, unless he chose "text me everything" in Settings.
+      const s = await db.settings();
+      const emergency = EMERGENCY.test(body);
+      const urgent = emergency || !!(done && done.urgent) || !done;
+      const who = done ? done.who : sms.prettyPhone(from);
+      if (done && done.did.length) await db.logActivity({ phone: from, who: done.who, did: done.did });
+      if (done && (done.handoff || emergency)) await db.addNeed({ phone: from, who, text: body.slice(0, 300), reason: done.handoff || "possible emergency", urgent });
+      if (dan && (urgent || s.ai.alerts === "all")) {
+        const head = (urgent && done ? "URGENT. " : "") + "Fig: " + who + ": \"" + body.slice(0, 160) + "\". ";
         await sms.sendText(dan, head + (done
-          ? "Assistant " + (done.did.length ? done.did.join(", ") : "answered") + (done.handoff ? ". NEEDS YOU: " + done.handoff : "") + ". figperformance.com/inbox"
+          ? "Assistant " + (done.did.length ? done.did.join(", ") : "answered") + (done.handoff ? ". Needs you: " + done.handoff : "") + ". figperformance.com/inbox"
           : "Answer at figperformance.com/inbox"));
       }
     }

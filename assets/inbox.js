@@ -13,11 +13,12 @@
       return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; });
     });
   }
-  var tabs = $("ib-tabs"), tab = "texts", signedIn = false;
+  var tabs = $("ib-tabs"), tab = "today", signedIn = false;
   function show(which) {                       // which: login | setup | app (texts) | schedule | settings
     login.hidden = which !== "login"; setup.hidden = which !== "setup"; app.hidden = which !== "app";
     $("ib-schedule").hidden = which !== "schedule"; $("ib-settings").hidden = which !== "settings";
-    $("ib-week").hidden = which !== "week"; $("ib-clients").hidden = which !== "clients";
+    $("ib-week").hidden = which !== "week"; $("ib-clients").hidden = which !== "clients"; $("ib-today").hidden = which !== "today";
+    document.body.classList.toggle("ib-signed", signedIn && which !== "login");
     if (which === "login") signedIn = false;
     logout.hidden = !signedIn; tabs.hidden = !signedIn;
     if (which !== "app") { clearInterval(timer); timer = null; }
@@ -25,7 +26,8 @@
   function setTab(name) {
     tab = name;
     tabs.querySelectorAll("button").forEach(function (b) { if (b.getAttribute("data-tab") === name) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
-    if (name === "texts") start(); else if (name === "schedule") loadSchedule(); else if (name === "week") loadWeek(); else if (name === "clients") loadClients(); else loadSettings();
+    window.scrollTo(0, 0);
+    if (name === "today") loadToday(); else if (name === "texts") start(); else if (name === "schedule") loadSchedule(); else if (name === "week") loadWeek(); else if (name === "clients") loadClients(); else loadSettings();
   }
   tabs.addEventListener("click", function (e) { var b = e.target.closest("button[data-tab]"); if (b) setTab(b.getAttribute("data-tab")); });
   var STATUS = { "new": "New", booked: "Booked", showed: "Showed", no_show: "No-show", signed_up: "Signed up", not_interested: "Not interested" };
@@ -52,6 +54,81 @@
     signedIn = true;
     return true;
   }
+
+  /* ----- Today: what needs Dan, today's schedule, what the assistant did ----- */
+  var pacTime = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" });
+  var pacDay = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric" });
+  var pacHour = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", hourCycle: "h23" });
+  function first(n) { return String(n || "").split(" ")[0]; }
+  function textBtn(phone, label) {
+    var b = el("button", "ib-link", label || "Open texts"); b.type = "button";
+    b.addEventListener("click", function () { setTab("texts"); openThread(phone); });
+    return b;
+  }
+  function loadToday() {
+    return api("GET", { view: "today" }).then(function (r) {
+      if (!handle(r)) return;
+      show("today");
+      var j = r.j, now = new Date(j.now), h = +pacHour.format(now);
+      $("td-date").textContent = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" }).format(now);
+      $("td-hello").textContent = (h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening") + ", Dan";
+      var ai = $("td-ai"); ai.textContent = ""; ai.className = "td-ai " + (j.assistant.on && j.assistant.ready ? "is-on" : "is-off");
+      ai.appendChild(el("span", "td-dot"));
+      ai.appendChild(document.createTextNode(j.assistant.on && j.assistant.ready
+        ? "Assistant is answering texts. " + (j.assistant.alerts === "all" ? "You get a text for everything." : "You only get texted for emergencies.")
+        : "Assistant is off. Texts go to you. Turn it on in Settings."));
+      $("td-status").textContent = j.texting ? "" : "Texting is waiting on carrier approval. Bookings still work; texts start once it's approved.";
+
+      var nd = $("td-needs"); nd.textContent = "";
+      if (!j.needs.length) nd.appendChild(el("p", "td-empty", "Nothing needs you. The assistant has it covered."));
+      j.needs.forEach(function (n) {
+        var c = el("article", "td-need" + (n.urgent ? " is-urgent" : ""));
+        var top = el("div", "td-need-top");
+        top.appendChild(el("strong", "", n.who));
+        if (n.urgent) top.appendChild(el("span", "td-urgent", "Urgent"));
+        top.appendChild(el("span", "td-when", ago(n.at)));
+        c.appendChild(top);
+        c.appendChild(el("p", "td-quote", "\u201C" + n.text + "\u201D"));
+        c.appendChild(el("p", "td-why", n.reason));
+        var acts = el("div", "td-acts");
+        acts.appendChild(textBtn(n.phone, "Reply"));
+        var done = el("button", "ib-btn ib-btn-light", "Done"); done.type = "button";
+        done.addEventListener("click", function () { done.disabled = true; api("POST", { action: "need_done", id: n.id }).then(loadToday); });
+        acts.appendChild(done);
+        c.appendChild(acts);
+        nd.appendChild(c);
+      });
+
+      function row(x, withDay) {
+        var li = el("li", "td-row" + (x.kind === "consult" ? " is-consult" : "") + (Date.parse(x.start) + (x.kind === "consult" ? 90 : 60) * 60000 < now.getTime() ? " is-past" : ""));
+        li.appendChild(el("span", "td-time", (withDay ? pacDay.format(new Date(x.start)).split(",")[0] + " " : "") + pacTime.format(new Date(x.start))));
+        var mid = el("span", "td-name", x.name);
+        li.appendChild(mid);
+        var tag = el("span", "td-kind", x.kind === "consult" ? "Consult · 90 min" : "Training · 1 hr");
+        li.appendChild(tag);
+        if (x.kind === "consult") li.appendChild(el("span", "td-conf" + (x.confirmed ? " ok" : ""), x.confirmed ? "Confirmed" : "Not confirmed yet"));
+        else if (x.by === "assistant") li.appendChild(el("span", "td-conf ok", "Booked by assistant"));
+        li.appendChild(textBtn(x.phone, "Text"));
+        return li;
+      }
+      var sc = $("td-sched"); sc.textContent = "";
+      if (!j.today.length) sc.appendChild(el("li", "td-empty", "Nothing on the schedule today."));
+      j.today.forEach(function (x) { sc.appendChild(row(x)); });
+      var tm = $("td-tom"); tm.textContent = "";
+      $("td-tom-wrap").hidden = !j.tomorrowConsults.length;
+      j.tomorrowConsults.forEach(function (x) { x.kind = "consult"; tm.appendChild(row(x, true)); });
+
+      var ac = $("td-act"); ac.textContent = "";
+      if (!j.activity.length) ac.appendChild(el("li", "td-empty", "Nothing yet. When it books, moves or cancels a session, it shows here."));
+      j.activity.forEach(function (a) {
+        var li = el("li");
+        li.appendChild(el("span", "td-when", ago(a.at)));
+        li.appendChild(el("span", "", first(a.who) + ": " + a.did.join(", ")));
+        ac.appendChild(li);
+      });
+    });
+  }
+  $("ib-today").addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) setTab(b.getAttribute("data-go")); });
 
   /* ----- conversations list ----- */
   function loadList(quiet) {
@@ -104,8 +181,9 @@
         if (!count) box.appendChild(el("p", "ib-empty", "No texts with this number yet. Send the first one below."));
         (t.messages || []).forEach(function (m) {
           var failed = m.status === "failed" || m.status === "undelivered";
-          var d = el("div", "ib-msg " + (m.inbound ? "in" : "out") + (failed ? " failed" : ""), m.body);
-          d.appendChild(el("small", "", ago(m.at) + (failed ? " · not delivered" : "")));
+          var bot = !m.inbound && /Fig Performance assistant\s*$|^Fig Performance assistant|^Hi \S+, Fig Performance assistant/.test(m.body || "");
+          var d = el("div", "ib-msg " + (m.inbound ? "in" : "out") + (bot ? " bot" : "") + (failed ? " failed" : ""), m.body);
+          d.appendChild(el("small", "", (bot ? "Assistant · " : m.inbound ? "" : "You · ") + ago(m.at) + (failed ? " · not delivered" : "")));
           box.appendChild(d);
         });
         if (!quiet || atBottom) box.scrollTop = box.scrollHeight;
@@ -428,6 +506,7 @@
       $("ib-rv-link").value = settings.review.link; $("ib-rv-text").value = settings.review.text;
       $("ib-ai-on").checked = !!(settings.ai && settings.ai.on);
       $("ib-ai-weekly").checked = !!(settings.ai && settings.ai.weeklyAsk);
+      $(settings.ai && settings.ai.alerts === "all" ? "ib-al-all" : "ib-al-urgent").checked = true;
       $("ib-ai-facts").value = (settings.ai && settings.ai.facts) || "";
       $("ib-ai-need").hidden = !!r.j.assistant;
     });
@@ -452,7 +531,7 @@
     settings.missedCall = { on: $("ib-mc-on").checked, ring: $("ib-mc-ring").checked, text: $("ib-mc-text").value };
     settings.sessionReminders = $("ib-rem-on").checked;
     settings.review = { link: $("ib-rv-link").value, text: $("ib-rv-text").value };
-    settings.ai = { on: $("ib-ai-on").checked, weeklyAsk: $("ib-ai-weekly").checked, facts: $("ib-ai-facts").value };
+    settings.ai = { on: $("ib-ai-on").checked, weeklyAsk: $("ib-ai-weekly").checked, alerts: $("ib-al-all").checked ? "all" : "urgent", facts: $("ib-ai-facts").value };
     var btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; st.className = "ib-status"; st.textContent = "Saving…";
     api("POST", { action: "settings", settings: settings }).then(function (r) {
       btn.disabled = false;
@@ -469,7 +548,7 @@
     btn.disabled = true; st.className = "ib-status"; st.textContent = "";
     api("POST", { action: "login", password: $("ib-pw").value }).then(function (r) {
       btn.disabled = false; $("ib-pw").value = "";
-      if (r.status === 200) { signedIn = true; return setTab("texts"); }
+      if (r.status === 200) { signedIn = true; return setTab("today"); }
       if (r.status === 503) return handle(r);
       st.className = "ib-status err"; st.textContent = r.status === 429 ? "Too many tries. Wait 10 minutes and try again." : "That password isn't right.";
     });
@@ -487,5 +566,5 @@
       }, 20000);
     });
   }
-  start();
+  setTab("today");
 })();

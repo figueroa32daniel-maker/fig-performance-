@@ -12,18 +12,18 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/assets/styles.css?v=51">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/inbox.css?v=8">
+  <link rel="stylesheet" href="/assets/inbox.css?v=9">
 </head>
 <body class="inbox-page ed">
   <header class="ib-top">
     <a class="ib-brand" href="/">Fig Performance</a>
     <span class="ib-title">Inbox</span>
     <nav class="ib-tabs" id="ib-tabs" aria-label="Sections" hidden>
-      <button type="button" data-tab="texts" aria-current="true">Texts</button>
-      <button type="button" data-tab="week">Week</button>
-      <button type="button" data-tab="schedule">Consults</button>
-      <button type="button" data-tab="clients">Clients</button>
-      <button type="button" data-tab="settings">Settings</button>
+      <button type="button" data-tab="today" aria-current="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Today</span></button>
+      <button type="button" data-tab="texts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg><span>Texts</span></button>
+      <button type="button" data-tab="week"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Week</span></button>
+      <button type="button" data-tab="clients"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.6.8 2.6 2.6 3 5.2"/></svg><span>Clients</span></button>
+      <button type="button" data-tab="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span>Settings</span></button>
     </nav>
     <button type="button" class="ib-link" id="ib-logout" hidden>Sign out</button>
   </header>
@@ -74,6 +74,39 @@
           <button class="btn btn-primary" type="submit">Send</button>
         </form>
         <p class="ib-status" id="ib-send-status" role="alert"></p>
+      </section>
+    </section>
+
+    <!-- Today: the home page -->
+    <section class="ib-panel ib-today" id="ib-today" hidden>
+      <div class="td-head">
+        <div>
+          <p class="td-date" id="td-date"></p>
+          <h1 id="td-hello">Today</h1>
+        </div>
+        <p class="td-ai" id="td-ai" role="status"></p>
+      </div>
+      <p class="ib-status" id="td-status" role="status"></p>
+
+      <section class="td-block" aria-labelledby="td-needs-h">
+        <h2 id="td-needs-h">Needs you</h2>
+        <div id="td-needs"></div>
+      </section>
+
+      <section class="td-block" aria-labelledby="td-sched-h">
+        <h2 id="td-sched-h">Today&rsquo;s schedule</h2>
+        <ol class="td-list" id="td-sched"></ol>
+        <p class="td-more"><button type="button" class="ib-link" data-go="week">Open the week</button> <button type="button" class="ib-link" data-go="schedule">All consults</button></p>
+      </section>
+
+      <section class="td-block" aria-labelledby="td-tom-h" id="td-tom-wrap" hidden>
+        <h2 id="td-tom-h">Consults coming up</h2>
+        <ol class="td-list" id="td-tom"></ol>
+      </section>
+
+      <section class="td-block" aria-labelledby="td-act-h">
+        <h2 id="td-act-h">What the assistant did</h2>
+        <ol class="td-feed" id="td-act"></ol>
       </section>
     </section>
 
@@ -149,8 +182,13 @@
         <label class="ib-block">Your Google review link<input id="ib-rv-link" type="url" inputmode="url" placeholder="https://g.page/r/..." maxlength="320"></label>
         <label class="ib-block">Review text (keep {first} and {link})<textarea id="ib-rv-text" rows="3" maxlength="480"></textarea></label>
         <h2>Texting assistant</h2>
-        <p class="ib-help">When this is on, clients on your Clients list can text the days and times they want and the assistant puts them on your Week if the hour is free. It offers other times when it is taken, sends anything else to you, and texts you everything it does. It never changes a session inside 24 hours.</p>
-        <label class="ib-check"><input type="checkbox" id="ib-ai-on"> Let the assistant answer clients and book their sessions</label>
+        <p class="ib-help">When this is on, the assistant answers every text for you. Clients on your Clients list can book, move and cancel their own sessions (never two people in the same hour). A cancel inside 24 hours needs their yes and counts as a used session. New people get answers from the facts below and a link to book a free consult. Anything it can&rsquo;t answer waits for you on the Today page.</p>
+        <label class="ib-check"><input type="checkbox" id="ib-ai-on"> Let the assistant answer texts and book sessions</label>
+        <fieldset class="ib-radios">
+          <legend>Text my phone</legend>
+          <label class="ib-check"><input type="radio" name="ib-alerts" value="urgent" id="ib-al-urgent"> Only for emergencies (recommended). Everything else is on the Today page and in one summary text each morning.</label>
+          <label class="ib-check"><input type="radio" name="ib-alerts" value="all" id="ib-al-all"> For every text and every booking</label>
+        </fieldset>
         <label class="ib-check"><input type="checkbox" id="ib-ai-weekly"> Every Sunday morning, text clients who have nothing booked and ask for their times</label>
         <p class="ib-help">The assistant remembers when each client usually trains (from your last 8 weeks). Clients with a steady schedule are offered their usual times and just reply YES. Everyone else is asked what works. Clients with a fixed weekly time are never asked.</p>
         <p class="ib-help" id="ib-ai-need" hidden>Not connected yet: the assistant needs its AI key added in Vercel before it can answer.</p>
@@ -170,6 +208,6 @@
       <label class="ib-block">Client training sessions (1 hour)<input id="ib-feed" type="text" readonly></label>
     </section>
   </main>
-  <script src="/assets/inbox.js?v=11" defer></script>
+  <script src="/assets/inbox.js?v=12" defer></script>
 </body>
 </html>

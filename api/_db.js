@@ -64,7 +64,7 @@ const DEFAULTS = {
     { day: 45, text: "Hi {first}, Coach Dan at Fig Performance. Last note from me: if the timing is better now, reply and we'll pick up where we left off. Reply STOP to opt out." }
   ],
   // The texting assistant. Off until Dan turns it on. "facts" is the only information it may give out.
-  ai: { on: false, weeklyAsk: false, facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
+  ai: { on: false, weeklyAsk: false, alerts: "urgent", facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
   // Missed-call text-back: a caller Dan couldn't answer gets one text so the lead isn't lost.
   // ring: true = calls to the gym number ring Dan's cell first; false = his carrier already tried him (call forwarding).
   missedCall: { on: true, ring: true, text: "Hi, this is Coach Dan at Fig Performance. Sorry I missed your call, I'm probably coaching. Text me here and I'll get right back to you, or book a free consult at figperformance.com. Reply STOP to opt out." },
@@ -92,6 +92,7 @@ function cleanSettings(s) {
   if (s.ai && typeof s.ai === "object") {
     out.ai.on = s.ai.on === true;
     out.ai.weeklyAsk = s.ai.weeklyAsk === true;
+    out.ai.alerts = s.ai.alerts === "all" ? "all" : "urgent";
     if (typeof s.ai.facts === "string" && s.ai.facts.trim()) out.ai.facts = s.ai.facts.trim().slice(0, 3000);
   }
   if (s.missedCall && typeof s.missedCall === "object") {
@@ -309,7 +310,33 @@ async function scheduleFollowup(phone, atMs) { return cmd("ZADD", "fu:due", Stri
 async function stopFollowups(phone) { return cmd("ZREM", "fu:due", phone); }
 async function dueFollowups(nowMs) { return (await cmd("ZRANGEBYSCORE", "fu:due", "0", String(nowMs), "LIMIT", "0", "40")) || []; }
 
-module.exports = { TZ, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
+/* "Needs you": things the assistant handed to Dan. Newest first, kept 30 days, at most 100. */
+async function addNeed(n) {
+  const rec = Object.assign({ id: newId(), at: new Date().toISOString(), done: false }, n);
+  await pipeline([["LPUSH", "needs", JSON.stringify(rec)], ["LTRIM", "needs", "0", "99"]]);
+  return rec;
+}
+async function needs() {
+  const raw = (await cmd("LRANGE", "needs", "0", "99")) || [], cut = Date.now() - 30 * 864e5;
+  return raw.map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(x => x && Date.parse(x.at) > cut);
+}
+async function resolveNeed(id) {
+  const list = await needs(), hit = list.find(x => x.id === id);
+  if (!hit) return false;
+  hit.done = true; hit.doneAt = new Date().toISOString();
+  await pipeline([["DEL", "needs"]].concat(list.length ? [["RPUSH", "needs"].concat(list.map(x => JSON.stringify(x)))] : []));
+  return true;
+}
+
+/* What the assistant did, newest first (last 50), for the Today page. */
+async function logActivity(a) {
+  await pipeline([["LPUSH", "activity", JSON.stringify(Object.assign({ at: new Date().toISOString() }, a))], ["LTRIM", "activity", "0", "49"]]);
+}
+async function activity() {
+  return ((await cmd("LRANGE", "activity", "0", "49")) || []).map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean);
+}
+
+module.exports = { TZ, addNeed, needs, resolveNeed, logActivity, activity, DAYS, DEFAULTS, LEAD_STATUSES, configured, cmd, pipeline, getJSON, setJSON, settings, cleanSettings, dateKey, pacificParts, zonedToUtc,
   candidateSlots, openSlots, createBooking, getBooking, saveBooking, cancelBooking, moveBooking, bookingsBetween,
   getLead, saveLead, getLeads, scheduleFollowup, stopFollowups, dueFollowups,
   clients, saveClients, addSession, removeSession, sessionsBetween, weekStart, validHourStart, ensureFixed, useCredit, tallySessions, cellsFor, CONSULT_MIN, SESSION_MIN };
