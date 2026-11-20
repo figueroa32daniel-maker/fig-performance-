@@ -127,3 +127,30 @@
 @media (prefers-contrast: more) {
   .ed .site-header, .ed .mobile-cta { background: var(--cream); -webkit-backdrop-filter: none; backdrop-filter: none; border-color: var(--navy); }
 }
+
+/* 9. Homepage de-template pass (Nov 20, 2026; impeccable critique). Fewer card grids, shorter page.
+   a. "How it works" is a plain ruled list beside its heading, not three numbered cards. */
+.ed .how-list { list-style: none; counter-reset: how; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.ed .how-list li { counter-increment: how; border-top: 1px solid var(--line); padding: 22px 0 22px 2.4rem; position: relative; }
+.ed .how-list li::before { content: counter(how) "."; position: absolute; left: 0; top: 22px; font-family: var(--ed-serif); font-size: 1.35rem; line-height: 1.2; color: var(--gold-text); }
+.ed .how-list h3 { margin: 0 0 6px; font-size: 1.25rem; }
+.ed .how-list p { margin: 0; color: var(--muted); max-width: 60ch; }
+@media (min-width: 900px) {
+  .ed .how-plain { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: start; }
+  .ed .how-plain .section-head { margin-bottom: 0; position: sticky; top: calc(var(--header-h) + 32px); }
+  .ed .how-plain .how-cta { grid-column: 2; }
+}
+/* b. Extra reviews and FAQs stay on the page (and in search) but start folded. */
+.ed .more-block { margin-top: 18px; }
+.ed .more-block > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: var(--font-head); font-weight: 700; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--gold); transition: color 200ms var(--ed-out); }
+.ed .more-block > summary::-webkit-details-marker { display: none; }
+.ed .more-block > summary::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 200ms var(--ed-out); }
+.ed .more-block[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.ed .more-block > summary:hover { color: var(--gold-text); }
+.ed .more-block > summary:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
+.ed .more-block[open] > summary { margin-bottom: 22px; }
+.ed .faq-more { display: grid; gap: 10px; }
+.ed .faq-more > summary { justify-self: start; }
+/* c. Nav "Services" lands on pricing now that the duplicate services grid is gone. */
+.ed .anchor-target { position: relative; top: calc(-1 * (var(--header-h) + 16px)); height: 0; }
+@media (prefers-reduced-motion: reduce) { .ed .more-block > summary, .ed .more-block > summary::after { transition: none; } }
