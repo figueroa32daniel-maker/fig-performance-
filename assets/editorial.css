@@ -109,3 +109,21 @@
 /* 7. Section labels the same size everywhere */
 .ed .kicker { font-size: .8125rem; letter-spacing: .22em; }
 .ed .rule-label { font-size: .8125rem; }
+
+/* 8. Apple-design pass (Nov 19, 2026; emil-apple-design skill). Feel only, no new colors, fonts or layout.
+   a. Card hover lifts only on devices that can hover. On phones a tap used to leave cards stuck lifted. */
+@media (hover: none) {
+  .ed .feature:hover, .ed .result-link:hover, .ed .guide-card:hover { transform: none; box-shadow: none; }
+}
+/* b. Instant feedback on press, not on release. Button-like things press like buttons (.97); cards settle down instead of scaling (MASTER: no scale on cards). */
+.ed .chip:active, .ed .review-badge:active, .ed .results-btn:active, .ed .to-top.show:active, .ed .header-phone:active { transform: scale(.97); transition-duration: 90ms; }
+.ed .feature:active, .ed .result-link:active, .ed .guide-card:active { transform: translateY(1px); transition-duration: 90ms; }
+/* c. One easing curve for UI motion: the strong ease-out already used on buttons, instead of the generic ease. */
+.ed .nav, .ed .nav-toggle span, .ed .to-top, .ed .mobile-cta, .ed .feature, .ed .result-link, .ed .guide-card, .ed .chip, .ed .faq-item summary svg, .ed .review-badge, .ed .results-btn { transition-timing-function: var(--ed-out); }
+/* d. Frosted bars go solid when the visitor asks for less transparency or more contrast. */
+@media (prefers-reduced-transparency: reduce) {
+  .ed .site-header, .ed .mobile-cta { background: var(--cream); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  .ed .site-header, .ed .mobile-cta { background: var(--cream); -webkit-backdrop-filter: none; backdrop-filter: none; border-color: var(--navy); }
+}
