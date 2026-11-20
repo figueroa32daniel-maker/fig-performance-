@@ -22,7 +22,7 @@ body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performan
   <li><strong>Save 20%</strong> when you pay 3 months in full.</li>
   <li>The first consult and InBody body-composition scan are free.</li>
 </ul>
-<p>Semi-private training, with coached small-group sessions, open gym, red light and vibration therapy, is $199 to $345 a month depending on how many sessions a week you choose. A membership with open gym is $79.99 a month plus a $50 yearly maintenance fee, month to month. No initiation fee on any plan. Concierge training at your home or office is quoted by location. Full details are on the <a href="/pricing">pricing page</a>.</p>
+<p>Semi-private training, with coached small-group sessions, open gym, red light and vibration therapy, is $199 to $345 a month depending on how many sessions a week you choose. A membership with open gym is $79.99 a month plus a $50 yearly maintenance fee, month to month. No initiation fee on any plan. <a href="/in-home-personal-training">In-home training</a> at your home or office is $150 a session, mileage included. Full details are on the <a href="/pricing">pricing page</a>.</p>
 
 <h2 id="types">The main types of training in Placentia</h2>
 <ul>

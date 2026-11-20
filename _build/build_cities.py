@@ -22,7 +22,7 @@ SHARED_PRICE = """<h2 id="pricing">Pricing</h2>
 def start_block(city):
     return f"""<h2 id="start">How to start</h2>
 <p>Book a free consult. You'll leave with your InBody numbers, an honest read on your strength, and a plan, before you commit to anything. If you'd rather read first, start with the <a href="/fitness-after-40">fitness after 40 guides</a>.</p>
-<p>Prefer not to drive? <a href="/in-home-personal-training">In-home personal training</a> brings Coach Dan to your {city} home or office. Concierge plans are quoted individually.</p>"""
+<p>Prefer not to drive? <a href="/in-home-personal-training">In-home personal training</a> brings Coach Dan to your {city} home or office. It's $150 a session, mileage included.</p>"""
 
 
 def visit_block(city, route):
@@ -55,7 +55,7 @@ CITIES = {
             ("How much does a personal trainer cost near Yorba Linda?",
              "Personal training at Fig Performance is $90 a session, billed weekly or monthly, with a 3-month minimum. You save 20% when you pay in full for 3 months. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Yorba Linda?",
-             "Yes. In-home personal training brings Coach Dan to your home or office in Yorba Linda. Each concierge plan is quoted individually because cost depends on location and schedule."),
+             "Yes. In-home personal training brings Coach Dan to your home or office in Yorba Linda. It's $150 a session, mileage included."),
             ("I've worked out for years. Will this be different?",
              "Most of our clients have. The difference is one-on-one coaching with a real strength progression, and an InBody scan every few months so you can see fat and muscle change separately instead of guessing from the scale."),
             ("What if I have an old back, knee or shoulder problem?",
@@ -85,7 +85,7 @@ CITIES = {
             ("Can I train before work?",
              "Yes. Fig Performance is staffed from 5 AM on weekdays and Saturdays. Early sessions are popular with clients who commute to Brea offices, so book your consult early to lock in a time."),
             ("Can a personal trainer come to my office in Brea?",
-             "Yes. In-home and in-office personal training is available in Brea. Each concierge plan is quoted individually because cost depends on location and schedule."),
+             "Yes. In-home and in-office personal training is available in Brea. It's $150 a session, mileage included."),
             ("I sit all day. Can I still start strength training?",
              "Yes. Most clients start with tight hips and a stiff back from desk work. The first weeks build mobility and basic strength patterns before loading them. If you're under a doctor's care for an injury, check with your doctor first."),
         ],
@@ -113,7 +113,7 @@ CITIES = {
             ("Do you train seniors?",
              "Yes. Clients in their 60s and 70s train at Fig Performance, including people with shoulder arthritis and past injuries. Plans start with what your body can do today. Read the strength training for seniors guide for how that works."),
             ("Can a personal trainer come to my home in Fullerton?",
-             "Yes. In-home personal training is available in Fullerton. Each concierge plan is quoted individually because cost depends on location and schedule."),
+             "Yes. In-home personal training is available in Fullerton. It's $150 a session, mileage included."),
             ("What's included in the free consult?",
              "About an hour with Coach Dan: an InBody body-composition scan, a movement and strength assessment, a conversation about your goals, and a plan. There's no commitment."),
         ],
@@ -139,7 +139,7 @@ CITIES = {
             ("How much does a personal trainer cost near Anaheim Hills?",
              "Personal training at Fig Performance is $90 a session, billed weekly or monthly, with a 3-month minimum. You save 20% when you pay in full for 3 months. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Anaheim Hills?",
-             "Yes. In-home personal training is available in Anaheim Hills. Each concierge plan is quoted individually because cost depends on location and schedule."),
+             "Yes. In-home personal training is available in Anaheim Hills. It's $150 a session, mileage included."),
             ("Will strength training help my hiking, golf or cycling?",
              "That's the point of it. Stronger legs, hips and back mean more power and fewer aches in whatever you do outside the gym. Training is built around the joints your activities lean on."),
             ("How many times a week do I need to come?",

@@ -15,6 +15,21 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
   <figcaption><a href="https://voyagela.com/interview/exploring-life-business-with-daniel-figueroa-of-fig-performance/" target="_blank" rel="noopener">Read the full interview on VoyageLA &rarr;</a></figcaption>
 </figure>
 
+<h3 id="linkedin">Articles by Daniel Figueroa on LinkedIn</h3>
+<p>Dan writes about training after 40 and choosing a gym in North Orange County. Recent articles:</p>
+<ul>
+  <li><a href="https://www.linkedin.com/pulse/best-personal-trainer-placentia-adults-over-40-2027-daniel-figueroa-k6rsc/" target="_blank" rel="noopener">Best Personal Trainer in Placentia for Adults Over 40 (2027)</a></li>
+  <li><a href="https://www.linkedin.com/pulse/private-gym-vs-big-box-people-over-40-daniel-figueroa-okqhc/" target="_blank" rel="noopener">Private Gym vs Big Box Gym for People Over 40</a></li>
+  <li><a href="https://www.linkedin.com/pulse/personal-trainer-vs-orangetheory-adults-over-40-daniel-figueroa-ackuc/" target="_blank" rel="noopener">Personal Trainer vs Orangetheory for Adults Over 40</a></li>
+  <li><a href="https://www.linkedin.com/pulse/best-gym-over-50-near-yorba-linda-brea-daniel-figueroa-v5qtc/" target="_blank" rel="noopener">Best Gym for Over 50 Near Yorba Linda and Brea</a></li>
+  <li><a href="https://www.linkedin.com/pulse/personal-training-vs-online-coaching-after-40-daniel-figueroa-h4fmc/" target="_blank" rel="noopener">Personal Training vs Online Coaching After 40</a></li>
+  <li><a href="https://www.linkedin.com/pulse/where-get-inbody-scan-orange-county-daniel-figueroa-nt7uc/" target="_blank" rel="noopener">Where to Get an InBody Scan in Orange County</a></li>
+  <li><a href="https://www.linkedin.com/pulse/how-much-does-personal-trainer-cost-orange-county-2027-figueroa-6e5dc/" target="_blank" rel="noopener">How Much Does a Personal Trainer Cost in Orange County in 2027</a></li>
+  <li><a href="https://www.linkedin.com/pulse/best-personal-trainer-seniors-north-orange-county-daniel-figueroa-nftzc/" target="_blank" rel="noopener">Best Personal Trainer for Seniors in North Orange County</a></li>
+  <li><a href="https://www.linkedin.com/pulse/in-home-personal-trainer-vs-private-gym-yorba-linda-daniel-figueroa-6lnhc/" target="_blank" rel="noopener">In-Home Personal Trainer vs Private Gym in Yorba Linda</a></li>
+  <li><a href="https://www.linkedin.com/pulse/f45-alternatives-adults-over-40-orange-county-daniel-figueroa-mpydc/" target="_blank" rel="noopener">F45 Alternatives for Adults Over 40 in Orange County</a></li>
+</ul>
+
 <h2 id="about">About Fig Performance</h2>
 <p>Fig Performance is a private, one-on-one strength gym in Placentia, California, built for adults over 40 who want to lose fat, build muscle and get stronger. Every client starts with an InBody body-composition scan, so progress is measured, not guessed. Recovery is built in with red light and vibration therapy. The gym opened on Saturday, November 14, 2026, at 1284 E. Yorba Linda Blvd, Placentia, CA 92870.</p>
 
