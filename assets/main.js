@@ -227,3 +227,28 @@ var CONFIG = {
   }
   if (mq && mq.addEventListener) mq.addEventListener("change", function (e) { if (e.matches) { manual = true; v.pause(); if (frame) frame.classList.add("is-manual"); } });
 })();
+
+
+/* FIG Performance GA4 tracking — G-BTJWNH2G73 */
+(function () {
+  "use strict";
+  if (window.__figGA4Loaded) return;
+  window.__figGA4Loaded = true;
+  var measurementId = "G-BTJWNH2G73";
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  window.gtag("js", new Date());
+  window.gtag("config", measurementId);
+  var tag = document.createElement("script");
+  tag.async = true;
+  tag.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
+  document.head.appendChild(tag);
+
+  document.addEventListener("click", function (event) {
+    var link = event.target && event.target.closest && event.target.closest("a[href]");
+    if (!link) return;
+    var href = link.getAttribute("href") || "";
+    if (/^tel:/i.test(href)) window.gtag("event", "phone_click");
+    if (/^sms:/i.test(href)) window.gtag("event", "sms_click");
+  });
+})();

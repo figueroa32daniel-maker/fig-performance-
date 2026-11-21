@@ -243,6 +243,9 @@
       lead._subject = (booked ? "New consult booked: " : "Consult request: ") + name + " · " + lead["Appointment"];
       sendLead(lead);
       remember({ name: name, phone: phone, email: email });
+      if (typeof window.gtag === "function") {
+        window.gtag("event", booked ? "consult_booked" : "consult_requested");
+      }
       showDone(name, booked, result);
     };
 
