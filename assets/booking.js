@@ -131,7 +131,7 @@
       '<div class="bk-fields">' +
         '<label class="bk-field"><span>Name</span><input name="name" autocomplete="name" maxlength="80" placeholder="First and last" value="' + esc(saved.name || "") + '" required></label>' +
         '<label class="bk-field"><span>Mobile phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(714) 555-0123" value="' + esc(saved.phone || "") + '" required>' +
-          '<small class="bk-note">We\'ll text your confirmation and a reminder. Reply STOP anytime.</small></label>' +
+          '<small class="bk-note">We\'ll text your booking details if confirmed, or follow up about your request. Reply STOP anytime.</small></label>' +
         (request ? '<label class="bk-field bk-wide"><span>Best day and time for you</span><input name="when" maxlength="120" placeholder="e.g. Tuesday after 5 PM" required></label>' : "") +
         '<div class="bk-wide bk-extras">' +
           '<button type="button" class="bk-more" data-more="goal" aria-expanded="false">+ Add your goal <i>(optional)</i></button>' +
@@ -141,11 +141,11 @@
         '<label class="bk-field bk-wide" data-extra="email"' + (saved.email ? "" : " hidden") + '><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="254" value="' + esc(saved.email || "") + '"></label>' +
         '<input name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       "</div>" +
-      '<p class="consent">By booking, you agree that Fig Performance may text and call this number about your appointment (your confirmation, reminders and replies to your questions), and to our <a href="/privacy">Privacy Policy</a> and <a href="/terms#sms">Terms, including the text message terms</a>. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.</p>' +
+      '<p class="consent">By submitting, you agree that Fig Performance may text and call this number about your appointment or consultation request (your confirmation, reminders and replies to your questions), and to our <a href="/privacy">Privacy Policy</a> and <a href="/terms#sms">Terms, including the text message terms</a>. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.</p>' +
       '<label class="bk-check"><input type="checkbox" name="marketing" value="yes"><span>Optional: also text me training tips and offers from Fig Performance, up to 4 messages a month. Msg &amp; data rates may apply. Reply STOP to opt out. Not required to book or buy anything.</span></label>' +
       '<p class="form-status" role="alert" tabindex="-1"></p>' +
       '<button class="btn btn-gold btn-lg btn-block" type="submit">' + (request ? "Request my free consult" : "Confirm my free consultation") + "</button>" +
-      '<p class="bk-fine">Free &middot; No credit card &middot; ' + (request ? "We\'ll text you to confirm" : "Instant confirmation") + "</p>" +
+      '<p class="bk-fine">Free &middot; No credit card &middot; ' + (request ? "Request only; no appointment reserved yet" : "Confirmed only when your booking succeeds") + "</p>" +
       "</form>" +
       '<p class="bk-talk">Prefer to talk? Call <a href="' + telHref() + '">' + esc(PHONE) + "</a> and we\'ll book it for you.</p>";
     root.innerHTML = html;
@@ -216,7 +216,7 @@
     var name = v("name"), phone = v("phone"), email = v("email"), goal = v("goal"), when = v("when");
     var err = null, bad = null;
     if (name.length < 2) { err = "Please enter your name."; bad = "name"; }
-    else if (digits(phone).length !== 10) { err = "Please enter a 10-digit mobile number so we can text your confirmation."; bad = "phone"; }
+    else if (digits(phone).length !== 10) { err = "Please enter a 10-digit mobile number so we can contact you about your consultation."; bad = "phone"; }
     else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err = "Please check your email, or leave it blank."; bad = "email"; }
     else if (st.mode === "request" && when.length < 2) { err = "Tell us a day and time that suits you."; bad = "when"; }
     clearFieldErrors(form);
@@ -238,7 +238,7 @@
     partialSent = true;                                         // a real submit replaces the "unfinished" alert
 
     var done = function (booked, result) {
-      lead["Status"] = booked ? "BOOKED in Calendly" : "Needs a time: text them to confirm";
+      lead["Status"] = booked ? "Booked through FIG PERFORMANCE website" : "Needs a time: text them to confirm";
       lead["Appointment"] = booked ? fmtLong.format(new Date(st.time)) + " at " + fmtTime.format(new Date(st.time)) + " (Pacific)" : (when || "(see note)");
       lead._subject = (booked ? "New consult booked: " : "Consult request: ") + name + " · " + lead["Appointment"];
       sendLead(lead);
@@ -367,7 +367,7 @@
             })() +
             (result && /^\/manage\?t=[A-Za-z0-9_-]{20,40}$/.test(result.manage_url || "") ? '<p class="bk-fine"><a href="' + esc(result.manage_url) + '">Need to change or cancel?</a></p>' : "") +
             '<p class="bk-fine">Questions? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>"
-          : '<h3 class="q-title" tabindex="-1">Got it, ' + first + ".</h3><p>We'll text you shortly to lock in your time. Your consult is free.</p>" +
+          : '<h3 class="q-title" tabindex="-1">Consultation requested, ' + first + ".</h3><p>Your appointment is not booked yet. We\'ll follow up to confirm a time. Your consult is free.</p>" +
             '<p class="bk-fine">Can\'t wait? Call or text <a href="' + telHref() + '">' + esc(PHONE) + "</a>.</p>") +
       "</div>";
     var h = root.querySelector(".q-title"); if (h) h.focus();
