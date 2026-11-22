@@ -133,6 +133,13 @@ wst_faqs = [
 hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who are already putting in the effort and want it to show. These guides are written by Coach Dan Figueroa, ACSM certified personal trainer and owner of Fig Performance in Placentia.</p>
 
 <h2 id="guides">Guides</h2>
+<div class="consult-explainer">
+  <div>
+    <h3>Free 6-week workout plan for women over 40</h3>
+    <p>Three full-body workouts a week to build your glutes and get stronger, with exercise demos and printable logs.</p>
+  </div>
+  <a class="btn btn-primary btn-lg" href="/glute-workout-plan-for-women-over-40">Get the free workout plan</a>
+</div>
 <ul>
   <li><a href="/dumbbell-workout-for-beginners-over-50">Dumbbell workout for beginners over 50</a><br>Dumbbells, a bench, two or three days a week: the menu, the 1 to 10 effort scale, and swaps for bad joints.</li>
   <li><a href="/calorie-deficit">Calorie deficit after 40: how I set one that works</a><br>InBody math, foods you already enjoy, the 80/20 rule, and three rules for the new year.</li>
