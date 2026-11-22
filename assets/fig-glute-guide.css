@@ -1,0 +1,24 @@
+.guide-page { background: var(--cream); }
+.guide-header, .guide-hero, .guide-footer { background: var(--navy); color: var(--on-navy); }
+.guide-header .container { padding-block: 1.25rem; }
+.guide-header img { width: 9rem; height: auto; }
+.guide-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2rem, 7vw, 7rem); align-items: center; padding-block: clamp(2.5rem, 8vw, 6rem); }
+.guide-page .guide-intro h1 { color: var(--white); font-size: clamp(2.8rem, 6vw, 5.25rem); line-height: 1.04; margin: .75rem 0 1.25rem; }
+.guide-page .guide-intro h1 em { display: block; color: var(--gold-light); }
+.guide-intro > p { max-width: 34rem; font-size: 1.1rem; }
+.guide-intro .guide-kicker { color: var(--gold-light); font-size: .8rem; font-family: var(--font-heading, inherit); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.guide-cover { width: min(100%, 25rem); height: auto; justify-self: center; border: 1px solid var(--gold); display: block; }
+.guide-form { display: grid; gap: .65rem; max-width: 30rem; margin-top: 1.75rem; scroll-margin-top: 1rem; }
+.guide-form label { font-weight: 700; }
+.guide-form input[type=email] { color: var(--text); background: var(--white); border: 1px solid var(--line); padding: .8rem; font: inherit; min-height: 48px; }
+.guide-form button { justify-self: start; }
+.guide-form p { margin: .2rem 0 0; font-size: .9rem; }
+.guide-form a, .guide-footer a { color: var(--on-navy); text-decoration: underline; }
+.guide-page :focus-visible { outline: 3px solid var(--gold-light); outline-offset: 3px; }
+.guide-details { padding-block: clamp(3rem, 8vw, 6rem); max-width: 52rem; }
+.guide-details li { margin-block: 1rem; }
+.guide-footer .container { padding-block: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; }
+@media (max-width: 700px) {
+  .guide-grid { grid-template-columns: 1fr; }
+  .guide-cover { width: min(75%, 18rem); }
+}
