@@ -28,8 +28,10 @@
   /* Where the visitor came from (ad, Google, Instagram), kept for this visit. */
   var UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
   var utm = {};
+  var consultSourcePage = "";
   try {
     var q = new URLSearchParams(location.search);
+    if (q.get("consult_source") === "fullerton") consultSourcePage = "/personal-trainer-fullerton";
     UTM_KEYS.forEach(function (k) { if (q.get(k)) utm[k] = q.get(k).slice(0, 100); });
     if (q.get("gclid")) utm.utm_source = utm.utm_source || "google-ads";
     if (q.get("fbclid")) utm.utm_source = utm.utm_source || "facebook";
@@ -234,6 +236,7 @@
       "Submitted from": "figperformance.com booking",
       _template: "table", _captcha: "false", _cc: "trainat@figperformance.com"
     };
+    if (consultSourcePage) lead["Consult source page"] = consultSourcePage;
     if (email) lead._replyto = email;
     partialSent = true;                                         // a real submit replaces the "unfinished" alert
 
@@ -244,7 +247,9 @@
       sendLead(lead);
       remember({ name: name, phone: phone, email: email });
       if (typeof window.gtag === "function") {
-        window.gtag("event", booked ? "consult_booked" : "consult_requested");
+        var eventName = booked ? "consult_booked" : "consult_requested";
+        if (consultSourcePage) window.gtag("event", eventName, { consult_source_page: consultSourcePage });
+        else window.gtag("event", eventName);
       }
       showDone(name, booked, result);
     };
@@ -255,7 +260,7 @@
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(Object.assign({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website"),
-        consent: true, marketing: marketing, page: location.pathname }, utm))
+        consent: true, marketing: marketing, page: consultSourcePage || location.pathname }, utm))
     })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
       .then(function (r) {
