@@ -176,6 +176,7 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
 <h2 id="tools">Measure and recover</h2>
 <ul>
   <li><a href="/inbody-scan-placentia">InBody scan in Placentia</a><br>See your body fat, muscle and visceral fat, not just your weight.</li>
+  <li><a href="/body-composition-glossary">Body composition terms explained</a><br>What every number on your scan printout actually means, in plain language.</li>
   <li><a href="/red-light-therapy-placentia">Red light therapy in Placentia</a><br>Part of the recovery routine at Fig Performance, included with semi-private training.</li>
 </ul>
 
