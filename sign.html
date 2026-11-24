@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="/assets/styles.css">
   <link rel="stylesheet" href="/assets/editorial.css?v=5">
-  <link rel="stylesheet" href="/assets/sign.css">
+  <link rel="stylesheet" href="/assets/sign.css?v=2">
 </head>
 <body class="legal-page sign-page ed">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -202,6 +202,12 @@
               <p class="program-note" id="program-note" hidden>These program details were set by Fig Performance for you. Please check them. If anything looks wrong, don't sign; call or text <a href="tel:+17143967178">(714) 396-7178</a> and we'll send a corrected link.</p>
               <div class="sign-grid">
                 <div class="sf">
+                  <label for="f-rate">Agreed rate per session ($) <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-rate" name="Agreed rate per session" type="text" inputmode="decimal" maxlength="8" autocomplete="off" placeholder="75.00" required>
+                  <p class="field-hint">One-on-one training is $60 to $90 a session. Enter the rate agreed at your consultation.</p>
+                  <p class="error" id="f-rate-err" hidden>Please enter the agreed rate per session, for example 75.00.</p>
+                </div>
+                <div class="sf">
                   <label for="f-sessions">Program consists of (50-minute) sessions per week <span class="req" aria-hidden="true">*</span></label>
                   <input id="f-sessions" name="Sessions per week (50-minute)" type="text" inputmode="numeric" maxlength="2" autocomplete="off" required>
                   <p class="error" id="f-sessions-err" hidden>Please enter the number of sessions per week (1 to 7).</p>
@@ -217,6 +223,7 @@
                 <div class="sf">
                   <label for="f-today">Amount due today ($) <span class="req" aria-hidden="true">*</span></label>
                   <input id="f-today" name="Amount due today" type="text" inputmode="decimal" maxlength="12" autocomplete="off" placeholder="0.00" required>
+                  <p class="field-hint">Worked out from the rate and sessions above. You can change it.</p>
                   <p class="error" id="f-today-err" hidden>Please enter the amount due today, for example 360.00.</p>
                 </div>
                 <div class="sf">
@@ -337,6 +344,6 @@
   </footer>
 
   <script src="/assets/main.js" defer></script>
-  <script src="/assets/sign.js?v=4" defer></script>
+  <script src="/assets/sign.js?v=6" defer></script>
 </body>
 </html>

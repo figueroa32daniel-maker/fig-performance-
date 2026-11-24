@@ -2,7 +2,8 @@
    Fig Performance: /sign page (waiver + PT client checklist)
    - /sign?type=waiver: waiver only (gym members), checklist hidden.
    - Prefills program details from the link Dan sends:
-       /sign?name=&sessions=&billing=&today=&recurring=&start=
+       /sign?name=&sessions=&billing=&rate=&today=&recurring=&start=
+       rate is the agreed per-session price; the amounts are worked out from it.
      Valid params are shown read-only; missing ones stay editable.
    - Validates everything with clear messages, then lets the form POST
      natively to FormSubmit (redirects to /signed via _next).
@@ -123,19 +124,14 @@
   if (td !== null) { $("f-today").value = td; lock($("f-today")); prefilled.push("today"); }
   var rc = money(q.get("recurring"));
   if (rc !== null) { $("f-recurring").value = rc; lock($("f-recurring")); prefilled.push("recurring"); }
-  /* Amounts come from the agreed per-session rate in the link (?rate=), because the published
-     price is a range ($60 to $90) and the rate is set per client at the consult.
-     Monthly = rate x 4 sessions per weekly session; weekly = rate per session. First payment = one period.
-     With no rate and no explicit today/recurring, the amounts are left blank on purpose rather
-     than guessed, so nobody signs a number that was never agreed. */
+  /* Standard plans: fill the amounts from the agreed session rate + sessions + billing,
+     when the link doesn't set the amounts directly. Sessions are quoted as a range
+     ($60 to $90) and the rate is agreed at the consult, so the rate MUST come from the
+     link: /sign?...&rate=75. Without it nothing is prefilled, because this is a contract
+     and a guessed number does not belong on one.
+     Weekly = rate x sessions; monthly = rate x 4 x sessions. First payment = one period. */
   var rate = money(q.get("rate"));
-  if (td === null && rc === null && rate !== null && /^[1-7]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
-    var perSession = Number(rate);
-    var plan = perSession * (bill === "weekly" ? 1 : 4) * Number(sess);
-    var planTxt = plan.toFixed(2);
-    $("f-today").value = planTxt; lock($("f-today")); prefilled.push("today");
-    $("f-recurring").value = planTxt; lock($("f-recurring")); prefilled.push("recurring");
-  }
+  if (rate !== null && +rate > 0) { $("f-rate").value = (+rate).toFixed(2); lock($("f-rate")); prefilled.push("rate"); }
   var sd = clean(q.get("start"), 10);
   if (isoDateOk(sd)) { $("f-start").value = sd; lock($("f-start")); prefilled.push("start"); }
   if (prefilled.length) $("program-note").hidden = false;
@@ -150,10 +146,29 @@
     var s = $("f-start").value;
     $("f-ends").value = isoDateOk(s) ? longDate(addMonths(s, 3), "UTC") : "";
   }
-  form.querySelectorAll('input[name="Billing"]').forEach(function (r) { r.addEventListener("change", function () { syncUnit(); setErr("f-billing", false); }); });
+  /* Amounts follow the agreed per-session rate: weekly = rate x sessions,
+     monthly = rate x 4 x sessions. Stops as soon as either amount is edited by
+     hand or arrived locked from the link, so a typed figure is never overwritten. */
+  var amountsTouched = false;
+  ["f-today", "f-recurring"].forEach(function (id) {
+    $(id).addEventListener("input", function () { if (!$(id).readOnly) amountsTouched = true; });
+  });
+  function syncAmounts() {
+    if (amountsTouched || $("f-today").readOnly || $("f-recurring").readOnly) return;
+    var r = parseFloat($("f-rate").value), n = parseInt($("f-sessions").value, 10), b = billingValue();
+    if (!(r > 0) || !(n >= 1 && n <= 7) || !b) return;
+    var amt = (b === "Weekly" ? r : r * 4) * n;
+    if (!isFinite(amt)) return;
+    $("f-today").value = amt.toFixed(2);
+    $("f-recurring").value = amt.toFixed(2);
+    setErr("f-today", false); setErr("f-recurring", false);
+  }
+  ["f-rate", "f-sessions"].forEach(function (id) { $(id).addEventListener("input", syncAmounts); });
+
+  form.querySelectorAll('input[name="Billing"]').forEach(function (r) { r.addEventListener("change", function () { syncUnit(); syncAmounts(); setErr("f-billing", false); }); });
   $("f-start").addEventListener("change", syncEnds);
   $("f-start").addEventListener("input", syncEnds);
-  syncUnit(); syncEnds();
+  syncUnit(); syncEnds(); syncAmounts();
 
   /* ---------- under-18 guardian block ---------- */
   var gSec = $("sec-guardian"), gFields = ["f-g-sig", "f-g-rel", "f-g-phone", "f-g-date"];
@@ -200,6 +215,7 @@
     if (!WAIVER_ONLY) {
     for (var n = 1; n <= 6; n++) check("f-init-" + n, /^\p{L}{2,4}$/u.test($("f-init-" + n).value.trim()));
 
+    check("f-rate", money($("f-rate").value) !== null && +money($("f-rate").value) > 0);
     check("f-sessions", /^[1-7]$/.test($("f-sessions").value.trim()));
     check("f-billing", !!billingValue());
     check("f-today", money($("f-today").value) !== null);
@@ -254,7 +270,7 @@
     });
     var b = billingValue(), unit = b === "Weekly" ? "week" : "month";
     c.push("Program Outline");
-    c.push("Program consists of " + $("f-sessions").value.trim() + " (50-minute) session(s) per week.");
+    c.push("Program consists of " + $("f-sessions").value.trim() + " (50-minute) session(s) per week, at an agreed rate of $" + money($("f-rate").value) + " per session.");
     c.push("Billing: " + b + "      Amount due today: $" + money($("f-today").value) + "      Then $" + money($("f-recurring").value) + " per " + unit);
     c.push("Start date: " + longDate(new Date($("f-start").value + "T12:00:00Z"), "UTC") + " (" + $("f-start").value + ")      Commitment ends: " + $("f-ends").value);
     c.push("Acknowledged and agreed by:");

@@ -79,7 +79,7 @@ function cleanSettings(s) {
   DAYS.forEach(d => {
     if (!s.hours || !(d in s.hours)) return;                  // not saved yet: keep the gym-hours default
     const h = s.hours[d];                                      // saved as closed (null) stays closed
-    out.hours[d] = h && /^\d{2}:00$/.test(h.from) && /^\d{2}:00$/.test(h.to) && h.from < h.to ? { from: h.from, to: h.to } : null;
+    out.hours[d] = h && /^\d{2}:(00|30)$/.test(h.from) && /^\d{2}:(00|30)$/.test(h.to) && h.from < h.to ? { from: h.from, to: h.to } : null;
   });
   if (Array.isArray(s.blocked)) out.blocked = s.blocked.filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x)).slice(0, 200);
   if (Number.isFinite(+s.noticeHours)) out.noticeHours = Math.max(0, Math.min(72, Math.round(+s.noticeHours)));
