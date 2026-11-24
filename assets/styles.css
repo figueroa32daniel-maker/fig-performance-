@@ -1068,3 +1068,67 @@ address { font-style: normal; }
 .bk-check { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; margin: 12px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); cursor: pointer; min-height: 44px; }
 .bk-check input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--navy); cursor: pointer; }
 .bk-check input:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ============================================================
+   Conversion layer (Nov 24, 2026) — trust bar, next open times,
+   beliefs, sticky mobile CTA. Tokens only, per MASTER.md.
+   ============================================================ */
+
+/* --- Trust bar above the header --- */
+.trustbar { background: var(--navy-3); color: var(--on-navy); border-bottom: 1px solid var(--line-navy); }
+.trustbar .container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 18px; padding-top: 9px; padding-bottom: 9px; }
+.trustbar p { margin: 0; font-family: var(--font-head); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--on-navy); display: flex; align-items: center; gap: 8px; }
+.trustbar p + p::before { content: ""; width: 4px; height: 4px; background: var(--gold); flex: none; }
+.trustbar svg { width: 14px; height: 14px; fill: var(--gold-light); flex: none; }
+.trustbar a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) {
+  .trustbar .trust-3 { display: none; }
+  .trustbar p { font-size: .66rem; letter-spacing: .1em; }
+  /* Stacked on phones: the separator dot would otherwise start line two. */
+  .trustbar .container { flex-direction: column; gap: 4px; }
+  .trustbar p + p::before { display: none; }
+}
+
+/* --- Reassurance line under a CTA pair --- */
+.assure { margin: 14px 0 0; font-size: .86rem; line-height: 1.5; color: var(--muted); }
+.section-navy .assure { color: var(--on-navy-muted); }
+/* The hero sits on navy, so this line uses the on-navy muted token (AA), and it
+   cancels .hero-more's negative top margin so the two never collide. */
+.hero-assure { margin: -.5rem 0 1.1rem; font-size: .86rem; line-height: 1.55; color: var(--on-navy-muted); max-width: 44ch; }
+.hero-assure + .hero-more { margin-top: 0; }
+
+/* --- Next open times strip --- */
+.nextopen { background: var(--beige); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.nextopen[hidden] { display: none; }
+.nextopen .container { padding-top: 22px; padding-bottom: 22px; display: grid; gap: 14px; align-items: center; }
+@media (min-width: 900px) { .nextopen .container { grid-template-columns: auto 1fr; gap: 28px; } }
+.nextopen-label { font-family: var(--font-head); font-size: .76rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-text); margin: 0; display: flex; align-items: center; gap: 12px; }
+.nextopen-label::before { content: ""; width: 30px; height: 2px; background: var(--gold); flex: none; }
+.nextopen-slots { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.nextopen-slot { display: inline-flex; flex-direction: column; justify-content: center; min-height: 48px; padding: 7px 16px; background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--gold); color: var(--text); text-decoration: none; font-size: .9rem; line-height: 1.3; transition: border-color 180ms ease, background 180ms ease; }
+.nextopen-slot b { font-family: var(--font-head); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.nextopen-slot:hover { background: var(--cream); border-color: var(--gold); }
+.nextopen-slot:active { transform: scale(.97); }
+.nextopen-all { font-size: .9rem; font-weight: 600; color: var(--navy); display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+.nextopen-msg { margin: 0; font-size: .9rem; color: var(--muted); }
+
+/* --- Belief cards --- */
+.beliefs-grid { display: grid; gap: 18px; margin-top: 34px; }
+@media (min-width: 680px) { .beliefs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .beliefs-grid { grid-template-columns: repeat(4, 1fr); } }
+.belief { background: var(--white); border: 1px solid var(--line); border-top: 1px solid var(--gold); padding: 24px; }
+.belief h3 { margin: 0 0 .5rem; font-size: 1.14rem; line-height: 1.25; }
+.belief p { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.6; }
+
+/* --- Sticky mobile CTA bar --- */
+.stickycta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: none; gap: 10px; align-items: center; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--navy-3); border-top: 1px solid var(--line-navy); }
+.stickycta .btn { margin: 0; }
+.stickycta .btn-primary { flex: 1 1 auto; }
+.stickycta-call { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; flex: none; border: 1px solid var(--line-navy); color: var(--on-navy); }
+.stickycta-call svg { width: 20px; height: 20px; fill: var(--gold-light); }
+@media (max-width: 859px) { .stickycta { display: flex; } body.has-stickycta { padding-bottom: 76px; } }
+.stickycta[data-hidden="true"] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nextopen-slot, .nextopen-slot:active { transition: none; transform: none; }
+}
