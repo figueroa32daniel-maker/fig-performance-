@@ -11,6 +11,27 @@ import sys
 from pathlib import Path
 from build_pages import page, SITE, CTA, stats
 
+PHOTO_DIR = SITE / "assets" / "case-studies"
+
+
+def photo(slug, name):
+    """Render the before/after only when Dan has put a file at
+    assets/case-studies/<slug>.jpg. Naming the file IS the pairing: it says
+    which photograph belongs to which client, and that is his call, not mine.
+    No file, no <img>, so nothing ever renders broken."""
+    f = PHOTO_DIR / f"{slug}.jpg"
+    if not f.exists():
+        return (f'<!-- PHOTO SLOT: drop the before/after at assets/case-studies/{slug}.jpg\n'
+                f'     and re-run this builder. Naming the file is how the photo gets\n'
+                f'     paired to {name}; nothing renders until that file exists. -->\n\n')
+    return (f'<figure class="case-photo">\n'
+            f'  <img src="/assets/case-studies/{slug}.jpg" alt="{name}, Fig Performance client: '
+            f'progress photos, before and after, side by side" width="960" height="540" '
+            f'loading="lazy" decoding="async">\n'
+            f'  <figcaption>Shared with permission. Individual results vary.</figcaption>\n'
+            f'</figure>\n\n')
+
+
 C = [
  dict(slug="ray", name="Ray", age=64, start=218, end=183, months=10, mode="studio",
    h1="Sixty-four, and carrying his own bags of soil again.",
@@ -108,9 +129,7 @@ def build(c):
                (f"{c['start']} to {c['end']}", "pounds"),
                (f"{c['months']} months", "start to finish")])
       + f'\n<p>{where}</p>\n\n'
-      '<!-- PHOTO SLOT: left empty on purpose. A before/after is only added here\n'
-      '     once Dan pairs it deliberately and confirms this client agreed to be\n'
-      '     named alongside it. The homepage gallery runs photos uncaptioned. -->\n\n'
+      + photo(c["slug"], c["name"]) +
       f'<h2 id="start">Where {c["name"]} started</h2>\n<p>{c["before"]}</p>\n'
       f'<p>{c["tried"]}</p>\n\n'
       f'<h2 id="changed">What changed</h2>\n<p>{c["changed"]}</p>\n\n'
