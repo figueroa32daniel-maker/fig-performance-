@@ -16,8 +16,8 @@ Last updated: November 24, 2026. Source of truth: https://www.figperformance.com
 - Missed sessions are still billed; pause with notice for travel or a break
 
 ## Semi-private (coached training in groups of 3 people max)
-- From $199 a month
-- 1 group session a week: $199/month
+- From $180 a month
+- 1 group session a week: $180/month
 - 2 group sessions a week: $225/month
 - 3 group sessions a week: $279/month
 - 4 group sessions a week: $345/month
