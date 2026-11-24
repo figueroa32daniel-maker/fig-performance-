@@ -28,7 +28,7 @@ def start_block(city):
 def visit_block(city, route):
     return f"""<h2 id="visit">Getting here from {city}</h2>
 <p>{route}</p>
-<p>Fig Performance is at 1284 E. Yorba Linda Blvd, Placentia, CA 92870, staffed Monday to Friday, 5 AM to 8:30 PM, and Saturday, 5 AM to 12 PM. Closed Sunday. <a href="https://www.google.com/maps/search/?api=1&amp;query=Fig%20Performance%2C%201284%20E.%20Yorba%20Linda%20Blvd%2C%20Placentia%2C%20CA%2092870">Get directions from {city}</a>.</p>
+<p>Fig Performance is at 1284 E. Yorba Linda Blvd, Placentia, CA 92870, staffed Monday to Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM. Closed Sunday. <a href="https://www.google.com/maps/search/?api=1&amp;query=Fig%20Performance%2C%201284%20E.%20Yorba%20Linda%20Blvd%2C%20Placentia%2C%20CA%2092870">Get directions from {city}</a>.</p>
 {CTA}"""
 
 
@@ -99,7 +99,7 @@ CITIES = {
 <p>Fullerton is a university town with a major hospital and a busy downtown, so if you work on campus, on a hospital schedule or in an office, you know what it's like to run out of day before you get to the gym. The same goes for anyone who has belonged to the same Fullerton gym for years and quietly stopped seeing changes. Many of our clients are over 50. Some are over 70. We help them:</p>
 <ul>
   <li><strong>Build muscle at any age.</strong> <a href="/build-muscle-after-60">Teresa, 60, and Sam, 70</a>, started from almost nothing. Sam now deadlifts 135 pounds. Teresa did her first pull-up in about three months.</li>
-  <li><strong>Train around long shifts.</strong> We're open 5 AM to 8:30 PM on weekdays and 5 AM to noon on Saturdays, so sessions fit around hospital, campus and clinic schedules.</li>
+  <li><strong>Train around long shifts.</strong> We're open 5 AM to 8 PM on weekdays and 5 AM to noon on Saturdays, so sessions fit around hospital, campus and clinic schedules.</li>
   <li><strong>Lose fat without losing muscle.</strong> The <a href="/inbody-scan-placentia">InBody scan</a> tracks both, which matters most for anyone over 40, and especially for anyone on a GLP-1 medication. <a href="/glp-1-muscle-loss">Here's how we handle that</a>.</li>
 </ul>""",
         "why": """<h2 id="why">Why Fullerton clients drive to Placentia</h2>

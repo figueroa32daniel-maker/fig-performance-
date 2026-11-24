@@ -30,7 +30,7 @@ pt_body = f"""<p class="legal-intro">Here's exactly what happens when you train 
 <p>Personal training is $60 to $90 a session with Coach Dan, billed weekly or monthly, with a 3-month minimum. Your exact rate depends on how often you train and whether you pay in full, and we give you the number at your free consult. Your first consult and InBody scan are free. See <a href="/pricing">all plans and pricing</a>, or read <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
 
 <h2 id="hours">Hours and location</h2>
-<p>1284 E. Yorba Linda Blvd, Placentia, CA 92870. Staffed Monday to Friday, 5 AM to 8:30 PM, and Saturday, 5 AM to 12 PM. Easy to reach from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a>, <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a> and Villa Park.</p>
+<p>1284 E. Yorba Linda Blvd, Placentia, CA 92870. Staffed Monday to Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM. Easy to reach from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a>, <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a> and Villa Park.</p>
 
 <h2 id="start">Start with a free consult</h2>
 <p>Your consult and InBody scan are free, with no commitment. <a href="/free-consult-placentia">See what's included</a>.</p>
