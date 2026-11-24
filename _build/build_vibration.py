@@ -35,7 +35,7 @@ body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration the
 </ul>
 
 <h2 id="access">Vibration therapy in Placentia</h2>
-<p>Vibration therapy is included with Fig Performance's semi-private training, along with red light therapy, coached small-group sessions and open gym. Semi-private is $199 to $345 a month. See <a href="/pricing">plans and pricing</a>.</p>
+<p>Vibration therapy is included with Fig Performance's semi-private training, along with red light therapy and coached small-group sessions. Semi-private starts at $199 a month. See <a href="/pricing">plans and pricing</a>.</p>
 <p>We're at 1284 E. Yorba Linda Blvd, Placentia, a short drive from <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park.</p>
 {CTA}"""
 

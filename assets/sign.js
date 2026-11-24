@@ -123,10 +123,15 @@
   if (td !== null) { $("f-today").value = td; lock($("f-today")); prefilled.push("today"); }
   var rc = money(q.get("recurring"));
   if (rc !== null) { $("f-recurring").value = rc; lock($("f-recurring")); prefilled.push("recurring"); }
-  /* Standard plans: fill the amounts from sessions + billing when the link doesn't set them.
-     Monthly = $360 per weekly session ($90 x 4 sessions); weekly = $90 per session. First payment = one period. */
-  if (td === null && rc === null && /^[1-3]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
-    var plan = (bill === "weekly" ? 90 : 360) * Number(sess);
+  /* Amounts come from the agreed per-session rate in the link (?rate=), because the published
+     price is a range ($60 to $90) and the rate is set per client at the consult.
+     Monthly = rate x 4 sessions per weekly session; weekly = rate per session. First payment = one period.
+     With no rate and no explicit today/recurring, the amounts are left blank on purpose rather
+     than guessed, so nobody signs a number that was never agreed. */
+  var rate = money(q.get("rate"));
+  if (td === null && rc === null && rate !== null && /^[1-7]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
+    var perSession = Number(rate);
+    var plan = perSession * (bill === "weekly" ? 1 : 4) * Number(sess);
     var planTxt = plan.toFixed(2);
     $("f-today").value = planTxt; lock($("f-today")); prefilled.push("today");
     $("f-recurring").value = planTxt; lock($("f-recurring")); prefilled.push("recurring");

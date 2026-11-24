@@ -4,25 +4,16 @@ from build_pages import page, SITE, CTA
 SLUG = "personal-training-cost-placentia"
 CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
 
-body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performance in Placentia</a> costs $90 a session, or $360 a month for one session a week, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
+body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performance in Placentia</a> costs $60 to $90 a session, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
 
 <h2 id="fig">Fig Performance prices (2026)</h2>
-<div class="price-table-wrap"><table class="price-table">
-  <thead><tr><th>Sessions a week</th><th>Monthly</th><th>3 months paid upfront</th></tr></thead>
-  <tbody>
-    <tr><td>1</td><td>$360</td><td>$864</td></tr>
-    <tr><td>2</td><td>$720</td><td>$1,728</td></tr>
-    <tr><td>3</td><td>$1,080</td><td>$2,592</td></tr>
-    <tr><td>4</td><td>$1,440</td><td>$3,456</td></tr>
-  </tbody>
-</table></div>
+<p><strong>One-on-one personal training: $60 to $90 a session.</strong> Where you land in that range depends on how often you train and whether you pay in full. We give you your exact rate at the free consult, in writing, before you decide anything.</p>
 <ul>
   <li>Every session is one-on-one with Coach Dan Figueroa, ACSM certified.</li>
   <li>3-month minimum on every training plan.</li>
-  <li><strong>Save 20%</strong> when you pay 3 months in full.</li>
   <li>The first consult and InBody body-composition scan are free.</li>
 </ul>
-<p>Semi-private training, with coached small-group sessions, open gym, red light and vibration therapy, is $199 to $345 a month depending on how many sessions a week you choose. A membership with open gym is $79.99 a month plus a $50 yearly maintenance fee, month to month. No initiation fee on any plan. <a href="/in-home-personal-training">In-home training</a> at your home or office is $150 a session, mileage included. Full details are on the <a href="/pricing">pricing page</a>.</p>
+<p>Semi-private training, with coached small-group sessions, red light and vibration therapy, starts at $199 a month and depends on how many sessions a week you choose. No initiation fee on any plan. <a href="/in-home-personal-training">In-home training</a> at your home or office is $150 a session, mileage included. Full details are on the <a href="/pricing">pricing page</a>.</p>
 
 <h2 id="types">The main types of training in Placentia</h2>
 <ul>
@@ -60,9 +51,9 @@ body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performan
 
 faqs = [
     ("How much does personal training cost in Placentia?",
-     "At Fig Performance, one-on-one personal training is $90 a session: $360 a month for once a week or $720 a month for twice a week. Save 20% by paying 3 months in full. The first consult and InBody scan are free."),
+     "At Fig Performance, one-on-one personal training is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full. The first consult and InBody scan are free."),
     ("How much is a gym membership in Placentia?",
-     "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. At Fig Performance, an open-gym membership is $79.99 a month, and semi-private small-group training with recovery tools is $199 to $345 a month."),
+     "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. Fig Performance does not sell an equipment-only membership. We coach people, so the two options are one-on-one training at $60 to $90 a session and semi-private small-group training from $199 a month."),
     ("Why is one-on-one training more expensive than a gym membership?",
      "A membership pays for equipment. One-on-one training pays for a coach's full attention: a plan built for you, form correction on every set, and progress tracking."),
     ("How many personal training sessions a week do I need?",
@@ -73,7 +64,7 @@ faqs = [
 
 html = page(SLUG,
     "Personal Training Cost in Placentia, CA (2026) | Fig Performance",
-    "How much personal training costs in Placentia, CA: real 2026 prices ($90 a session, $360/month), what changes the price, and how to compare trainers.",
+    "How much personal training costs in Placentia, CA: real 2026 prices ($60 to $90 a session), what changes the price, and how to compare trainers.",
     "How Much Does Personal Training Cost in Placentia? (2026)",
     "Prices", "How Much Does Personal Training Cost in Placentia?",
     "Real 2026 prices, what changes them, and how to compare your options.",
