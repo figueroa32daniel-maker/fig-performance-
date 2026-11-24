@@ -1,5 +1,7 @@
 import re,os,json,html,glob,collections
-pages=sorted(f for f in glob.glob('*.html'))
+pages=sorted([f for f in glob.glob('*.html')]+
+             [f for f in glob.glob('*/*.html')
+              if not f.startswith(('_build/','.claude/','node_modules/'))])
 skip_index={'404.html','thanks.html','sign.html','signed.html'}
 sm=open('sitemap.xml').read(); locs=set(re.findall(r'<loc>https://www\.figperformance\.com(/[^<]*)</loc>',sm))
 titles=collections.defaultdict(list); descs=collections.defaultdict(list)
@@ -12,7 +14,8 @@ def exists(path):
     return os.path.exists(p) or os.path.exists(p+'.html') or os.path.exists(os.path.join(p,'index.html'))
 vj=json.load(open('vercel.json')); redirects={r['source'] for r in vj.get('redirects',[])}|{r['source'] for r in vj.get('rewrites',[])}
 for f in pages:
-    s=open(f).read(); slug='/' if f=='index.html' else '/'+f[:-5]
+    s=open(f).read()
+    slug='/' if f=='index.html' else ('/'+f[:-11] if f.endswith('/index.html') else '/'+f[:-5])
     noindex='noindex' in (re.search(r'<meta name="robots"[^>]*>',s) or [''])[0] if re.search(r'<meta name="robots"[^>]*>',s) else False
     t=re.search(r'<title>(.*?)</title>',s,re.S); t=html.unescape(t.group(1).strip()) if t else ''
     d=re.search(r'<meta name="description" content="([^"]*)"',s); d=html.unescape(d.group(1)) if d else ''
@@ -51,7 +54,7 @@ for f in pages:
             p=u.split('#')[0].split('?')[0]
             if not exists(u) and p not in redirects: issues['broken internal link'].append(f+' -> '+u)
             if m.group(0).startswith('href') and not p.startswith('/assets'): inlinks[p.rstrip('/') or '/']+=1 if ('/'+f[:-5])!=p else 0
-    if f!='index.html' and not re.fullmatch(r'[a-z0-9-]+\.html',f): issues['slug not lowercase-hyphen'].append(f)
+    if f!='index.html' and not re.fullmatch(r'[a-z0-9-]+(/[a-z0-9-]+)*\.html',f): issues['slug not lowercase-hyphen'].append(f)
 for t,fs in titles.items():
     if len(fs)>1: issues['duplicate title'].append(', '.join(fs))
 for d,fs in descs.items():
@@ -59,7 +62,7 @@ for d,fs in descs.items():
 for l in locs:
     if not exists(l): issues['sitemap url missing file'].append(l)
 for f in pages:
-    slug='/' if f=='index.html' else '/'+f[:-5]
+    slug='/' if f=='index.html' else ('/'+f[:-11] if f.endswith('/index.html') else '/'+f[:-5])
     if f not in skip_index and inlinks[slug.rstrip('/') or '/']<2: issues['few internal links pointing in (<2)'].append(f'{f} ({inlinks[slug]})')
 big=[(os.path.getsize(p)//1024,p) for p in glob.glob('assets/**/*',recursive=True) if p.lower().endswith(('.jpg','.jpeg','.png','.webp','.gif')) and os.path.getsize(p)>300*1024]
 print('pages',len(pages),'sitemap urls',len(locs))
