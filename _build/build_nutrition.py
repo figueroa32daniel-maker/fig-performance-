@@ -2,7 +2,7 @@
 from build_pages import page, SITE, CTA
 
 SLUG = "nutrition-coaching-placentia"
-CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
+CAL = "/#consult"
 
 body = f"""<p class="legal-intro">At Fig Performance in Placentia, nutrition coaching comes with one-on-one personal training. Coach Dan, your trainer and nutrition coach, takes the foods you already like, raises your protein, sets your calories, and gives you a simple plan with rotating options. No obsessive tracking, no cutting out the foods you love, and your InBody scans show whether it's working.</p>
 
@@ -27,11 +27,11 @@ body = f"""<p class="legal-intro">At Fig Performance in Placentia, nutrition coa
 <p>See a registered dietitian (RD) or your doctor if you have diabetes, kidney disease, a food allergy, a digestive condition, an eating disorder, or you're pregnant, or if your doctor has prescribed a special diet. Many clients work with both: their RD or doctor for the medical side, and Coach Dan for training, protein, habits and accountability.</p>
 
 <h2 id="price">Cost</h2>
-<p>Nutrition coaching is included with personal training at Fig Performance: $90 a session with Coach Dan, 3-month minimum, and 20% off when you pay 3 months in full. See <a href="/pricing">plans and pricing</a> or <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
+<p>Nutrition coaching is included with personal training at Fig Performance: $60 to $90 a session with Coach Dan, 3-month minimum, with your exact rate set at your free consult. See <a href="/pricing">plans and pricing</a> or <a href="/personal-training-cost-placentia">how much personal training costs in Placentia</a>.</p>
 
 <h2 id="start">Start with a free consult</h2>
 <p>Your consult and <a href="/inbody-scan-placentia">InBody scan</a> are free, with no commitment. You'll leave with your numbers and a plan. We're at 1284 E. Yorba Linda Blvd, Placentia, close to <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, Fullerton, <a href="/personal-trainer-brea">Brea</a>, Anaheim Hills and Villa Park.</p>
-<p><a class="btn btn-gold" href="{CAL}" target="_blank" rel="noopener">Book your free consult online</a></p>
+<p><a class="btn btn-gold" href="{CAL}">Book your free consult online</a></p>
 {CTA}"""
 
 faqs = [
@@ -42,7 +42,7 @@ faqs = [
     ("Is Coach Dan a nutrition coach or a dietitian?",
      "Coach Dan is a Precision Nutrition Level 1 certified nutrition coach and ACSM certified personal trainer, not a registered dietitian. He coaches nutrition for healthy adults who want to lose fat and build muscle. For a medical condition, a food allergy, an eating disorder, pregnancy or a prescribed diet, see a registered dietitian or your doctor."),
     ("How much does nutrition coaching cost?",
-     "It's included with personal training at Fig Performance, which is $90 a session with a 3-month minimum and 20% off when you pay 3 months in full. The first consult and InBody scan are free."),
+     "It's included with personal training at Fig Performance, which is $60 to $90 a session with a 3-month minimum. Your exact rate depends on how often you train and whether you pay in full, and we give you the number at your free consult. The first consult and InBody scan are free."),
     ("How much protein should I eat after 40?",
      "Enough to keep the muscle you have while you lose fat. Start by putting a solid protein source in every meal. Your exact target depends on your body size, goals and health, which Coach Dan sets at your consult."),
 ]

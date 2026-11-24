@@ -5,7 +5,7 @@ Last updated: November 24, 2026. Source of truth: https://www.figperformance.com
 ## Free consult with InBody scan
 - Price: $0
 - About an hour: InBody body-composition scan, movement and strength assessment, goals conversation, game plan
-- No commitment. Book online: https://calendly.com/trainwithcoachdan/free-consult-inbody-scan
+- No commitment. Book online: https://www.figperformance.com/#consult
 
 ## Fig Strong 90: personal training (one-on-one with Coach Dan Figueroa, ACSM certified)
 - A 90-day program to lose fat, get stronger and tone up

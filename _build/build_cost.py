@@ -2,7 +2,7 @@
 from build_pages import page, SITE, CTA
 
 SLUG = "personal-training-cost-placentia"
-CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
+CAL = "/#consult"
 
 body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performance in Placentia</a> costs $60 to $90 a session, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
 
@@ -25,7 +25,7 @@ body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performan
 <h2 id="price">What changes the price</h2>
 <ul>
   <li><strong>One-on-one vs. shared sessions.</strong> Splitting a coach's hour with others lowers the price and the attention you get.</li>
-  <li><strong>Session length.</strong> Compare the cost per minute: a 30-minute session at $60 costs more per minute than 50 minutes at $90.</li>
+  <li><strong>Session length.</strong> Compare the cost per minute, not just the price on the page. A 30-minute session can work out dearer per minute than a 50-minute one with a higher sticker price.</li>
   <li><strong>How often you train.</strong> Most adults over 40 see results training two times a week.</li>
   <li><strong>What's included.</strong> Nutrition coaching, body-composition scans, recovery tools and a written program add value even when the session price looks the same.</li>
   <li><strong>Commitment.</strong> Packages and paid-in-full plans usually lower the per-session cost.</li>
@@ -46,7 +46,7 @@ body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performan
 
 <h2 id="start">Start with a free consult</h2>
 <p>See your InBody numbers and get a plan before you spend anything. <a href="/free-consult-placentia">See what's included</a>.</p>
-<p><a class="btn btn-gold" href="{CAL}" target="_blank" rel="noopener">Book your free consult online</a></p>
+<p><a class="btn btn-gold" href="{CAL}">Book your free consult online</a></p>
 {CTA}"""
 
 faqs = [

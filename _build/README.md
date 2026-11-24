@@ -25,7 +25,7 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 
 - Never publish an article until Dan has reviewed it and approved it. He adds his own suggestions to every article first. Drafts go in the article plan doc (Claude Docs project 1a4c49c4-7f9b-466c-bf63-1d21fa93dc1e) for his review.
 
-- Prices: use only what the website already shows. That's $90 a session; the 1–4 sessions-a-week table ($360, $720, $1,080, $1,440 a month, billed weekly or monthly); 20% off when paid 3 months in full; a 3-month minimum; and a free consult. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full. The membership price is quoted at the consult.
+- Prices: use only what the website already shows. Two offers (Dan, Nov 24 2026): one-on-one personal training is $60 to $90 a session, billed weekly or monthly, 3-month minimum, with the exact rate set per client at the free consult and given in writing; semi-private small-group training starts at $199 a month (then $225, $279, $345 for 2x, 3x, 4x a week). There is no membership and no open gym. Never publish a single per-session figure, a monthly tier table or a pay-in-full discount: the range covers them. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full.
 - Never mention Crunch on Dan's own marketing, except the sourced price comparison on the cost guide.
 - No "$150 value" claims.
 - The 12 extra reviews are "client reviews" from people Dan coached before Fig Performance. Never call them text-message reviews.

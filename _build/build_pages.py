@@ -110,8 +110,8 @@ TAKEAWAYS = {
         "Expect about 8 pounds of fat plus water weight.",
         "Eat high protein and strength train so the weight you lose is fat, not muscle."],
     "personal-training-cost-placentia": [
-        "Personal training at Fig Performance is $90 a session, or $360 a month for once a week.",
-        "Save 20% when you pay 3 months in full. The first consult and InBody scan are free.",
+        "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly.",
+        "Your exact rate depends on how often you train and whether you pay in full. The first consult and InBody scan are free.",
         "Compare trainers on price per session, who coaches you, and how they measure progress."],
 }
 
@@ -151,7 +151,8 @@ def pullquote(text, who="Coach Dan Figueroa"):
 CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
 
 
-def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, crumb, kind="service", published=None):
+def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, crumb, kind="service", published=None,
+         service_name=None, service_type=None, service_desc=None):
     url = f"{BASE}/{slug}"
     faq_html = "\n".join(
         f'          <details class="faq-item">\n            <summary><span>{html.escape(q)}</span>{CHEVRON}</summary>\n'
@@ -170,11 +171,12 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
         ({
             "@context": "https://schema.org",
             "@type": "Service",
-            "name": crumb,
-            "serviceType": crumb,
+            "name": service_name or crumb,
+            "serviceType": service_type or crumb,
             "url": url,
             "areaServed": ["Placentia", "Yorba Linda", "Fullerton", "Brea", "Anaheim Hills", "Villa Park"],
             "provider": {"@id": f"{BASE}/#gym"},
+            **({"description": service_desc} if service_desc else {}),
         } if kind == "service" else {
             "@context": "https://schema.org",
             "@type": "Article",
@@ -297,7 +299,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
 
 
 CTA = ('<p class="legal-contact">Fig Performance &middot; 1284 E. Yorba Linda Blvd, Placentia, CA 92870<br>'
-       'Call or text <a href="tel:+17143967178">(714) 396-7178</a> &middot; Mon&ndash;Fri, 5 AM &ndash; 8 PM; Sat, 5 AM &ndash; 12 PM<br>'
+       'Call or text <a href="tel:+17143967178">(714) 396-7178</a> &middot; Mon&ndash;Fri, 5 AM &ndash; 8:30 PM; Sat, 5 AM &ndash; 12 PM<br>'
        '<a href="/#consult">Book a free consult</a></p>')
 
 # ---------------------------------------------------------------- InBody
@@ -357,7 +359,7 @@ inbody_faqs = [
     ("Is InBody better than a bathroom scale?",
      "A bathroom scale only tells you total weight. InBody separates that weight into fat, muscle and water, so you can see whether you're losing fat or losing muscle, even when the scale doesn't move."),
     ("Where can I get an InBody scan near Yorba Linda or Fullerton?",
-     "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM."),
+     "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8:30 PM, and Saturday, 5 AM to 12 PM."),
 ]
 
 # ---------------------------------------------------------------- Red light
@@ -409,7 +411,7 @@ red_faqs = [
     ("How much does red light therapy cost in Placentia?",
      "At Fig Performance, red light therapy is included with semi-private training, along with vibration therapy and coached small-group sessions. Semi-private starts at $199 a month."),
     ("Where can I find red light therapy near Fullerton, Yorba Linda or Brea?",
-     "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8 PM, and Saturday, 5 AM to 12 PM."),
+     "Fig Performance is at 1284 E. Yorba Linda Blvd in Placentia, CA 92870, close to Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park. We're open Monday through Friday, 5 AM to 8:30 PM, and Saturday, 5 AM to 12 PM."),
 ]
 
 pages = {
