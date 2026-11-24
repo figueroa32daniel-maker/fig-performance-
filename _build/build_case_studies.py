@@ -9,26 +9,36 @@ See the MEMORY.md log entry for Nov 24 2026.
 """
 import sys
 from pathlib import Path
+from PIL import Image
 from build_pages import page, SITE, CTA, stats
 
 PHOTO_DIR = SITE / "assets" / "case-studies"
 
 
 def photo(slug, name):
-    """Render the before/after only when Dan has put a file at
-    assets/case-studies/<slug>.jpg. Naming the file IS the pairing: it says
-    which photograph belongs to which client, and that is his call, not mine.
-    No file, no <img>, so nothing ever renders broken."""
-    f = PHOTO_DIR / f"{slug}.jpg"
-    if not f.exists():
+    """Render the before/after from assets/case-studies/<slug>.jpg when it is
+    there. Dan paired these himself, sending the photographs in the same order
+    as the numbered profiles and describing each one. Height is read off the
+    file so the box is reserved and nothing shifts while it loads."""
+    jpg = PHOTO_DIR / f"{slug}.jpg"
+    if not jpg.exists():
         return (f'<!-- PHOTO SLOT: drop the before/after at assets/case-studies/{slug}.jpg\n'
                 f'     and re-run this builder. Naming the file is how the photo gets\n'
                 f'     paired to {name}; nothing renders until that file exists. -->\n\n')
+    with Image.open(jpg) as im:
+        w, h = im.size
+    srcset_w = f"/assets/case-studies/{slug}-480.webp 480w, /assets/case-studies/{slug}.webp 960w"
+    srcset_j = f"/assets/case-studies/{slug}-480.jpg 480w, /assets/case-studies/{slug}.jpg 960w"
+    sizes = '(min-width: 760px) 700px, 92vw'
     return (f'<figure class="case-photo">\n'
-            f'  <img src="/assets/case-studies/{slug}.jpg" alt="{name}, Fig Performance client: '
-            f'progress photos, before and after, side by side" width="960" height="540" '
-            f'loading="lazy" decoding="async">\n'
-            f'  <figcaption>Shared with permission. Individual results vary.</figcaption>\n'
+            f'  <picture>\n'
+            f'    <source type="image/webp" srcset="{srcset_w}" sizes="{sizes}">\n'
+            f'    <img src="/assets/case-studies/{slug}.jpg" srcset="{srcset_j}" sizes="{sizes}" '
+            f'width="{w}" height="{h}" loading="lazy" decoding="async" '
+            f'alt="{name}, Fig Performance client: progress photos, before on the left and after on the right">\n'
+            f'  </picture>\n'
+            f'  <figcaption>Before and after, shared with {name}\u2019s permission. '
+            f'Individual results vary.</figcaption>\n'
             f'</figure>\n\n')
 
 
