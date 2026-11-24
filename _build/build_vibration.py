@@ -30,7 +30,7 @@ body = f"""<p class="legal-intro">At Fig Performance in Placentia, vibration the
 <h2 id="session">How we use it at Fig Performance</h2>
 <ul>
   <li>Coach Dan shows you how to use the platform the first time, and sets the intensity for you.</li>
-  <li>Most members use it for a few minutes after training, often with <a href="/red-light-therapy-placentia">red light therapy</a> on the same visit.</li>
+  <li>Most clients use it for a few minutes after training, often with <a href="/red-light-therapy-placentia">red light therapy</a> on the same visit.</li>
   <li>Stop if anything feels wrong: dizziness, pain, or numbness.</li>
 </ul>
 

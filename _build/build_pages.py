@@ -344,7 +344,7 @@ inbody_body = f"""<p class="legal-intro">You eat well. You exercise. You might h
   <li><strong>Plan</strong>: Coach Dan builds your strength training and nutrition plan around those numbers and around anything that hurts.</li>
   <li><strong>Re-scan</strong>: regular re-scans show what's changing: fat down, muscle up, and where you're making progress.</li>
 </ul>
-<p>Your free consult includes an InBody scan, and every member gets a complimentary scan.</p>
+<p>Your free consult includes an InBody scan, and training clients are re-scanned regularly as part of their program.</p>
 
 <h2 id="visit">Get your scan in Placentia</h2>
 <p>Fig Performance is a private, coach-led strength gym on E. Yorba Linda Blvd in Placentia, a short drive from Yorba Linda, Fullerton, Brea, Anaheim Hills and Villa Park.</p>
@@ -356,7 +356,7 @@ inbody_faqs = [
     ("How often should I get re-scanned?",
      "Most people re-scan every 4 to 8 weeks. That's long enough for real changes in fat and muscle to show up. Coach Dan will tell you when to re-scan based on your plan."),
     ("How much does an InBody scan cost at Fig Performance?",
-     "Your free consult includes an InBody scan, and every member gets a complimentary scan. Personal training clients are re-scanned as part of their program. Call or text (714) 396-7178 with any questions."),
+     "Your free consult includes an InBody scan. Training clients are re-scanned regularly as part of their program. Call or text (714) 396-7178 with any questions."),
     ("Is InBody better than a bathroom scale?",
      "A bathroom scale only tells you total weight. InBody separates that weight into fat, muscle and water, so you can see whether you're losing fat or losing muscle, even when the scale doesn't move."),
     ("Where can I get an InBody scan near Yorba Linda or Fullerton?",
@@ -384,7 +384,7 @@ red_body = f"""<p class="legal-intro">At Fig Performance, red light therapy is p
   <li>Coach Dan shows you how to use the panel the first time.</li>
   <li>You stand or sit in front of the panel for a few minutes.</li>
   <li>Don't stare directly into the lights.</li>
-  <li>Many members use it after training, on the same visit.</li>
+  <li>Many clients use it after training, on the same visit.</li>
 </ul>
 
 <h2 id="safety">Who should check with a doctor first</h2>
