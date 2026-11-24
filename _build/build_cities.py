@@ -158,7 +158,7 @@ for city, c in CITIES.items():
         f"Personal Trainer in {city}, CA | Fig Performance",
         f"Private one-on-one personal training near {city} for adults over 40. Lose fat, build strength, track it with InBody scans. Free consult.",
         f"Personal Trainer Near {city} for Adults Over 40 | Fig Performance",
-        "Areas we serve", c["h1"], c["lede"], toc, body, c["faqs"], f"Personal Trainer {city}")
+        "Areas we serve", c["h1"], c["lede"], toc, body, c["faqs"], f"Personal Trainer {city}", updated="2026-11-24")
 
 if __name__ == "__main__":
     for name, content in pages.items():

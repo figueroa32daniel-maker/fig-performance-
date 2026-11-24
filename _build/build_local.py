@@ -102,7 +102,8 @@ pages = {
         pt_body, pt_faqs, "How Personal Training Works",
         service_name="Private One-on-One Personal Training in Placentia for Adults Over 40",
         service_type="Private one-on-one personal strength training",
-        service_desc="FIG PERFORMANCE provides private, coach-led strength training for adults over 40 at its Placentia studio. Sessions are one-on-one with ACSM-certified Coach Daniel Figueroa. The free initial consultation includes an InBody body-composition scan."),
+        service_desc="FIG PERFORMANCE provides private, coach-led strength training for adults over 40 at its Placentia studio. Sessions are one-on-one with ACSM-certified Coach Daniel Figueroa. The free initial consultation includes an InBody body-composition scan.",
+        updated="2026-11-24"),
     "free-consult-placentia": page(
         "free-consult-placentia",
         "Free Consult + InBody Scan in Placentia | Fig Performance",
@@ -111,7 +112,7 @@ pages = {
         "Free offer", "Free Consult + InBody Scan in Placentia",
         "Free, no commitment. Your numbers, your strength and your plan in about an hour.",
         [("included", "What's included"), ("who", "Who it's for"), ("expect", "What to expect"), ("coach", "Your coach")],
-        fc_body, fc_faqs, "Free Consult + InBody Scan"),
+        fc_body, fc_faqs, "Free Consult + InBody Scan", updated="2026-11-24"),
 }
 
 if __name__ == "__main__":

@@ -69,7 +69,7 @@ html = page(SLUG,
     "Prices", "How Much Does Personal Training Cost in Placentia?",
     "Real 2026 prices, what changes them, and how to compare your options.",
     [("fig", "Fig Performance prices"), ("types", "Types of training"), ("price", "What changes the price"), ("compare", "How to compare"), ("worth", "Is it worth it?"), ("start", "Free consult")],
-    body, faqs, "Personal Training Cost", kind="article", published="2026-10-31")
+    body, faqs, "Personal Training Cost", kind="article", published="2026-10-31", updated="2026-11-24")
 
 if __name__ == "__main__":
     (SITE / f"{SLUG}.html").write_text(html)

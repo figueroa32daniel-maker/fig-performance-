@@ -152,7 +152,7 @@ CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/><
 
 
 def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, crumb, kind="service", published=None,
-         service_name=None, service_type=None, service_desc=None):
+         service_name=None, service_type=None, service_desc=None, updated=None):
     url = f"{BASE}/{slug}"
     faq_html = "\n".join(
         f'          <details class="faq-item">\n            <summary><span>{html.escape(q)}</span>{CHEVRON}</summary>\n'
@@ -184,7 +184,7 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
             "description": desc,
             "url": url,
             "datePublished": published,
-            "dateModified": published,
+            "dateModified": updated or published,
             "image": f"{BASE}/assets/og-image.jpg",
             "author": {"@type": "Person", "name": "Daniel Figueroa", "jobTitle": "ACSM Certified Personal Trainer", "url": f"{BASE}/#coach"},
             "publisher": {"@id": f"{BASE}/#gym"},
@@ -202,11 +202,12 @@ def page(slug, title, desc, og_title, kicker, h1, lede, toc, body_html, faqs, cr
     ld_html = "\n".join(
         f'  <script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld
     )
-    if kind == "article" and published:
+    _stamp = updated or (published if kind == "article" else None)
+    if _stamp:
         import datetime as _dt
-        _d = _dt.date.fromisoformat(published)
+        _d = _dt.date.fromisoformat(_stamp)
         _human = f"{_d:%b} {_d.day}, {_d.year}"
-        byline = f'\n        <p class="legal-meta article-byline">By Coach Dan Figueroa, ACSM certified personal trainer &middot; Precision Nutrition Level 1 coach &middot; Updated <time datetime="{published}">{_human}</time></p>'
+        byline = f'\n        <p class="legal-meta article-byline">By Coach Dan Figueroa, ACSM certified personal trainer &middot; Precision Nutrition Level 1 coach &middot; Updated <time datetime="{_stamp}">{_human}</time></p>'
     else:
         byline = ""
     body_class = "legal-page service-page article-page" if kind == "article" else "legal-page service-page"
@@ -425,7 +426,7 @@ pages = {
         [("what", "What it measures"), ("why-40", "Why it matters after 40"), ("how", "How it works"),
          ("prep", "How to prepare"), ("safety", "Who shouldn't use it"), ("fig", "How we use it"),
          ("visit", "Get your scan")],
-        inbody_body, inbody_faqs, "InBody Scan"),
+        inbody_body, inbody_faqs, "InBody Scan", updated="2026-11-24"),
     "red-light-therapy-placentia.html": page(
         "red-light-therapy-placentia",
         "Red Light Therapy in Placentia, CA | Fig Performance",
@@ -435,7 +436,7 @@ pages = {
         "Part of the recovery routine at Fig Performance. Included with semi-private training.",
         [("what", "What it is"), ("research", "What the research says"), ("session", "What a session is like"),
          ("safety", "Check with a doctor"), ("access", "How to use it"), ("cost", "Cost"), ("visit", "Visit us")],
-        red_body, red_faqs, "Red Light Therapy"),
+        red_body, red_faqs, "Red Light Therapy", updated="2026-11-24"),
 }
 
 if __name__ == "__main__":

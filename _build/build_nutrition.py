@@ -55,7 +55,7 @@ html = page(SLUG,
     "A simple plan built from foods you already like, for adults over 40. Included with personal training.",
     [("how", "How it works"), ("after-40", "Why it changes after 40"), ("clients", "What clients say"),
      ("dietitian", "Coach or dietitian?"), ("price", "Cost"), ("start", "Free consult")],
-    body, faqs, "Nutrition Coaching")
+    body, faqs, "Nutrition Coaching", updated="2026-11-24")
 
 if __name__ == "__main__":
     (SITE / f"{SLUG}.html").write_text(html)

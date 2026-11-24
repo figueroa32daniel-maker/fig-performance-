@@ -60,7 +60,7 @@ html = page(SLUG,
     "What it is, what the research says, and who should skip it. Included with semi-private training.",
     [("what", "What it is"), ("work", "Does it work?"), ("ten-minutes", "Is 10 minutes a workout?"),
      ("who-not", "Who should skip it"), ("session", "How we use it"), ("access", "Vibration therapy in Placentia")],
-    body, faqs, "Vibration Therapy")
+    body, faqs, "Vibration Therapy", updated="2026-11-24")
 
 if __name__ == "__main__":
     (SITE / f"{SLUG}.html").write_text(html)
