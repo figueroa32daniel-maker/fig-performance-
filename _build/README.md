@@ -31,5 +31,5 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 - The 12 extra reviews are "client reviews" from people Dan coached before Fig Performance. Never call them text-message reviews.
 - Never invent client stories, numbers or quotes. Use first names only, and only ones Dan has given.
 - Dan is an ACSM certified personal trainer and a Precision Nutrition Level 1 certified nutrition coach. He is not a registered dietitian.
-- Hours: Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM, closed Sunday.
+- Hours: Mon–Fri 5 AM–8:30 PM, Sat 5 AM–12 PM, closed Sunday.
 - Publish only from this repo. A deploy from any other tool wipes these pages (this happened on Nov 1, 2026).
