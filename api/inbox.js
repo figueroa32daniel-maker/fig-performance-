@@ -161,7 +161,7 @@ async function markBooking(id, set) {
   bk.status = set; await db.saveBooking(bk);
   if (sms.configured()) await sms.cancelScheduled(bk.phone);
   // One "sorry we missed you" text about their own appointment (not marketing), unless they opted out.
-  if (set === "no_show" && first && sms.configured() && !lead.optedOut && !sms.quietHours()) {
+  if (set === "no_show" && first && sms.configured() && !lead.optedOut && !(lead.consent && lead.consent.appointmentTexts === false) && !sms.quietHours()) {
     const s = await db.settings();
     await sms.sendText(bk.phone, s.noShowText.replace(/\{first\}/g, sms.first(bk.name)));
   }

@@ -13,7 +13,7 @@ const sms = require("./_sms.js");
 const db = require("./_db.js");
 
 const SITE = "https://www.figperformance.com";
-const CONSENT_VERSION = "2026-11-17.2";      // bump when the wording next to the booking button changes
+const CONSENT_VERSION = "2026-11-24.1";      // bump when the wording next to the booking button changes
 
 function send(res, status, body, cache) {
   res.statusCode = status;
@@ -60,6 +60,10 @@ async function tellDanIf(text, startIso) {
   } catch (e) { /* not critical */ }
 }
 
+/* Texts about a booking only go to people who ticked the appointment-texts box (and never after STOP).
+   Older leads without that record keep the consent they gave under the earlier wording. */
+function canText(lead) { return !!lead && !lead.optedOut && !(lead.consent && lead.consent.appointmentTexts === false); }
+
 async function book(req, res, b) {
   if (clean(b.website, 200)) return send(res, 200, { ok: true });            // honeypot: bots get a fake success
   // Spam and "SMS pumping" guard: each booking sends texts, so bots booking with fake numbers would cost money.
@@ -101,14 +105,14 @@ async function book(req, res, b) {
     status: "booked", bookingId: rec.id, lastStart: start, followStep: 0,
     consent: {
       at: now, ip: sms.clientIp(req), version: CONSENT_VERSION, page: clean(b.page, 120) || "/",
-      appointmentTexts: true,                               // agreed by booking with the notice shown at the button
+      appointmentTexts: b.smsAppt === true,                 // only if they ticked the separate, unchecked appointment-texts box
       marketingTexts: b.marketing === true                  // only if they ticked the separate, optional box
     }
   });
   await db.saveLead(lead);
   await db.stopFollowups(phone);
 
-  const texted = lead.optedOut ? false : await sendBookingTexts(rec, false);
+  const texted = canText(lead) ? await sendBookingTexts(rec, false) : false;
   const w = sms.when(start);
   await danHeadsUp(rec);
   await tellDanIf("New consult booked: " + name + ", " + w.day + " " + w.time + ", " + sms.prettyPhone(phone) + (goal ? ". Goal: " + goal.slice(0, 80) : ""), start);
@@ -127,7 +131,7 @@ async function manage(req, res, b) {
   if (b.action === "cancel") {
     const oldStart = rec.start;
     await db.cancelBooking(rec, "client");
-    if (sms.configured() && !lead.optedOut) { try { await sms.cancelScheduled(rec.phone); await sms.sendText(rec.phone, sms.cancelledText(rec.name, oldStart)); } catch (e) { /* booking is cancelled either way */ } }
+    if (sms.configured() && canText(lead)) { try { await sms.cancelScheduled(rec.phone); await sms.sendText(rec.phone, sms.cancelledText(rec.name, oldStart)); } catch (e) { /* booking is cancelled either way */ } }
     await danHeadsUp(rec);
     await tellDanIf("Cancelled by client: " + rec.name + ", " + was.day + " " + was.time + ", " + sms.prettyPhone(rec.phone), oldStart);
     return send(res, 200, { ok: true, booking: pub(rec) });
@@ -138,7 +142,8 @@ async function manage(req, res, b) {
     if (start === rec.start) return send(res, 200, { ok: true, texting: false, booking: pub(rec) });
     if ((await db.openSlots(null, rec.id)).indexOf(start) < 0 || !(await db.moveBooking(rec, start))) return send(res, 409, { error: "taken" });
     if (lead.phone) { lead.lastStart = start; await db.saveLead(lead); }
-    const texted = lead.optedOut ? false : await sendBookingTexts(rec, true);
+    if (sms.configured() && !canText(lead)) { try { await sms.cancelScheduled(rec.phone); } catch (e) { /* nothing queued */ } }
+    const texted = canText(lead) ? await sendBookingTexts(rec, true) : false;
     const w = sms.when(start);
     await danHeadsUp(rec);
     await tellDanIf("Rescheduled: " + rec.name + ", was " + was.day + " " + was.time + ", now " + w.day + " " + w.time, Date.parse(start) < Date.parse(oldStartMove) ? start : oldStartMove);

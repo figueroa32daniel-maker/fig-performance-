@@ -133,7 +133,7 @@
       '<div class="bk-fields">' +
         '<label class="bk-field"><span>Name</span><input name="name" autocomplete="name" maxlength="80" placeholder="First and last" value="' + esc(saved.name || "") + '" required></label>' +
         '<label class="bk-field"><span>Mobile phone</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="(714) 555-0123" value="' + esc(saved.phone || "") + '" required>' +
-          '<small class="bk-note">We\'ll text your booking details if confirmed, or follow up about your request. Reply STOP anytime.</small></label>' +
+          '<small class="bk-note">So we can reach you about your booking. Texts only if you tick the box below.</small></label>' +
         (request ? '<label class="bk-field bk-wide"><span>Best day and time for you</span><input name="when" maxlength="120" placeholder="e.g. Tuesday after 5 PM" required></label>' : "") +
         '<div class="bk-wide bk-extras">' +
           '<button type="button" class="bk-more" data-more="goal" aria-expanded="false">+ Add your goal <i>(optional)</i></button>' +
@@ -143,8 +143,9 @@
         '<label class="bk-field bk-wide" data-extra="email"' + (saved.email ? "" : " hidden") + '><span>Email</span><input name="email" type="email" autocomplete="email" maxlength="254" value="' + esc(saved.email || "") + '"></label>' +
         '<input name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">' +
       "</div>" +
-      '<p class="consent">By submitting, you agree that Fig Performance may text and call this number about your appointment or consultation request (your confirmation, reminders and replies to your questions), and to our <a href="/privacy">Privacy Policy</a> and <a href="/terms#sms">Terms, including the text message terms</a>. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.</p>' +
+      '<label class="bk-check"><input type="checkbox" name="smsAppt" value="yes"><span>Text me about my appointment: my confirmation, reminders and replies to my questions from Fig Performance. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Optional: you can book without it.</span></label>' +
       '<label class="bk-check"><input type="checkbox" name="marketing" value="yes"><span>Optional: also text me training tips and offers from Fig Performance, up to 4 messages a month. Msg &amp; data rates may apply. Reply STOP to opt out. Not required to book or buy anything.</span></label>' +
+      '<p class="consent">By booking, you agree to our <a href="/privacy">Privacy Policy</a> and <a href="/terms#sms">Terms, including the text message terms</a>. We never sell or share your number or text opt-in with anyone for their marketing.</p>' +
       '<p class="form-status" role="alert" tabindex="-1"></p>' +
       '<button class="btn btn-gold btn-lg btn-block" type="submit">' + (request ? "Request my free consult" : "Confirm my free consultation") + "</button>" +
       '<p class="bk-fine">Free &middot; No credit card &middot; ' + (request ? "Request only; no appointment reserved yet" : "Confirmed only when your booking succeeds") + "</p>" +
@@ -230,9 +231,10 @@
     status.className = "form-status"; status.textContent = "";
 
     var marketing = !!(form.elements.marketing && form.elements.marketing.checked);
+    var smsAppt = !!(form.elements.smsAppt && form.elements.smsAppt.checked);
     var lead = {
       "Name": name, "Mobile": phone, "Email": email || "(not given)", "Goal": goal || "(not given)", "Came from": source(),
-      "Consent": "Appointment texts/calls: yes (agreed at booking). Marketing texts: " + (marketing ? "YES (ticked the optional box)" : "no") + ". Policy version " + POLICY,
+      "Consent": "Appointment texts: " + (smsAppt ? "YES (ticked the box)" : "no (call or email only)") + ". Marketing texts: " + (marketing ? "YES (ticked the optional box)" : "no") + ". Policy version " + POLICY,
       "Submitted from": "figperformance.com booking",
       _template: "table", _captcha: "false", _cc: "trainat@figperformance.com"
     };
@@ -260,7 +262,7 @@
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(Object.assign({ name: name, phone: phone, email: email, goal: goal, start: st.time, website: v("website"),
-        consent: true, marketing: marketing, page: consultSourcePage || location.pathname }, utm))
+        consent: true, smsAppt: smsAppt, marketing: marketing, page: consultSourcePage || location.pathname }, utm))
     })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, j: j }; }); })
       .then(function (r) {
@@ -364,7 +366,7 @@
         '<div class="done-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div>' +
         (booked
           ? '<h3 class="q-title" tabindex="-1">You\'re booked, ' + first + ".</h3><p><strong>" + when + "</strong> (Pacific)<br>Fig Performance &middot; 1284 E. Yorba Linda Blvd, Placentia</p>" +
-            '<ul class="done-steps"><li>' + (result && result.texting ? "We\'re texting you a confirmation now, plus a reminder before your visit." : "Your time is held. We\'ll be in touch before your visit.") + "</li>" + '<li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
+            '<ul class="done-steps"><li>' + (result && result.texting ? "We\'re texting you a confirmation now, plus a reminder before your visit." : "Your time is held. Save this page or add it to your calendar below.") + "</li>" + '<li>Wear workout clothes. We\'ll start with your InBody scan.</li><li>Your consult is free.</li></ul>' +
             (function () {
               var id = result && /^\/manage\?t=[A-Za-z0-9_-]{20,40}$/.test(result.manage_url || "") ? result.manage_url.split("=")[1] : null;
               var h = id ? "/api/cal?b=" + id : icsHref();
