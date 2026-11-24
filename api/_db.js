@@ -52,8 +52,8 @@ const DAYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 const DEFAULTS = {
   // No open times until Dan sets them on the inbox Settings tab: better no slots than wrong slots.
   // Consults can be booked any time the gym is open that a client session doesn't already take (Dan, Nov 18 2026).
-  hours: { sun: null, mon: { from: "05:00", to: "20:00" }, tue: { from: "05:00", to: "20:00" }, wed: { from: "05:00", to: "20:00" },
-           thu: { from: "05:00", to: "20:00" }, fri: { from: "05:00", to: "20:00" }, sat: { from: "05:00", to: "12:00" } },
+  hours: { sun: null, mon: { from: "05:00", to: "20:30" }, tue: { from: "05:00", to: "20:30" }, wed: { from: "05:00", to: "20:30" },
+           thu: { from: "05:00", to: "20:30" }, fri: { from: "05:00", to: "20:30" }, sat: { from: "05:00", to: "12:00" } },
   blocked: [],                 // dates off, "YYYY-MM-DD"
   noticeHours: 3,              // earliest bookable time from now
   daysAhead: 14,
@@ -64,7 +64,7 @@ const DEFAULTS = {
     { day: 45, text: "Hi {first}, Coach Dan at Fig Performance. Last note from me: if the timing is better now, reply and we'll pick up where we left off. Reply STOP to opt out." }
   ],
   // The texting assistant. Off until Dan turns it on. "facts" is the only information it may give out.
-  ai: { on: false, weeklyAsk: false, alerts: "urgent", facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
+  ai: { on: false, weeklyAsk: false, alerts: "urgent", facts: "Fig Performance is Coach Dan Figueroa's private personal-training gym at 1284 E. Yorba Linda Blvd, Placentia, CA. Gym hours: Mon-Fri 5 AM to 8:30 PM, Saturday 5 AM to 12 PM, closed Sunday. Training is by appointment only. Phone: (714) 396-7178. Website: figperformance.com." },
   // Missed-call text-back: a caller Dan couldn't answer gets one text so the lead isn't lost.
   // ring: true = calls to the gym number ring Dan's cell first; false = his carrier already tried him (call forwarding).
   missedCall: { on: true, ring: true, text: "Hi, this is Coach Dan at Fig Performance. Sorry I missed your call, I'm probably coaching. Text me here and I'll get right back to you, or book a free consult at figperformance.com. Reply STOP to opt out." },
@@ -79,7 +79,7 @@ function cleanSettings(s) {
   DAYS.forEach(d => {
     if (!s.hours || !(d in s.hours)) return;                  // not saved yet: keep the gym-hours default
     const h = s.hours[d];                                      // saved as closed (null) stays closed
-    out.hours[d] = h && /^\d{2}:00$/.test(h.from) && /^\d{2}:00$/.test(h.to) && h.from < h.to ? { from: h.from, to: h.to } : null;
+    out.hours[d] = h && /^\d{2}:(00|30)$/.test(h.from) && /^\d{2}:(00|30)$/.test(h.to) && h.from < h.to ? { from: h.from, to: h.to } : null;
   });
   if (Array.isArray(s.blocked)) out.blocked = s.blocked.filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x)).slice(0, 200);
   if (Number.isFinite(+s.noticeHours)) out.noticeHours = Math.max(0, Math.min(72, Math.round(+s.noticeHours)));

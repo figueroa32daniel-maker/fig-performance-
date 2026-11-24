@@ -25,11 +25,11 @@ These scripts generate the guide, service and city pages. `_build/` is excluded 
 
 - Never publish an article until Dan has reviewed it and approved it. He adds his own suggestions to every article first. Drafts go in the article plan doc (Claude Docs project 1a4c49c4-7f9b-466c-bf63-1d21fa93dc1e) for his review.
 
-- Prices: use only what the website already shows. That's $90 a session; the 1–4 sessions-a-week table ($360, $720, $1,080, $1,440 a month, billed weekly or monthly); 20% off when paid 3 months in full; a 3-month minimum; and a free consult. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full. The membership price is quoted at the consult.
+- Prices (Dan, Nov 24 2026): one-on-one is **$60 to $90 a session**, billed weekly or monthly, with a 3-month minimum and a free consult. Where a client lands in the range depends on how often they train; the exact rate is set at the consultation. Semi-private is **from $180 a month**. There is NO monthly rate table and NO paid-in-full discount any more: both were removed site-wide on Nov 24. Quote the range, never a single session price, and never invent a monthly figure. Online coaching is $249 a month as a 3-month program ($747), or $697 paid in full. The membership price is quoted at the consult.
 - Never mention Crunch on Dan's own marketing, except the sourced price comparison on the cost guide.
 - No "$150 value" claims.
 - The 12 extra reviews are "client reviews" from people Dan coached before Fig Performance. Never call them text-message reviews.
 - Never invent client stories, numbers or quotes. Use first names only, and only ones Dan has given.
 - Dan is an ACSM certified personal trainer and a Precision Nutrition Level 1 certified nutrition coach. He is not a registered dietitian.
-- Hours: Mon–Fri 5 AM–8 PM, Sat 5 AM–12 PM, closed Sunday.
+- Hours: Mon–Fri 5 AM–8:30 PM, Sat 5 AM–12 PM, closed Sunday.
 - Publish only from this repo. A deploy from any other tool wipes these pages (this happened on Nov 1, 2026).

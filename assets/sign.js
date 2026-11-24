@@ -2,7 +2,7 @@
    Fig Performance: /sign page (waiver + PT client checklist)
    - /sign?type=waiver: waiver only (gym members), checklist hidden.
    - Prefills program details from the link Dan sends:
-       /sign?name=&sessions=&billing=&today=&recurring=&start=
+       /sign?name=&sessions=&billing=&rate=&today=&recurring=&start=
      Valid params are shown read-only; missing ones stay editable.
    - Validates everything with clear messages, then lets the form POST
      natively to FormSubmit (redirects to /signed via _next).
@@ -123,10 +123,15 @@
   if (td !== null) { $("f-today").value = td; lock($("f-today")); prefilled.push("today"); }
   var rc = money(q.get("recurring"));
   if (rc !== null) { $("f-recurring").value = rc; lock($("f-recurring")); prefilled.push("recurring"); }
-  /* Standard plans: fill the amounts from sessions + billing when the link doesn't set them.
-     Monthly = $360 per weekly session ($90 x 4 sessions); weekly = $90 per session. First payment = one period. */
-  if (td === null && rc === null && /^[1-3]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
-    var plan = (bill === "weekly" ? 90 : 360) * Number(sess);
+  /* Standard plans: fill the amounts from the agreed session rate + sessions + billing,
+     when the link doesn't set the amounts directly. Sessions are quoted as a range
+     ($60 to $90) and the rate is agreed at the consult, so the rate MUST come from the
+     link: /sign?...&rate=75. Without it nothing is prefilled, because this is a contract
+     and a guessed number does not belong on one.
+     Weekly = rate x sessions; monthly = rate x 4 x sessions. First payment = one period. */
+  var rate = money(q.get("rate"));
+  if (td === null && rc === null && rate !== null && +rate > 0 && /^[1-3]$/.test(sess) && (bill === "weekly" || bill === "monthly")) {
+    var plan = (bill === "weekly" ? +rate : +rate * 4) * Number(sess);
     var planTxt = plan.toFixed(2);
     $("f-today").value = planTxt; lock($("f-today")); prefilled.push("today");
     $("f-recurring").value = planTxt; lock($("f-recurring")); prefilled.push("recurring");

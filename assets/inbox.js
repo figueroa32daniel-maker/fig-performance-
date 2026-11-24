@@ -461,11 +461,21 @@
   var DAYNAME = { mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat", sun: "Sun" };
   var DAYS = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];
   var settings = null;
-  function hourLabel(h) { return (h % 12 || 12) + ":00 " + (h < 12 ? "AM" : "PM"); }
+  // The calendar runs on 30-minute cells, so these offer the half hours too
+  // (the gym closes at 8:30 PM). api/_db.js validates saved hours as :00 or :30.
+  function hourLabel(h, m) { return (h % 12 || 12) + ":" + (m ? "30" : "00") + " " + (h < 12 ? "AM" : "PM"); }
   function hourSelect(val, from, to, withClosed) {
     var s = el("select", "ib-select");
     if (withClosed) { var c = el("option", "", "Closed"); c.value = ""; s.appendChild(c); }
-    for (var h = from; h <= to; h++) { var o = el("option", "", hourLabel(h)); o.value = String(h).padStart(2, "0") + ":00"; if (o.value === val) o.selected = true; s.appendChild(o); }
+    for (var h = from; h <= to; h++) {
+      for (var m = 0; m < 60; m += 30) {
+        if (h === to && m) break;                      // stop at the top of the last hour
+        var o = el("option", "", hourLabel(h, m));
+        o.value = String(h).padStart(2, "0") + ":" + (m ? "30" : "00");
+        if (o.value === val) o.selected = true;
+        s.appendChild(o);
+      }
+    }
     return s;
   }
   function renderBlocked() {
