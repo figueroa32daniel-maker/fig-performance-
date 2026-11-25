@@ -268,3 +268,8 @@ a.tcard:focus-visible{outline:3px solid var(--hot);outline-offset:3px}
 .tcard--photo .tbody{border-top:1px solid var(--fp-line)}
 .tread{margin:14px 0 0;font-family:var(--display);font-weight:800;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;color:var(--hot)}
 @media(prefers-reduced-motion:reduce){a.tcard{transition:none}a.tcard:hover{transform:none}}
+
+/* Results guarantee. Deliberately loud: it is the strongest thing on the page. */
+.fp-guarantee{margin:30px 0 0;padding:26px 28px;border:1px solid var(--hot);border-radius:var(--r-lg);background:rgba(255,166,43,.07)}
+.g-head{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(1.15rem,3.4vw,1.5rem);line-height:1.2;letter-spacing:-.02em;color:var(--fp-text)}
+.g-sub{margin:12px 0 0;font-size:.94rem;line-height:1.6;color:var(--fp-muted)}
