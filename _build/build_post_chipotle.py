@@ -6,7 +6,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "chipotle-after-40"
 
-body = f"""<p class="legal-intro">Chipotle is the easiest place in Orange County to hit a protein target, and the easiest place to accidentally eat 1,000 calories while believing you ate a salad. Both of those are true at the same time, and the difference is about four decisions at the counter. Here is how I tell clients to order.</p>
+body = f"""<p class="legal-intro">Almost every client I have coached has tried to eat <em>less</em> at Chipotle. Order the salad, hold the rice, go easy on the chicken because it sounds like a lot of meat. It goes wrong every time, because none of that is where the calories live. Chipotle is the easiest place in Orange County to hit a protein target and the easiest place to eat 1,000 calories believing you ate a salad, and the fix is to add meat, not subtract it. Here is how I tell clients to order.</p>
 
 <h2 id="chicken">Start with the chicken, and consider doubling it</h2>
 <p>Chipotle's adobo chicken is the best protein-per-calorie item on the menu. A 4 oz portion is about 180 calories and 32 grams of protein. Steak is about 150 calories and 23 grams, so it looks leaner on the calorie line and gives you nine grams less.</p>
@@ -66,8 +66,8 @@ html = page(
     "Chipotle After 40: What to Order | Fig Performance",
     "How to order at Chipotle if you are over 40: the high-protein menu numbers, double chicken, and where the calories actually hide. From Coach Dan in Placentia.",
     "Chipotle After 40: What to Order",
-    "Fitness after 40", "Eighty-one grams of protein, or 1,400 calories. Your call.",
-    "The four decisions at the counter that separate the two.",
+    "Fitness after 40", "Double the meat. That is most of the job.",
+    "The protein is not what turns this into 1,400 calories. The things next to it are.",
     [("chicken", "Start with the chicken"), ("menu", "The high-protein menu"), ("creep", "Where the calories come from"),
      ("order", "What I would order"), ("why", "Why I recommend it most"), ("more", "The other guides")],
     body, faqs, "Chipotle after 40", kind="article", published=DATE)

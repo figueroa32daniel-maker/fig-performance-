@@ -12,7 +12,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "in-n-out-after-40"
 
-body = f"""<p class="legal-intro">Clients ask me about In-N-Out more than any other restaurant, and I have never once told anyone to stop going. It is a Southern California institution, the food is fresh, and a plan that bans it is a plan you quit in March. The honest answer is that In-N-Out is one of the easier places in Orange County to eat well, as long as you know which two items are doing the damage.</p>
+body = f"""<p class="legal-intro">Most trainers would tell you to stay out of In-N-Out. I have never once told a client to stop going. A plan that bans the place your family already eats at is a plan you quit by March, and in this case the ban would be aimed at the wrong thing anyway. In-N-Out is one of the easier places in Orange County to eat well. Two items on that board are doing almost all of the damage, and the burger is not one of them.</p>
 
 <h2 id="numbers">The numbers that matter</h2>
 <p>In-N-Out publishes its nutrition information, which is more than a lot of chains do. Here is the short version for the items people actually order.</p>
@@ -71,8 +71,8 @@ html = page(
     "In-N-Out After 40: What to Order | Fig Performance",
     "What to order at In-N-Out if you are over 40 and trying to lose fat: Protein Style numbers, the Double-Double, and why the fries cost more than the burger.",
     "In-N-Out After 40: What to Order",
-    "Fitness after 40", "In-N-Out is not the problem. The fries are.",
-    "What to order, what it actually costs you, and why I never tell clients to avoid it.",
+    "Fitness after 40", "I tell my clients to eat at In-N-Out.",
+    "The burger is not what is keeping you heavy. Two other items on the board are.",
     [("numbers", "The numbers that matter"), ("protein-style", "What Protein Style saves"),
      ("order", "What I would order"), ("why", "Why I do not say avoid it"), ("caveat", "A note on the numbers")],
     body, faqs, "In-N-Out after 40", kind="article", published=DATE)
