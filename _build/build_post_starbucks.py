@@ -6,7 +6,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "starbucks-after-40"
 
-body = f"""<p class="legal-intro">The standard advice about Starbucks is to drink your coffee black and eat somewhere else. That advice is out of date. Starbucks put protein-boosted milk and a protein cold foam on the permanent menu, which turned the coffee itself into a protein source instead of a thing you drink alongside one. Breakfast is where almost every client I work with leaks protein, and this is now one of the easiest places to stop it, because you are standing in that line anyway.</p>
+body = f"""<p class="legal-intro">The standard advice about Starbucks is to drink your coffee black and eat somewhere else. That advice is out of date. Starbucks put protein-boosted milk and a protein cold foam on the permanent menu, which turned the coffee itself into a protein source. Breakfast is where almost every client I work with leaks protein, and this is now one of the easiest places to stop it, because you are standing in that line anyway.</p>
 
 <h2 id="protein-drinks">The drinks changed</h2>
 <p>Starbucks added protein-boosted milk and a protein cold foam to the permanent menu, which turned the coffee itself into a protein source rather than a thing you drink alongside one. Published numbers for a grande:</p>
@@ -70,7 +70,7 @@ html = page(
     "Starbucks After 40: What to Order | Fig Performance",
     "How to order at Starbucks after 40: protein lattes at 29g, cold foam that adds 15g, the egg bites worth buying, and the drink that quietly costs you most.",
     "Starbucks After 40: What to Order",
-    "Fitness after 40", "How to get 29 grams of protein at Starbucks, in the line you already stand in.",
+    "Fitness after 40", "Unpopular opinion: your Starbucks order can be the protein, not the thing you drink beside it.",
     "Protein lattes, cold foam, and the egg bites worth buying.",
     [("protein-drinks", "The drinks changed"), ("food", "The egg bites"), ("avoid", "What costs you most"),
      ("order", "What I would order"), ("why", "Why a coffee shop"), ("more", "The other guides")],
