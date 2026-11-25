@@ -13,6 +13,22 @@ header = header.replace(' aria-current="page"', "").replace('          <li><a hr
 footer = pricing[pricing.index("  <!-- ============ FOOTER ============ -->"):]
 
 TAKEAWAYS = {
+    "el-pollo-loco-after-40": [
+        "A fire-grilled chicken breast is 200 calories and 34 g of protein.",
+        "The Mexican Caesar Salad is about 52 g of protein for 350 calories.",
+        "Watch sodium, not calories: the bowls run 2,030 to 2,670 mg, a whole day's worth."],
+    "starbucks-after-40": [
+        "Protein cold foam adds about 15 g of protein to any cold drink for roughly 80 calories.",
+        "An iced vanilla protein latte is about 29 g of protein for 270 calories.",
+        "Egg bites plus a protein latte is a 25 to 45 g breakfast for under 500 calories."],
+    "chipotle-after-40": [
+        "Adobo chicken is the best protein per calorie on the menu: 180 calories for 32 g.",
+        "Chipotle's own Double High Protein Bowl is 81 g of protein for 760 calories.",
+        "The calories hide in the toppings. Pick one starch and one of guac, cheese or sour cream."],
+    "chick-fil-a-after-40": [
+        "An 8-count of grilled nuggets is 130 calories, 25 g protein and 440 mg sodium.",
+        "The grilled and fried sandwiches are 30 calories and 1 g of protein apart. Sodium is the real gap.",
+        "A vanilla milkshake is about 580 calories, more than the Chicken Sandwich."],
     "in-n-out-after-40": [
         "A Double-Double gives you 34 g of protein for about 610 calories. A regular fries gives you 6 g for 360.",
         "Protein Style saves about 150 calories and 30 g of carbs on any burger, and the protein does not change.",
