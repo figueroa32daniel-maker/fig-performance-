@@ -147,6 +147,10 @@ hub_body = f"""<p class="legal-intro">Straight answers for adults over 40 who ar
   <a class="btn btn-primary btn-lg" href="/glute-workout-plan-for-women-over-40">Get the free workout plan</a>
 </div>
 <ul>
+  <li><a href="/what-is-personal-training-for-adults-over-40">What is personal training for adults over 40?</a><br>A plain definition, why training over 40 is different, and what a good program includes.</li>
+  <li><a href="/strength-training-after-50">Strength training after 50: what it is and why it matters</a><br>The science in short, whether it is safe, and what a program looks like.</li>
+  <li><a href="/what-is-private-personal-training">What is private personal training?</a><br>How one-on-one private coaching compares to a big-box gym, semi-private and online.</li>
+  <li><a href="/strength-training-for-weight-loss">Strength training for weight loss: how it actually works</a><br>Why lifting, not just cardio, is what changes how your body looks.</li>
   <li><a href="/dumbbell-workout-for-beginners-over-50">Dumbbell workout for beginners over 50</a><br>Dumbbells, a bench, two or three days a week: the menu, the 1 to 10 effort scale, and swaps for bad joints.</li>
   <li><a href="/calorie-deficit">Calorie deficit after 40: how I set one that works</a><br>InBody math, foods you already enjoy, the 80/20 rule, and three rules for the new year.</li>
   <li><a href="/hotel-workout">The hotel workout, from someone who travels a lot</a><br>Find the gym, buy the day pass, the dumbbell-and-cable session, and the protein rule for the road.</li>
