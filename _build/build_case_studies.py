@@ -42,6 +42,28 @@ def photo(slug, name):
             f'</figure>\n\n')
 
 
+import json as _json
+_REVIEWS = {r[0]: r for r in _json.load(open(Path(__file__).parent / "reviews.json"))}
+# One real review per page, verbatim, under the reviewer's own name. These are
+# OTHER clients' words, never the case-study client's: no quote is attributed to
+# anyone who did not write it. Reviewers who share a first name with a case study
+# (Lauren T., Priscilla F.) are left out to avoid any confusion.
+_PICK = ["Eva Morales", "Paula G.", "Cynthia H.", "Steve S.", "Shantel T.", "Cristian A.",
+         "A A.", "Lexie H.", "Cesar N.", "Ian Deak", "Adriana M.", "Maggie R.", "Dao P.",
+         "Bryana A.", "Mauricio M."]
+_SRC = {"Google review": "Google review of Fig Performance",
+        "Yelp review*": "Yelp review of Train With Dan, Dan&rsquo;s coaching business",
+        "Client review\u2020": "review of Dan from a client he coached before opening Fig Performance"}
+
+
+def review(i):
+    name, src, text = _REVIEWS[_PICK[i % len(_PICK)]]
+    return ('<h2 id="reviews">What another client says</h2>\n'
+            f'<blockquote class="case-review"><p>{text}</p>\n'
+            f'<footer><strong>{name}</strong>, {_SRC.get(src, src)}</footer></blockquote>\n'
+            '<p><a href="/#reviews">Read more reviews</a></p>\n\n')
+
+
 C = [
  dict(slug="ray", name="Ray", age=64, start=218, end=183, months=10, mode="studio",
    h1="Sixty-four, and carrying his own bags of soil again.",
@@ -195,10 +217,11 @@ def build(c):
       'quiet month to survive. A program you can run on a bad week beats a better '
       'program you abandon in March, and that is most of the difference between '
       f'the {c["months"]} months that worked and the years before them that did not.</p>\n\n'
+      + review([x["slug"] for x in C].index(c["slug"]) + 1)
       + related(c["slug"])
       + CTA)
     toc = [("results", "The numbers"), ("start", "Where it started"),
-           ("changed", "What changed"), ("moment", "The moment"), ("why", "Why it held"), ("more", "Other stories")]
+           ("changed", "What changed"), ("moment", "The moment"), ("why", "Why it held"), ("reviews", "A client review"), ("more", "Other stories")]
     return page(
       f"case-studies/{c['slug']}",
       f"{c['name']}, {c['age']}: {c['start']} to {c['end']} lb | Fig Performance",

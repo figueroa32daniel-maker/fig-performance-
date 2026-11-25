@@ -1076,3 +1076,8 @@ address { font-style: normal; }
 .case-photo{margin:28px 0 32px}
 .case-photo img{display:block;width:100%;height:auto;border-radius:4px;border:1px solid rgba(15,31,61,.14)}
 .case-photo figcaption{margin-top:10px;font-size:.84rem;color:#5a6472}
+
+/* A real client review quoted on a case study page. */
+.case-review{margin:18px 0 12px;padding:18px 22px;border-left:4px solid #C9A227;background:rgba(15,31,61,.04);border-radius:0 4px 4px 0}
+.case-review p{margin:0 0 10px;font-style:italic}
+.case-review footer{font-size:.9rem;color:#5a6472}

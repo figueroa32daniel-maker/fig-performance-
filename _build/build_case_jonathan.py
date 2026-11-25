@@ -14,6 +14,7 @@ PHOTO SLOT is left empty on purpose. See the comment in the body.
 import sys
 from pathlib import Path
 from build_pages import page, SITE, CTA, stats
+from build_case_studies import review
 
 SLUG = "case-studies/jonathan"
 
@@ -47,6 +48,10 @@ body = """<p class="legal-intro">Jonathan came to Fig Performance at 43 with a b
 <h2 id="why">Why this one worked</h2>
 <p>Because the problem was never that Jonathan needed to move less. It was that the ranges his back was failing in had not been trained in years, and no amount of avoiding them was going to change that.</p>
 <p>That is most of what we do here. Adults over 40 arrive having spent a decade carefully not doing the things that hurt, which is reasonable and which slowly makes the list of things that hurt longer. The way out is usually the direction nobody wants to go.</p>
+""" + review(0) + """<h2 id="more">Other client stories</h2>
+<ul><li><a href="/case-studies/rosa">Rosa, 43</a>: 205 to 169 lb in 11 months</li><li><a href="/case-studies/ray">Ray, 64</a>: 218 to 183 lb in 10 months</li><li><a href="/case-studies/greg">Greg, 55</a>: 232 to 205 lb in 8 months</li></ul>
+<p><a href="/case-studies">All the case studies</a>, or <a href="/personal-training-placentia">how one-on-one training works</a>.</p>
+
 """ + CTA
 
 faqs = [
@@ -69,7 +74,7 @@ html = page(
     "A sore back, a new baby, and no golf. Then five pull-ups.",
     "Jonathan was 43, stiff and achy, and had quit the sport he loved. Here is what changed.",
     [("results", "The numbers"), ("start", "Where he started"), ("changed", "What we changed"),
-     ("now", "Where he is now"), ("why", "Why it worked"), ("more", "Other stories")],
+     ("now", "Where he is now"), ("why", "Why it worked"), ("reviews", "A client review"), ("more", "Other stories")],
     body, faqs, "Jonathan's case study")
 
 if __name__ == "__main__":
