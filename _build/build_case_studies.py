@@ -99,6 +99,48 @@ C = [
    tried="He skipped breakfast after the big dinners. He crammed extra cardio into the weekend to make up for the week. Both are attempts to pay off a debt rather than avoid one.",
    changed="With online coaching he kept a regular lifting plan at home and carried a shorter dumbbell workout for hotel days. He also picked a few reliable orders at the restaurants he ends up in often.",
    moment="Getting home from a trip and going straight back into his regular workouts, instead of spending a week climbing back in."),
+ dict(slug="greg", name="Greg", age=55, start=232, end=205, months=8, mode="studio",
+   h1="He wore the suit he had been avoiding.",
+   lede="Greg leads a regional sales team and lost his weekday workouts to every trip. Twenty-seven pounds in eight months, without cancelling a client dinner.",
+   before="Greg is a regional sales leader. He spent half his week in client meetings and the other half driving between accounts. He still lifted on weekends, but when he flew out for a sales kickoff or a client dinner ran late, his weekday workouts disappeared.",
+   tried="He tried making up for it with long Saturday workouts and cutting out bread. By the next trip he was back to winging it.",
+   changed="He booked two early studio sessions on the days he was usually in town and kept a short dumbbell workout for travel. He also worked out what to order at the places he already took clients.",
+   moment="A few months in, he wore a suit he had been avoiding to a quarterly sales meeting and went the whole day without thinking about how it fit."),
+ dict(slug="lauren", name="Lauren", age=42, start=151, end=144, months=5, mode="online",
+   h1="Lifting stopped being the first thing to go.",
+   lede="Lauren is a CFO who could fit in a run but dropped lifting every month-end close. Online coaching gave her a plan that survives close week.",
+   before="Lauren is a CFO. She could fit in a run before work, but lifting was always the first thing to go during month-end close. Between board prep, back-to-back meetings and flights to meet investors, she would open a workout app and spend half the time she had deciding what to do.",
+   tried="She tried adding more cardio, even though what she wanted was to feel stronger and see more definition.",
+   changed="With online coaching she had two strength workouts she could repeat and a shorter version for close week. She kept running, because she enjoys it.",
+   moment="The progress she cared about most was in her training log. Dumbbells that used to feel heavy for a few reps became weights she could use for a full set."),
+ dict(slug="diane", name="Diane", age=58, start=148, end=139, months=7, mode="studio",
+   h1="She kept going past the spot where she used to stop.",
+   lede="Diane is a chiropractor, on her feet with patients all day, whose after-work workout rarely happened. Two sessions before her first patient changed that.",
+   before="Diane is a chiropractor and spent most of the day on her feet seeing patients. If an appointment ran long, lunch got pushed back, and the workout she planned for after the last patient rarely happened. She wanted to feel stronger on weekend hikes, especially on the climbs.",
+   tried="She walked with friends and squeezed in short workouts at home, but she kept using the same light weights.",
+   changed="She booked two studio sessions before her first patient of the day. She kept her walks and tracked a few lifts so she could see what was improving.",
+   moment="On a hike she had done several times, she reached the steep stretch where she usually stopped and realised she felt good enough to keep going."),
+ dict(slug="marcus", name="Marcus", age=47, start=218, end=196, months=7, mode="studio",
+   h1="Two sessions in a bad week, and he knew where to pick up.",
+   lede="Marcus manages cybersecurity IT, where a late incident can take the evening. He stopped needing a perfect week to make progress.",
+   before="Marcus used to lift five days a week. As a cybersecurity IT manager he could plan his morning around team meetings and still have a late incident blow up his evening.",
+   tried="He tried a five-day program from an app and a boot camp with fixed class times. When he missed a couple of days he would cram everything into Saturday and feel worn out for the rest of the weekend.",
+   changed="He moved his studio sessions to the mornings he could reliably protect and kept a shorter workout ready for the weeks he was on call.",
+   moment="During one especially busy week he got two sessions in and knew exactly where to pick up the following Monday. That felt like a bigger win than finally getting through a perfect week."),
+ dict(slug="alyssa", name="Alyssa", age=36, start=167, end=149, months=6, mode="online",
+   h1="Home from a conference Thursday, lifting Friday morning.",
+   lede="Alyssa runs a cybersecurity company and lives on flights and late dinners. Eighteen pounds in six months, with the client dinners kept.",
+   before="Alyssa is the CEO of a cybersecurity company. She could start the day on a flight, land for a customer meeting and finish with a dinner that ran past nine. At home she could follow a meal plan and get to the gym.",
+   tried="On the road she tried packing every meal and booking hotel workouts before early meetings. One delayed flight could wipe out both plans.",
+   changed="With online coaching she had a regular strength plan for home and a dumbbell version for hotel gyms. She picked a few airport meals she actually liked and kept the client dinners.",
+   moment="It clicked when she got home from a conference on a Thursday, did her usual lift on Friday morning, and went into the weekend feeling like she had never left her routine."),
+ dict(slug="karen", name="Karen", age=53, start=176, end=152, months=9, mode="studio",
+   h1="She left the house without the backup pair.",
+   lede="Karen leads an enterprise sales team and kept pushing strength training to after this quarter. Twenty-four pounds in nine months.",
+   before="Karen led an enterprise sales team. Between pipeline reviews, customer visits and flights for conferences, she spent a lot of time on the go. She was good about getting her steps in, but meaningful strength training kept getting pushed to after this quarter.",
+   tried="She tried a points-based diet and workout videos in her living room. Once her calendar filled up, both were easy to drop.",
+   changed="She started with two studio sessions on the mornings she typically worked from home and had a short workout for conference weeks. She tracked her lifts and how her clothes fit.",
+   moment="One morning before a customer visit she put on a pair of work pants she had stopped wearing and left the house without reaching for the backup pair."),
 ]
 
 FAQS = [
@@ -123,7 +165,7 @@ def related(slug, n=3):
     items = "".join(
         f'<li><a href="/case-studies/{s}">{name}</a>: {head}</li>' for s, name, head in picks)
     return ('<h2 id="more">Other client stories</h2>\n<ul>' + items + '</ul>\n'
-            '<p><a href="/case-studies">All nine case studies</a>, or '
+            '<p><a href="/case-studies">All the case studies</a>, or '
             '<a href="/personal-training-placentia">how one-on-one training works</a>.</p>\n\n')
 
 

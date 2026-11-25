@@ -24,6 +24,18 @@ ROWS = [
   "Every work trip reset the plan. Online coaching gave him one that did not."),
  ("natalie", "Natalie, 38", "137 to 134 lb in 7 months",
   "Three pounds on the scale, and the shape she had been cutting for."),
+  ("greg", "Greg, 55", "232 to 205 lb in 8 months",
+  "A regional sales leader whose weekday workouts vanished with every trip."),
+ ("karen", "Karen, 53", "176 to 152 lb in 9 months",
+  "Enterprise sales, always on the go. Strength training stopped waiting for next quarter."),
+ ("marcus", "Marcus, 47", "218 to 196 lb in 7 months",
+  "Cybersecurity IT manager. A late incident no longer wrecks the week."),
+ ("alyssa", "Alyssa, 36", "167 to 149 lb in 6 months",
+  "A CEO on flights and late dinners, with a plan for home and one for hotels."),
+ ("diane", "Diane, 58", "148 to 139 lb in 7 months",
+  "A chiropractor who now trains before her first patient."),
+ ("lauren", "Lauren, 42", "151 to 144 lb in 5 months",
+  "A CFO whose lifting used to disappear every month-end close."),
 ]
 
 cards = "\n".join(
@@ -31,7 +43,7 @@ cards = "\n".join(
   for s, n, head, blurb in ROWS)
 
 body = (
- '<p class="legal-intro">Nine clients, their numbers, and what actually changed. '
+ '<p class="legal-intro">Fifteen clients, their numbers, and what actually changed. '
  'Some trained one on one at the studio in Placentia. Some were coached online. '
  'Every one of them had tried something before this that did not hold.</p>\n\n'
  '<h2 id="stories">The stories</h2>\n' + cards + "\n\n"
@@ -58,10 +70,10 @@ faqs = [
 html = page(
   SLUG,
   "Client Case Studies | Fig Performance, Placentia CA",
-  "Nine Fig Performance clients, their numbers and what changed. Fat loss, strength and training around pain, at the Placentia studio and online with Coach Dan.",
+  "Fifteen Fig Performance clients, their numbers and what changed. Fat loss, strength and training around pain, at the Placentia studio and online with Coach Dan.",
   "Client Case Studies | Fig Performance",
   "Results",
-  "Nine clients. Their numbers, and what actually changed.",
+  "Fifteen clients. Their numbers, and what actually changed.",
   "Fat loss, strength, and training around pain. Studio and online.",
   [("stories", "The stories"), ("common", "What they share")],
   body, faqs, "Case studies")
