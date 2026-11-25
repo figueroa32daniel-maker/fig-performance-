@@ -71,7 +71,7 @@ html = page(
     "In-N-Out After 40: What to Order | Fig Performance",
     "What to order at In-N-Out if you are over 40 and trying to lose fat: Protein Style numbers, the Double-Double, and why the fries cost more than the burger.",
     "In-N-Out After 40: What to Order",
-    "Fitness after 40", "Unpopular opinion: In-N-Out is not what is keeping you heavy.",
+    "Fitness after 40", "Unpopular opinion: In-N-Out is not what is keeping you heavy, and I have never told a client to stop going.",
     "Two items on that board are doing almost all of the damage. The burger is not one of them.",
     [("numbers", "The numbers that matter"), ("protein-style", "What Protein Style saves"),
      ("order", "What I would order"), ("why", "Why I do not say avoid it"), ("caveat", "A note on the numbers")],

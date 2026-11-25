@@ -70,7 +70,7 @@ html = page(
     "El Pollo Loco After 40: What to Order | Fig Performance",
     "What to order at El Pollo Loco after 40: 34g of protein in a grilled breast, the 52g salad nobody orders, and the sodium number in the bowls worth knowing.",
     "El Pollo Loco After 40: What to Order",
-    "Fitness after 40", "Stop reading the calorie column at El Pollo Loco.",
+    "Fitness after 40", "Stop reading the calorie column at El Pollo Loco. It is the wrong number to worry about.",
     "34 grams of protein for 200 calories, and the number nobody mentions.",
     [("chicken", "The chicken itself"), ("sodium", "The number I watch"), ("salad", "The best item on the menu"),
      ("order", "What I would order"), ("why", "Why it is on the list"), ("more", "The other guides")],

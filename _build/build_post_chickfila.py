@@ -64,8 +64,8 @@ html = page(
     "Chick-fil-A After 40: What to Order | Fig Performance",
     "What to order at Chick-fil-A after 40: grilled nuggets at 25g protein for 130 calories, the real sandwich difference, and the drink that costs more than the meal.",
     "Chick-fil-A After 40: What to Order",
-    "Fitness after 40", "The biggest lie you have been told about fried chicken.",
-    "Grilled instead of fried saves you 30 calories and costs you a gram of protein.",
+    "Fitness after 40", "The biggest lie you have been told about Chick-fil-A is that grilled beats fried.",
+    "Thirty calories and one gram of protein apart. The real gap is somewhere else on the label.",
     [("nuggets", "The grilled nuggets"), ("sandwiches", "The sandwiches, honestly"), ("drink", "The milkshake problem"),
      ("order", "What I would order"), ("why", "Why I do not say avoid it"), ("more", "The other guides")],
     body, faqs, "Chick-fil-A after 40", kind="article", published=DATE)
