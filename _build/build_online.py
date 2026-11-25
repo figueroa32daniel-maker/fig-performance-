@@ -54,7 +54,7 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 <p>In-person training is best if you're new to lifting, have old injuries that need hands-on attention, or want every set watched. Online coaching works best if you can train on your own and want the plan, the nutrition and the accountability. See <a href="/pricing">all plans and pricing</a> or <a href="/personal-training-placentia">personal training in Placentia</a>.</p>
 
 <h2 id="price">Price</h2>
-<p><strong>$249 a month for 3 months ($747), or $697 if you pay the 3 months in full.</strong> Online coaching is sold as a 3-month program, not month to month, because that's how long it takes to build habits that last and see real results.</p>
+<p><strong>$249 a month for 3 months ($747).</strong> Online coaching is sold as a 3-month program, not month to month, because that's how long it takes to build habits that last and see real results.</p>
 
 <h2 id="start">How to start</h2>
 <ol>
@@ -67,13 +67,13 @@ body = f"""<p class="legal-intro">Online coaching with Coach Dan Figueroa is one
 
 faqs = [
     ("How much does an online personal trainer cost?",
-     "Online coaching with Coach Dan at Fig Performance is $249 a month as a 3-month program ($747), or $697 if you pay in full. It includes a weekly one-on-one video call, a custom training program in the app, a custom nutrition plan and supplement guidance."),
+     "Online coaching with Coach Dan at Fig Performance is $249 a month as a 3-month program ($747). It includes a weekly one-on-one video call, a custom training program in the app, a custom nutrition plan and supplement guidance."),
     ("What's included in online coaching?",
      "A weekly accountability call over Zoom, Google Meet or FaceTime; a custom training program in the R.H.O.D.E.S. app with warm-ups and cool-down stretches; a custom 80/20 nutrition plan built from foods you enjoy; supplement guidance; travel workouts; and messaging support between calls."),
     ("Is online personal training as good as in-person?",
      "It depends on you. If you can train on your own and want a plan, nutrition and accountability, online coaching works well and costs less. If you're new to lifting or have injuries that need hands-on attention, in-person training is the better start."),
     ("Can I pay month to month?",
-     "Online coaching is a 3-month program. You can pay $249 a month for the 3 months, or $697 up front."),
+     "Online coaching is a 3-month program, billed $249 a month over the 3 months."),
     ("Do I need a gym?",
      "No. Dan builds the program around the equipment you have, whether that's a full gym, a home setup or just dumbbells, and gives you workouts for when you travel."),
     ("Who is the coach?",
