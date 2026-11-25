@@ -1,6 +1,6 @@
-"""Article: How much protein after 40. DRAFT, written by Claude overnight Nov 25 2026
-from published research, not from a Coach Dan interview. Dan reviews before publishing.
-Open questions for Dan are marked [DAN] in comments."""
+"""Article: How much protein after 40. Approved by Dan and PUBLISHED Nov 25 2026.
+Source links added, verified via PubMed: PROT-AGE (Bauer 2013, doi 10.1016/j.jamda.2013.05.021)
+and Moore et al. 2015 (anabolic resistance, doi 10.1093/gerona/glu103)."""
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-11-25"
@@ -10,13 +10,13 @@ body = f"""<p class="legal-intro">Most people over 40 who tell me they eat plent
 
 <h2 id="rda">The number you have heard is a floor, not a goal</h2>
 <p>The Recommended Dietary Allowance for protein is 0.8 grams per kilogram of body weight a day. For a 165-pound adult that is about 60 grams. It sounds official, and it is, but of what: it is the minimum intake that keeps nearly all healthy adults from running a deficit. It is the bottom of the range, not the middle.</p>
-<p>The PROT-AGE study group, convened by the European Union Geriatric Medicine Society, reviewed the evidence for older adults and concluded that 0.8 is too low. Their recommendation for healthy adults over 65 is 1.0 to 1.2 grams per kilogram a day, and 1.2 to 1.5 grams for anyone dealing with a chronic condition or losing muscle. For older adults who train regularly, the range they and others give goes higher still, to roughly 1.2 to 1.7 grams.</p>
+<p>The <a href="https://doi.org/10.1016/j.jamda.2013.05.021" target="_blank" rel="noopener noreferrer">PROT-AGE study group</a>, convened by the European Union Geriatric Medicine Society, reviewed the evidence for older adults and concluded that 0.8 is too low. Their recommendation for healthy adults over 65 is 1.0 to 1.2 grams per kilogram a day, and 1.2 to 1.5 grams for anyone dealing with a chronic condition or losing muscle. For older adults who train regularly, the range they and others give goes higher still, to roughly 1.2 to 1.7 grams.</p>
 {callout("What that looks like", "Protein a day for a 165-pound adult", ["RDA minimum: about 60 g", "PROT-AGE, healthy older adult: 75 to 90 g", "Training regularly: 90 to 127 g"])}
 <p>So the gap between the number on the back of the cereal box and the number that actually protects your muscle is not small. For a lot of my clients it is 40 or 50 grams a day.</p>
 
 <h2 id="why">Why it changes after 40</h2>
 <p>There is a specific reason older adults need more, and it has a name: anabolic resistance. As you age, the same amount of protein in a meal triggers less muscle building than it did at 25. Your body gets less responsive to the signal, so you need a louder signal.</p>
-<p>Research on this is blunt about the size of the effect. Work by Moore and colleagues found that adults around 71 needed substantially more protein in a single meal than young adults to stimulate muscle protein synthesis at the same rate. You are not imagining that what used to work has stopped working.</p>
+<p>Research on this is blunt about the size of the effect. Work by <a href="https://doi.org/10.1093/gerona/glu103" target="_blank" rel="noopener noreferrer">Moore and colleagues</a> found that adults around 71 needed substantially more protein in a single meal than young adults to stimulate muscle protein synthesis at the same rate. You are not imagining that what used to work has stopped working.</p>
 <p>Put that next to the other thing that happens after 40, which is that muscle starts to go if nothing is asking it to stay, and you get the situation I see every week: someone eating what they have always eaten, training the way they have always trained, and slowly losing ground.</p>
 {pullquote("Protein is not what builds the muscle. Lifting builds the muscle. Protein is the material. You need both, and most people over 40 are short on both.")}
 

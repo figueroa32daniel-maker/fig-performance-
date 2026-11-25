@@ -1,12 +1,12 @@
-"""Article: Lifting for bone density after 50. DRAFT, written by Claude overnight Nov 25 2026
-from published research (LIFTMOR trial), not from a Coach Dan interview. Dan reviews first.
-[DAN] Do you have a client with a documented DEXA improvement? That story would carry this page."""
+"""Article: Lifting for bone density after 50. Approved by Dan and PUBLISHED Nov 25 2026.
+Source links added (LIFTMOR trial verified via PubMed, PMID 28975661, doi 10.1002/jbmr.3284).
+[DAN] A client with a documented DEXA improvement would strengthen this page further."""
 from build_pages import page, SITE, CTA, callout, pullquote, stats
 
 DATE = "2026-11-25"
 SLUG = "strength-training-for-bone-density"
 
-body = f"""<p class="legal-intro">If you have been told you have osteopenia or osteoporosis, you have probably also been told to walk, swim and be careful. Walking and swimming are good for you. Neither one does much for your bones. The exercise that does is the one most women over 50 are quietly steered away from: picking up heavy things. There is a well-known trial on exactly this, and it is worth knowing about.</p>
+body = f"""<p class="legal-intro">If you have been told you have osteopenia or osteoporosis, you have probably also been told to walk, swim and be careful. Walking and swimming are good for you. Neither one does much for your bones. The exercise that does is the one most women over 50 are quietly steered away from: picking up heavy things. There is a well-known trial on exactly this.</p>
 
 <h2 id="why">Why walking does not build bone</h2>
 <p>Bone responds to load. Specifically, it responds to strain that is larger than what it already handles, applied quickly. That is the signal that tells bone-building cells to get to work.</p>
@@ -14,11 +14,11 @@ body = f"""<p class="legal-intro">If you have been told you have osteopenia or o
 <p>What provides the signal is heavy resistance training and impact. Loading the skeleton through the spine and hips, hard enough that it is genuinely difficult.</p>
 
 <h2 id="liftmor">The LIFTMOR trial</h2>
-<p>LIFTMOR is the study worth knowing. Researchers in Australia took 101 postmenopausal women with low bone mass, a T-score below minus 1.0, and randomised them. One group did a home-based, low-intensity exercise program. The other did supervised heavy lifting.</p>
-<p>The heavy group trained twice a week for 30 minutes, for eight months. Four exercises: deadlift, back squat, overhead press, and a jumping chin-up with a drop landing for impact. Five sets of five reps, at more than 80 to 85 percent of their one-rep maximum. The first month was bodyweight and light loads to learn the movements before any of that weight went on the bar.</p>
+<p>The trial is called <a href="https://doi.org/10.1002/jbmr.3284" target="_blank" rel="noopener noreferrer">LIFTMOR</a>. Researchers in Australia took 101 postmenopausal women with low bone mass, a T-score below minus 1.0, and randomised them. One group did a home-based, low-intensity exercise program. The other did supervised heavy lifting.</p>
+<p>The heavy group trained twice a week for 30 minutes, for eight months. Four exercises: deadlift, back squat, overhead press, and a jumping chin-up with a drop landing for impact. Five sets of five reps, above 85 percent of their one-rep maximum. The first month was bodyweight and light loads to learn the movements before any of that weight went on the bar.</p>
 <p>The heavy group improved bone mineral density at the lumbar spine and the femoral neck, which is the top of the thigh bone and one of the places a hip fracture happens. They also improved on physical function tests. The low-intensity group did not keep pace.</p>
-{callout("The LIFTMOR protocol", "What the women in the trial actually did", ["Twice a week, 30 minutes, supervised", "Deadlift, back squat, overhead press, jumping chin-up", "5 sets of 5 at over 80% of their one-rep max", "First month was light, to learn the movements", "Eight months total"])}
-<p>The other finding is the one I would underline. It was safe. These were women with osteopenia and osteoporosis, lifting heavy, and the trial reported it as safe and well tolerated. The fear that heavy lifting will break a fragile spine is the exact thing the study was designed to test, and it did not happen.</p>
+{callout("The LIFTMOR protocol", "What the women in the trial actually did", ["Twice a week, 30 minutes, supervised", "Deadlift, back squat, overhead press, jumping chin-up", "5 sets of 5 above 85% of their one-rep max", "First month was light, to learn the movements", "Eight months total"])}
+<p>The other finding is the one I would underline. It was safe. These were women with osteopenia and osteoporosis, lifting heavy, and across the eight months the trial logged a single minor adverse event, a back spasm. The fear that heavy lifting will break a fragile spine is the exact thing the study was designed to test, and it did not happen.</p>
 {pullquote("Thirty minutes, twice a week, for eight months. That is less time than most people spend on cardio they do not enjoy and their bones do not notice.")}
 
 <h2 id="meaning">What that does and does not mean for you</h2>
@@ -63,7 +63,7 @@ faqs = [
 html = page(
     SLUG,
     "Lifting for Bone Density After 50 | Fig Performance",
-    "Walking does not build bone. What the LIFTMOR trial found about heavy lifting for postmenopausal women with osteopenia, and how to start safely in Placentia, CA.",
+    "Walking doesn't build bone. What the LIFTMOR trial found about heavy lifting for postmenopausal women with osteopenia, and how to start safely in Placentia, CA.",
     "Strength Training for Bone Density After 50",
     "Fitness after 40", "Walking will not build your bones. This might.",
     "What the LIFTMOR trial found, and how we would start you.",
