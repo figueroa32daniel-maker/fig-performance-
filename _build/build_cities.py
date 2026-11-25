@@ -146,6 +146,84 @@ CITIES = {
              "Most clients over 40 train twice a week in 50-minute one-on-one sessions and add daily walking. Some train three or four times a week. We'll settle on the right number at your free consult."),
         ],
     },
+    "Villa Park": {
+        "slug": "personal-trainer-villa-park",
+        "h1": "Personal Trainer Near Villa Park for Adults Over 40",
+        "lede": "Private one-on-one strength training a few minutes north of Villa Park, in Placentia.",
+        "intro": """<p class="legal-intro">Looking for a personal trainer in Villa Park? Fig Performance is a private, one-on-one strength gym in Placentia, a short drive north of the Hidden Jewel. Villa Park is almost entirely single-family homes, so there is no real gym inside the 2.1 square miles of the city itself, which is why most residents already drive out to train. We are built for the adults over 40 who do: people who exercise, eat reasonably well, and still can't get the effort to show on the scan.</p>""",
+        "who": """<h2 id="who">Who we help in Villa Park</h2>
+<p>Villa Park is the smallest city in Orange County and one of its most affluent, a quiet enclave of large lots, horse properties and executives who have done well. The people Fig Performance is built for live exactly this way: business owners and professionals in their 40s, 50s and 60s, with the time and the means to train properly, who are tired of guessing. The pattern we hear most is "I'm doing everything right and nothing is changing." Usually something is changing, just not the number on the scale. We help them:</p>
+<ul>
+  <li><strong>See what's actually happening.</strong> An InBody scan separates fat from muscle, so you stop wondering whether the last six months of effort did anything.</li>
+  <li><strong>Train for the life Villa Park is built around.</strong> Keeping up with the property, riding, golf, hiking the nearby Santiago Oaks and Irvine Regional Park trails. Strength in the hips, back and shoulders is what protects all of it.</li>
+  <li><strong>Lift with a plan, not a guess.</strong> Muscle after 40 responds to real progressive strength work. <a href="/building-muscle-after-50">Here's how that looks after 50</a>, and <a href="/strength-training-for-women-over-50">for women over 50</a>.</li>
+</ul>""",
+        "why": """<h2 id="why">Why Villa Park clients come to Placentia</h2>
+<p>Villa Park has no gym of its own, so the question was never whether to drive, only where to. People choose Fig Performance over the big clubs in Orange and Anaheim Hills for three reasons: every session is private and one-on-one, with no crowd and no waiting; progress is measured with an InBody scan instead of a mirror and a hope; and it fits a full schedule, with the doors open at 5 AM on weekdays and on Saturday mornings.</p>""",
+        "route": "Villa Park sits just south of us. Head north on Santiago Boulevard and across to Tustin Avenue into Placentia, or take the 55 north to Lincoln or Imperial and over. It is about a 15-minute drive either way.",
+        "faqs": [
+            ("Is there a personal trainer near Villa Park for adults over 40?",
+             "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a short drive north of Villa Park. Every session is with Coach Dan, an ACSM certified personal trainer. Villa Park itself has no commercial gym, so most residents train just outside the city."),
+            ("How much does a personal trainer cost near Villa Park?",
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+            ("Can a personal trainer come to my home in Villa Park?",
+             "Yes. In-home personal training brings Coach Dan to your home in Villa Park, which suits the larger properties here. It's $150 a session, mileage included."),
+            ("I already have a home gym. Why would I train with you?",
+             "A lot of Villa Park homes do. Equipment was never the missing piece; a plan and an honest measure were. You get one-on-one coaching with a real strength progression and an InBody scan every few months, so you can see fat and muscle change separately instead of guessing."),
+        ],
+    },
+    "La Habra": {
+        "slug": "personal-trainer-la-habra",
+        "h1": "Personal Trainer Near La Habra for Adults Over 40",
+        "lede": "Private one-on-one strength training a straight drive east on Imperial Highway from La Habra, in Placentia.",
+        "intro": """<p class="legal-intro">Looking for a personal trainer in La Habra? Fig Performance is a private, one-on-one strength gym in Placentia, a straight drive east on Imperial Highway from La Habra. It's built for adults over 40 in La Habra and La Habra Heights who already exercise and eat reasonably well, and want the effort to finally show in the mirror and on the scan.</p>""",
+        "who": """<h2 id="who">Who we help in La Habra</h2>
+<p>La Habra sits at the northwest corner of Orange County, where it meets Whittier and the LA County line, with the quieter hillside homes of La Habra Heights just above. The people Fig Performance is built for are the professionals and business owners there in their 40s, 50s and 60s, with full calendars and a long history of working out that stopped paying off. The pattern we hear most is "I'm doing everything right and nothing is changing." Usually something is changing, just not the number on the scale. We help them:</p>
+<ul>
+  <li><strong>Find out what's actually happening.</strong> An InBody scan separates fat from muscle, so you stop guessing whether the last six months worked.</li>
+  <li><strong>Lift heavier than "light weights."</strong> Muscle after 40 responds to progressive strength work, not endless cardio. <a href="/workout-plan-for-men-over-40">Here's how that looks for men over 40</a>, and <a href="/strength-training-for-women-over-40">for women over 40</a>.</li>
+  <li><strong>Protect what you love doing.</strong> Golf, tennis, long walks, keeping up with grandkids. Training is built around the back, hips and shoulders those lean on.</li>
+</ul>""",
+        "why": """<h2 id="why">Why La Habra clients drive to Placentia</h2>
+<p>There are closer gyms along Imperial and Whittier. People choose Fig Performance for three reasons: every session is private and one-on-one, so there's no waiting on a rack or being watched; progress is measured with an InBody scan instead of a mirror and a hope; and the whole thing fits a working schedule, with the doors open at 5 AM on weekdays and Saturday mornings.</p>""",
+        "route": "Imperial Highway (SR 90) runs straight from La Habra east through Brea and into Placentia, and we're just off it. Stay on Imperial through Brea and you're a few minutes from the gym. It is about 15 to 20 minutes depending on traffic.",
+        "faqs": [
+            ("Is there a personal trainer near La Habra for adults over 40?",
+             "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a straight drive east on Imperial Highway from La Habra. Every session is with Coach Dan, an ACSM certified personal trainer."),
+            ("How much does a personal trainer cost near La Habra?",
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+            ("Can a personal trainer come to my home in La Habra?",
+             "Yes. In-home personal training brings Coach Dan to your home or office in La Habra or La Habra Heights. It's $150 a session, mileage included."),
+            ("I've worked out for years. Will this be different?",
+             "Most of our clients have. The difference is one-on-one coaching with a real strength progression, and an InBody scan every few months so you can see fat and muscle change separately instead of guessing from the scale."),
+        ],
+    },
+    "Orange": {
+        "slug": "personal-trainer-orange",
+        "h1": "Personal Trainer Near Orange, CA for Adults Over 40",
+        "lede": "Private one-on-one strength training a short drive north of Orange, in Placentia.",
+        "intro": """<p class="legal-intro">Looking for a personal trainer in Orange? Fig Performance is a private, one-on-one strength gym in Placentia, a short drive north of the City of Orange. From Old Towne to the equestrian estates of Orange Park Acres, it's built for adults over 40 who already exercise and eat reasonably well, and want the effort to finally show in the mirror and on the scan.</p>""",
+        "who": """<h2 id="who">Who we help in Orange</h2>
+<p>Orange runs from the antique shops and Craftsman homes of Old Towne around the Plaza to Chapman University and out to Orange Park Acres, the equestrian community whose residents are among the most heavily executive and professional in the county. The people Fig Performance is built for live across all of it: business owners and professionals in their 40s, 50s and 60s with full calendars and a long history of training that stopped working. The pattern we hear most is "I'm doing everything right and nothing is changing." Usually something is changing, just not the number on the scale. We help them:</p>
+<ul>
+  <li><strong>Find out what's actually happening.</strong> An InBody scan separates fat from muscle, so you stop guessing whether the last six months worked.</li>
+  <li><strong>Lift heavier than "light weights."</strong> Muscle after 40 responds to progressive strength work, not endless cardio. <a href="/building-muscle-after-50">Here's how that looks after 50</a>, and <a href="/workout-plan-for-men-over-40">for men over 40</a>.</li>
+  <li><strong>Protect what you love doing.</strong> Riding in Orange Park Acres, golf, tennis, hiking Santiago Oaks. Training is built around the back, hips and shoulders those lean on.</li>
+</ul>""",
+        "why": """<h2 id="why">Why Orange clients drive to Placentia</h2>
+<p>Orange has no shortage of gyms, from the big clubs on Tustin to the studios near Chapman. People choose Fig Performance for three reasons: every session is private and one-on-one, so there's no waiting on a rack or being watched; progress is measured with an InBody scan instead of a mirror and a hope; and the whole thing fits a working schedule, with the doors open at 5 AM on weekdays and Saturday mornings.</p>""",
+        "route": "From Orange, head north on Tustin Street or Glassell, or take the 55 north to Lincoln or Imperial and over to Placentia. From Old Towne or Orange Park Acres it is roughly a 15-minute drive.",
+        "faqs": [
+            ("Is there a personal trainer near Orange, CA for adults over 40?",
+             "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a short drive north of the City of Orange. Every session is with Coach Dan, an ACSM certified personal trainer."),
+            ("How much does a personal trainer cost near Orange?",
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+            ("Can a personal trainer come to my home in Orange?",
+             "Yes. In-home personal training brings Coach Dan to your home or office anywhere in Orange, including Old Towne and Orange Park Acres. It's $150 a session, mileage included."),
+            ("I've worked out for years. Will this be different?",
+             "Most of our clients have. The difference is one-on-one coaching with a real strength progression, and an InBody scan every few months so you can see fat and muscle change separately instead of guessing from the scale."),
+        ],
+    },
 }
 
 pages = {}
