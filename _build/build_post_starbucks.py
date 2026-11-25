@@ -70,8 +70,8 @@ html = page(
     "Starbucks After 40: What to Order | Fig Performance",
     "How to order at Starbucks after 40: protein lattes at 29g, cold foam that adds 15g, the egg bites worth buying, and the drink that quietly costs you most.",
     "Starbucks After 40: What to Order",
-    "Fitness after 40", "Your coffee should be the protein, not the thing beside it.",
-    "Protein lattes, cold foam and egg bites, in the time you already spend in line.",
+    "Fitness after 40", "How to get 29 grams of protein in the line you already stand in.",
+    "Protein lattes, cold foam, and the egg bites worth buying.",
     [("protein-drinks", "The drinks changed"), ("food", "The egg bites"), ("avoid", "What costs you most"),
      ("order", "What I would order"), ("why", "Why a coffee shop"), ("more", "The other guides")],
     body, faqs, "Starbucks after 40", kind="article", published=DATE)

@@ -66,7 +66,7 @@ html = page(
     "Chipotle After 40: What to Order | Fig Performance",
     "How to order at Chipotle if you are over 40: the high-protein menu numbers, double chicken, and where the calories actually hide. From Coach Dan in Placentia.",
     "Chipotle After 40: What to Order",
-    "Fitness after 40", "Double the meat. That is most of the job.",
+    "Fitness after 40", "Hot take: you are ordering too little chicken, not too much.",
     "The protein is not what turns this into 1,400 calories. The things next to it are.",
     [("chicken", "Start with the chicken"), ("menu", "The high-protein menu"), ("creep", "Where the calories come from"),
      ("order", "What I would order"), ("why", "Why I recommend it most"), ("more", "The other guides")],

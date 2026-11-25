@@ -5,7 +5,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "chick-fil-a-after-40"
 
-body = f"""<p class="legal-intro">A trainer is supposed to tell you to cook at home, and most of the time I do. This is one of the places I do not. There is an item on the Chick-fil-A menu that does more for an adult over 40 than almost anything you would make in the same ten minutes, and most people walk straight past it to the sandwich. Grilled nuggets. Eight of them are 130 calories and 25 grams of protein. Here is how I tell clients to order the rest of the board.</p>
+body = f"""<p class="legal-intro">You have been told that ordering grilled instead of fried is the healthy choice at Chick-fil-A. The original Chicken Sandwich is 420 calories and 29 grams of protein. The grilled one is 390 and 28. Thirty calories and one gram apart. The difference everyone assumes is enormous is almost nothing, the real gap is somewhere else on that label, and the best item on the board is not either sandwich. Here is how I tell clients to order.</p>
 
 <h2 id="nuggets">The grilled nuggets are the whole story</h2>
 <p>Published numbers, straight across:</p>
@@ -64,8 +64,8 @@ html = page(
     "Chick-fil-A After 40: What to Order | Fig Performance",
     "What to order at Chick-fil-A after 40: grilled nuggets at 25g protein for 130 calories, the real sandwich difference, and the drink that costs more than the meal.",
     "Chick-fil-A After 40: What to Order",
-    "Fitness after 40", "Eight nuggets here beat most meals you would cook.",
-    "130 calories, 25 grams of protein, and no pan to wash.",
+    "Fitness after 40", "The biggest lie you have been told about fried chicken.",
+    "Grilled instead of fried saves you 30 calories and costs you a gram of protein.",
     [("nuggets", "The grilled nuggets"), ("sandwiches", "The sandwiches, honestly"), ("drink", "The milkshake problem"),
      ("order", "What I would order"), ("why", "Why I do not say avoid it"), ("more", "The other guides")],
     body, faqs, "Chick-fil-A after 40", kind="article", published=DATE)

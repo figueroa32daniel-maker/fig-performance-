@@ -6,7 +6,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "el-pollo-loco-after-40"
 
-body = f"""<p class="legal-intro">This is the one restaurant on my list where I tell clients to stop reading the calorie column. A fire-grilled chicken breast is 200 calories and 34 grams of protein, a better protein-to-calorie ratio than almost anything you will cook at home, for about six dollars, five minutes from most of Placentia. The calories here are fine. There is a different number on that menu that matters more, and it matters most to the people who have had a doctor mention blood pressure.</p>
+body = f"""<p class="legal-intro">A fire-grilled chicken breast here is 200 calories and 34 grams of protein, a better protein-to-calorie ratio than almost anything you will cook at home, for about six dollars, five minutes from most of Placentia. The calories are not the issue at this restaurant, which is why I tell clients to stop looking at that column. There is a different number on the menu that matters more, and it matters most to the people who have had a doctor mention blood pressure.</p>
 
 <h2 id="chicken">The chicken itself is the best thing on any menu around here</h2>
 <p>Published numbers for the fire-grilled pieces:</p>
@@ -70,7 +70,7 @@ html = page(
     "El Pollo Loco After 40: What to Order | Fig Performance",
     "What to order at El Pollo Loco after 40: 34g of protein in a grilled breast, the 52g salad nobody orders, and the sodium number in the bowls worth knowing.",
     "El Pollo Loco After 40: What to Order",
-    "Fitness after 40", "Calories are not the number to watch here.",
+    "Fitness after 40", "Stop reading the calorie column at El Pollo Loco.",
     "34 grams of protein for 200 calories, and the number nobody mentions.",
     [("chicken", "The chicken itself"), ("sodium", "The number I watch"), ("salad", "The best item on the menu"),
      ("order", "What I would order"), ("why", "Why it is on the list"), ("more", "The other guides")],
