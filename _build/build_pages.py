@@ -13,6 +13,10 @@ header = header.replace(' aria-current="page"', "").replace('          <li><a hr
 footer = pricing[pricing.index("  <!-- ============ FOOTER ============ -->"):]
 
 TAKEAWAYS = {
+    "in-n-out-after-40": [
+        "A Double-Double gives you 34 g of protein for about 610 calories. A regular fries gives you 6 g for 360.",
+        "Protein Style saves about 150 calories and 30 g of carbs on any burger, and the protein does not change.",
+        "The order: Double-Double Protein Style, mustard and ketchup instead of spread."],
     "how-much-protein-after-40": [
         "The RDA of 0.8 g per kg is a floor to prevent deficiency, not a target.",
         "Healthy adults over 65 need about 1.0 to 1.2 g per kg a day, and more if they train.",
