@@ -16,7 +16,7 @@ SHARED_TRAIN = """<h2 id="training">What training looks like</h2>
 <p>Coach Dan Figueroa is an ACSM certified personal trainer and a Precision Nutrition Level 1 certified nutrition coach. Every session is with him. No hand-offs to a junior trainer.</p>"""
 
 SHARED_PRICE = """<h2 id="pricing">Pricing</h2>
-<p>Personal training is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Your exact rate depends on how often you train and whether you pay in full, and we give you the number at your free consult. Semi-private small-group training starts at $180 a month. See <a href="/pricing">plans and pricing</a> or the <a href="/personal-training-cost-placentia">personal training cost guide</a>.</p>"""
+<p>Personal training is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Your exact rate depends on how often you train, and we give you the number at your free consult. Semi-private small-group training starts at $180 a month. See <a href="/pricing">plans and pricing</a> or the <a href="/personal-training-cost-placentia">personal training cost guide</a>.</p>"""
 
 
 def start_block(city):
@@ -53,7 +53,7 @@ CITIES = {
             ("Is there a personal trainer near Yorba Linda for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a short drive west of Yorba Linda on the same road. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near Yorba Linda?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Yorba Linda?",
              "Yes. In-home personal training brings Coach Dan to your home or office in Yorba Linda. It's $150 a session, mileage included."),
             ("I've worked out for years. Will this be different?",
@@ -81,7 +81,7 @@ CITIES = {
             ("Is there a personal trainer near Brea for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a quick drive south of Brea by Kraemer Blvd or the 57. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near Brea?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can I train before work?",
              "Yes. Fig Performance is staffed from 5 AM on weekdays and Saturdays. Early sessions are popular with clients who commute to Brea offices, so book your consult early to lock in a time."),
             ("Can a personal trainer come to my office in Brea?",
@@ -109,7 +109,7 @@ CITIES = {
             ("Is there a personal trainer near Fullerton for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a few minutes east of Fullerton on Yorba Linda Blvd. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near Fullerton?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Do you train seniors?",
              "Yes. Clients in their 60s and 70s train at Fig Performance, including people with shoulder arthritis and past injuries. Plans start with what your body can do today. Read the strength training for seniors guide for how that works."),
             ("Can a personal trainer come to my home in Fullerton?",
@@ -137,7 +137,7 @@ CITIES = {
             ("Is there a personal trainer near Anaheim Hills for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, north of Anaheim Hills by Imperial Highway or Lakeview Ave. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near Anaheim Hills?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Anaheim Hills?",
              "Yes. In-home personal training is available in Anaheim Hills. It's $150 a session, mileage included."),
             ("Will strength training help my hiking, golf or cycling?",
@@ -165,7 +165,7 @@ CITIES = {
             ("Is there a personal trainer near Villa Park for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a short drive north of Villa Park. Every session is with Coach Dan, an ACSM certified personal trainer. Villa Park itself has no commercial gym, so most residents train just outside the city."),
             ("How much does a personal trainer cost near Villa Park?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Villa Park?",
              "Yes. In-home personal training brings Coach Dan to your home in Villa Park, which suits the larger properties here. It's $150 a session, mileage included."),
             ("I already have a home gym. Why would I train with you?",
@@ -191,7 +191,7 @@ CITIES = {
             ("Is there a personal trainer near La Habra for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a straight drive east on Imperial Highway from La Habra. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near La Habra?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in La Habra?",
              "Yes. In-home personal training brings Coach Dan to your home or office in La Habra or La Habra Heights. It's $150 a session, mileage included."),
             ("I've worked out for years. Will this be different?",
@@ -217,7 +217,7 @@ CITIES = {
             ("Is there a personal trainer near Orange, CA for adults over 40?",
              "Yes. Fig Performance offers private one-on-one personal training for adults over 40 at 1284 E. Yorba Linda Blvd in Placentia, a short drive north of the City of Orange. Every session is with Coach Dan, an ACSM certified personal trainer."),
             ("How much does a personal trainer cost near Orange?",
-             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
+             "Personal training at Fig Performance is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train, and we give you the exact number at your free consult. The first consult and InBody scan are free."),
             ("Can a personal trainer come to my home in Orange?",
              "Yes. In-home personal training brings Coach Dan to your home or office anywhere in Orange, including Old Towne and Orange Park Acres. It's $150 a session, mileage included."),
             ("I've worked out for years. Will this be different?",

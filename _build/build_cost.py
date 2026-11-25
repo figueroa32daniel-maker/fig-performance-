@@ -7,7 +7,7 @@ CAL = "/#consult"
 body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performance in Placentia</a> costs $60 to $90 a session, with a free first consult and InBody scan. Most gyms in town don't post their personal training prices, so here's what training actually costs, what changes the price, and how to compare your options.</p>
 
 <h2 id="fig">Fig Performance prices (2026)</h2>
-<p><strong>One-on-one personal training: $60 to $90 a session.</strong> Where you land in that range depends on how often you train and whether you pay in full. We give you your exact rate at the free consult, in writing, before you decide anything.</p>
+<p><strong>One-on-one personal training: $60 to $90 a session.</strong> Where you land in that range depends on how often you train. We give you your exact rate at the free consult, in writing, before you decide anything.</p>
 <ul>
   <li>Every session is one-on-one with Coach Dan Figueroa, ACSM certified.</li>
   <li>3-month minimum on every training plan.</li>
@@ -51,7 +51,7 @@ body = f"""<p class="legal-intro"><a href="/">Personal training at Fig Performan
 
 faqs = [
     ("How much does personal training cost in Placentia?",
-     "At Fig Performance, one-on-one personal training is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train and whether you pay in full. The first consult and InBody scan are free."),
+     "At Fig Performance, one-on-one personal training is $60 to $90 a session, billed weekly or monthly, with a 3-month minimum. Where you land in that range depends on how often you train. The first consult and InBody scan are free."),
     ("How much is a gym membership in Placentia?",
      "Big-box gyms in Placentia list memberships from roughly $10 to $35 a month for equipment access. Personal training is usually extra. Fig Performance does not sell an equipment-only membership. We coach people, so the two options are one-on-one training at $60 to $90 a session and semi-private small-group training from $180 a month."),
     ("Why is one-on-one training more expensive than a gym membership?",

@@ -10,7 +10,7 @@ Last updated: November 24, 2026. Source of truth: https://www.figperformance.com
 ## Fig Strong 90: personal training (one-on-one with Coach Dan Figueroa, ACSM certified)
 - A 90-day program to lose fat, get stronger and tone up
 - Price: $60 to $90 per session, billed weekly or monthly
-- Where you land in that range depends on how often you train and whether you pay in full. The exact rate is given at the free consult, in writing, before you commit
+- Where you land in that range depends on how often you train. The exact rate is given at the free consult, in writing, before you commit
 - 3-month minimum commitment on every plan; no drop-ins or one-off sessions
 - Includes: 50-minute one-on-one sessions (warm-up, workout, cool-down), planned around your goals, schedule and fitness level; a nutrition program; a training program in the app; support from Dan Monday through Saturday; a weekly InBody scan
 - Missed sessions are still billed; pause with notice for travel or a break

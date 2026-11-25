@@ -44,7 +44,7 @@ body = f"""<p class="legal-intro">If you're over 40, you work a desk job, and yo
 <h2 id="hormones">Hormones and menopause are real, and you can still get results</h2>
 <p><strong>For men:</strong> testosterone gradually declines with age, often starting in your 30s. Energy, drive, focus and sex drive can drop, and you start losing muscle. Lifting weights, eating a high-protein diet with healthy fats, and a few basic supplements, like a multivitamin and creatine, go a long way. Check with your doctor before starting supplements, especially if you take medication.</p>
 <p><strong>For women:</strong> menopause changes the game, but it doesn't end it. The basics matter even more: weight training and getting stronger, eating enough protein, drinking plenty of water, getting good sleep and cutting back on alcohol. I've seen a lot of women over 50 get in really good shape and get really strong because they nailed the basics. It takes time and consistency, and you have to be realistic about the pace.</p>
-<p>For more, see our guide to <a href="/strength-training-for-women-over-40">strength training for women over 40</a>.</p>
+<p>For more, see our guide to <a href="/strength-training-for-women-over-40">strength training for women over 40</a>, and how <a href="/strength-training-for-weight-loss">strength training drives fat loss</a> rather than cardio alone.</p>
 
 <h2 id="stress">Stress, alcohol and the things nobody measures</h2>
 <p><strong>Stress:</strong> a lot of people are more stressed than they think. Some are so good at masking it, or distracting themselves, that they don't notice. Then they keep getting sick and blame the air conditioning. Long-term stress wears your body down, and your body will tell you about it.</p>
