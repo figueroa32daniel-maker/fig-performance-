@@ -42,7 +42,7 @@ faqs = [
     ("Is Coach Dan a nutrition coach or a dietitian?",
      "Coach Dan is a Precision Nutrition Level 1 certified nutrition coach and ACSM certified personal trainer, not a registered dietitian. He coaches nutrition for healthy adults who want to lose fat and build muscle. For a medical condition, a food allergy, an eating disorder, pregnancy or a prescribed diet, see a registered dietitian or your doctor."),
     ("How much does nutrition coaching cost?",
-     "It's included with personal training at Fig Performance, which is $60 to $90 a session with a 3-month minimum. Your exact rate depends on how often you train and whether you pay in full, and we give you the number at your free consult. The first consult and InBody scan are free."),
+     "It's included with personal training at Fig Performance, which is $60 to $90 a session with a 3-month minimum. Your exact rate depends on how often you train, and we give you the number at your free consult. The first consult and InBody scan are free."),
     ("How much protein should I eat after 40?",
      "Enough to keep the muscle you have while you lose fat. Start by putting a solid protein source in every meal. Your exact target depends on your body size, goals and health, which Coach Dan sets at your consult."),
 ]
