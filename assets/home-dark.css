@@ -284,3 +284,18 @@ a.tcard:focus-visible{outline:3px solid var(--hot);outline-offset:3px}
 .award .a-who{margin:10px 0 0;font-size:.84rem;color:var(--fp-muted);overflow-wrap:break-word}
 .award .a-yr{margin:4px 0 0;font-family:var(--display);font-weight:800;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--hot)}
 .awards-sub{margin:40px 0 0;font-size:clamp(1.3rem,3.6vw,1.75rem)}
+
+/* Award bar above the header (Dan, Nov 25 2026) */
+.topbar{background:var(--ink-3,#13161C);border-bottom:1px solid var(--fp-line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:center;gap:9px;padding-top:9px;padding-bottom:9px;text-align:center}
+.topbar svg{width:13px;height:13px;fill:var(--hot);flex:none}
+.topbar p{margin:0;font-family:var(--display);font-weight:700;font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fp-muted);line-height:1.5}
+.topbar b{color:var(--hot);font-weight:800}
+@media(max-width:560px){.topbar p{font-size:.63rem;letter-spacing:.1em}}
+
+/* Hero proof row (Dan, Nov 25 2026) */
+.hero-stats{display:flex;flex-wrap:wrap;gap:0;margin:26px 0 22px;border-left:3px solid var(--hot);background:rgba(19,22,28,.72);border-radius:0 var(--r) var(--r) 0;padding:16px 4px}
+.hero-stats>div{padding:4px 22px;min-width:0;flex:1 1 128px}
+.hero-stats b{display:block;font-family:var(--display);font-weight:900;font-size:clamp(1.45rem,3.4vw,1.85rem);letter-spacing:-.03em;color:var(--hot);line-height:1.05}
+.hero-stats span{display:block;font-family:var(--display);font-weight:700;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--fp-muted);margin-top:7px;line-height:1.55}
+@media(max-width:560px){.hero-stats{padding:14px 2px}.hero-stats>div{padding:6px 14px;flex:1 1 100%}.hero-stats>div+div{border-top:1px solid var(--fp-line);margin-top:10px;padding-top:12px}}
