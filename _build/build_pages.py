@@ -13,6 +13,14 @@ header = header.replace(' aria-current="page"', "").replace('          <li><a hr
 footer = pricing[pricing.index("  <!-- ============ FOOTER ============ -->"):]
 
 TAKEAWAYS = {
+    "how-much-protein-after-40": [
+        "The RDA of 0.8 g per kg is a floor to prevent deficiency, not a target.",
+        "Healthy adults over 65 need about 1.0 to 1.2 g per kg a day, and more if they train.",
+        "Aim for 25 to 35 g at each main meal. Breakfast is where most people fall short."],
+    "strength-training-for-bone-density": [
+        "Walking and swimming do not load bone enough to build it. Heavy lifting and impact do.",
+        "In the LIFTMOR trial, 30 minutes twice a week for eight months improved spine and hip bone density.",
+        "It was supervised, participants were screened, and it was reported as safe. Talk to your doctor first."],
     "how-to-lose-weight-after-40": [
         "Move more every day: over 5,000 steps, ideally 6,000 or more.",
         "Eat protein at every meal, and lift heavy enough to get stronger over time.",
