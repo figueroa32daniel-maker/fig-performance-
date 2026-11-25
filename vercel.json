@@ -110,6 +110,16 @@
       "permanent": false
     },
     {
+      "source": "/review",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJOwL6Wd7V3IARyTpNLSm1SQE",
+      "permanent": false
+    },
+    {
+      "source": "/reviews",
+      "destination": "https://search.google.com/local/writereview?placeid=ChIJOwL6Wd7V3IARyTpNLSm1SQE",
+      "permanent": false
+    },
+    {
       "source": "/privacy-policy",
       "destination": "/privacy",
       "permanent": true
