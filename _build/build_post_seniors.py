@@ -20,7 +20,7 @@ body = f"""<p class="legal-intro">Here's my unpopular opinion: a lot of trainers
 <p>I'm not saying you'll start there. We don't start with anything crazy. But I don't treat a 65-year-old like they're 90. When I give clients something challenging, they often ask, "Are you sure I can do this?" I tell them: trust me, I've seen it work. Then they do it, and they're surprised they had it in them.</p>
 
 <h2 id="senior">Who counts as a senior?</h2>
-<p>At Fig Performance, I'd say anyone 65 and up. But honestly, I don't train seniors any differently. My philosophy is the same for everyone. What changes is the starting point and the goals. That's why every plan starts with an assessment: your joints, mobility, injuries and history. If you've had surgery or finished physical therapy, I like to work with your doctor or therapist's notes too.</p>
+<p>At Fig Performance, I'd say anyone 65 and up. If you're in your 50s, start with <a href="/strength-training-after-50">strength training after 50</a>. But honestly, I don't train seniors any differently. My philosophy is the same for everyone. What changes is the starting point and the goals. That's why every plan starts with an assessment: your joints, mobility, injuries and history. If you've had surgery or finished physical therapy, I like to work with your doctor or therapist's notes too.</p>
 <p>The CDC recommends that adults 65 and older do muscle-strengthening activities at least 2 days a week, plus 150 minutes a week of moderate activity like brisk walking, and balance work (<a href="{CDC}" target="_blank" rel="noopener noreferrer">CDC</a>).</p>
 
 <h2 id="movements">The 6 movements every older adult should train</h2>
