@@ -213,7 +213,7 @@
     check("f-date-waiver", !!clean($("f-date-waiver").value, 40));
 
     if (!WAIVER_ONLY) {
-    for (var n = 1; n <= 6; n++) check("f-init-" + n, /^\p{L}{2,4}$/u.test($("f-init-" + n).value.trim()));
+    for (var n = 1; n <= 7; n++) check("f-init-" + n, /^\p{L}{2,4}$/u.test($("f-init-" + n).value.trim()));
 
     check("f-rate", money($("f-rate").value) !== null && +money($("f-rate").value) > 0);
     check("f-sessions", /^[1-7]$/.test($("f-sessions").value.trim()));
