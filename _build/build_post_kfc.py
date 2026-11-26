@@ -32,7 +32,7 @@ body = f"""<p class="legal-intro">Extra Crispy and Original Recipe are the same 
 </ul>
 <p>One gram of protein apart. One hundred and eighty calories apart. That is one of the largest gaps for the smallest trade-off anywhere in this series.</p>
 {pullquote("One gram of protein apart. A hundred and eighty calories apart. Same chicken.")}
-<p><strong>The catch, and it is a real one:</strong> grilled chicken is not reliably on the menu everywhere. At least one nutrition guide reports it is no longer a nationwide item, and availability appears to vary by location. Check before you build a plan around it. If your Placentia store has it, order it. If not, Original Recipe breast is the fallback and it is still 39 grams of protein.</p>
+<p><strong>The catch:</strong> availability varies by store. At least one nutrition guide reports grilled chicken is no longer a nationwide item, and some locations have dropped it. The two closest to the studio, on Yorba Linda Boulevard and on Imperial Highway, have been carrying it. Menus change without much warning, so call ahead if you are driving somewhere specifically for it. If your store does not have it, the Original Recipe breast is the fallback and it is still 39 grams of protein.</p>
 
 <h2 id="sodium">Sodium, again</h2>
 <p>A single Original Recipe breast carries about 1,190 mg. That is not catastrophic on its own, but it is half a day's worth in one piece of chicken before biscuits, gravy or sides enter the picture.</p>
@@ -56,7 +56,7 @@ body = f"""<p class="legal-intro">Extra Crispy and Original Recipe are the same 
 <p>Knowing one sentence, order Original Recipe not Extra Crispy, is worth more over a year than any amount of deciding you will never go.</p>
 
 <h2 id="caveat">A note on these numbers</h2>
-<p>This is the best-sourced page in the series. Six independent nutrition breakdowns give the Original Recipe breast at 390 calories, 39 grams of protein and 1,190 mg of sodium, and five give the Kentucky Grilled breast at 210 calories and 38 grams. One page claimed the grilled breast was 250 to 300 calories with 30 grams of protein while its own calculator said 210 and 38, so that figure was discarded rather than averaged in. The availability of grilled chicken is the genuinely uncertain part here, so this page tells you to check your store rather than pretending to know.</p>
+<p>This is the best-sourced page in the series. Six independent nutrition breakdowns give the Original Recipe breast at 390 calories, 39 grams of protein and 1,190 mg of sodium, and five give the Kentucky Grilled breast at 210 calories and 38 grams. One page claimed the grilled breast was 250 to 300 calories with 30 grams of protein while its own calculator said 210 and 38, so that figure was discarded rather than averaged in. The availability of grilled chicken is the genuinely uncertain part here. The note about the Yorba Linda Boulevard and Imperial Highway locations comes from Coach Dan rather than from a published source, and chains change menus without announcing it, so this page tells you to call ahead rather than pretending to know.</p>
 
 <h2 id="more">The rest of the restaurant guides</h2>
 <ul><li><a href="/in-n-out-after-40">In-N-Out</a>: the Double-Double against the fries</li><li><a href="/chick-fil-a-after-40">Chick-fil-A</a>: grilled nuggets, 25 g for 130 calories</li><li><a href="/chipotle-after-40">Chipotle</a>: double chicken and where the calories hide</li><li><a href="/el-pollo-loco-after-40">El Pollo Loco</a>: 34 g in a grilled breast, and the sodium</li><li><a href="/raising-canes-after-40">Raising Cane's</a>: the sauce costs more than the chicken</li><li><a href="/jersey-mikes-after-40">Jersey Mike's</a>: the three words that cut 300 calories</li><li><a href="/panera-after-40">Panera</a>: the bread bowl holds more than the soup</li><li><a href="/starbucks-after-40">Starbucks</a>: protein lattes and egg bites</li></ul>
@@ -69,7 +69,7 @@ faqs = [
     ("Is Original Recipe or Extra Crispy better for weight loss?",
      "Original Recipe. An Extra Crispy breast adds about 140 calories and 14 grams of fat over the Original Recipe version of the same cut, and gains you no extra protein. It is purely the coating."),
     ("Does KFC still have grilled chicken?",
-     "Availability varies and at least one nutrition guide reports it is no longer a nationwide menu item. Check your own location. Where it is available, the Kentucky Grilled breast at roughly 210 calories and 38 grams of protein is the best order in the building."),
+     "It depends on the store. At least one nutrition guide reports it is no longer a nationwide menu item, though the locations nearest Placentia, on Yorba Linda Boulevard and on Imperial Highway, have been carrying it. Call ahead if you are making a trip for it. Where it is available, the Kentucky Grilled breast at roughly 210 calories and 38 grams of protein is the best order in the building."),
     ("Can you eat KFC and still lose fat?",
      "Yes, if the order fits your calories and hits your protein. A breast piece is 39 grams of protein, which is a real meal. What usually ruins it is choosing Extra Crispy without thinking about it and adding a biscuit and a mac and cheese."),
     ("What is the healthiest thing to order at KFC?",
