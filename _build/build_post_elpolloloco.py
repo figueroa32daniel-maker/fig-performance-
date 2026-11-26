@@ -6,7 +6,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "el-pollo-loco-after-40"
 
-body = f"""<p class="legal-intro">A fire-grilled chicken breast here is 200 calories and 34 grams of protein, a better protein-to-calorie ratio than almost anything you will cook at home, for about six dollars, five minutes from most of Placentia. The calories at this restaurant are not the issue, which is why I tell clients to stop reading that column. The sodium is. One bowl can carry a full day of it, and that matters most to the people who have had a doctor mention blood pressure.</p>
+body = f"""<p class="legal-intro">A fire-grilled chicken breast here is 200 calories and 34 grams of protein, a better protein-to-calorie ratio than almost anything you will cook at home, for about six dollars, five minutes from most of Placentia. The calories are not the issue at this restaurant, which is why I tell clients to stop looking at that column. There is a different number on the menu that matters more, and it matters most to the people who have had a doctor mention blood pressure.</p>
 
 <h2 id="chicken">The chicken itself is the best thing on any menu around here</h2>
 <p>Published numbers for the fire-grilled pieces:</p>
@@ -70,8 +70,8 @@ html = page(
     "El Pollo Loco After 40: What to Order | Fig Performance",
     "What to order at El Pollo Loco after 40: 34g of protein in a grilled breast, the 52g salad nobody orders, and the sodium number in the bowls worth knowing.",
     "El Pollo Loco After 40: What to Order",
-    "Fitness after 40", "Unpopular opinion: the calories at El Pollo Loco are fine, and the number nobody checks is the sodium.",
-    "34 grams of protein for 200 calories. The bowl it comes in is a different story.",
+    "Fitness after 40", "Stop reading the calorie column at El Pollo Loco. It is the wrong number to worry about.",
+    "34 grams of protein for 200 calories, and the number nobody mentions.",
     [("chicken", "The chicken itself"), ("sodium", "The number I watch"), ("salad", "The best item on the menu"),
      ("order", "What I would order"), ("why", "Why it is on the list"), ("more", "The other guides")],
     body, faqs, "El Pollo Loco after 40", kind="article", published=DATE)
