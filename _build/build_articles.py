@@ -204,7 +204,7 @@ pages = {
         "Guides for adults over 40 who want to lose fat, build strength and feel like themselves again, from Coach Dan at Fig Performance in Placentia.",
         "Fitness After 40 Guides | Fig Performance",
         "Guides", "Fitness After 40",
-        "Guides for adults over 40 who want to lose fat, build strength and feel like themselves again.",
+        "You're over 40, you put in the work, and the results stopped matching the effort. These guides cover what changed and what to do about it: losing fat, building strength, feeling like yourself again.",
         [("guides", "Guides"), ("tools", "Measure and recover"), ("train", "Train with Dan")],
         hub_body, hub_faqs, "Fitness After 40", kind="article", published=DATE),
 }

@@ -9,7 +9,7 @@ CAL = "https://calendly.com/trainwithcoachdan/free-consult-inbody-scan"
 SG = "https://www.hhs.gov/surgeongeneral/reports-and-publications/alcohol-cancer/index.html"
 DOWNLOAD = f'<p><a class="btn btn-gold" href="{PDF}" download>Download the free meal plan (PDF)</a></p>'
 
-body = f"""<p class="legal-intro">A simple meal plan for weight loss doesn't need fancy recipes. Every meal and snack has the same four things: protein, carbs, fats and fiber. That combination keeps you full longer, so you don't snack, overeat or run out of energy. Below is the exact template Coach Dan Figueroa uses with clients at Fig Performance, with breakfast, lunch, dinner and snack options and a grocery list. Download the free PDF. No email needed.</p>
+body = f"""<p class="legal-intro">If you can't stick to a meal plan, it usually means it was built for someone with nothing else going on. This simple meal plan for weight loss is built to survive a full calendar. Every meal and snack has the same four things: protein, carbs, fats and fiber, which keep you full longer so you don't snack, overeat or run out of energy. Below is the template Coach Dan Figueroa uses with clients at Fig Performance, with breakfast, lunch, dinner and snack options and a grocery list. Download the free PDF. No email needed.</p>
 {DOWNLOAD}
 
 <h2 id="rule">The one rule behind every meal</h2>
