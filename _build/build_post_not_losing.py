@@ -23,7 +23,7 @@ body = f"""<p class="legal-intro">If you're not losing weight, you're almost alw
 <p><strong>What to do:</strong> aim for 0.7 to 1 gram of protein per pound of body weight every day, whether you're training or not. If you have a lot of weight to lose, base it on your goal weight. Build your meals around protein, and start early. Your appetite tends to drop off later in the day, so get protein in at breakfast and before you train. Your muscles need it to recover and grow.</p>
 
 <h2 id="training">4. Your workouts aren't built to change your body</h2>
-<p>Showing up to work out isn't the same as training to change your body. You need progressive overload: lifting a little more weight, or doing a few more reps, over time. That's how you build and keep muscle, and muscle keeps your metabolism up.</p>
+<p>Showing up to work out isn't the same as training to change your body. You need progressive overload: lifting a little more weight, or doing a few more reps, over time. That's how you build and keep muscle, and muscle keeps your metabolism up. Here's more on <a href="/strength-training-for-weight-loss">how strength training drives weight loss</a>.</p>
 <p><strong>What to do:</strong> lift weights at least 2 or 3 times a week, and keep getting stronger. If you need a plan, start with the beginner workout plan for <a href="/beginner-workout-plan-for-women">women</a> or <a href="/beginner-workout-plan-for-men">men</a>.</p>
 
 <h2 id="movement">5. You sit more than you think</h2>

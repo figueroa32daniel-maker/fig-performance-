@@ -14,7 +14,7 @@ from build_cities import SHARED_TRAIN, SHARED_PRICE
 
 SLUG = "personal-trainer-placentia"
 
-body = f"""<p class="legal-intro">Fig Performance is a private, one-on-one strength studio at 1284 E. Yorba Linda Blvd in Placentia. Not a gym floor you walk onto alone. A room where one coach trains one person at a time, built for adults over 40 who are already doing the work and want it to start showing.</p>
+body = f"""<p class="legal-intro">Fig Performance is a <a href="/what-is-private-personal-training">private, one-on-one</a> strength studio at 1284 E. Yorba Linda Blvd in Placentia. Not a gym floor you walk onto alone. A room where one coach trains one person at a time, built for adults over 40 who are already doing the work and want it to start showing.</p>
 
 <h2 id="who">Who trains here</h2>
 <p>Placentia is a town of people who have been busy for thirty years: business owners, teachers, nurses, people in the trades, parents whose kids have left and who suddenly have an hour back. The ones who come to us usually arrive with some version of the same sentence. <em>I used to be in shape. I still move. Nothing is changing.</em></p>
