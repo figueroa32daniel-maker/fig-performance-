@@ -198,6 +198,7 @@ h3{font-size:1.2rem;letter-spacing:-.02em;line-height:1.22}
 .studio{display:grid;gap:clamp(26px,4vw,48px);align-items:center;margin-top:34px}
 @media(min-width:900px){.studio{grid-template-columns:1fr 1fr}}
 .studio img{width:100%;aspect-ratio:16/11;object-fit:cover;filter:saturate(.82) brightness(.74)}
+.studio img.night{filter:none}
 .studio dl{margin:24px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 22px;font-size:.94rem}
 .studio dt{font-family:var(--display);font-weight:800;font-size:.69rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hot);padding-top:4px}
 .studio dd{margin:0;color:var(--fp-muted)}
