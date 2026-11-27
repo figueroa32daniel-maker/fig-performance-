@@ -51,7 +51,7 @@ body = """<p class="legal-intro">For interview requests, expert quotes or photos
 
 <h2 id="facts">Fast facts</h2>
 <ul>
-  <li><strong>Location:</strong> Placentia, CA (Orange County), serving Yorba Linda, Brea, Fullerton, Anaheim Hills and Villa Park</li>
+  <li><strong>Location:</strong> Placentia, CA (Orange County), serving <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a>, <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a> and <a href="/personal-trainer-villa-park">Villa Park</a></li>
   <li><strong>Facility:</strong> private 1,500 sq ft strength gym</li>
   <li><strong>Grand opening:</strong> Saturday, November 14, 2026</li>
   <li><strong>Reviews:</strong> 5.0 on Google and 5.0 on Yelp</li>

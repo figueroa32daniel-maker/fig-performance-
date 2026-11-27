@@ -82,7 +82,7 @@ body = f"""<p class="legal-intro">I've trained in Switzerland, Italy, Greece, Po
 
 <h2 id="coach">When you get home</h2>
 <p>Your first session back feels rusty for about one workout. Don't make up for lost time by going heavier than you left off. Pick up where you were, and by the second session you're back. If you've been meaning to start a real plan and the holidays are the excuse, come in for a free consult when you're home. We'll do an InBody scan and build the routine that travels with you.</p>
-<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving Yorba Linda, Brea, Fullerton and Anaheim Hills. Related: <a href="/how-to-avoid-holiday-weight-gain">how to avoid holiday weight gain after 40</a>, the <a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a> and <a href="/online-personal-trainer">online coaching</a>, which comes with you wherever you go.</p>
+<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a> and <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a>. Related: <a href="/how-to-avoid-holiday-weight-gain">how to avoid holiday weight gain after 40</a>, the <a href="/3-day-beginner-workout-plan">3-day beginner workout plan</a> and <a href="/online-personal-trainer">online coaching</a>, which comes with you wherever you go.</p>
 <p><em>Check with your doctor before starting a new exercise program, especially if you have a heart condition or a recent injury or surgery.</em></p>
 {CTA}"""
 

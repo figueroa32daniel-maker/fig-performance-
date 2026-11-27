@@ -66,7 +66,7 @@ body = f"""<p class="legal-intro">Every January the same thing happens. People s
 
 <h2 id="coach">Start the year with a number, not a guess</h2>
 <p>If you don't know what you burn, you can't set a deficit; you can only guess. A free consult at Fig Performance includes an InBody scan, so you leave with your BMR and your real muscle and fat numbers. From there, the deficit is math.</p>
-<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving Yorba Linda, Brea, Fullerton and Anaheim Hills. Related: <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a>, <a href="/why-am-i-not-losing-weight">why you're not losing weight</a>, <a href="/nutrition-coaching-placentia">nutrition coaching</a> and the <a href="/meal-plan-for-weight-loss">free meal plan for weight loss</a>.</p>
+<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a> and <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a>. Related: <a href="/how-to-lose-weight-after-40">how to lose weight after 40</a>, <a href="/why-am-i-not-losing-weight">why you're not losing weight</a>, <a href="/nutrition-coaching-placentia">nutrition coaching</a> and the <a href="/meal-plan-for-weight-loss">free meal plan for weight loss</a>.</p>
 <p><em>Fig Performance coaches are not registered dietitians. Talk to your doctor before starting a low-calorie diet or a supplement, especially if you have a medical condition or take medication.</em></p>
 {CTA}"""
 

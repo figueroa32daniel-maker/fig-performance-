@@ -77,7 +77,7 @@ body = f"""<p class="legal-intro">This past August I spent three days in Fort La
 
 <h2 id="coach">Start here</h2>
 <p>If you've never hip thrusted, set up a bench and the empty bar, find full hip extension with no weight first, then add 5 pounds a side. If you want someone to set up the bar and watch your form, that's what the free consult is for.</p>
-<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving Yorba Linda, Brea, Fullerton and Anaheim Hills. Related: <a href="/strength-training-for-women-over-50">strength training for women over 50</a>, <a href="/strength-training-for-women-over-40">strength training for women over 40</a> and <a href="/how-to-lose-belly-fat-after-menopause">how to lose belly fat after menopause</a>. Can't make it in person? Try <a href="/online-personal-trainer">online coaching</a>.</p>
+<p>Fig Performance is a <a href="/">private one-on-one personal training gym in Placentia</a>, serving <a href="/personal-trainer-yorba-linda">Yorba Linda</a>, <a href="/personal-trainer-brea">Brea</a>, <a href="/personal-trainer-fullerton">Fullerton</a> and <a href="/personal-trainer-anaheim-hills">Anaheim Hills</a>. Related: <a href="/strength-training-for-women-over-50">strength training for women over 50</a>, <a href="/strength-training-for-women-over-40">strength training for women over 40</a> and <a href="/how-to-lose-belly-fat-after-menopause">how to lose belly fat after menopause</a>. Can't make it in person? Try <a href="/online-personal-trainer">online coaching</a>.</p>
 <p><em>Check with your doctor before starting a new exercise program, especially if you have a hip or back injury or a recent surgery.</em></p>
 {CTA}"""
 
