@@ -6,7 +6,7 @@ DATE = "2026-11-03"
 SLUG = "strength-training-for-women-over-50"
 LIFTMOR = "https://pubmed.ncbi.nlm.nih.gov/28975661/"
 
-body = f"""<p class="legal-intro">Strength training for women over 50 isn't a gentler, watered-down version of training. Your age doesn't decide your program. Your body does: your injuries, your mobility, your strength and your goals. I have a 37-year-old client who can't do a pull-up, and a 60-year-old who can. Here's how I train women over 50 at Fig Performance, and what changes during and after menopause.</p>
+body = f"""<p class="legal-intro">If you're a woman over 50 and the walking, the classes and the light weights haven't changed how you look or feel, it isn't because you're doing too little. The one thing that moves the needle after 50, lifting heavy enough to matter, is the thing most women get quietly steered away from. Strength training for women over 50 isn't a gentler, watered-down version of training. Your age doesn't decide your program. Your body does: your injuries, your mobility, your strength and your goals. I have a 37-year-old client who can't do a pull-up, and a 60-year-old who can. Here's how I train women over 50 at Fig Performance going into 2027, and what changes during and after menopause.</p>
 
 <h2 id="age">Your age doesn't decide your program</h2>
 <p>I don't treat a 60-year-old like she's 90, or a 40-year-old like she's 60. Every client gets the same effective coaching, because I want all my clients to feel strong, confident, capable and powerful.</p>
