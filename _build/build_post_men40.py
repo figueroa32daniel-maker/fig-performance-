@@ -5,7 +5,7 @@ from build_pages import page, SITE, CTA, callout, pullquote
 DATE = "2026-11-03"
 SLUG = "workout-plan-for-men-over-40"
 
-body = f"""<p class="legal-intro">The best workout plan for men over 40 trains for function, not just looks. Start light, use ranges of motion you actually own, progress slowly, and fix the spots that usually hurt: neck, shoulders, lower back, hips and knees. Do that, and you stay strong enough for golf, the kids, the grandkids and the trip you've been planning, without getting hurt.</p>
+body = f"""<p class="legal-intro">If you're a man over 40 and the training that built you at 30 has stopped showing up on your body, the plan is usually the problem, not your age and not your effort. The best workout plan for men over 40 trains for function: start light, use ranges of motion you actually own, progress slowly, and fix the spots that usually hurt, like the neck, shoulders, lower back, hips and knees. Do that and you stay strong for golf, the kids, the grandkids and the trip you've been planning, without getting hurt. Here's the plan I'd put you on going into 2027.</p>
 
 <h2 id="mistake">The biggest mistake men over 40 make</h2>
 <p>Most guys who walk in aren't training the right things. They train for aesthetics and forget about function. And they try to work in ranges of motion they don't own. That's how injuries happen.</p>
@@ -27,6 +27,7 @@ body = f"""<p class="legal-intro">The best workout plan for men over 40 trains f
 <p>In the first three months, his inflammation came down, his belly flattened, his chest and arms got more defined, and he went from one pull-up to five in a row. Over time he kept building.</p>
 {callout("Client result", "Jonathan, 43, ex-Army", ["Pull-ups: from 1 to 5 in a row", "Chin-ups with 35 pounds added", "Jefferson curls with 135 pounds", "Bench press 185 pounds, after 10 years of not benching"])}
 <p>His glutes grew a lot too, thanks to all the posterior chain work. Most of all, he improved his capacity as a father and a husband.</p>
+<p>It isn't only about strength. Marcus came to me at 47 carrying weight he hadn't been able to shift on his own, and dropped from 218 to 196 pounds in seven months on this kind of plan, training two to three times a week, not living in the gym.</p>
 
 {pullquote("Motion is lotion. As you get older, your body gets stiffer. Keep it moving.")}
 
