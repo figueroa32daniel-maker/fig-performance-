@@ -511,6 +511,8 @@ address { font-style: normal; }
 .legal-body h2:first-of-type { margin-top: 1.6rem; }
 .legal-body h3 { font-size: 1.02rem; margin: 1.4rem 0 .5rem; }
 .legal-body p, .legal-body li { color: #2b2f38; font-size: 1rem; line-height: 1.7; }
+.legal-body .consult-explainer p { color: var(--on-navy-muted); }
+.legal-body .consult-explainer h3 { color: #fff; }
 .legal-body ul { padding-left: 1.2em; display: grid; gap: 6px; margin: 0 0 1rem; }
 .legal-body a { color: var(--navy); font-weight: 600; text-underline-offset: 2px; overflow-wrap: anywhere; }
 .legal-intro { font-size: 1.08rem !important; color: var(--text) !important; padding-bottom: 1.2rem; border-bottom: 1px solid var(--line); }
