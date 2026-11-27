@@ -8,7 +8,7 @@ var CONFIG = {
   PHONE: "(714) 396-7178",            // display format; links use +1 digits
   EMAIL: "trainat@figperformance.com",
   FORM_ENDPOINT: "https://formsubmit.co/ajax/figueroa32daniel@gmail.com",
-  POLICY_VERSION: "2026-11-17.2"         // bump when privacy/terms/consent text changes
+  POLICY_VERSION: "2026-11-27.1"         // bump when privacy/terms/consent text changes
 };
 
 (function () {
@@ -238,7 +238,9 @@ var CONFIG = {
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   window.gtag("js", new Date());
-  window.gtag("config", measurementId);
+  /* Measurement only. Google Signals and ad personalisation are off, so visits are not
+     used to build advertising profiles. Keeps this out of CPRA "sharing" territory. */
+  window.gtag("config", measurementId, { allow_google_signals: false, allow_ad_personalization_signals: false });
   var tag = document.createElement("script");
   tag.async = true;
   tag.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
