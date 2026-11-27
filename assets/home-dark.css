@@ -12,7 +12,7 @@
   --ink:#0B0E14; --ink-2:#121724; --ink-3:#1A2132;
   --fp-line:rgba(255,255,255,.10); --fp-line-2:rgba(255,255,255,.18);
   --hot:#FFA62B;
-  --fp-text:#E8E5DF; --fp-muted:#9BA3B4; --fp-muted-2:#6F7889;
+  --fp-text:#E8E5DF; --fp-muted:#9BA3B4; --fp-muted-2:#788192;
   --display:'Archivo',system-ui,-apple-system,sans-serif;
   --body:'Inter',system-ui,-apple-system,sans-serif;
   --wrap:1280px; --pad:clamp(20px,4vw,40px);
@@ -223,6 +223,7 @@ h3{font-size:1.2rem;letter-spacing:-.02em;line-height:1.22}
 .foot h3{font-size:.71rem;font-family:var(--display);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--hot);margin:0 0 16px}
 .foot ul{list-style:none;margin:0;padding:0}
 .foot li{margin-bottom:10px;color:var(--fp-muted)}
+.foot p{color:var(--fp-muted)}
 .foot a{color:var(--fp-muted);text-decoration:none}
 .foot a:hover{color:var(--hot)}
 .foot .bottom{border-top:1px solid var(--fp-line);margin-top:38px;padding-top:22px;color:var(--fp-muted-2);font-size:.84rem}
