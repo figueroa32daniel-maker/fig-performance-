@@ -6,7 +6,7 @@ from build_pages import page, SITE, CTA, callout, pullquote, stats
 DATE = "2026-11-25"
 SLUG = "how-much-protein-after-40"
 
-body = f"""<p class="legal-intro">Most people over 40 who tell me they eat plenty of protein are eating about half what they need. Not because they are careless. Because the number everyone quotes, the official RDA, was never meant to be a target for someone who is 50 and lifting weights. It is a floor, set to stop you becoming deficient. Here is what the research actually says, and the simple way I get clients to hit it.</p>
+body = f"""<p class="legal-intro">Most people over 40 who tell me they eat plenty of protein are eating about half what they need. Not because they are careless. Because the number everyone quotes, the official RDA, was never meant to be a target for someone who is 50 and lifting weights. It is a floor, set to stop you becoming deficient. Here is what the research actually says, and the simple way I get clients to hit it. It matters most when the goal is fat loss, and going into 2027 it is the first number I set with a client, before we count a single calorie.</p>
 
 <h2 id="rda">The number you have heard is a floor, not a goal</h2>
 <p>The Recommended Dietary Allowance for protein is 0.8 grams per kilogram of body weight a day. For a 165-pound adult that is about 60 grams. It sounds official, and it is, but of what: it is the minimum intake that keeps nearly all healthy adults from running a deficit. It is the bottom of the range, not the middle.</p>
@@ -48,6 +48,7 @@ body = f"""<p class="legal-intro">Most people over 40 who tell me they eat plent
 
 <h2 id="lifting">Protein without lifting does not do much</h2>
 <p>You can eat 150 grams a day and still lose muscle if nothing is asking your body to keep it. The protein is the raw material. The training is the instruction. Teresa was 60 when she started here, could not do a single bodyweight exercise, and did her first pull-up about three months later. That happened because she lifted and ate enough to support it, in that order of importance.</p>
+<p>The same holds when you are losing fat. Enough protein is what keeps the weight you lose coming off fat instead of muscle. Rosa came to me at 43, working long shifts, and went from 205 to 169 pounds in eleven months, losing the fat while the training and the protein held onto her muscle.</p>
 <p>If you are over 40 and want the training side of this, <a href="/strength-training-for-women-over-40">start here for women</a> or <a href="/workout-plan-for-men-over-40">here for men</a>, and <a href="/build-muscle-after-60">here if you are over 60</a>.</p>
 {CTA}"""
 
