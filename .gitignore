@@ -1,2 +1,13 @@
 __pycache__/
 *.pyc
+
+# Never commit credentials. The API reads TWILIO_AUTH_TOKEN, database and AI keys
+# from Vercel environment variables, so no .env belongs in this repo.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+credentials.json
+.vercel
