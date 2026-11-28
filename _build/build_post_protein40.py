@@ -74,7 +74,7 @@ html = page(
     "The number everyone quotes is a minimum. Here is the real range, and how to hit it.",
     [("rda", "The RDA is a floor"), ("why", "Why it changes after 40"), ("meal", "Spread it out"),
      ("how", "How to hit it"), ("kidneys", "What about my kidneys?"), ("lifting", "Protein without lifting")],
-    body, faqs, "How much protein after 40", kind="article", published=DATE)
+    body, faqs, "How much protein after 40", kind="article", published=DATE, updated="2026-11-27")
 
 if __name__ == "__main__":
     (SITE / f"{SLUG}.html").write_text(html)

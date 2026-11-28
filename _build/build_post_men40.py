@@ -72,7 +72,7 @@ html = page(
     "Train for function, not just looks. Start light, fix what hurts, and stay capable for life.",
     [("mistake", "The biggest mistake"), ("problem-spots", "Fix what hurts"), ("jonathan", "Jonathan's story"),
      ("plan", "What the plan looks like"), ("why", "Why it matters"), ("coach", "Train with a coach")],
-    body, faqs, "Workout Plan for Men Over 40", kind="article", published=DATE)
+    body, faqs, "Workout Plan for Men Over 40", kind="article", published=DATE, updated="2026-11-27")
 
 if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else str(SITE / f"{SLUG}.html")

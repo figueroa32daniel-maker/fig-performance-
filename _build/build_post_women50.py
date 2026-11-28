@@ -68,7 +68,7 @@ html = page(
     "Your body decides your program, not your age. The assessment, menopause, and how often to lift.",
     [("age", "Age doesn't decide it"), ("assessment", "The assessment"), ("menopause", "Menopause"),
      ("how-often", "How often to lift"), ("safety", "Before you start"), ("coach", "Train with a coach")],
-    body, faqs, "Strength Training for Women Over 50", kind="article", published=DATE)
+    body, faqs, "Strength Training for Women Over 50", kind="article", published=DATE, updated="2026-11-27")
 
 if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else str(SITE / f"{SLUG}.html")

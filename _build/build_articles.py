@@ -206,7 +206,7 @@ pages = {
         "Guides", "Fitness After 40",
         "You're over 40, you put in the work, and the results stopped matching the effort. These guides cover what changed and what to do about it: losing fat, building strength, feeling like yourself again.",
         [("guides", "Guides"), ("tools", "Measure and recover"), ("train", "Train with Dan")],
-        hub_body, hub_faqs, "Fitness After 40", kind="article", published=DATE),
+        hub_body, hub_faqs, "Fitness After 40", kind="article", published=DATE, updated="2026-11-27"),
 }
 
 if __name__ == "__main__":

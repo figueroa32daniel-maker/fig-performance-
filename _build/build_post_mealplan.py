@@ -113,7 +113,7 @@ html = page(
     "Protein, carbs, fats and fiber at every meal: options, a sample day and a grocery list. No email needed.",
     [("rule", "The one rule"), ("plate", "Build your plate"), ("breakfast", "Breakfast"), ("lunch", "Lunch"), ("dinner", "Dinner"),
      ("snacks", "Snacks"), ("sample", "Sample day"), ("grocery", "Grocery list"), ("eating-out", "Eating out and drinking"), ("download", "Free PDF")],
-    body, faqs, "Meal Plan for Weight Loss", kind="article", published=DATE)
+    body, faqs, "Meal Plan for Weight Loss", kind="article", published=DATE, updated="2026-11-27")
 
 if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else str(SITE / f"{SLUG}.html")

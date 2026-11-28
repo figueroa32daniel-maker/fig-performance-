@@ -89,7 +89,7 @@ html = page(
     "Yes. Here's why, which belly fat leaves first, and how Priscilla got a flat stomach after 42.",
     [("why", "Why the belly"), ("two", "Two kinds of belly fat"), ("cortisol", "Where cortisol fits"), ("inbody", "What the InBody shows"),
      ("crunches", "Do crunches work?"), ("moves", "What moves it"), ("priscilla", "Priscilla's story"), ("coach", "Which fat are you carrying?")],
-    body, faqs, "Is Belly Fat the Last to Go?", kind="article", published=DATE)
+    body, faqs, "Is Belly Fat the Last to Go?", kind="article", published=DATE, updated="2026-11-27")
 
 if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else str(SITE / f"{SLUG}.html")
