@@ -352,6 +352,9 @@ inbody_body = f"""<p class="legal-intro">You eat well. You exercise. You might h
 <h2 id="how">How the scan works</h2>
 <p>You step onto the InBody barefoot and hold the hand electrodes. The device sends a small, painless electrical signal through your body and measures how it travels through muscle, fat and water. You don't feel anything, you stay fully dressed, and the whole thing takes about a minute. You get a printout and Dan walks you through every number.</p>
 
+<h2 id="accurate">Is an InBody scan accurate?</h2>
+<p>This gets argued about online, so here is the honest answer. An InBody uses bioelectrical impedance, which estimates body fat by how a small signal travels through muscle, fat and water. For a single, exact body-fat percentage, a lab method like a DEXA scan is more precise. Where InBody is strong, and where it actually matters for training, is tracking change over time. Tested under the same conditions each visit, it reliably shows whether your fat is going down and your muscle is going up, which is the number you act on. The trend across several scans tells you far more than any one reading, from any method.</p>
+
 <h2 id="prep">How to prepare</h2>
 <p>InBody results are most useful when you test under the same conditions each time. For the most consistent numbers:</p>
 <ul>
@@ -452,9 +455,9 @@ pages = {
         "InBody scan", "InBody Scan in Placentia, CA",
         "Body-composition testing for adults over 40 who want real numbers, not guesses. Included with your free consult.",
         [("what", "What it measures"), ("why-40", "Why it matters after 40"), ("how", "How it works"),
-         ("prep", "How to prepare"), ("safety", "Who shouldn't use it"), ("fig", "How we use it"),
-         ("visit", "Get your scan")],
-        inbody_body, inbody_faqs, "InBody Scan", updated="2026-11-24"),
+         ("accurate", "Is it accurate?"), ("prep", "How to prepare"), ("safety", "Who shouldn't use it"),
+         ("fig", "How we use it"), ("visit", "Get your scan")],
+        inbody_body, inbody_faqs, "InBody Scan", updated="2026-11-27"),
     "red-light-therapy-placentia.html": page(
         "red-light-therapy-placentia",
         "Red Light Therapy in Placentia, CA | Fig Performance",
